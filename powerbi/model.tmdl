@@ -1,0 +1,61 @@
+/// <summary>
+/// Power BI Semantic Model for GIC Intelligence Platform
+/// This TMDL file serves as the baseline for the Power BI Modeling MCP.
+/// </summary>
+
+model 'GIC Intelligence Model'
+	compatibilityLevel: 1550
+
+table 'Public Concerns'
+	lineageTag: 78b27357-1234-4a5e-8b9c-2d3e4f5a6b7c
+
+	column Topic
+		dataType: string
+		sourceColumn: primary_topic
+
+	column Sentiment
+		dataType: string
+		sourceColumn: sentiment
+
+	column Urgency
+		dataType: string
+		sourceColumn: urgency
+
+	column Municipality
+		dataType: string
+		sourceColumn: municipality
+
+	column Evidence
+		dataType: string
+		sourceColumn: evidence_snippet
+
+	measure 'Concern Velocity' = 
+		VAR MentionsToday = COUNTROWS(FILTER('Public Concerns', [Timestamp] >= TODAY()))
+		VAR AvgMentions7D = COUNTROWS(FILTER('Public Concerns', [Timestamp] >= TODAY() - 7)) / 7
+		RETURN IF(AvgMentions7D > 0, MentionsToday / AvgMentions7D, 1)
+	
+	measure 'Confidence Rating' = AVERAGE('Public Concerns'[confidence])
+
+table 'Provincial Budgets'
+	lineageTag: 89c38468-2345-5b6f-9c0d-3d4e5f6a7b8c
+
+	column Sector
+		dataType: string
+		sourceColumn: budget_topic
+
+	column Allocation
+		dataType: decimal
+		sourceColumn: allocation_amount
+
+	column AllocationPercentage
+		dataType: double
+		sourceColumn: allocation_percentage
+
+	measure 'Budget Alignment Index' = 
+		VAR PublicConcernShare = [Concern Share of Voice]
+		VAR BudgetShare = SUM('Provincial Budgets'[AllocationPercentage])
+		RETURN 1 - ABS(PublicConcernShare - BudgetShare)
+
+relationship 'Alignment Link'
+	fromColumn: 'Public Concerns'[Topic]
+	toColumn: 'Provincial Budgets'[Sector]

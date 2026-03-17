@@ -1,0 +1,13 @@
+province_name,municipality_name,election_year,election_type,party_name,votes,vote_share,turnout,winner_flag,source_name,source_url
+Western Cape,City of Cape Town,2021,Local Government Election,DA,,, ,true,"Wikipedia (2021 local election summary)",https://en.wikipedia.org/wiki/City_of_Cape_Town
+Eastern Cape,Buffalo City,2021,Local Government Election,ANC,214118,59.4,45.6,true,"Wikipedia (2021 local election summary)",https://en.wikipedia.org/wiki/Buffalo_City_Metropolitan_Municipality
+Eastern Cape,Nelson Mandela Bay,2021,Local Government Election,ANC,,, ,true,"Wikipedia (2021 local election summary)",https://en.wikipedia.org/wiki/Nelson_Mandela_Bay_Metropolitan_Municipality
+Mpumalanga,Steve Tshwete,2021,Local Government Election,ANC,,, ,true,"Wikipedia (2021 local election summary)",https://en.wikipedia.org/wiki/Steve_Tshwete_Local_Municipality
+Northern Cape,Sol Plaatje,2021,Local Government Election,ANC,,, ,true,"Wikipedia (2021 local election summary)",https://en.wikipedia.org/wiki/Sol_Plaatje_Local_Municipality
+Mpumalanga,Bushbuckridge,2021,Local Government Election,ANC,,, ,true,"Wikipedia (2021 local election summary)",https://en.wikipedia.org/wiki/Bushbuckridge_Local_Municipality_elections
+Mpumalanga,Emalahleni,2021,Local Government Election,ANC,,, ,true,"Wikipedia (2021 local election summary)",https://en.wikipedia.org/wiki/Emalahleni_Local_Municipality%2C_Mpumalanga_elections
+Mpumalanga,Govan Mbeki,2021,Local Government Election,ANC,,, ,true,"Wikipedia (2021 local election summary)",https://en.wikipedia.org/wiki/Govan_Mbeki_Local_Municipality_elections
+Mpumalanga,Thembisile Hani,2021,Local Government Election,ANC,,, ,true,"Wikipedia (2021 local election summary)",https://en.wikipedia.org/wiki/Thembisile_Hani_Local_Municipality_elections
+Mpumalanga,Nkomazi,2021,Local Government Election,ANC,,, ,true,"Wikipedia (2021 local election summary)",https://en.wikipedia.org/wiki/Nkomazi_Local_Municipality_elections
+Mpumalanga,Msukaligwa,2021,Local Government Election,ANC,,, ,true,"Wikipedia (2021 local election summary)",https://en.wikipedia.org/wiki/Msukaligwa_Local_Municipality_elections
+Eastern Cape,Raymond Mhlaba,2021,Local Government Election,ANC,,, ,true,"Wikipedia (2021 local election summary)",https://en.wikipedia.org/wiki/Raymond_Mhlaba_Local_Municipality_elections

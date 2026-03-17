@@ -1,0 +1,1231 @@
+{
+    "startedAt":  "2026-03-17T00:00:05.3322651+02:00",
+    "finishedAt":  null,
+    "deadline":  "2026-03-17T04:00:05.3322651+02:00",
+    "hours":  4,
+    "delayMinutes":  20,
+    "logPath":  "C:\\Users\\Dell\\Desktop\\Sparc Innovation\\gic-app\\logs\\overnight-enrichment-2026-03-17T00-00-05.log",
+    "cycles":  [
+                   {
+                       "cycleNumber":  1,
+                       "startedAt":  "2026-03-17T00:00:05.3931075+02:00",
+                       "finishedAt":  "2026-03-17T00:03:35.4469482+02:00",
+                       "results":  [
+                                       "2026-03-17T00:00:05.4276702+02:00 [start] firestore-community-signals :: npm.cmd run import:firestore:community-signals:v2",
+                                       "2026-03-17T00:00:44.4759821+02:00 [finish] firestore-community-signals :: exit=0",
+                                       {
+                                           "name":  "firestore-community-signals",
+                                           "command":  "npm.cmd run import:firestore:community-signals:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:00:44.4856723+02:00"
+                                       },
+                                       "2026-03-17T00:00:44.5055929+02:00 [start] official-ingestion :: npm.cmd run ingest:official:v2",
+                                       "2026-03-17T00:00:53.2599775+02:00 [finish] official-ingestion :: exit=1",
+                                       {
+                                           "name":  "official-ingestion",
+                                           "command":  "npm.cmd run ingest:official:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T00:00:53.2599775+02:00"
+                                       },
+                                       "2026-03-17T00:00:53.2599775+02:00 [start] registry-rss :: npm.cmd run ingest:rss:v2",
+                                       "2026-03-17T00:01:04.5451710+02:00 [finish] registry-rss :: exit=1",
+                                       {
+                                           "name":  "registry-rss",
+                                           "command":  "npm.cmd run ingest:rss:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T00:01:04.5491928+02:00"
+                                       },
+                                       "2026-03-17T00:01:04.5491928+02:00 [start] news-ingestion :: npm.cmd run ingest:news:v2",
+                                       "2026-03-17T00:01:15.3951296+02:00 [finish] news-ingestion :: exit=1",
+                                       {
+                                           "name":  "news-ingestion",
+                                           "command":  "npm.cmd run ingest:news:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T00:01:15.3985523+02:00"
+                                       },
+                                       "2026-03-17T00:01:15.3996895+02:00 [start] citizen-voice :: npm.cmd run ingest:citizen-voice:v2",
+                                       "2026-03-17T00:01:25.9002288+02:00 [finish] citizen-voice :: exit=0",
+                                       {
+                                           "name":  "citizen-voice",
+                                           "command":  "npm.cmd run ingest:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:01:25.9022695+02:00"
+                                       },
+                                       "2026-03-17T00:01:25.9022695+02:00 [start] process-queue :: npm.cmd run process:v2:queue",
+                                       "2026-03-17T00:01:37.2435165+02:00 [finish] process-queue :: exit=0",
+                                       {
+                                           "name":  "process-queue",
+                                           "command":  "npm.cmd run process:v2:queue",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:01:37.2464381+02:00"
+                                       },
+                                       "2026-03-17T00:01:37.2464381+02:00 [start] municipal-money :: npm.cmd run ingest:municipal-money:v2",
+                                       "2026-03-17T00:01:47.8439216+02:00 [finish] municipal-money :: exit=1",
+                                       {
+                                           "name":  "municipal-money",
+                                           "command":  "npm.cmd run ingest:municipal-money:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T00:01:47.8461009+02:00"
+                                       },
+                                       "2026-03-17T00:01:47.8461009+02:00 [start] normalize-projects :: npm.cmd run normalize:projects:v2",
+                                       "2026-03-17T00:01:54.4627109+02:00 [finish] normalize-projects :: exit=0",
+                                       {
+                                           "name":  "normalize-projects",
+                                           "command":  "npm.cmd run normalize:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:01:54.4677447+02:00"
+                                       },
+                                       "2026-03-17T00:01:54.4689372+02:00 [start] rebuild-projects :: npm.cmd run rebuild:projects:v2",
+                                       "2026-03-17T00:02:00.9230612+02:00 [finish] rebuild-projects :: exit=0",
+                                       {
+                                           "name":  "rebuild-projects",
+                                           "command":  "npm.cmd run rebuild:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:02:00.9230612+02:00"
+                                       },
+                                       "2026-03-17T00:02:00.9230612+02:00 [start] rebuild-citizen-voice :: npm.cmd run rebuild:citizen-voice:v2",
+                                       "2026-03-17T00:02:14.3573750+02:00 [finish] rebuild-citizen-voice :: exit=0",
+                                       {
+                                           "name":  "rebuild-citizen-voice",
+                                           "command":  "npm.cmd run rebuild:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:02:14.3583717+02:00"
+                                       },
+                                       "2026-03-17T00:02:14.3596119+02:00 [start] rebuild-leadership :: npm.cmd run rebuild:leadership:v2",
+                                       "2026-03-17T00:02:19.6420263+02:00 [finish] rebuild-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-leadership",
+                                           "command":  "npm.cmd run rebuild:leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:02:19.6438117+02:00"
+                                       },
+                                       "2026-03-17T00:02:19.6449230+02:00 [start] rebuild-municipal-leadership :: npm.cmd run rebuild:municipal-leadership:v2",
+                                       "2026-03-17T00:02:24.9595306+02:00 [finish] rebuild-municipal-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-municipal-leadership",
+                                           "command":  "npm.cmd run rebuild:municipal-leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:02:24.9755378+02:00"
+                                       },
+                                       "2026-03-17T00:02:24.9755378+02:00 [start] collect-context :: npm.cmd run collect:context:v2",
+                                       "2026-03-17T00:03:35.4429284+02:00 [finish] collect-context :: exit=0",
+                                       {
+                                           "name":  "collect-context",
+                                           "command":  "npm.cmd run collect:context:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:03:35.4469482+02:00"
+                                       }
+                                   ]
+                   },
+                   {
+                       "cycleNumber":  2,
+                       "startedAt":  "2026-03-17T00:23:35.5610197+02:00",
+                       "finishedAt":  "2026-03-17T00:27:40.8265550+02:00",
+                       "results":  [
+                                       "2026-03-17T00:23:35.5748094+02:00 [start] firestore-community-signals :: npm.cmd run import:firestore:community-signals:v2",
+                                       "2026-03-17T00:24:14.3487253+02:00 [finish] firestore-community-signals :: exit=0",
+                                       {
+                                           "name":  "firestore-community-signals",
+                                           "command":  "npm.cmd run import:firestore:community-signals:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:24:14.3487253+02:00"
+                                       },
+                                       "2026-03-17T00:24:14.3487253+02:00 [start] official-ingestion :: npm.cmd run ingest:official:v2",
+                                       "2026-03-17T00:24:20.4465188+02:00 [finish] official-ingestion :: exit=1",
+                                       {
+                                           "name":  "official-ingestion",
+                                           "command":  "npm.cmd run ingest:official:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T00:24:20.4465188+02:00"
+                                       },
+                                       "2026-03-17T00:24:20.4465188+02:00 [start] registry-rss :: npm.cmd run ingest:rss:v2",
+                                       "2026-03-17T00:24:29.8962834+02:00 [finish] registry-rss :: exit=1",
+                                       {
+                                           "name":  "registry-rss",
+                                           "command":  "npm.cmd run ingest:rss:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T00:24:29.8962834+02:00"
+                                       },
+                                       "2026-03-17T00:24:29.8962834+02:00 [start] news-ingestion :: npm.cmd run ingest:news:v2",
+                                       "2026-03-17T00:24:50.4905346+02:00 [finish] news-ingestion :: exit=1",
+                                       {
+                                           "name":  "news-ingestion",
+                                           "command":  "npm.cmd run ingest:news:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T00:24:50.4947397+02:00"
+                                       },
+                                       "2026-03-17T00:24:50.4957450+02:00 [start] citizen-voice :: npm.cmd run ingest:citizen-voice:v2",
+                                       "2026-03-17T00:25:17.4162736+02:00 [finish] citizen-voice :: exit=0",
+                                       {
+                                           "name":  "citizen-voice",
+                                           "command":  "npm.cmd run ingest:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:25:17.4233546+02:00"
+                                       },
+                                       "2026-03-17T00:25:17.4253674+02:00 [start] process-queue :: npm.cmd run process:v2:queue",
+                                       "2026-03-17T00:25:28.6994599+02:00 [finish] process-queue :: exit=0",
+                                       {
+                                           "name":  "process-queue",
+                                           "command":  "npm.cmd run process:v2:queue",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:25:28.7091675+02:00"
+                                       },
+                                       "2026-03-17T00:25:28.7106490+02:00 [start] municipal-money :: npm.cmd run ingest:municipal-money:v2",
+                                       "2026-03-17T00:25:37.0612483+02:00 [finish] municipal-money :: exit=1",
+                                       {
+                                           "name":  "municipal-money",
+                                           "command":  "npm.cmd run ingest:municipal-money:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T00:25:37.0662573+02:00"
+                                       },
+                                       "2026-03-17T00:25:37.0662573+02:00 [start] normalize-projects :: npm.cmd run normalize:projects:v2",
+                                       "2026-03-17T00:25:43.3560466+02:00 [finish] normalize-projects :: exit=0",
+                                       {
+                                           "name":  "normalize-projects",
+                                           "command":  "npm.cmd run normalize:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:25:43.3560466+02:00"
+                                       },
+                                       "2026-03-17T00:25:43.3560466+02:00 [start] rebuild-projects :: npm.cmd run rebuild:projects:v2",
+                                       "2026-03-17T00:25:48.8159332+02:00 [finish] rebuild-projects :: exit=0",
+                                       {
+                                           "name":  "rebuild-projects",
+                                           "command":  "npm.cmd run rebuild:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:25:48.8164743+02:00"
+                                       },
+                                       "2026-03-17T00:25:48.8164743+02:00 [start] rebuild-citizen-voice :: npm.cmd run rebuild:citizen-voice:v2",
+                                       "2026-03-17T00:26:06.0585517+02:00 [finish] rebuild-citizen-voice :: exit=0",
+                                       {
+                                           "name":  "rebuild-citizen-voice",
+                                           "command":  "npm.cmd run rebuild:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:26:06.0695662+02:00"
+                                       },
+                                       "2026-03-17T00:26:06.0715773+02:00 [start] rebuild-leadership :: npm.cmd run rebuild:leadership:v2",
+                                       "2026-03-17T00:26:15.5761271+02:00 [finish] rebuild-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-leadership",
+                                           "command":  "npm.cmd run rebuild:leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:26:15.5761271+02:00"
+                                       },
+                                       "2026-03-17T00:26:15.5761271+02:00 [start] rebuild-municipal-leadership :: npm.cmd run rebuild:municipal-leadership:v2",
+                                       "2026-03-17T00:26:25.4675765+02:00 [finish] rebuild-municipal-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-municipal-leadership",
+                                           "command":  "npm.cmd run rebuild:municipal-leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:26:25.4675765+02:00"
+                                       },
+                                       "2026-03-17T00:26:25.4675765+02:00 [start] collect-context :: npm.cmd run collect:context:v2",
+                                       "2026-03-17T00:27:40.8211985+02:00 [finish] collect-context :: exit=0",
+                                       {
+                                           "name":  "collect-context",
+                                           "command":  "npm.cmd run collect:context:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:27:40.8265550+02:00"
+                                       }
+                                   ]
+                   },
+                   {
+                       "cycleNumber":  3,
+                       "startedAt":  "2026-03-17T00:47:40.8282216+02:00",
+                       "finishedAt":  "2026-03-17T00:50:36.5135986+02:00",
+                       "results":  [
+                                       "2026-03-17T00:47:40.8282216+02:00 [start] firestore-community-signals :: npm.cmd run import:firestore:community-signals:v2",
+                                       "2026-03-17T00:48:09.2146605+02:00 [finish] firestore-community-signals :: exit=0",
+                                       {
+                                           "name":  "firestore-community-signals",
+                                           "command":  "npm.cmd run import:firestore:community-signals:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:48:09.2146605+02:00"
+                                       },
+                                       "2026-03-17T00:48:09.2146605+02:00 [start] official-ingestion :: npm.cmd run ingest:official:v2",
+                                       "2026-03-17T00:48:15.1779719+02:00 [finish] official-ingestion :: exit=1",
+                                       {
+                                           "name":  "official-ingestion",
+                                           "command":  "npm.cmd run ingest:official:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T00:48:15.1937847+02:00"
+                                       },
+                                       "2026-03-17T00:48:15.1947559+02:00 [start] registry-rss :: npm.cmd run ingest:rss:v2",
+                                       "2026-03-17T00:48:20.7594137+02:00 [finish] registry-rss :: exit=1",
+                                       {
+                                           "name":  "registry-rss",
+                                           "command":  "npm.cmd run ingest:rss:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T00:48:20.7594137+02:00"
+                                       },
+                                       "2026-03-17T00:48:20.7594137+02:00 [start] news-ingestion :: npm.cmd run ingest:news:v2",
+                                       "2026-03-17T00:48:26.3258440+02:00 [finish] news-ingestion :: exit=1",
+                                       {
+                                           "name":  "news-ingestion",
+                                           "command":  "npm.cmd run ingest:news:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T00:48:26.3258440+02:00"
+                                       },
+                                       "2026-03-17T00:48:26.3258440+02:00 [start] citizen-voice :: npm.cmd run ingest:citizen-voice:v2",
+                                       "2026-03-17T00:48:35.2904152+02:00 [finish] citizen-voice :: exit=0",
+                                       {
+                                           "name":  "citizen-voice",
+                                           "command":  "npm.cmd run ingest:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:48:35.2930218+02:00"
+                                       },
+                                       "2026-03-17T00:48:35.2930218+02:00 [start] process-queue :: npm.cmd run process:v2:queue",
+                                       "2026-03-17T00:48:43.6850948+02:00 [finish] process-queue :: exit=0",
+                                       {
+                                           "name":  "process-queue",
+                                           "command":  "npm.cmd run process:v2:queue",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:48:43.6850948+02:00"
+                                       },
+                                       "2026-03-17T00:48:43.6850948+02:00 [start] municipal-money :: npm.cmd run ingest:municipal-money:v2",
+                                       "2026-03-17T00:48:48.7333759+02:00 [finish] municipal-money :: exit=1",
+                                       {
+                                           "name":  "municipal-money",
+                                           "command":  "npm.cmd run ingest:municipal-money:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T00:48:48.7333759+02:00"
+                                       },
+                                       "2026-03-17T00:48:48.7333759+02:00 [start] normalize-projects :: npm.cmd run normalize:projects:v2",
+                                       "2026-03-17T00:48:54.4666004+02:00 [finish] normalize-projects :: exit=0",
+                                       {
+                                           "name":  "normalize-projects",
+                                           "command":  "npm.cmd run normalize:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:48:54.4666004+02:00"
+                                       },
+                                       "2026-03-17T00:48:54.4666004+02:00 [start] rebuild-projects :: npm.cmd run rebuild:projects:v2",
+                                       "2026-03-17T00:49:00.4461275+02:00 [finish] rebuild-projects :: exit=0",
+                                       {
+                                           "name":  "rebuild-projects",
+                                           "command":  "npm.cmd run rebuild:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:49:00.4461275+02:00"
+                                       },
+                                       "2026-03-17T00:49:00.4461275+02:00 [start] rebuild-citizen-voice :: npm.cmd run rebuild:citizen-voice:v2",
+                                       "2026-03-17T00:49:13.4928527+02:00 [finish] rebuild-citizen-voice :: exit=0",
+                                       {
+                                           "name":  "rebuild-citizen-voice",
+                                           "command":  "npm.cmd run rebuild:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:49:13.4928527+02:00"
+                                       },
+                                       "2026-03-17T00:49:13.5079709+02:00 [start] rebuild-leadership :: npm.cmd run rebuild:leadership:v2",
+                                       "2026-03-17T00:49:18.7075793+02:00 [finish] rebuild-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-leadership",
+                                           "command":  "npm.cmd run rebuild:leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:49:18.7075793+02:00"
+                                       },
+                                       "2026-03-17T00:49:18.7075793+02:00 [start] rebuild-municipal-leadership :: npm.cmd run rebuild:municipal-leadership:v2",
+                                       "2026-03-17T00:49:25.1723025+02:00 [finish] rebuild-municipal-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-municipal-leadership",
+                                           "command":  "npm.cmd run rebuild:municipal-leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:49:25.1723025+02:00"
+                                       },
+                                       "2026-03-17T00:49:25.1723025+02:00 [start] collect-context :: npm.cmd run collect:context:v2",
+                                       "2026-03-17T00:50:36.5135986+02:00 [finish] collect-context :: exit=0",
+                                       {
+                                           "name":  "collect-context",
+                                           "command":  "npm.cmd run collect:context:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T00:50:36.5135986+02:00"
+                                       }
+                                   ]
+                   },
+                   {
+                       "cycleNumber":  4,
+                       "startedAt":  "2026-03-17T01:10:36.5398746+02:00",
+                       "finishedAt":  "2026-03-17T01:13:40.6671556+02:00",
+                       "results":  [
+                                       "2026-03-17T01:10:36.5418984+02:00 [start] firestore-community-signals :: npm.cmd run import:firestore:community-signals:v2",
+                                       "2026-03-17T01:11:06.9204329+02:00 [finish] firestore-community-signals :: exit=0",
+                                       {
+                                           "name":  "firestore-community-signals",
+                                           "command":  "npm.cmd run import:firestore:community-signals:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:11:06.9307116+02:00"
+                                       },
+                                       "2026-03-17T01:11:06.9307116+02:00 [start] official-ingestion :: npm.cmd run ingest:official:v2",
+                                       "2026-03-17T01:11:14.6627237+02:00 [finish] official-ingestion :: exit=1",
+                                       {
+                                           "name":  "official-ingestion",
+                                           "command":  "npm.cmd run ingest:official:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T01:11:14.6657263+02:00"
+                                       },
+                                       "2026-03-17T01:11:14.6657263+02:00 [start] registry-rss :: npm.cmd run ingest:rss:v2",
+                                       "2026-03-17T01:11:21.1090277+02:00 [finish] registry-rss :: exit=1",
+                                       {
+                                           "name":  "registry-rss",
+                                           "command":  "npm.cmd run ingest:rss:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T01:11:21.1090277+02:00"
+                                       },
+                                       "2026-03-17T01:11:21.1090277+02:00 [start] news-ingestion :: npm.cmd run ingest:news:v2",
+                                       "2026-03-17T01:11:26.9091447+02:00 [finish] news-ingestion :: exit=1",
+                                       {
+                                           "name":  "news-ingestion",
+                                           "command":  "npm.cmd run ingest:news:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T01:11:26.9091447+02:00"
+                                       },
+                                       "2026-03-17T01:11:26.9091447+02:00 [start] citizen-voice :: npm.cmd run ingest:citizen-voice:v2",
+                                       "2026-03-17T01:11:36.8518005+02:00 [finish] citizen-voice :: exit=0",
+                                       {
+                                           "name":  "citizen-voice",
+                                           "command":  "npm.cmd run ingest:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:11:36.8545191+02:00"
+                                       },
+                                       "2026-03-17T01:11:36.8585432+02:00 [start] process-queue :: npm.cmd run process:v2:queue",
+                                       "2026-03-17T01:11:44.2504122+02:00 [finish] process-queue :: exit=0",
+                                       {
+                                           "name":  "process-queue",
+                                           "command":  "npm.cmd run process:v2:queue",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:11:44.2529726+02:00"
+                                       },
+                                       "2026-03-17T01:11:44.2529726+02:00 [start] municipal-money :: npm.cmd run ingest:municipal-money:v2",
+                                       "2026-03-17T01:11:49.8828383+02:00 [finish] municipal-money :: exit=1",
+                                       {
+                                           "name":  "municipal-money",
+                                           "command":  "npm.cmd run ingest:municipal-money:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T01:11:49.8828383+02:00"
+                                       },
+                                       "2026-03-17T01:11:49.8828383+02:00 [start] normalize-projects :: npm.cmd run normalize:projects:v2",
+                                       "2026-03-17T01:11:55.8324723+02:00 [finish] normalize-projects :: exit=0",
+                                       {
+                                           "name":  "normalize-projects",
+                                           "command":  "npm.cmd run normalize:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:11:55.8324723+02:00"
+                                       },
+                                       "2026-03-17T01:11:55.8473531+02:00 [start] rebuild-projects :: npm.cmd run rebuild:projects:v2",
+                                       "2026-03-17T01:12:01.8620743+02:00 [finish] rebuild-projects :: exit=0",
+                                       {
+                                           "name":  "rebuild-projects",
+                                           "command":  "npm.cmd run rebuild:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:12:01.8620743+02:00"
+                                       },
+                                       "2026-03-17T01:12:01.8620743+02:00 [start] rebuild-citizen-voice :: npm.cmd run rebuild:citizen-voice:v2",
+                                       "2026-03-17T01:12:16.0748502+02:00 [finish] rebuild-citizen-voice :: exit=0",
+                                       {
+                                           "name":  "rebuild-citizen-voice",
+                                           "command":  "npm.cmd run rebuild:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:12:16.0748502+02:00"
+                                       },
+                                       "2026-03-17T01:12:16.0748502+02:00 [start] rebuild-leadership :: npm.cmd run rebuild:leadership:v2",
+                                       "2026-03-17T01:12:22.2064216+02:00 [finish] rebuild-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-leadership",
+                                           "command":  "npm.cmd run rebuild:leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:12:22.2064216+02:00"
+                                       },
+                                       "2026-03-17T01:12:22.2064216+02:00 [start] rebuild-municipal-leadership :: npm.cmd run rebuild:municipal-leadership:v2",
+                                       "2026-03-17T01:12:29.2196031+02:00 [finish] rebuild-municipal-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-municipal-leadership",
+                                           "command":  "npm.cmd run rebuild:municipal-leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:12:29.2196031+02:00"
+                                       },
+                                       "2026-03-17T01:12:29.2196031+02:00 [start] collect-context :: npm.cmd run collect:context:v2",
+                                       "2026-03-17T01:13:40.6632416+02:00 [finish] collect-context :: exit=0",
+                                       {
+                                           "name":  "collect-context",
+                                           "command":  "npm.cmd run collect:context:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:13:40.6671556+02:00"
+                                       }
+                                   ]
+                   },
+                   {
+                       "cycleNumber":  5,
+                       "startedAt":  "2026-03-17T01:33:40.6890940+02:00",
+                       "finishedAt":  "2026-03-17T01:36:42.9274211+02:00",
+                       "results":  [
+                                       "2026-03-17T01:33:40.6890940+02:00 [start] firestore-community-signals :: npm.cmd run import:firestore:community-signals:v2",
+                                       "2026-03-17T01:34:11.6784893+02:00 [finish] firestore-community-signals :: exit=0",
+                                       {
+                                           "name":  "firestore-community-signals",
+                                           "command":  "npm.cmd run import:firestore:community-signals:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:34:11.6784893+02:00"
+                                       },
+                                       "2026-03-17T01:34:11.6784893+02:00 [start] official-ingestion :: npm.cmd run ingest:official:v2",
+                                       "2026-03-17T01:34:18.3036738+02:00 [finish] official-ingestion :: exit=1",
+                                       {
+                                           "name":  "official-ingestion",
+                                           "command":  "npm.cmd run ingest:official:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T01:34:18.3036738+02:00"
+                                       },
+                                       "2026-03-17T01:34:18.3097591+02:00 [start] registry-rss :: npm.cmd run ingest:rss:v2",
+                                       "2026-03-17T01:34:24.2090941+02:00 [finish] registry-rss :: exit=1",
+                                       {
+                                           "name":  "registry-rss",
+                                           "command":  "npm.cmd run ingest:rss:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T01:34:24.2090941+02:00"
+                                       },
+                                       "2026-03-17T01:34:24.2090941+02:00 [start] news-ingestion :: npm.cmd run ingest:news:v2",
+                                       "2026-03-17T01:34:30.3224940+02:00 [finish] news-ingestion :: exit=1",
+                                       {
+                                           "name":  "news-ingestion",
+                                           "command":  "npm.cmd run ingest:news:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T01:34:30.3224940+02:00"
+                                       },
+                                       "2026-03-17T01:34:30.3361790+02:00 [start] citizen-voice :: npm.cmd run ingest:citizen-voice:v2",
+                                       "2026-03-17T01:34:39.0878357+02:00 [finish] citizen-voice :: exit=0",
+                                       {
+                                           "name":  "citizen-voice",
+                                           "command":  "npm.cmd run ingest:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:34:39.0878357+02:00"
+                                       },
+                                       "2026-03-17T01:34:39.0878357+02:00 [start] process-queue :: npm.cmd run process:v2:queue",
+                                       "2026-03-17T01:34:46.4615366+02:00 [finish] process-queue :: exit=0",
+                                       {
+                                           "name":  "process-queue",
+                                           "command":  "npm.cmd run process:v2:queue",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:34:46.4635477+02:00"
+                                       },
+                                       "2026-03-17T01:34:46.4655625+02:00 [start] municipal-money :: npm.cmd run ingest:municipal-money:v2",
+                                       "2026-03-17T01:34:52.7496165+02:00 [finish] municipal-money :: exit=1",
+                                       {
+                                           "name":  "municipal-money",
+                                           "command":  "npm.cmd run ingest:municipal-money:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T01:34:52.7496165+02:00"
+                                       },
+                                       "2026-03-17T01:34:52.7496165+02:00 [start] normalize-projects :: npm.cmd run normalize:projects:v2",
+                                       "2026-03-17T01:34:58.7795095+02:00 [finish] normalize-projects :: exit=0",
+                                       {
+                                           "name":  "normalize-projects",
+                                           "command":  "npm.cmd run normalize:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:34:58.7795095+02:00"
+                                       },
+                                       "2026-03-17T01:34:58.7795095+02:00 [start] rebuild-projects :: npm.cmd run rebuild:projects:v2",
+                                       "2026-03-17T01:35:05.1941449+02:00 [finish] rebuild-projects :: exit=0",
+                                       {
+                                           "name":  "rebuild-projects",
+                                           "command":  "npm.cmd run rebuild:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:35:05.1941449+02:00"
+                                       },
+                                       "2026-03-17T01:35:05.1941449+02:00 [start] rebuild-citizen-voice :: npm.cmd run rebuild:citizen-voice:v2",
+                                       "2026-03-17T01:35:19.3560560+02:00 [finish] rebuild-citizen-voice :: exit=0",
+                                       {
+                                           "name":  "rebuild-citizen-voice",
+                                           "command":  "npm.cmd run rebuild:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:35:19.3726297+02:00"
+                                       },
+                                       "2026-03-17T01:35:19.3740020+02:00 [start] rebuild-leadership :: npm.cmd run rebuild:leadership:v2",
+                                       "2026-03-17T01:35:25.6871903+02:00 [finish] rebuild-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-leadership",
+                                           "command":  "npm.cmd run rebuild:leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:35:25.6871903+02:00"
+                                       },
+                                       "2026-03-17T01:35:25.6871903+02:00 [start] rebuild-municipal-leadership :: npm.cmd run rebuild:municipal-leadership:v2",
+                                       "2026-03-17T01:35:32.1504937+02:00 [finish] rebuild-municipal-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-municipal-leadership",
+                                           "command":  "npm.cmd run rebuild:municipal-leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:35:32.1513395+02:00"
+                                       },
+                                       "2026-03-17T01:35:32.1513395+02:00 [start] collect-context :: npm.cmd run collect:context:v2",
+                                       "2026-03-17T01:36:42.9274211+02:00 [finish] collect-context :: exit=0",
+                                       {
+                                           "name":  "collect-context",
+                                           "command":  "npm.cmd run collect:context:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:36:42.9274211+02:00"
+                                       }
+                                   ]
+                   },
+                   {
+                       "cycleNumber":  6,
+                       "startedAt":  "2026-03-17T01:56:42.9537480+02:00",
+                       "finishedAt":  "2026-03-17T01:59:39.6783108+02:00",
+                       "results":  [
+                                       "2026-03-17T01:56:42.9561597+02:00 [start] firestore-community-signals :: npm.cmd run import:firestore:community-signals:v2",
+                                       "2026-03-17T01:57:18.8768665+02:00 [finish] firestore-community-signals :: exit=0",
+                                       {
+                                           "name":  "firestore-community-signals",
+                                           "command":  "npm.cmd run import:firestore:community-signals:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:57:18.8768665+02:00"
+                                       },
+                                       "2026-03-17T01:57:18.8768665+02:00 [start] official-ingestion :: npm.cmd run ingest:official:v2",
+                                       "2026-03-17T01:57:24.7081060+02:00 [finish] official-ingestion :: exit=1",
+                                       {
+                                           "name":  "official-ingestion",
+                                           "command":  "npm.cmd run ingest:official:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T01:57:24.7081060+02:00"
+                                       },
+                                       "2026-03-17T01:57:24.7081060+02:00 [start] registry-rss :: npm.cmd run ingest:rss:v2",
+                                       "2026-03-17T01:57:29.1735260+02:00 [finish] registry-rss :: exit=1",
+                                       {
+                                           "name":  "registry-rss",
+                                           "command":  "npm.cmd run ingest:rss:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T01:57:29.1735260+02:00"
+                                       },
+                                       "2026-03-17T01:57:29.1735260+02:00 [start] news-ingestion :: npm.cmd run ingest:news:v2",
+                                       "2026-03-17T01:57:33.5852093+02:00 [finish] news-ingestion :: exit=1",
+                                       {
+                                           "name":  "news-ingestion",
+                                           "command":  "npm.cmd run ingest:news:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T01:57:33.5885644+02:00"
+                                       },
+                                       "2026-03-17T01:57:33.5885644+02:00 [start] citizen-voice :: npm.cmd run ingest:citizen-voice:v2",
+                                       "2026-03-17T01:57:41.0259679+02:00 [finish] citizen-voice :: exit=0",
+                                       {
+                                           "name":  "citizen-voice",
+                                           "command":  "npm.cmd run ingest:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:57:41.0351964+02:00"
+                                       },
+                                       "2026-03-17T01:57:41.0366069+02:00 [start] process-queue :: npm.cmd run process:v2:queue",
+                                       "2026-03-17T01:57:48.1505210+02:00 [finish] process-queue :: exit=0",
+                                       {
+                                           "name":  "process-queue",
+                                           "command":  "npm.cmd run process:v2:queue",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:57:48.1505210+02:00"
+                                       },
+                                       "2026-03-17T01:57:48.1505210+02:00 [start] municipal-money :: npm.cmd run ingest:municipal-money:v2",
+                                       "2026-03-17T01:57:54.1284442+02:00 [finish] municipal-money :: exit=1",
+                                       {
+                                           "name":  "municipal-money",
+                                           "command":  "npm.cmd run ingest:municipal-money:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T01:57:54.1315769+02:00"
+                                       },
+                                       "2026-03-17T01:57:54.1315769+02:00 [start] normalize-projects :: npm.cmd run normalize:projects:v2",
+                                       "2026-03-17T01:57:58.7791258+02:00 [finish] normalize-projects :: exit=0",
+                                       {
+                                           "name":  "normalize-projects",
+                                           "command":  "npm.cmd run normalize:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:57:58.7892979+02:00"
+                                       },
+                                       "2026-03-17T01:57:58.7892979+02:00 [start] rebuild-projects :: npm.cmd run rebuild:projects:v2",
+                                       "2026-03-17T01:58:03.3606421+02:00 [finish] rebuild-projects :: exit=0",
+                                       {
+                                           "name":  "rebuild-projects",
+                                           "command":  "npm.cmd run rebuild:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:58:03.3606421+02:00"
+                                       },
+                                       "2026-03-17T01:58:03.3606421+02:00 [start] rebuild-citizen-voice :: npm.cmd run rebuild:citizen-voice:v2",
+                                       "2026-03-17T01:58:13.4411693+02:00 [finish] rebuild-citizen-voice :: exit=0",
+                                       {
+                                           "name":  "rebuild-citizen-voice",
+                                           "command":  "npm.cmd run rebuild:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:58:13.4576061+02:00"
+                                       },
+                                       "2026-03-17T01:58:13.4590421+02:00 [start] rebuild-leadership :: npm.cmd run rebuild:leadership:v2",
+                                       "2026-03-17T01:58:21.3955349+02:00 [finish] rebuild-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-leadership",
+                                           "command":  "npm.cmd run rebuild:leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:58:21.3955349+02:00"
+                                       },
+                                       "2026-03-17T01:58:21.3955349+02:00 [start] rebuild-municipal-leadership :: npm.cmd run rebuild:municipal-leadership:v2",
+                                       "2026-03-17T01:58:28.4369854+02:00 [finish] rebuild-municipal-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-municipal-leadership",
+                                           "command":  "npm.cmd run rebuild:municipal-leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:58:28.4387841+02:00"
+                                       },
+                                       "2026-03-17T01:58:28.4387841+02:00 [start] collect-context :: npm.cmd run collect:context:v2",
+                                       "2026-03-17T01:59:39.6783108+02:00 [finish] collect-context :: exit=0",
+                                       {
+                                           "name":  "collect-context",
+                                           "command":  "npm.cmd run collect:context:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T01:59:39.6783108+02:00"
+                                       }
+                                   ]
+                   },
+                   {
+                       "cycleNumber":  7,
+                       "startedAt":  "2026-03-17T02:19:39.7046015+02:00",
+                       "finishedAt":  "2026-03-17T02:22:35.3305885+02:00",
+                       "results":  [
+                                       "2026-03-17T02:19:39.7072475+02:00 [start] firestore-community-signals :: npm.cmd run import:firestore:community-signals:v2",
+                                       "2026-03-17T02:20:17.8427352+02:00 [finish] firestore-community-signals :: exit=0",
+                                       {
+                                           "name":  "firestore-community-signals",
+                                           "command":  "npm.cmd run import:firestore:community-signals:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T02:20:17.8427352+02:00"
+                                       },
+                                       "2026-03-17T02:20:17.8427352+02:00 [start] official-ingestion :: npm.cmd run ingest:official:v2",
+                                       "2026-03-17T02:20:23.9080449+02:00 [finish] official-ingestion :: exit=1",
+                                       {
+                                           "name":  "official-ingestion",
+                                           "command":  "npm.cmd run ingest:official:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T02:20:23.9080449+02:00"
+                                       },
+                                       "2026-03-17T02:20:23.9080449+02:00 [start] registry-rss :: npm.cmd run ingest:rss:v2",
+                                       "2026-03-17T02:20:28.5217628+02:00 [finish] registry-rss :: exit=1",
+                                       {
+                                           "name":  "registry-rss",
+                                           "command":  "npm.cmd run ingest:rss:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T02:20:28.5217628+02:00"
+                                       },
+                                       "2026-03-17T02:20:28.5217628+02:00 [start] news-ingestion :: npm.cmd run ingest:news:v2",
+                                       "2026-03-17T02:20:33.1369339+02:00 [finish] news-ingestion :: exit=1",
+                                       {
+                                           "name":  "news-ingestion",
+                                           "command":  "npm.cmd run ingest:news:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T02:20:33.1375363+02:00"
+                                       },
+                                       "2026-03-17T02:20:33.1375363+02:00 [start] citizen-voice :: npm.cmd run ingest:citizen-voice:v2",
+                                       "2026-03-17T02:20:39.5867948+02:00 [finish] citizen-voice :: exit=0",
+                                       {
+                                           "name":  "citizen-voice",
+                                           "command":  "npm.cmd run ingest:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T02:20:39.5867948+02:00"
+                                       },
+                                       "2026-03-17T02:20:39.5867948+02:00 [start] process-queue :: npm.cmd run process:v2:queue",
+                                       "2026-03-17T02:20:46.0706670+02:00 [finish] process-queue :: exit=0",
+                                       {
+                                           "name":  "process-queue",
+                                           "command":  "npm.cmd run process:v2:queue",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T02:20:46.0706670+02:00"
+                                       },
+                                       "2026-03-17T02:20:46.0706670+02:00 [start] municipal-money :: npm.cmd run ingest:municipal-money:v2",
+                                       "2026-03-17T02:20:52.9807824+02:00 [finish] municipal-money :: exit=1",
+                                       {
+                                           "name":  "municipal-money",
+                                           "command":  "npm.cmd run ingest:municipal-money:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T02:20:52.9807824+02:00"
+                                       },
+                                       "2026-03-17T02:20:52.9807824+02:00 [start] normalize-projects :: npm.cmd run normalize:projects:v2",
+                                       "2026-03-17T02:20:57.8401688+02:00 [finish] normalize-projects :: exit=0",
+                                       {
+                                           "name":  "normalize-projects",
+                                           "command":  "npm.cmd run normalize:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T02:20:57.8401688+02:00"
+                                       },
+                                       "2026-03-17T02:20:57.8401688+02:00 [start] rebuild-projects :: npm.cmd run rebuild:projects:v2",
+                                       "2026-03-17T02:21:02.2952212+02:00 [finish] rebuild-projects :: exit=0",
+                                       {
+                                           "name":  "rebuild-projects",
+                                           "command":  "npm.cmd run rebuild:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T02:21:02.2952212+02:00"
+                                       },
+                                       "2026-03-17T02:21:02.2952212+02:00 [start] rebuild-citizen-voice :: npm.cmd run rebuild:citizen-voice:v2",
+                                       "2026-03-17T02:21:11.9925059+02:00 [finish] rebuild-citizen-voice :: exit=0",
+                                       {
+                                           "name":  "rebuild-citizen-voice",
+                                           "command":  "npm.cmd run rebuild:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T02:21:11.9925059+02:00"
+                                       },
+                                       "2026-03-17T02:21:11.9925059+02:00 [start] rebuild-leadership :: npm.cmd run rebuild:leadership:v2",
+                                       "2026-03-17T02:21:18.4568314+02:00 [finish] rebuild-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-leadership",
+                                           "command":  "npm.cmd run rebuild:leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T02:21:18.4568314+02:00"
+                                       },
+                                       "2026-03-17T02:21:18.4568314+02:00 [start] rebuild-municipal-leadership :: npm.cmd run rebuild:municipal-leadership:v2",
+                                       "2026-03-17T02:21:24.9750373+02:00 [finish] rebuild-municipal-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-municipal-leadership",
+                                           "command":  "npm.cmd run rebuild:municipal-leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T02:21:24.9770473+02:00"
+                                       },
+                                       "2026-03-17T02:21:24.9790576+02:00 [start] collect-context :: npm.cmd run collect:context:v2",
+                                       "2026-03-17T02:22:35.3305885+02:00 [finish] collect-context :: exit=0",
+                                       {
+                                           "name":  "collect-context",
+                                           "command":  "npm.cmd run collect:context:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T02:22:35.3305885+02:00"
+                                       }
+                                   ]
+                   },
+                   {
+                       "cycleNumber":  8,
+                       "startedAt":  "2026-03-17T02:42:35.3397216+02:00",
+                       "finishedAt":  "2026-03-17T02:45:13.6028350+02:00",
+                       "results":  [
+                                       "2026-03-17T02:42:35.3523791+02:00 [start] firestore-community-signals :: npm.cmd run import:firestore:community-signals:v2",
+                                       "2026-03-17T02:43:00.5981615+02:00 [finish] firestore-community-signals :: exit=0",
+                                       {
+                                           "name":  "firestore-community-signals",
+                                           "command":  "npm.cmd run import:firestore:community-signals:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T02:43:00.5981615+02:00"
+                                       },
+                                       "2026-03-17T02:43:00.6137868+02:00 [start] official-ingestion :: npm.cmd run ingest:official:v2",
+                                       "2026-03-17T02:43:05.6796199+02:00 [finish] official-ingestion :: exit=1",
+                                       {
+                                           "name":  "official-ingestion",
+                                           "command":  "npm.cmd run ingest:official:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T02:43:05.6796199+02:00"
+                                       },
+                                       "2026-03-17T02:43:05.6796199+02:00 [start] registry-rss :: npm.cmd run ingest:rss:v2",
+                                       "2026-03-17T02:43:10.3115957+02:00 [finish] registry-rss :: exit=1",
+                                       {
+                                           "name":  "registry-rss",
+                                           "command":  "npm.cmd run ingest:rss:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T02:43:10.3115957+02:00"
+                                       },
+                                       "2026-03-17T02:43:10.3115957+02:00 [start] news-ingestion :: npm.cmd run ingest:news:v2",
+                                       "2026-03-17T02:43:14.4457882+02:00 [finish] news-ingestion :: exit=1",
+                                       {
+                                           "name":  "news-ingestion",
+                                           "command":  "npm.cmd run ingest:news:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T02:43:14.4457882+02:00"
+                                       },
+                                       "2026-03-17T02:43:14.4457882+02:00 [start] citizen-voice :: npm.cmd run ingest:citizen-voice:v2",
+                                       "2026-03-17T02:43:20.5914859+02:00 [finish] citizen-voice :: exit=0",
+                                       {
+                                           "name":  "citizen-voice",
+                                           "command":  "npm.cmd run ingest:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T02:43:20.5914859+02:00"
+                                       },
+                                       "2026-03-17T02:43:20.5914859+02:00 [start] process-queue :: npm.cmd run process:v2:queue",
+                                       "2026-03-17T02:43:26.2077236+02:00 [finish] process-queue :: exit=0",
+                                       {
+                                           "name":  "process-queue",
+                                           "command":  "npm.cmd run process:v2:queue",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T02:43:26.2077236+02:00"
+                                       },
+                                       "2026-03-17T02:43:26.2077236+02:00 [start] municipal-money :: npm.cmd run ingest:municipal-money:v2",
+                                       "2026-03-17T02:43:31.3043309+02:00 [finish] municipal-money :: exit=1",
+                                       {
+                                           "name":  "municipal-money",
+                                           "command":  "npm.cmd run ingest:municipal-money:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T02:43:31.3043309+02:00"
+                                       },
+                                       "2026-03-17T02:43:31.3043309+02:00 [start] normalize-projects :: npm.cmd run normalize:projects:v2",
+                                       "2026-03-17T02:43:36.1365086+02:00 [finish] normalize-projects :: exit=0",
+                                       {
+                                           "name":  "normalize-projects",
+                                           "command":  "npm.cmd run normalize:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T02:43:36.1365086+02:00"
+                                       },
+                                       "2026-03-17T02:43:36.1365086+02:00 [start] rebuild-projects :: npm.cmd run rebuild:projects:v2",
+                                       "2026-03-17T02:43:41.3696057+02:00 [finish] rebuild-projects :: exit=0",
+                                       {
+                                           "name":  "rebuild-projects",
+                                           "command":  "npm.cmd run rebuild:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T02:43:41.3696057+02:00"
+                                       },
+                                       "2026-03-17T02:43:41.3696057+02:00 [start] rebuild-citizen-voice :: npm.cmd run rebuild:citizen-voice:v2",
+                                       "2026-03-17T02:43:51.7643795+02:00 [finish] rebuild-citizen-voice :: exit=0",
+                                       {
+                                           "name":  "rebuild-citizen-voice",
+                                           "command":  "npm.cmd run rebuild:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T02:43:51.7696037+02:00"
+                                       },
+                                       "2026-03-17T02:43:51.7696037+02:00 [start] rebuild-leadership :: npm.cmd run rebuild:leadership:v2",
+                                       "2026-03-17T02:43:57.6643510+02:00 [finish] rebuild-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-leadership",
+                                           "command":  "npm.cmd run rebuild:leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T02:43:57.6643510+02:00"
+                                       },
+                                       "2026-03-17T02:43:57.6643510+02:00 [start] rebuild-municipal-leadership :: npm.cmd run rebuild:municipal-leadership:v2",
+                                       "2026-03-17T02:44:03.8277929+02:00 [finish] rebuild-municipal-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-municipal-leadership",
+                                           "command":  "npm.cmd run rebuild:municipal-leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T02:44:03.8277929+02:00"
+                                       },
+                                       "2026-03-17T02:44:03.8277929+02:00 [start] collect-context :: npm.cmd run collect:context:v2",
+                                       "2026-03-17T02:45:13.6028350+02:00 [finish] collect-context :: exit=0",
+                                       {
+                                           "name":  "collect-context",
+                                           "command":  "npm.cmd run collect:context:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T02:45:13.6028350+02:00"
+                                       }
+                                   ]
+                   },
+                   {
+                       "cycleNumber":  9,
+                       "startedAt":  "2026-03-17T03:05:13.6121501+02:00",
+                       "finishedAt":  "2026-03-17T03:07:57.3265077+02:00",
+                       "results":  [
+                                       "2026-03-17T03:05:13.6136439+02:00 [start] firestore-community-signals :: npm.cmd run import:firestore:community-signals:v2",
+                                       "2026-03-17T03:05:44.0382684+02:00 [finish] firestore-community-signals :: exit=0",
+                                       {
+                                           "name":  "firestore-community-signals",
+                                           "command":  "npm.cmd run import:firestore:community-signals:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:05:44.0382684+02:00"
+                                       },
+                                       "2026-03-17T03:05:44.0382684+02:00 [start] official-ingestion :: npm.cmd run ingest:official:v2",
+                                       "2026-03-17T03:05:48.5685924+02:00 [finish] official-ingestion :: exit=1",
+                                       {
+                                           "name":  "official-ingestion",
+                                           "command":  "npm.cmd run ingest:official:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T03:05:48.5685924+02:00"
+                                       },
+                                       "2026-03-17T03:05:48.5685924+02:00 [start] registry-rss :: npm.cmd run ingest:rss:v2",
+                                       "2026-03-17T03:05:54.1836567+02:00 [finish] registry-rss :: exit=1",
+                                       {
+                                           "name":  "registry-rss",
+                                           "command":  "npm.cmd run ingest:rss:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T03:05:54.1836567+02:00"
+                                       },
+                                       "2026-03-17T03:05:54.1836567+02:00 [start] news-ingestion :: npm.cmd run ingest:news:v2",
+                                       "2026-03-17T03:05:59.1992855+02:00 [finish] news-ingestion :: exit=1",
+                                       {
+                                           "name":  "news-ingestion",
+                                           "command":  "npm.cmd run ingest:news:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T03:05:59.1992855+02:00"
+                                       },
+                                       "2026-03-17T03:05:59.1992855+02:00 [start] citizen-voice :: npm.cmd run ingest:citizen-voice:v2",
+                                       "2026-03-17T03:06:04.3306454+02:00 [finish] citizen-voice :: exit=0",
+                                       {
+                                           "name":  "citizen-voice",
+                                           "command":  "npm.cmd run ingest:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:06:04.3306454+02:00"
+                                       },
+                                       "2026-03-17T03:06:04.3306454+02:00 [start] process-queue :: npm.cmd run process:v2:queue",
+                                       "2026-03-17T03:06:08.8591993+02:00 [finish] process-queue :: exit=0",
+                                       {
+                                           "name":  "process-queue",
+                                           "command":  "npm.cmd run process:v2:queue",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:06:08.8615905+02:00"
+                                       },
+                                       "2026-03-17T03:06:08.8615905+02:00 [start] municipal-money :: npm.cmd run ingest:municipal-money:v2",
+                                       "2026-03-17T03:06:14.2268624+02:00 [finish] municipal-money :: exit=1",
+                                       {
+                                           "name":  "municipal-money",
+                                           "command":  "npm.cmd run ingest:municipal-money:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T03:06:14.2274166+02:00"
+                                       },
+                                       "2026-03-17T03:06:14.2274166+02:00 [start] normalize-projects :: npm.cmd run normalize:projects:v2",
+                                       "2026-03-17T03:06:20.4248743+02:00 [finish] normalize-projects :: exit=0",
+                                       {
+                                           "name":  "normalize-projects",
+                                           "command":  "npm.cmd run normalize:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:06:20.4248743+02:00"
+                                       },
+                                       "2026-03-17T03:06:20.4248743+02:00 [start] rebuild-projects :: npm.cmd run rebuild:projects:v2",
+                                       "2026-03-17T03:06:27.0074444+02:00 [finish] rebuild-projects :: exit=0",
+                                       {
+                                           "name":  "rebuild-projects",
+                                           "command":  "npm.cmd run rebuild:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:06:27.0074444+02:00"
+                                       },
+                                       "2026-03-17T03:06:27.0074444+02:00 [start] rebuild-citizen-voice :: npm.cmd run rebuild:citizen-voice:v2",
+                                       "2026-03-17T03:06:35.3706791+02:00 [finish] rebuild-citizen-voice :: exit=0",
+                                       {
+                                           "name":  "rebuild-citizen-voice",
+                                           "command":  "npm.cmd run rebuild:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:06:35.3706791+02:00"
+                                       },
+                                       "2026-03-17T03:06:35.3706791+02:00 [start] rebuild-leadership :: npm.cmd run rebuild:leadership:v2",
+                                       "2026-03-17T03:06:39.9344766+02:00 [finish] rebuild-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-leadership",
+                                           "command":  "npm.cmd run rebuild:leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:06:39.9344766+02:00"
+                                       },
+                                       "2026-03-17T03:06:39.9344766+02:00 [start] rebuild-municipal-leadership :: npm.cmd run rebuild:municipal-leadership:v2",
+                                       "2026-03-17T03:06:45.0496534+02:00 [finish] rebuild-municipal-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-municipal-leadership",
+                                           "command":  "npm.cmd run rebuild:municipal-leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:06:45.0496534+02:00"
+                                       },
+                                       "2026-03-17T03:06:45.0553549+02:00 [start] collect-context :: npm.cmd run collect:context:v2",
+                                       "2026-03-17T03:07:57.3084892+02:00 [finish] collect-context :: exit=0",
+                                       {
+                                           "name":  "collect-context",
+                                           "command":  "npm.cmd run collect:context:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:07:57.3265077+02:00"
+                                       }
+                                   ]
+                   },
+                   {
+                       "cycleNumber":  10,
+                       "startedAt":  "2026-03-17T03:27:57.3334089+02:00",
+                       "finishedAt":  "2026-03-17T03:30:36.5503830+02:00",
+                       "results":  [
+                                       "2026-03-17T03:27:57.3367969+02:00 [start] firestore-community-signals :: npm.cmd run import:firestore:community-signals:v2",
+                                       "2026-03-17T03:28:24.4942346+02:00 [finish] firestore-community-signals :: exit=0",
+                                       {
+                                           "name":  "firestore-community-signals",
+                                           "command":  "npm.cmd run import:firestore:community-signals:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:28:24.4942346+02:00"
+                                       },
+                                       "2026-03-17T03:28:24.4942346+02:00 [start] official-ingestion :: npm.cmd run ingest:official:v2",
+                                       "2026-03-17T03:28:29.3412716+02:00 [finish] official-ingestion :: exit=1",
+                                       {
+                                           "name":  "official-ingestion",
+                                           "command":  "npm.cmd run ingest:official:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T03:28:29.3585155+02:00"
+                                       },
+                                       "2026-03-17T03:28:29.3585155+02:00 [start] registry-rss :: npm.cmd run ingest:rss:v2",
+                                       "2026-03-17T03:28:34.0233169+02:00 [finish] registry-rss :: exit=1",
+                                       {
+                                           "name":  "registry-rss",
+                                           "command":  "npm.cmd run ingest:rss:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T03:28:34.0233169+02:00"
+                                       },
+                                       "2026-03-17T03:28:34.0233169+02:00 [start] news-ingestion :: npm.cmd run ingest:news:v2",
+                                       "2026-03-17T03:28:38.3547847+02:00 [finish] news-ingestion :: exit=1",
+                                       {
+                                           "name":  "news-ingestion",
+                                           "command":  "npm.cmd run ingest:news:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T03:28:38.3547847+02:00"
+                                       },
+                                       "2026-03-17T03:28:38.3547847+02:00 [start] citizen-voice :: npm.cmd run ingest:citizen-voice:v2",
+                                       "2026-03-17T03:28:43.2365000+02:00 [finish] citizen-voice :: exit=0",
+                                       {
+                                           "name":  "citizen-voice",
+                                           "command":  "npm.cmd run ingest:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:28:43.2365000+02:00"
+                                       },
+                                       "2026-03-17T03:28:43.2365000+02:00 [start] process-queue :: npm.cmd run process:v2:queue",
+                                       "2026-03-17T03:28:47.8851307+02:00 [finish] process-queue :: exit=0",
+                                       {
+                                           "name":  "process-queue",
+                                           "command":  "npm.cmd run process:v2:queue",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:28:47.8851307+02:00"
+                                       },
+                                       "2026-03-17T03:28:47.8851307+02:00 [start] municipal-money :: npm.cmd run ingest:municipal-money:v2",
+                                       "2026-03-17T03:28:53.7511705+02:00 [finish] municipal-money :: exit=1",
+                                       {
+                                           "name":  "municipal-money",
+                                           "command":  "npm.cmd run ingest:municipal-money:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T03:28:53.7511705+02:00"
+                                       },
+                                       "2026-03-17T03:28:53.7511705+02:00 [start] normalize-projects :: npm.cmd run normalize:projects:v2",
+                                       "2026-03-17T03:28:59.5311660+02:00 [finish] normalize-projects :: exit=0",
+                                       {
+                                           "name":  "normalize-projects",
+                                           "command":  "npm.cmd run normalize:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:28:59.5311660+02:00"
+                                       },
+                                       "2026-03-17T03:28:59.5311660+02:00 [start] rebuild-projects :: npm.cmd run rebuild:projects:v2",
+                                       "2026-03-17T03:29:03.8463435+02:00 [finish] rebuild-projects :: exit=0",
+                                       {
+                                           "name":  "rebuild-projects",
+                                           "command":  "npm.cmd run rebuild:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:29:03.8463435+02:00"
+                                       },
+                                       "2026-03-17T03:29:03.8463435+02:00 [start] rebuild-citizen-voice :: npm.cmd run rebuild:citizen-voice:v2",
+                                       "2026-03-17T03:29:13.3621422+02:00 [finish] rebuild-citizen-voice :: exit=0",
+                                       {
+                                           "name":  "rebuild-citizen-voice",
+                                           "command":  "npm.cmd run rebuild:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:29:13.3765934+02:00"
+                                       },
+                                       "2026-03-17T03:29:13.3765934+02:00 [start] rebuild-leadership :: npm.cmd run rebuild:leadership:v2",
+                                       "2026-03-17T03:29:18.0759533+02:00 [finish] rebuild-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-leadership",
+                                           "command":  "npm.cmd run rebuild:leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:29:18.0759533+02:00"
+                                       },
+                                       "2026-03-17T03:29:18.0759533+02:00 [start] rebuild-municipal-leadership :: npm.cmd run rebuild:municipal-leadership:v2",
+                                       "2026-03-17T03:29:25.3060440+02:00 [finish] rebuild-municipal-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-municipal-leadership",
+                                           "command":  "npm.cmd run rebuild:municipal-leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:29:25.3122022+02:00"
+                                       },
+                                       "2026-03-17T03:29:25.3122022+02:00 [start] collect-context :: npm.cmd run collect:context:v2",
+                                       "2026-03-17T03:30:36.5503830+02:00 [finish] collect-context :: exit=0",
+                                       {
+                                           "name":  "collect-context",
+                                           "command":  "npm.cmd run collect:context:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:30:36.5503830+02:00"
+                                       }
+                                   ]
+                   },
+                   {
+                       "cycleNumber":  11,
+                       "startedAt":  "2026-03-17T03:50:36.5736505+02:00",
+                       "finishedAt":  "2026-03-17T03:53:20.4545530+02:00",
+                       "results":  [
+                                       "2026-03-17T03:50:36.5766131+02:00 [start] firestore-community-signals :: npm.cmd run import:firestore:community-signals:v2",
+                                       "2026-03-17T03:51:08.0149253+02:00 [finish] firestore-community-signals :: exit=0",
+                                       {
+                                           "name":  "firestore-community-signals",
+                                           "command":  "npm.cmd run import:firestore:community-signals:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:51:08.0149253+02:00"
+                                       },
+                                       "2026-03-17T03:51:08.0149253+02:00 [start] official-ingestion :: npm.cmd run ingest:official:v2",
+                                       "2026-03-17T03:51:11.9802297+02:00 [finish] official-ingestion :: exit=1",
+                                       {
+                                           "name":  "official-ingestion",
+                                           "command":  "npm.cmd run ingest:official:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T03:51:11.9802297+02:00"
+                                       },
+                                       "2026-03-17T03:51:11.9802297+02:00 [start] registry-rss :: npm.cmd run ingest:rss:v2",
+                                       "2026-03-17T03:51:16.3619286+02:00 [finish] registry-rss :: exit=1",
+                                       {
+                                           "name":  "registry-rss",
+                                           "command":  "npm.cmd run ingest:rss:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T03:51:16.3619286+02:00"
+                                       },
+                                       "2026-03-17T03:51:16.3619286+02:00 [start] news-ingestion :: npm.cmd run ingest:news:v2",
+                                       "2026-03-17T03:51:22.1259618+02:00 [finish] news-ingestion :: exit=1",
+                                       {
+                                           "name":  "news-ingestion",
+                                           "command":  "npm.cmd run ingest:news:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T03:51:22.1280889+02:00"
+                                       },
+                                       "2026-03-17T03:51:22.1280889+02:00 [start] citizen-voice :: npm.cmd run ingest:citizen-voice:v2",
+                                       "2026-03-17T03:51:29.8482073+02:00 [finish] citizen-voice :: exit=0",
+                                       {
+                                           "name":  "citizen-voice",
+                                           "command":  "npm.cmd run ingest:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:51:29.8502175+02:00"
+                                       },
+                                       "2026-03-17T03:51:29.8502175+02:00 [start] process-queue :: npm.cmd run process:v2:queue",
+                                       "2026-03-17T03:51:34.7067591+02:00 [finish] process-queue :: exit=0",
+                                       {
+                                           "name":  "process-queue",
+                                           "command":  "npm.cmd run process:v2:queue",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:51:34.7067591+02:00"
+                                       },
+                                       "2026-03-17T03:51:34.7067591+02:00 [start] municipal-money :: npm.cmd run ingest:municipal-money:v2",
+                                       "2026-03-17T03:51:39.2710673+02:00 [finish] municipal-money :: exit=1",
+                                       {
+                                           "name":  "municipal-money",
+                                           "command":  "npm.cmd run ingest:municipal-money:v2",
+                                           "exitCode":  1,
+                                           "finishedAt":  "2026-03-17T03:51:39.2710673+02:00"
+                                       },
+                                       "2026-03-17T03:51:39.2710673+02:00 [start] normalize-projects :: npm.cmd run normalize:projects:v2",
+                                       "2026-03-17T03:51:43.9361161+02:00 [finish] normalize-projects :: exit=0",
+                                       {
+                                           "name":  "normalize-projects",
+                                           "command":  "npm.cmd run normalize:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:51:43.9361161+02:00"
+                                       },
+                                       "2026-03-17T03:51:43.9361161+02:00 [start] rebuild-projects :: npm.cmd run rebuild:projects:v2",
+                                       "2026-03-17T03:51:49.2000376+02:00 [finish] rebuild-projects :: exit=0",
+                                       {
+                                           "name":  "rebuild-projects",
+                                           "command":  "npm.cmd run rebuild:projects:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:51:49.2024101+02:00"
+                                       },
+                                       "2026-03-17T03:51:49.2024101+02:00 [start] rebuild-citizen-voice :: npm.cmd run rebuild:citizen-voice:v2",
+                                       "2026-03-17T03:51:59.6966231+02:00 [finish] rebuild-citizen-voice :: exit=0",
+                                       {
+                                           "name":  "rebuild-citizen-voice",
+                                           "command":  "npm.cmd run rebuild:citizen-voice:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:51:59.6976271+02:00"
+                                       },
+                                       "2026-03-17T03:51:59.6976271+02:00 [start] rebuild-leadership :: npm.cmd run rebuild:leadership:v2",
+                                       "2026-03-17T03:52:05.6454594+02:00 [finish] rebuild-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-leadership",
+                                           "command":  "npm.cmd run rebuild:leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:52:05.6454594+02:00"
+                                       },
+                                       "2026-03-17T03:52:05.6454594+02:00 [start] rebuild-municipal-leadership :: npm.cmd run rebuild:municipal-leadership:v2",
+                                       "2026-03-17T03:52:10.7603165+02:00 [finish] rebuild-municipal-leadership :: exit=0",
+                                       {
+                                           "name":  "rebuild-municipal-leadership",
+                                           "command":  "npm.cmd run rebuild:municipal-leadership:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:52:10.7603165+02:00"
+                                       },
+                                       "2026-03-17T03:52:10.7603165+02:00 [start] collect-context :: npm.cmd run collect:context:v2",
+                                       "2026-03-17T03:53:20.4545530+02:00 [finish] collect-context :: exit=0",
+                                       {
+                                           "name":  "collect-context",
+                                           "command":  "npm.cmd run collect:context:v2",
+                                           "exitCode":  0,
+                                           "finishedAt":  "2026-03-17T03:53:20.4545530+02:00"
+                                       }
+                                   ]
+                   }
+               ]
+}

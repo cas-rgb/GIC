@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+  superset:
+    image: apache/superset:latest
+    container_name: gic_superset
+    ports:
+      - "8088:8088"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./superset_config.py:/app/pythonpath/superset_config.py
+      - ./data:/app/superset_home
+      - ../gic_intelligence.db:/app/gic_intelligence.db
+    environment:
+      - SUPERSET_SECRET_KEY=gic_ultra_secure_key_123
+      - TALISMAN_CONFIG={"content_security_policy": {"default-src": ["'self'", "'unsafe-inline'", "'unsafe-eval'", "*.google-analytics.com", "*.googleapis.com", "*.gstatic.com", "fonts.gstatic.com", "data:"]}}
+    user: root
+    entrypoint: >
+      /bin/sh -c "
+        superset db upgrade;
+        superset fab create-admin --username admin --firstname Superset --lastname Admin --email admin@localhost --password admin;
+        superset init;
+        /usr/bin/run-server.sh
+      "

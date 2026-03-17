@@ -1,0 +1,6819 @@
+{
+  "generatedAt": "2026-03-17T01:53:20.328Z",
+  "profiles": [
+    {
+      "geographyLevel": "province",
+      "province": "Eastern Cape",
+      "municipality": null,
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Eastern Cape"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Eastern Cape",
+      "municipality": "Buffalo City",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Eastern Cape",
+        "Buffalo City"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 7,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Eastern Cape",
+      "municipality": "Enoch Mgijima",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Eastern Cape",
+        "Enoch Mgijima"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Eastern Cape",
+      "municipality": "Nelson Mandela Bay",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Eastern Cape",
+        "Nelson Mandela Bay"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 4,
+      "evidenceBackedWardCount": 1
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Eastern Cape",
+      "municipality": "OR Tambo",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Eastern Cape",
+        "OR Tambo"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Eastern Cape",
+      "municipality": "Walter Sisulu",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Eastern Cape",
+        "Walter Sisulu"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "province",
+      "province": "Free State",
+      "municipality": null,
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Free State"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Free State",
+      "municipality": "Dihlabeng",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Free State",
+        "Dihlabeng"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 7,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Free State",
+      "municipality": "Kopanong",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Free State",
+        "Kopanong"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 10,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Free State",
+      "municipality": "Letsemeng",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Free State",
+        "Letsemeng"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 11,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Free State",
+      "municipality": "Maluti-a-Phofung",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Free State",
+        "Maluti-a-Phofung"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 2,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Free State",
+      "municipality": "Mangaung",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Free State",
+        "Mangaung"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 14,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Free State",
+      "municipality": "Masilonyana",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Free State",
+        "Masilonyana"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 12,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Free State",
+        "Matjhabeng"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 25,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Free State",
+      "municipality": "Mohokare",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Free State",
+        "Mohokare"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 8,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Free State",
+      "municipality": "Moqhaka",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Free State",
+        "Moqhaka"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Free State",
+      "municipality": "Nala",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Free State",
+        "Nala"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 2,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Free State",
+      "municipality": "Ngwathe",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Free State",
+        "Ngwathe"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Free State",
+      "municipality": "Nketoana",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Free State",
+        "Nketoana"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Free State",
+      "municipality": "Phumelela",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Free State",
+        "Phumelela"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Free State",
+      "municipality": "Setsoto",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Free State",
+        "Setsoto"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Free State",
+      "municipality": "Tokologo",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Free State",
+        "Tokologo"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Free State",
+      "municipality": "Tswelopele",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Free State",
+        "Tswelopele"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 3,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "province",
+      "province": "Gauteng",
+      "municipality": null,
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Gauteng"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Gauteng",
+      "municipality": "City of Ekurhuleni",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Gauteng",
+        "City of Ekurhuleni"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 17,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Gauteng",
+      "municipality": "City of Johannesburg",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Gauteng",
+        "City of Johannesburg"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 3,
+      "evidenceBackedWardCount": 1
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Gauteng",
+      "municipality": "City of Tshwane",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Gauteng",
+        "City of Tshwane"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 2,
+      "evidenceBackedWardCount": 1
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Gauteng",
+      "municipality": "Ekurhuleni",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Gauteng",
+        "Ekurhuleni"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Gauteng",
+      "municipality": "Emfuleni",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Gauteng",
+        "Emfuleni"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Gauteng",
+      "municipality": "Johannesburg",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Gauteng",
+        "Johannesburg"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "province",
+      "province": "KwaZulu-Natal",
+      "municipality": null,
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "KwaZulu-Natal"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "KwaZulu-Natal",
+        "eThekwini"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 72,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "KwaZulu-Natal",
+      "municipality": "Inkosi Langalibalele",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "KwaZulu-Natal",
+        "Inkosi Langalibalele"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "KwaZulu-Natal",
+      "municipality": "Msunduzi",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "KwaZulu-Natal",
+        "Msunduzi"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "KwaZulu-Natal",
+      "municipality": "uMhlathuze",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "KwaZulu-Natal",
+        "uMhlathuze"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "KwaZulu-Natal",
+      "municipality": "Umvoti",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "KwaZulu-Natal",
+        "Umvoti"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "KwaZulu-Natal",
+      "municipality": "Umzumbe",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "KwaZulu-Natal",
+        "Umzumbe"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "province",
+      "province": "Limpopo",
+      "municipality": null,
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Limpopo"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Limpopo",
+      "municipality": "Lephalale",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Limpopo",
+        "Lephalale"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Limpopo",
+      "municipality": "Mogalakwena",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Limpopo",
+        "Mogalakwena"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Limpopo",
+      "municipality": "Polokwane",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Limpopo",
+        "Polokwane"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 2,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Limpopo",
+      "municipality": "Thulamela",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Limpopo",
+        "Thulamela"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "province",
+      "province": "Mpumalanga",
+      "municipality": null,
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Mpumalanga"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Mpumalanga",
+      "municipality": "Albert Luthuli",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Mpumalanga",
+        "Albert Luthuli"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Mpumalanga",
+      "municipality": "Bushbuckridge",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Mpumalanga",
+        "Bushbuckridge"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 4,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Mpumalanga",
+      "municipality": "City of Mbombela",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Mpumalanga",
+        "City of Mbombela"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 3,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Mpumalanga",
+      "municipality": "Dipaleseng",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Mpumalanga",
+        "Dipaleseng"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 2,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Mpumalanga",
+        "Emalahleni"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni (MP)",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Mpumalanga",
+        "Emalahleni (MP)"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 14,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Mpumalanga",
+      "municipality": "Govan Mbeki",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Mpumalanga",
+        "Govan Mbeki"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 14,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Mpumalanga",
+      "municipality": "Lekwa",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Mpumalanga",
+        "Lekwa"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 13,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Mpumalanga",
+      "municipality": "Mbombela",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Mpumalanga",
+        "Mbombela"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Mpumalanga",
+      "municipality": "Mkhondo",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Mpumalanga",
+        "Mkhondo"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 8,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Mpumalanga",
+      "municipality": "Msukaligwa",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Mpumalanga",
+        "Msukaligwa"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 6,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Mpumalanga",
+      "municipality": "Nkomazi",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Mpumalanga",
+        "Nkomazi"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Mpumalanga",
+        "Pixley Ka Seme (MP)"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 19,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Mpumalanga",
+        "Steve Tshwete"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 36,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Mpumalanga",
+      "municipality": "Thembisile Hani",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Mpumalanga",
+        "Thembisile Hani"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Mpumalanga",
+      "municipality": "Victor Khanye",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Mpumalanga",
+        "Victor Khanye"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 8,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "province",
+      "province": "National",
+      "municipality": null,
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "National"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "province",
+      "province": "North West",
+      "municipality": null,
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "North West",
+      "municipality": "City of Matlosana",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West",
+        "City of Matlosana"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 5,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "North West",
+      "municipality": "Ditsobotla",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West",
+        "Ditsobotla"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 2,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "North West",
+      "municipality": "Greater Taung",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West",
+        "Greater Taung"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 6,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "North West",
+      "municipality": "J B Marks",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West",
+        "J B Marks"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 4,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "North West",
+      "municipality": "Kagisano-Molopo",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West",
+        "Kagisano-Molopo"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 6,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "North West",
+      "municipality": "Kgetlengrivier",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West",
+        "Kgetlengrivier"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 5,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "North West",
+      "municipality": "Lekwa-Teemane",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West",
+        "Lekwa-Teemane"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 6,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "North West",
+      "municipality": "Madibeng",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West",
+        "Madibeng"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 7,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "North West",
+      "municipality": "Mafikeng",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West",
+        "Mafikeng"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 4,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "North West",
+      "municipality": "Mahikeng",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West",
+        "Mahikeng"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "North West",
+      "municipality": "Mamusa",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West",
+        "Mamusa"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 3,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "North West",
+      "municipality": "Maquassi Hills",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West",
+        "Maquassi Hills"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 9,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "North West",
+      "municipality": "Moretele",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West",
+        "Moretele"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 7,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West",
+        "Moses Kotane"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 31,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "North West",
+      "municipality": "Naledi (NW)",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West",
+        "Naledi (NW)"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 11,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "North West",
+      "municipality": "Nkangala District",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West",
+        "Nkangala District"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "North West",
+      "municipality": "Ramotshere Moiloa",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West",
+        "Ramotshere Moiloa"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 5,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "North West",
+      "municipality": "Ratlou",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West",
+        "Ratlou"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 7,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West",
+        "Rustenburg"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 18,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "North West",
+      "municipality": "Tswaing",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "North West",
+        "Tswaing"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 6,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "province",
+      "province": "Northern Cape",
+      "municipality": null,
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Northern Cape"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Northern Cape",
+      "municipality": "!Kai! Garib",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Northern Cape",
+        "!Kai! Garib"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Northern Cape",
+      "municipality": "Dawid Kruiper",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Northern Cape",
+        "Dawid Kruiper"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Northern Cape",
+      "municipality": "Dikgatlong",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Northern Cape",
+        "Dikgatlong"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 2,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Northern Cape",
+      "municipality": "Ga-Segonyana",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Northern Cape",
+        "Ga-Segonyana"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Northern Cape",
+      "municipality": "Joe Morolong",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Northern Cape",
+        "Joe Morolong"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Northern Cape",
+      "municipality": "Magareng",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Northern Cape",
+        "Magareng"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Northern Cape",
+      "municipality": "Phokwane",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Northern Cape",
+        "Phokwane"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Northern Cape",
+      "municipality": "Sol Plaatje",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Northern Cape",
+        "Sol Plaatje"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 11,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "province",
+      "province": "Western Cape",
+      "municipality": null,
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Western Cape"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Western Cape",
+      "municipality": "Bitou",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Western Cape",
+        "Bitou"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Western Cape",
+      "municipality": "Breede Valley",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Western Cape",
+        "Breede Valley"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 2,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Western Cape",
+      "municipality": "Cape Agulhas",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Western Cape",
+        "Cape Agulhas"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Western Cape",
+        "Cape Town"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 41,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Western Cape",
+      "municipality": "City of Cape Town",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Western Cape",
+        "City of Cape Town"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 2,
+      "evidenceBackedWardCount": 1
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Western Cape",
+      "municipality": "Drakenstein",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Western Cape",
+        "Drakenstein"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Western Cape",
+      "municipality": "George",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Western Cape",
+        "George"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Western Cape",
+      "municipality": "Hessequa",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Western Cape",
+        "Hessequa"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Western Cape",
+      "municipality": "Matzikama",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Western Cape",
+        "Matzikama"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Western Cape",
+      "municipality": "Saldanha Bay",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Western Cape",
+        "Saldanha Bay"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "geographyLevel": "municipality",
+      "province": "Western Cape",
+      "municipality": "Stellenbosch",
+      "wikipediaTitle": null,
+      "wikipediaDescription": null,
+      "wikipediaExtract": null,
+      "wikipediaUrl": null,
+      "storyAngles": [],
+      "tags": [
+        "Western Cape",
+        "Stellenbosch"
+      ],
+      "geocode": null,
+      "weather": null,
+      "knownWardCount": 0,
+      "evidenceBackedWardCount": 0
+    }
+  ],
+  "wardCoverage": [
+    {
+      "province": "Eastern Cape",
+      "municipality": "Buffalo City",
+      "ward": "Administrative or Head Office",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Eastern Cape",
+      "municipality": "Buffalo City",
+      "ward": "Coastal",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Eastern Cape",
+      "municipality": "Buffalo City",
+      "ward": "Coastal,Whole of the Metro,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Eastern Cape",
+      "municipality": "Buffalo City",
+      "ward": "Inland",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Eastern Cape",
+      "municipality": "Buffalo City",
+      "ward": "Midland",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Eastern Cape",
+      "municipality": "Buffalo City",
+      "ward": "Ward 31",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Eastern Cape",
+      "municipality": "Buffalo City",
+      "ward": "Whole of the Metro",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Eastern Cape",
+      "municipality": "Nelson Mandela Bay",
+      "ward": "Motherwell",
+      "documentCount": 1,
+      "pressureCaseCount": 4,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": true
+    },
+    {
+      "province": "Eastern Cape",
+      "municipality": "Nelson Mandela Bay",
+      "ward": "Ward 4",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Eastern Cape",
+      "municipality": "Nelson Mandela Bay",
+      "ward": "Ward 993",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Eastern Cape",
+      "municipality": "Nelson Mandela Bay",
+      "ward": "Whole of the Metro",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Eastern Cape",
+      "municipality": "Walter Sisulu",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Dihlabeng",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Dihlabeng",
+      "ward": "Ward 14",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Dihlabeng",
+      "ward": "Ward 15",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Dihlabeng",
+      "ward": "Ward 3",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Dihlabeng",
+      "ward": "Ward 4",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Dihlabeng",
+      "ward": "Ward 6",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Dihlabeng",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Kopanong",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Kopanong",
+      "ward": "Ward 1",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Kopanong",
+      "ward": "Ward 2",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Kopanong",
+      "ward": "Ward 3",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Kopanong",
+      "ward": "Ward 4",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Kopanong",
+      "ward": "Ward 5",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Kopanong",
+      "ward": "Ward 6",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Kopanong",
+      "ward": "Ward 7",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Kopanong",
+      "ward": "Ward 8",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Kopanong",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Letsemeng",
+      "ward": "Administrative or Head Office",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Letsemeng",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Letsemeng",
+      "ward": "Administrative or Head Office (Including Satellite Offices),Ward 1,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Letsemeng",
+      "ward": "Administrative or Head Office (Including Satellite Offices),Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Letsemeng",
+      "ward": "Ward 1",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Letsemeng",
+      "ward": "Ward 1,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Letsemeng",
+      "ward": "Ward 2",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Letsemeng",
+      "ward": "Ward 4",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Letsemeng",
+      "ward": "Ward 6",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Letsemeng",
+      "ward": "Whole of the District,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Letsemeng",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Maluti-a-Phofung",
+      "ward": "Ward 1",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Maluti-a-Phofung",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mangaung",
+      "ward": "Bloemfontein South",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mangaung",
+      "ward": "Bloemfontein South,Botshabelo,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mangaung",
+      "ward": "Bloemfontein South,Whole of the Metro,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mangaung",
+      "ward": "Botshabelo",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mangaung",
+      "ward": "Botshabelo,Thaba Nchu,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mangaung",
+      "ward": "Botshabelo,Whole of the Metro,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mangaung",
+      "ward": "Naledi",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mangaung",
+      "ward": "Soutpan",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mangaung",
+      "ward": "Soutpan,Thaba Nchu,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mangaung",
+      "ward": "Soutpan,Whole of the Metro,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mangaung",
+      "ward": "Thaba Nchu",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mangaung",
+      "ward": "Thaba Nchu,Whole of the Metro,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mangaung",
+      "ward": "Ward 46",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mangaung",
+      "ward": "Whole of the Metro",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Masilonyana",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Masilonyana",
+      "ward": "Ward 1",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Masilonyana",
+      "ward": "Ward 1,Ward 10,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Masilonyana",
+      "ward": "Ward 1,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Masilonyana",
+      "ward": "Ward 10",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Masilonyana",
+      "ward": "Ward 2",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Masilonyana",
+      "ward": "Ward 3",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Masilonyana",
+      "ward": "Ward 4",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Masilonyana",
+      "ward": "Ward 5",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Masilonyana",
+      "ward": "Ward 6",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Masilonyana",
+      "ward": "Ward 9",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Masilonyana",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 1",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 10",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 11",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 12",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 13",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 14",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 16",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 17",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 18",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 19",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 2",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 20",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 24",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 26",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 27",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 28",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 29",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 3",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 32",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 33",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 35",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 4",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 5",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Ward 9",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mohokare",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mohokare",
+      "ward": "Ward 1,Ward 5,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mohokare",
+      "ward": "Ward 2",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mohokare",
+      "ward": "Ward 2,Ward 4,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mohokare",
+      "ward": "Ward 4",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mohokare",
+      "ward": "Ward 5",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mohokare",
+      "ward": "Ward 6",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mohokare",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Nala",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Nala",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Ngwathe",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Nketoana",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Phumelela",
+      "ward": "FS195 Phumelela",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Setsoto",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Tokologo",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Tswelopele",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Tswelopele",
+      "ward": "Administrative or Head Office (Including Satellite Offices),Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Free State",
+      "municipality": "Tswelopele",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Ekurhuleni",
+      "ward": "EDC",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Ekurhuleni",
+      "ward": "Ward 10",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Ekurhuleni",
+      "ward": "Ward 102",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Ekurhuleni",
+      "ward": "Ward 109",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Ekurhuleni",
+      "ward": "Ward 18",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Ekurhuleni",
+      "ward": "Ward 19",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Ekurhuleni",
+      "ward": "Ward 65",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Ekurhuleni",
+      "ward": "Ward 70",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Ekurhuleni",
+      "ward": "Ward 75",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Ekurhuleni",
+      "ward": "Ward 76",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Ekurhuleni",
+      "ward": "Ward 77",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Ekurhuleni",
+      "ward": "Ward 79",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Ekurhuleni",
+      "ward": "Ward 83",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Ekurhuleni",
+      "ward": "Ward 86",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Ekurhuleni",
+      "ward": "Ward 9",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Ekurhuleni",
+      "ward": "Ward 92",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Ekurhuleni",
+      "ward": "Ward 96",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Johannesburg",
+      "ward": "Soweto",
+      "documentCount": 1,
+      "pressureCaseCount": 2,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": true
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Johannesburg",
+      "ward": "Ward 58",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Johannesburg",
+      "ward": "Whole of the Metro",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Tshwane",
+      "ward": "Hammanskraal",
+      "documentCount": 1,
+      "pressureCaseCount": 1,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": true
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Tshwane",
+      "ward": "Ward 77",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Central Region,Whole of the Metro,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Northern Region",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "South Western Region",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 1",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 10",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 100",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 102",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 103",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 104",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 105",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 106",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 106,Ward 59,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 12",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 13",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 14",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 15",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 16",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 17",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 18",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 19",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 2",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 20",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 21",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 23",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 24",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 26",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 27",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 28",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 29",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 3",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 30",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 31",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 32",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 33",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 34",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 35",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 4",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 40",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 41",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 41,Ward 8,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 42",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 43",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 45",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 5",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 53",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 54",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 56",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 58",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 59",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 6",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 61",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 62",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 63",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 64",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 68",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 7",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 74",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 75",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 76",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 77",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 8",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 80",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 83",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 85",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 90",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 91",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 94",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 95",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 96",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Ward 99",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Western Region",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "ward": "Whole of the Metro",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "Inkosi Langalibalele",
+      "ward": "Ward 3",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "Msunduzi",
+      "ward": "Ward 28",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "Umvoti",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "Umzumbe",
+      "ward": "Ward 7",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Limpopo",
+      "municipality": "Polokwane",
+      "ward": "Ward 19",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Limpopo",
+      "municipality": "Polokwane",
+      "ward": "Ward 25",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Limpopo",
+      "municipality": "Thulamela",
+      "ward": "Ward 14",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Albert Luthuli",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Bushbuckridge",
+      "ward": "Ward 14",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Bushbuckridge",
+      "ward": "Ward 25",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Bushbuckridge",
+      "ward": "Ward 28",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Bushbuckridge",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "City of Mbombela",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "City of Mbombela",
+      "ward": "Ward 1",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "City of Mbombela",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Dipaleseng",
+      "ward": "Ward 3,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Dipaleseng",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni",
+      "ward": "Ward 10",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni (MP)",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni (MP)",
+      "ward": "Administrative or Head Office (Including Satellite Offices),Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni (MP)",
+      "ward": "Ward 1",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni (MP)",
+      "ward": "Ward 1,Ward 12,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni (MP)",
+      "ward": "Ward 1,Ward 2,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni (MP)",
+      "ward": "Ward 1,Ward 3,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni (MP)",
+      "ward": "Ward 1,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni (MP)",
+      "ward": "Ward 15",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni (MP)",
+      "ward": "Ward 2",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni (MP)",
+      "ward": "Ward 23",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni (MP)",
+      "ward": "Ward 28",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni (MP)",
+      "ward": "Ward 3",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni (MP)",
+      "ward": "Ward 34",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni (MP)",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Govan Mbeki",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Govan Mbeki",
+      "ward": "Administrative or Head Office (Including Satellite Offices),Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Govan Mbeki",
+      "ward": "Ward 1",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Govan Mbeki",
+      "ward": "Ward 1,Ward 2,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Govan Mbeki",
+      "ward": "Ward 10",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Govan Mbeki",
+      "ward": "Ward 10,Ward 5,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Govan Mbeki",
+      "ward": "Ward 2,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Govan Mbeki",
+      "ward": "Ward 28",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Govan Mbeki",
+      "ward": "Ward 3",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Govan Mbeki",
+      "ward": "Ward 3,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Govan Mbeki",
+      "ward": "Ward 4",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Govan Mbeki",
+      "ward": "Ward 5",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Govan Mbeki",
+      "ward": "Ward 5,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Govan Mbeki",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Lekwa",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Lekwa",
+      "ward": "Administrative or Head Office (Including Satellite Offices),Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Lekwa",
+      "ward": "Ward 1",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Lekwa",
+      "ward": "Ward 1,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Lekwa",
+      "ward": "Ward 11,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Lekwa",
+      "ward": "Ward 12",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Lekwa",
+      "ward": "Ward 12,Ward 14,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Lekwa",
+      "ward": "Ward 15,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Lekwa",
+      "ward": "Ward 2,Ward 6,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Lekwa",
+      "ward": "Ward 4,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Lekwa",
+      "ward": "Ward 6,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Lekwa",
+      "ward": "Ward 8",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Lekwa",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Mbombela",
+      "ward": "Ward 22",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Mkhondo",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Mkhondo",
+      "ward": "Ward 1",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Mkhondo",
+      "ward": "Ward 14",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Mkhondo",
+      "ward": "Ward 18",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Mkhondo",
+      "ward": "Ward 5",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Mkhondo",
+      "ward": "Ward 6",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Mkhondo",
+      "ward": "Whole of the District",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Mkhondo",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Msukaligwa",
+      "ward": "Ward 1",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Msukaligwa",
+      "ward": "Ward 10",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Msukaligwa",
+      "ward": "Ward 14",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Msukaligwa",
+      "ward": "Ward 19",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Msukaligwa",
+      "ward": "Ward 2",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Msukaligwa",
+      "ward": "Ward 3",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Nkomazi",
+      "ward": "Ward 27",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "ward": "Ward 1",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "ward": "Ward 1,Ward 2,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "ward": "Ward 10",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "ward": "Ward 10,Ward 8,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "ward": "Ward 11",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "ward": "Ward 11,Ward 7,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "ward": "Ward 11,Ward 9,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "ward": "Ward 2",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "ward": "Ward 2,Ward 3,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "ward": "Ward 3",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "ward": "Ward 4",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "ward": "Ward 4,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "ward": "Ward 5",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "ward": "Ward 5,Ward 6,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "ward": "Ward 6",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "ward": "Ward 7",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "ward": "Ward 7,Ward 8,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "ward": "Ward 9",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Region: Hendrina",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Region: Middelburg",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 1",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 10",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 11",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 12",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 13",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 14",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 14,Ward 21,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 15",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 16",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 17",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 18",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 19",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 19,Ward 28,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 2",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 20",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 21",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 22",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 23",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 23,Ward 27,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 24",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 25",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 26",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 27",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 28",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 29",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 3",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 4",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 5",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 6",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 7",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 8",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Ward 9",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Victor Khanye",
+      "ward": "Administrative or Head Office,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Victor Khanye",
+      "ward": "MP311 Victor Khanye",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Victor Khanye",
+      "ward": "MP311 Victor Khanye,Ward 1,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Victor Khanye",
+      "ward": "MP311 Victor Khanye,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Victor Khanye",
+      "ward": "Ward 1",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Victor Khanye",
+      "ward": "Ward 1,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Victor Khanye",
+      "ward": "Ward 2",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Victor Khanye",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "City of Matlosana",
+      "ward": "Ward 16,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "City of Matlosana",
+      "ward": "Ward 32",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "City of Matlosana",
+      "ward": "Ward 32,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "City of Matlosana",
+      "ward": "Ward 9,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "City of Matlosana",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Ditsobotla",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Ditsobotla",
+      "ward": "Whole of the Municipality,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Greater Taung",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Greater Taung",
+      "ward": "Pudimoe",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Greater Taung",
+      "ward": "Reivilo",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Greater Taung",
+      "ward": "Taung",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Greater Taung",
+      "ward": "Taung,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Greater Taung",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "J B Marks",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "J B Marks",
+      "ward": "Administrative or Head Office (Including Satellite Offices),Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "J B Marks",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "J B Marks",
+      "ward": "Whole of the Municipality,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Kagisano-Molopo",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Kagisano-Molopo",
+      "ward": "Administrative or Head Office (Including Satellite Offices),Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Kagisano-Molopo",
+      "ward": "Ward 12,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Kagisano-Molopo",
+      "ward": "Ward 3,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Kagisano-Molopo",
+      "ward": "Ward 8",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Kagisano-Molopo",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Kgetlengrivier",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Kgetlengrivier",
+      "ward": "Administrative or Head Office (Including Satellite Offices),Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Kgetlengrivier",
+      "ward": "NW374 Kgetlengrivier",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Kgetlengrivier",
+      "ward": "NW374 Kgetlengrivier,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Kgetlengrivier",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Lekwa-Teemane",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Lekwa-Teemane",
+      "ward": "Administrative or Head Office (Including Satellite Offices),Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Lekwa-Teemane",
+      "ward": "Ward 7",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Lekwa-Teemane",
+      "ward": "Ward 7,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Lekwa-Teemane",
+      "ward": "Ward 8",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Lekwa-Teemane",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Madibeng",
+      "ward": "Ward 1",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Madibeng",
+      "ward": "Ward 10,Ward 3,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Madibeng",
+      "ward": "Ward 14",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Madibeng",
+      "ward": "Ward 19",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Madibeng",
+      "ward": "Ward 3",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Madibeng",
+      "ward": "Ward 6",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Madibeng",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Mafikeng",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Mafikeng",
+      "ward": "Administrative or Head Office (Including Satellite Offices),Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Mafikeng",
+      "ward": "Ward 1,Ward 2,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Mafikeng",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Mahikeng",
+      "ward": "Ward 9",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Mamusa",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Mamusa",
+      "ward": "Administrative or Head Office (Including Satellite Offices),Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Mamusa",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Maquassi Hills",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Maquassi Hills",
+      "ward": "Ward 10",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Maquassi Hills",
+      "ward": "Ward 11",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Maquassi Hills",
+      "ward": "Ward 5",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Maquassi Hills",
+      "ward": "Ward 6",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Maquassi Hills",
+      "ward": "Ward 7",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Maquassi Hills",
+      "ward": "Ward 8",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Maquassi Hills",
+      "ward": "Ward 9",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Maquassi Hills",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moretele",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moretele",
+      "ward": "Administrative or Head Office (Including Satellite Offices),Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moretele",
+      "ward": "Ward 10",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moretele",
+      "ward": "Ward 15",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moretele",
+      "ward": "Ward 3",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moretele",
+      "ward": "Ward 9",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moretele",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Administrative or Head Office (Including Satellite Offices),Administrative or Head Office (Including Satellite Offices),...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 1",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 11",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 12",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 14",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 15",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 16",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 17",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 17,Ward 22,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 18",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 19",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 2",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 2,Ward 24,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 2,Ward 3,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 20",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 22",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 23",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 24",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 25",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 26",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 27",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 29",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 3",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 32",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 34",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 4",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 5",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 6",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Ward 9",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Naledi (NW)",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Naledi (NW)",
+      "ward": "Ward 1",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Naledi (NW)",
+      "ward": "Ward 2",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Naledi (NW)",
+      "ward": "Ward 2,Ward 3,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Naledi (NW)",
+      "ward": "Ward 2,Ward 8,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Naledi (NW)",
+      "ward": "Ward 3",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Naledi (NW)",
+      "ward": "Ward 5",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Naledi (NW)",
+      "ward": "Ward 7",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Naledi (NW)",
+      "ward": "Ward 7,Ward 8,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Naledi (NW)",
+      "ward": "Ward 8",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Naledi (NW)",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Ramotshere Moiloa",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Ramotshere Moiloa",
+      "ward": "Administrative or Head Office (Including Satellite Offices),Ward 3,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Ramotshere Moiloa",
+      "ward": "Administrative or Head Office (Including Satellite Offices),Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Ramotshere Moiloa",
+      "ward": "Ward 15,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Ramotshere Moiloa",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Ratlou",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Ratlou",
+      "ward": "Administrative or Head Office (Including Satellite Offices),Ward 7,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Ratlou",
+      "ward": "Administrative or Head Office (Including Satellite Offices),Ward 8,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Ratlou",
+      "ward": "Administrative or Head Office (Including Satellite Offices),Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Ratlou",
+      "ward": "Ward 13",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Ratlou",
+      "ward": "Ward 6,Ward 7,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Ratlou",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "ward": "Administrative or Head Office (Including Satellite Offices),Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "ward": "Ward 1",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "ward": "Ward 1,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "ward": "Ward 11",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "ward": "Ward 14",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "ward": "Ward 16",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "ward": "Ward 18",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "ward": "Ward 18,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "ward": "Ward 2",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "ward": "Ward 24",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "ward": "Ward 25,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "ward": "Ward 29",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "ward": "Ward 3,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "ward": "Ward 31",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "ward": "Ward 32",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "ward": "Ward 44",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Tswaing",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Tswaing",
+      "ward": "Ward 15",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Tswaing",
+      "ward": "Ward 5",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Tswaing",
+      "ward": "Ward 6",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Tswaing",
+      "ward": "Ward 9",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "North West",
+      "municipality": "Tswaing",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "!Kai! Garib",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Dawid Kruiper",
+      "ward": "Administrative or Head Office (Including Satellite Offices)",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Dikgatlong",
+      "ward": "Ward 3",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Dikgatlong",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Joe Morolong",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Magareng",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Phokwane",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Sol Plaatje",
+      "ward": "Ward 11",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Sol Plaatje",
+      "ward": "Ward 14",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Sol Plaatje",
+      "ward": "Ward 17,Whole of the Municipality,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Sol Plaatje",
+      "ward": "Ward 19,Ward 5,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Sol Plaatje",
+      "ward": "Ward 24",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Sol Plaatje",
+      "ward": "Ward 27",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Sol Plaatje",
+      "ward": "Ward 28",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Sol Plaatje",
+      "ward": "Ward 29",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Sol Plaatje",
+      "ward": "Ward 32",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Sol Plaatje",
+      "ward": "Ward 8",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Sol Plaatje",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Bitou",
+      "ward": "Ward 2",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Breede Valley",
+      "ward": "Ward 13",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Breede Valley",
+      "ward": "Ward 9",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Agulhas",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Administrative or Head Office",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Administrative or Head Office,Multi-ward Projects,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Administrative or Head Office,Ward 74,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Administrative or Head Office,Whole of the Metro,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Corporate Infrastructure Projects",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Multi-ward Projects",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 10",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 100",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 108",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 11",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 111",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 19",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 22",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 25",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 3",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 34",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 35",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 36",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 38",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 40",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 46,Whole of the Metro,...",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 47",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 48",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 49",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 51",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 53",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 62",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 65",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 67",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 69",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 72",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 73",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 74",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 82",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 83",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 86",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 92",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 94",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 95",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Ward 97",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "ward": "Whole of the Metro",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "City of Cape Town",
+      "ward": "Khayelitsha",
+      "documentCount": 1,
+      "pressureCaseCount": 4,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": true
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "City of Cape Town",
+      "ward": "Ward 13",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Drakenstein",
+      "ward": "Ward 6",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Hessequa",
+      "ward": "Whole of the Municipality",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Matzikama",
+      "ward": "Ward 1",
+      "documentCount": 0,
+      "pressureCaseCount": 0,
+      "sentimentMentionCount": 0,
+      "evidenceBacked": false
+    }
+  ]
+}

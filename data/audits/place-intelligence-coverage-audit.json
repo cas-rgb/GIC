@@ -1,0 +1,132 @@
+{
+  "generatedAt": "2026-03-17T11:18:16.390Z",
+  "totals": {
+    "provinceReference": 10,
+    "municipalityReference": 92,
+    "wardReference": 362,
+    "provinceDemographics": 5,
+    "municipalityDemographics": 18,
+    "wardDemographics": 22,
+    "provinceElectionResults": 5,
+    "municipalityElectionResults": 12,
+    "wardElectionResults": 14,
+    "wardCouncillors": 21,
+    "budgetAllocations": 18,
+    "provinceInfrastructureHistory": 124,
+    "municipalityInfrastructureHistory": 317,
+    "wardInfrastructureHistory": 105,
+    "historicalIssueEvents": 984
+  },
+  "provinces": [
+    {
+      "province_name": "Eastern Cape",
+      "municipality_reference_count": 5,
+      "ward_reference_count": 7,
+      "municipality_demographics_count": 3,
+      "municipality_election_count": 3,
+      "ward_councillor_count": 3,
+      "municipality_history_count": 32,
+      "ward_history_count": 9,
+      "ward_event_count": 9
+    },
+    {
+      "province_name": "Free State",
+      "municipality_reference_count": 16,
+      "ward_reference_count": 61,
+      "municipality_demographics_count": 3,
+      "municipality_election_count": 0,
+      "ward_councillor_count": 0,
+      "municipality_history_count": 30,
+      "ward_history_count": 0,
+      "ward_event_count": 0
+    },
+    {
+      "province_name": "Gauteng",
+      "municipality_reference_count": 6,
+      "ward_reference_count": 21,
+      "municipality_demographics_count": 3,
+      "municipality_election_count": 0,
+      "ward_councillor_count": 0,
+      "municipality_history_count": 35,
+      "ward_history_count": 79,
+      "ward_event_count": 136
+    },
+    {
+      "province_name": "KwaZulu-Natal",
+      "municipality_reference_count": 6,
+      "ward_reference_count": 71,
+      "municipality_demographics_count": 0,
+      "municipality_election_count": 0,
+      "ward_councillor_count": 0,
+      "municipality_history_count": 31,
+      "ward_history_count": 0,
+      "ward_event_count": 0
+    },
+    {
+      "province_name": "Limpopo",
+      "municipality_reference_count": 4,
+      "ward_reference_count": 3,
+      "municipality_demographics_count": 0,
+      "municipality_election_count": 0,
+      "ward_councillor_count": 0,
+      "municipality_history_count": 32,
+      "ward_history_count": 0,
+      "ward_event_count": 0
+    },
+    {
+      "province_name": "Mpumalanga",
+      "municipality_reference_count": 16,
+      "ward_reference_count": 78,
+      "municipality_demographics_count": 7,
+      "municipality_election_count": 7,
+      "ward_councillor_count": 10,
+      "municipality_history_count": 36,
+      "ward_history_count": 9,
+      "ward_event_count": 21
+    },
+    {
+      "province_name": "National",
+      "municipality_reference_count": 0,
+      "ward_reference_count": 0,
+      "municipality_demographics_count": 0,
+      "municipality_election_count": 0,
+      "ward_councillor_count": 0,
+      "municipality_history_count": 0,
+      "ward_history_count": 0,
+      "ward_event_count": 0
+    },
+    {
+      "province_name": "North West",
+      "municipality_reference_count": 20,
+      "ward_reference_count": 72,
+      "municipality_demographics_count": 0,
+      "municipality_election_count": 0,
+      "ward_councillor_count": 0,
+      "municipality_history_count": 29,
+      "ward_history_count": 0,
+      "ward_event_count": 0
+    },
+    {
+      "province_name": "Northern Cape",
+      "municipality_reference_count": 8,
+      "ward_reference_count": 9,
+      "municipality_demographics_count": 1,
+      "municipality_election_count": 1,
+      "ward_councillor_count": 1,
+      "municipality_history_count": 31,
+      "ward_history_count": 1,
+      "ward_event_count": 1
+    },
+    {
+      "province_name": "Western Cape",
+      "municipality_reference_count": 11,
+      "ward_reference_count": 40,
+      "municipality_demographics_count": 1,
+      "municipality_election_count": 1,
+      "ward_councillor_count": 7,
+      "municipality_history_count": 30,
+      "ward_history_count": 7,
+      "ward_event_count": 7
+    }
+  ]
+}

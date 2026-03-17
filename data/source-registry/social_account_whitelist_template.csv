@@ -1,0 +1,2 @@
+account_id,platform,account_name,account_url,account_owner,owner_type,province,municipality,sector,data_role,verification_status,verification_reference,notes
+example-govza-x,x,GovernmentZA,https://x.com/GovernmentZA,South African Government,official_gov,,,general,evidence,pending_verification,https://www.gov.za/links/government-social-media-accounts,"Example row only. Replace with individually verified accounts before ingestion."

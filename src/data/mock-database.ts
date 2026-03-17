@@ -1,0 +1,604 @@
+import { 
+    Community, 
+    GICProject, 
+    ProjectVulnerabilityLedger, 
+    CommunitySignal, 
+    StrategicInsight,
+    ProvincialPromise,
+    RegionalBenchmark,
+    NewsArticle,
+    EvidenceSource,
+    FundingPartner
+} from '../types/database';
+
+/**
+ * GIC MOCK DATABASE - Southern African Demo Data
+ * Optimized for performance and regional variety.
+ */
+
+const now = new Date().toISOString();
+
+export const MOCK_COMMUNITIES: Community[] = [
+    // Gauteng
+    { 
+        id: 'comm-gp-01', 
+        name: 'Alexandra', 
+        country: 'South Africa', 
+        province: 'Gauteng', 
+        municipality: 'City of Johannesburg', 
+        lat: -26.1557,
+        lng: 28.0933,
+        population: 180000, 
+        riskScore: 88, 
+        priorityStatus: "Urgent Action",
+        infrastructureScore: 32,
+        image: '/assets/communities/alexandra.png',
+        status: 'active', 
+        tags: ['High Density'], 
+        governance: {
+            mayor: 'Kabelo Gwamanda',
+            governingParty: 'ANC/PA/EFF Coalition',
+            voteSplit: { "ANC": 35, "DA": 25, "PA": 15, "EFF": 10 },
+            premier: 'Panyaza Lesufi'
+        },
+        culture: {
+            primaryLanguages: ['IsiZulu', 'Sesotho', 'Sepedi'],
+            niches: ['Urban Activism', 'Youth Entrepreneurship']
+        },
+        wikipediaBrief: 'One of the oldest urban areas in South Africa, Alexandra is a dense township with a vibrant political history and severe infrastructure pressure.',
+        environmental: {
+            crimeRate: 'High',
+            weatherRisk: 'Standard',
+            fundingStability: 0.45
+        },
+        infrastructureNeeds: ['Housing', 'Sanitation'], 
+        demographics: { youthPercentage: 62, employmentRate: 41 }, 
+        lastAuditDate: now, 
+        createdAt: now, 
+        updatedAt: now 
+    },
+    { 
+        id: 'comm-gp-02', 
+        name: 'Soweto (Diepkloof)', 
+        country: 'South Africa', 
+        province: 'Gauteng', 
+        municipality: 'City of Johannesburg', 
+        lat: -26.2485,
+        lng: 27.8540,
+        population: 1300000, 
+        riskScore: 65, 
+        priorityStatus: "Moderate",
+        infrastructureScore: 58,
+        image: '/projects/MAJWEMASWEU-X5-1039-1024x683.webp',
+        status: 'active', 
+        tags: ['Political Hub'], 
+        governance: {
+            mayor: 'Kabelo Gwamanda',
+            governingParty: 'ANC/PA/EFF Coalition',
+            voteSplit: { "ANC": 42, "DA": 28, "ActionSA": 12 },
+            premier: 'Panyaza Lesufi'
+        },
+        culture: {
+            primaryLanguages: ['IsiZulu', 'IsiXhosa', 'Setswana'],
+            niches: ['Cultural Heritage', 'Music Economy']
+        },
+        wikipediaBrief: 'Soweto is a world-renowned cultural heart of South Africa, originally created as a cluster of townships for black residents during Apartheid.',
+        environmental: {
+            crimeRate: 'Medium',
+            weatherRisk: 'Standard',
+            fundingStability: 0.72
+        },
+        infrastructureNeeds: ['Roads', 'Health Nodes'], 
+        demographics: { youthPercentage: 55, employmentRate: 52 }, 
+        lastAuditDate: now, 
+        createdAt: now, 
+        updatedAt: now 
+    },
+    { 
+        id: 'comm-wc-01', 
+        name: 'Khayelitsha', 
+        country: 'South Africa', 
+        province: 'Western Cape', 
+        municipality: 'City of Cape Town', 
+        lat: -34.0373,
+        lng: 18.6675,
+        population: 400000, 
+        riskScore: 78, 
+        priorityStatus: "High Risk",
+        infrastructureScore: 41,
+        image: '/assets/communities/khayelitsha.png',
+        status: 'active', 
+        tags: ['Rapid Growth'], 
+        governance: {
+            mayor: 'Geordin Hill-Lewis',
+            governingParty: 'DA',
+            voteSplit: { "DA": 72, "ANC": 15, "EFF": 5 },
+            premier: 'Alan Winde'
+        },
+        culture: {
+            primaryLanguages: ['IsiXhosa', 'Afrikaans', 'English'],
+            niches: ['Township Tourism', 'Civic Entrepreneurship']
+        },
+        environmental: { crimeRate: 'High', weatherRisk: 'Elevated', fundingStability: 0.85 },
+        infrastructureNeeds: ['Fire Safety', 'Water'], 
+        demographics: { youthPercentage: 58, employmentRate: 47 }, 
+        lastAuditDate: now, 
+        createdAt: now, 
+        updatedAt: now 
+    },
+    { 
+        id: 'comm-kzn-02', 
+        name: 'Umlazi', 
+        country: 'South Africa', 
+        province: 'KwaZulu-Natal', 
+        municipality: 'eThekwini Metropolitan', 
+        lat: -29.9833,
+        lng: 30.9333,
+        population: 120000, 
+        riskScore: 68, 
+        priorityStatus: "Moderate",
+        infrastructureScore: 62,
+        image: '/assets/communities/umlazi.png',
+        status: 'active', 
+        tags: ['Economic Node'], 
+        governance: {
+            mayor: 'Mxolisi Kaunda',
+            governingParty: 'ANC',
+            voteSplit: { "ANC": 52, "DA": 20, "EFF": 10 },
+            premier: 'Nomusa Dube-Ncube'
+        },
+        culture: {
+            primaryLanguages: ['IsiZulu', 'English'],
+            niches: ['Zulu Heritage', 'Port Logistics']
+        },
+        environmental: { crimeRate: 'High', weatherRisk: 'Elevated', fundingStability: 0.60 },
+        infrastructureNeeds: ['Public Transit'], 
+        demographics: { youthPercentage: 60, employmentRate: 44 }, 
+        lastAuditDate: now, 
+        createdAt: now, 
+        updatedAt: now 
+    },
+    { 
+        id: 'comm-nc-02', 
+        name: 'Breipaal', 
+        country: 'South Africa', 
+        province: 'Northern Cape', 
+        municipality: 'Siyancuma', 
+        lat: -29.0833,
+        lng: 23.9500,
+        population: 12000, 
+        riskScore: 74, 
+        priorityStatus: "High Risk",
+        infrastructureScore: 45,
+        image: '/projects/Breipaal-12-1-1024x683.webp',
+        status: 'active', 
+        tags: ['Growth Zone'], 
+        governance: {
+            mayor: 'Patrick Mwakayile',
+            governingParty: 'ANC',
+            voteSplit: { "ANC": 48, "DA": 35, "Vryheidsfront Plus": 10 },
+            premier: 'Zamani Saul'
+        },
+        culture: {
+            primaryLanguages: ['Afrikaans', 'Setswana'],
+            niches: ['Agricultural Innovation', 'Solar Potential']
+        },
+        environmental: { crimeRate: 'Low', weatherRisk: 'Standard', fundingStability: 0.55 },
+        infrastructureNeeds: ['Civil Works', 'Education'], 
+        demographics: { youthPercentage: 52, employmentRate: 46 }, 
+        lastAuditDate: now, 
+        createdAt: now, 
+        updatedAt: now 
+    },
+    { 
+        id: 'comm-fs-02', 
+        name: 'Majwamasweu', 
+        country: 'South Africa', 
+        province: 'Free State', 
+        municipality: 'Maseru Node', 
+        lat: -29.3167,
+        lng: 27.4833,
+        population: 330000, 
+        riskScore: 62, 
+        priorityStatus: "Stable",
+        infrastructureScore: 55,
+        image: '/projects/MAJWEMASWEU-X5-1165-1024x683.webp',
+        status: 'active', 
+        tags: ['Mining Area'], 
+        governance: {
+            mayor: 'Dimakatso Modise',
+            governingParty: 'ANC',
+            voteSplit: { "ANC": 55, "DA": 25, "EFF": 15 },
+            premier: 'Mxolisi Dukwana'
+        },
+        culture: {
+            primaryLanguages: ['Sesotho', 'Afrikaans'],
+            niches: ['Mining Heritage']
+        },
+        environmental: { crimeRate: 'Medium', weatherRisk: 'Standard', fundingStability: 0.50 },
+        infrastructureNeeds: ['Sanitation', 'Housing'], 
+        demographics: { youthPercentage: 48, employmentRate: 38 }, 
+        lastAuditDate: now, 
+        createdAt: now, 
+        updatedAt: now 
+    },
+    { 
+        id: 'comm-kzn-03', 
+        name: 'Intabazwe', 
+        country: 'South Africa', 
+        province: 'KwaZulu-Natal', 
+        municipality: 'Maluti-a-Phofung', 
+        lat: -28.2333,
+        lng: 29.1333,
+        population: 18000, 
+        riskScore: 71, 
+        priorityStatus: "High Risk",
+        infrastructureScore: 38,
+        image: '/projects/INTABAZWE-X2-9906-1024x683.webp',
+        status: 'active', 
+        tags: ['High Altitude'], 
+        governance: {
+            mayor: 'Gilbert Mokotso',
+            governingParty: 'MAP-16 (Independent)',
+            voteSplit: { "MAP-16": 35, "ANC": 28, "EFF": 18 },
+            premier: 'Nomusa Dube-Ncube'
+        },
+        culture: {
+            primaryLanguages: ['Sesotho', 'IsiZulu'],
+            niches: ['Highland Agriculture', 'Resilient Communities']
+        },
+        environmental: { crimeRate: 'Medium', weatherRisk: 'Elevated', fundingStability: 0.35 },
+        infrastructureNeeds: ['Water Reticulation', 'Roads'], 
+        demographics: { youthPercentage: 65, employmentRate: 32 }, 
+        lastAuditDate: now, 
+        createdAt: now, 
+        updatedAt: now 
+    },
+    { 
+        id: 'comm-mp-02', 
+        name: 'Hlalanikahle', 
+        country: 'South Africa', 
+        province: 'Mpumalanga', 
+        municipality: 'eMalahleni', 
+        lat: -25.8728,
+        lng: 29.2314,
+        population: 45000, 
+        riskScore: 82, 
+        priorityStatus: "Urgent Action",
+        infrastructureScore: 29,
+        image: '/projects/Section-C-Image-1.webp',
+        status: 'active', 
+        tags: ['Coal Corridor'], 
+        governance: {
+            mayor: 'Conny Nkalitshana',
+            governingParty: 'ANC',
+            voteSplit: { "ANC": 58, "DA": 20, "EFF": 15 },
+            premier: 'Refilwe Mtshweni-Tsipane'
+        },
+        culture: {
+            primaryLanguages: ['IsiZulu', 'SiSwati', 'Afrikaans'],
+            niches: ['Industrial Hub', 'Energy Transition']
+        },
+        environmental: { crimeRate: 'High', weatherRisk: 'Standard', fundingStability: 0.40 },
+        infrastructureNeeds: ['Power Reliability', 'Healthcare'], 
+        demographics: { youthPercentage: 60, employmentRate: 41 }, 
+        lastAuditDate: now, 
+        createdAt: now, 
+        updatedAt: now 
+    },
+];
+
+export const MOCK_PROJECTS: GICProject[] = [
+    { id: 'proj-01', name: 'Alexandra Water Hub V3', sector: 'Civil', communityId: 'comm-gp-01', country: 'South Africa', province: 'Gauteng', budget: 150000000, currency: 'ZAR', stage: 'Execution', progress: 45, riskVelocity: 'High', startDate: now, completionDate: now, status: 'active', createdAt: now, updatedAt: now, lat: -26.10, lng: 28.09, visual: '/projects/MAJWEMASWEU-X5-1039-1024x683.webp' },
+    { id: 'proj-07', name: 'Soweto Micro-Grid Pilot', sector: 'Structural', communityId: 'comm-gp-02', country: 'South Africa', province: 'Gauteng', budget: 18000000, currency: 'ZAR', stage: 'Execution', progress: 80, riskVelocity: 'Medium', startDate: now, completionDate: now, status: 'active', createdAt: now, updatedAt: now, lat: -26.24, lng: 27.91, visual: '/projects/MAJWEMASWEU-X5-1313-1024x683.webp' },
+    { id: 'proj-12', name: 'Galeshewe Solar Farm', sector: 'Structural', communityId: 'comm-nc-01', country: 'South Africa', province: 'Northern Cape', budget: 350000000, currency: 'ZAR', stage: 'Planning', progress: 5, riskVelocity: 'Low', startDate: now, completionDate: now, status: 'active', createdAt: now, updatedAt: now, lat: -28.71, lng: 24.74, visual: '/projects/Breipaal-28-1024x683.webp' },
+    { id: 'proj-16', name: 'Mapulaneng Hospital Phase 3B', sector: 'Health', communityId: 'comm-lp-01', country: 'South Africa', province: 'Limpopo', budget: 1200000000, currency: 'ZAR', stage: 'Execution', progress: 35, riskVelocity: 'Low', startDate: now, completionDate: now, status: 'active', createdAt: now, updatedAt: now, lat: -24.58, lng: 31.02, visual: '/projects/DJI_0025.00_02_00_19.Still006-1024x576.webp' },
+    { id: 'proj-17', name: 'Hlalanikahle Section C Development', sector: 'Structural', communityId: 'comm-mp-02', country: 'South Africa', province: 'Mpumalanga', budget: 45000000, currency: 'ZAR', stage: 'Execution', progress: 15, riskVelocity: 'High', startDate: now, completionDate: now, status: 'active', createdAt: now, updatedAt: now, lat: -25.87, lng: 29.23, visual: '/projects/Section-C-Image-1.webp' },
+];
+
+export const MOCK_VULNERABILITIES: ProjectVulnerabilityLedger[] = [
+    { id: 'vul-01', projectId: 'proj-01', country: 'South Africa', province: 'Gauteng', vector: 'Social', vulnerabilityIndex: 0.85, probability: 0.7, justification: 'Labor inclusion demands in Alexandra.', mitigationStrategy: 'CLO recruitment mediation.', status: 'active', createdAt: now, updatedAt: now, lastAuditBy: 'Senthinel-AI' },
+    { id: 'vul-02', projectId: 'proj-03', country: 'South Africa', province: 'KwaZulu-Natal', vector: 'Environmental', vulnerabilityIndex: 0.92, probability: 0.8, justification: 'Coastal erosion risks at eThekwini site.', mitigationStrategy: 'Reinforced bulkhead installation.', status: 'active', createdAt: now, updatedAt: now, lastAuditBy: 'Senthinel-AI' },
+    { id: 'vul-03', projectId: 'proj-09', country: 'South Africa', province: 'Eastern Cape', vector: 'Financial', vulnerabilityIndex: 0.75, probability: 0.6, justification: 'Budgetary overrun risks due to logistics.', mitigationStrategy: 'Phased procurement audit.', status: 'active', createdAt: now, updatedAt: now, lastAuditBy: 'Senthinel-AI' },
+    { id: 'vul-04', projectId: 'proj-05', country: 'Lesotho', province: 'Maseru', vector: 'Technical', vulnerabilityIndex: 0.50, probability: 0.4, justification: 'Geological instability at reservoir base.', mitigationStrategy: 'Seismic grouting.', status: 'active', createdAt: now, updatedAt: now, lastAuditBy: 'Senthinel-AI' },
+    { id: 'vul-05', projectId: 'proj-15', country: 'South Africa', province: 'KwaZulu-Natal', vector: 'Social', vulnerabilityIndex: 0.88, probability: 0.9, justification: 'Community displacement concerns.', mitigationStrategy: 'Relocation compensation framework.', status: 'active', createdAt: now, updatedAt: now, lastAuditBy: 'Senthinel-AI' },
+    { id: 'vul-06', projectId: 'proj-02', country: 'South Africa', province: 'Gauteng', vector: 'Technical', vulnerabilityIndex: 0.40, probability: 0.3, justification: 'Soil composition variance.', mitigationStrategy: 'Deep core sampling.', status: 'active', createdAt: now, updatedAt: now, lastAuditBy: 'Senthinel-AI' },
+    { id: 'vul-07', projectId: 'proj-10', country: 'South Africa', province: 'Free State', vector: 'Environmental', vulnerabilityIndex: 0.65, probability: 0.5, justification: 'Waste water leakage risk.', mitigationStrategy: 'Dual-containment lining.', status: 'active', createdAt: now, updatedAt: now, lastAuditBy: 'Senthinel-AI' },
+    { id: 'vul-08', projectId: 'proj-08', country: 'South Africa', province: 'North West', vector: 'Social', vulnerabilityIndex: 0.80, probability: 0.75, justification: 'Labor strike potential in mining corridor.', mitigationStrategy: 'Early union engagement.', status: 'active', createdAt: now, updatedAt: now, lastAuditBy: 'Senthinel-AI' },
+    { id: 'vul-09', projectId: 'proj-07', country: 'South Africa', province: 'Gauteng', vector: 'Technical', vulnerabilityIndex: 0.55, probability: 0.45, justification: 'Grid integration complexity.', mitigationStrategy: 'Smart transformer pilot.', status: 'active', createdAt: now, updatedAt: now, lastAuditBy: 'Senthinel-AI' },
+    { id: 'vul-10', projectId: 'proj-13', country: 'Eswatini', province: 'Manzini', vector: 'Financial', vulnerabilityIndex: 0.70, probability: 0.55, justification: 'Currency fluctuation impact on imports.', mitigationStrategy: 'Hedging local procurement.', status: 'active', createdAt: now, updatedAt: now, lastAuditBy: 'Senthinel-AI' },
+    { id: 'vul-11', projectId: 'proj-04', country: 'South Africa', province: 'Western Cape', vector: 'Technical', vulnerabilityIndex: 0.30, probability: 0.2, justification: 'Standard facility build.', mitigationStrategy: 'Routine QA.', status: 'active', createdAt: now, updatedAt: now, lastAuditBy: 'Senthinel-AI' },
+    { id: 'vul-12', projectId: 'proj-12', country: 'South Africa', province: 'Northern Cape', vector: 'Environmental', vulnerabilityIndex: 0.45, probability: 0.35, justification: 'Dust impact on solar efficiency.', mitigationStrategy: 'Automated cleaning bots.', status: 'active', createdAt: now, updatedAt: now, lastAuditBy: 'Senthinel-AI' },
+    { id: 'vul-13', projectId: 'proj-01', country: 'South Africa', province: 'Gauteng', vector: 'Technical', vulnerabilityIndex: 0.60, probability: 0.5, justification: 'Aging pipe interface.', mitigationStrategy: 'Seamless coupling tech.', status: 'active', createdAt: now, updatedAt: now, lastAuditBy: 'Senthinel-AI' },
+    { id: 'vul-14', projectId: 'proj-03', country: 'South Africa', province: 'KwaZulu-Natal', vector: 'Social', vulnerabilityIndex: 0.95, probability: 0.85, justification: 'Proximity to high-risk informal settlement.', mitigationStrategy: 'Security perimeter / Community job slots.', status: 'active', createdAt: now, updatedAt: now, lastAuditBy: 'Senthinel-AI' },
+    { id: 'vul-15', projectId: 'proj-06', country: 'Eswatini', province: 'Hhohho', vector: 'Technical', vulnerabilityIndex: 0.40, probability: 0.3, justification: 'Network latency issues.', mitigationStrategy: 'Fiber redundancy.', status: 'active', createdAt: now, updatedAt: now, lastAuditBy: 'Senthinel-AI' },
+    { id: 'vul-16', projectId: 'proj-14', country: 'Lesotho', province: 'Leribe', vector: 'Environmental', vulnerabilityIndex: 0.50, probability: 0.6, justification: 'River flow variance.', mitigationStrategy: 'Hydraulic modeling.', status: 'active', createdAt: now, updatedAt: now, lastAuditBy: 'Senthinel-AI' },
+    { id: 'vul-17', projectId: 'proj-02', country: 'South Africa', province: 'Gauteng', vector: 'Social', vulnerabilityIndex: 0.45, probability: 0.3, justification: 'Noise complaints in Tembisa.', mitigationStrategy: 'Sound barriers.', status: 'active', createdAt: now, updatedAt: now, lastAuditBy: 'Senthinel-AI' },
+    { id: 'vul-18', projectId: 'proj-05', country: 'Lesotho', province: 'Maseru', vector: 'Financial', vulnerabilityIndex: 0.65, probability: 0.5, justification: 'Material logistics cost.', mitigationStrategy: 'Local quarry sourcing.', status: 'active', createdAt: now, updatedAt: now, lastAuditBy: 'Senthinel-AI' },
+    { id: 'vul-19', projectId: 'proj-09', country: 'South Africa', province: 'Eastern Cape', vector: 'Technical', vulnerabilityIndex: 0.72, probability: 0.6, justification: 'Power grid instability for medical equipment.', mitigationStrategy: 'Back-up solar hybrid.', status: 'active', createdAt: now, updatedAt: now, lastAuditBy: 'Senthinel-AI' },
+    { id: 'vul-20', projectId: 'proj-15', country: 'South Africa', province: 'KwaZulu-Natal', vector: 'Technical', vulnerabilityIndex: 0.80, probability: 0.75, justification: 'Saltwater corrosion.', mitigationStrategy: 'Marine-grade concrete.', status: 'active', createdAt: now, updatedAt: now, lastAuditBy: 'Senthinel-AI' },
+];
+
+export const MOCK_SIGNALS: CommunitySignal[] = [
+    { 
+        id: 'sig-01', 
+        communityId: 'comm-gp-01', 
+        type: 'social', 
+        text: 'Alexandra residents complaining about water pressure drops.', 
+        layers: ['issue', 'sentiment', 'momentum', 'location'],
+        sentiment: 'negative', 
+        emotion: 'frustration',
+        urgency: 4, 
+        momentum: 0.85,
+        engagement: { likes: 450, shares: 120, comments: 85, views: 5200 },
+        category: 'Civil', 
+        source: 'Twitter', 
+        sourceType: 'social_media',
+        country: 'South Africa', 
+        province: 'Gauteng', 
+        status: 'active', 
+        reliabilityScore: 0.3,
+        createdAt: now, 
+        updatedAt: now 
+    },
+    { 
+        id: 'sig-02', 
+        communityId: 'comm-gp-03', 
+        type: 'field_agent', 
+        text: 'K101 expansion survey complete. Local community receptive to biz hubs.', 
+        layers: ['sentiment', 'influence', 'development'],
+        sentiment: 'positive', 
+        emotion: 'hope',
+        urgency: 2, 
+        momentum: 0.3,
+        category: 'Roads', 
+        source: 'Internal', 
+        sourceType: 'journalist', // Internal agents ranked high
+        country: 'South Africa', 
+        province: 'Gauteng', 
+        status: 'active', 
+        reliabilityScore: 0.9,
+        createdAt: now, 
+        updatedAt: now 
+    },
+    { 
+        id: 'sig-03', 
+        communityId: 'comm-kzn-01', 
+        type: 'media', 
+        text: 'eThekwini water hub seeing labor protests planning for Friday.', 
+        layers: ['event', 'risk', 'momentum', 'sentiment'],
+        sentiment: 'negative', 
+        emotion: 'anger',
+        urgency: 5, 
+        momentum: 0.95,
+        eventTrigger: true,
+        potentialImpact: 'Critical project stoppage and asset damage risk.',
+        category: 'Civil', 
+        source: 'IOL', 
+        sourceType: 'local_news',
+        country: 'South Africa', 
+        province: 'KwaZulu-Natal', 
+        status: 'active', 
+        reliabilityScore: 1.0,
+        createdAt: now, 
+        updatedAt: now 
+    },
+    { 
+        id: 'sig-04', 
+        communityId: 'comm-ls-01', 
+        type: 'social', 
+        text: 'Maseru citizens celebrating new pipeline progress.', 
+        layers: ['sentiment', 'development'], 
+        sentiment: 'positive', 
+        emotion: 'pride',
+        urgency: 3, 
+        momentum: 0.2, 
+        category: 'Structural', 
+        source: 'Facebook', 
+        sourceType: 'social_media',
+        country: 'South Africa', 
+        province: 'Maseru', 
+        status: 'active', 
+        reliabilityScore: 0.3,
+        createdAt: now, 
+        updatedAt: now 
+    },
+    { 
+        id: 'sig-05', 
+        communityId: 'comm-gp-02', 
+        type: 'media', 
+        text: 'Soweto micro-grid theft reported near Diepkloof. NGOs warning of sabotage.', 
+        layers: ['issue', 'risk', 'narrative'], 
+        sentiment: 'negative', 
+        urgency: 4, 
+        momentum: 0.6, 
+        influencer: { name: 'EnergyWatch NGO', username: '@EnergyWatchSA', followers: 15000, type: 'ngo' },
+        category: 'Structural', 
+        source: 'Daily Sun', 
+        sourceType: 'ngo',
+        country: 'South Africa', 
+        province: 'Gauteng', 
+        status: 'active', 
+        reliabilityScore: 0.6,
+        createdAt: now, 
+        updatedAt: now 
+    },
+    { 
+        id: 'sig-06', 
+        communityId: 'comm-wc-01', 
+        type: 'media', 
+        text: 'Khayelitsha housing expansion targets 50,000 new units by 2028.', 
+        layers: ['development', 'narrative', 'influence'], 
+        sentiment: 'positive', 
+        urgency: 2, 
+        momentum: 0.5, 
+        influencer: { name: 'Jane Doe', username: '@JaneNews', followers: 85000, type: 'journalist' },
+        category: 'Planning', 
+        source: 'Cape Argus', 
+        sourceType: 'journalist',
+        country: 'South Africa', 
+        province: 'Western Cape', 
+        status: 'active', 
+        reliabilityScore: 0.85,
+        createdAt: now, 
+        updatedAt: now 
+    }
+];
+
+export const MOCK_NEWS: NewsArticle[] = [
+    { id: 'news-01', title: 'Gauteng Infrastructure Audit Reveals R400B Gap', content: 'Auditor General flags significant maintenance backlogs in SA economic hub.', url: '#', sourceName: 'News24', publishedAt: now, sentiment: 'negative', relevanceScore: 0.9, geographyLinks: ['Gauteng'], categories: ['Apex'], narrativeTheme: 'Government Accountability', publicQuotes: ['The backlog is a ticking time bomb for the province.'], country: 'South Africa', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'news-02', title: 'Lesotho Water Projects Gain Momentum', content: 'New funding secured for Maseru reservoir restorations.', url: '#', sourceName: 'Lesotho Times', publishedAt: now, sentiment: 'positive', relevanceScore: 0.85, geographyLinks: ['Maseru'], categories: ['Civil'], narrativeTheme: 'Infrastructure Investment', country: 'Lesotho', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'news-03', title: 'Eswatini Tech Growth Targets Youth Employment', content: 'Mbabane tech corridor pilot showing early success.', url: '#', sourceName: 'Times of Eswatini', publishedAt: now, sentiment: 'positive', relevanceScore: 0.78, geographyLinks: ['Hhohho'], categories: ['Planning'], narrativeTheme: 'Urban Expansion', country: 'Eswatini', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'news-04', title: 'Critical Water Shortage Hits eThekwini Nodes', content: 'Bulk supply lines under severe pressure due to infrastructure failure.', url: '#', sourceName: 'SABC News', publishedAt: now, sentiment: 'negative', relevanceScore: 0.95, geographyLinks: ['KwaZulu-Natal'], categories: ['Civil'], narrativeTheme: 'Service Delivery Crisis', publicQuotes: ['We have reached a point of system failure.'], country: 'South Africa', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'news-05', title: 'Western Cape Rapid-Land Release Success', content: 'Khayelitsha housing parcels successfully transferred to local developers.', url: '#', sourceName: 'Cape Argus', publishedAt: now, sentiment: 'positive', relevanceScore: 0.82, geographyLinks: ['Western Cape'], categories: ['Planning'], country: 'South Africa', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'news-06', title: 'Mining Infrastructure Sabotage in North West', content: 'Rustenburg corridor seeing increased incidences of cable theft.', url: '#', sourceName: 'BusinessDay', publishedAt: now, sentiment: 'negative', relevanceScore: 0.88, geographyLinks: ['North West'], categories: ['Structural'], country: 'South Africa', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'news-07', title: 'Limpopo Digital Migration Ph1 Complete', content: 'Polokwane now 100% covered by strategic fiber backbone.', url: '#', sourceName: 'Sowetan Live', publishedAt: now, sentiment: 'positive', relevanceScore: 0.92, geographyLinks: ['Limpopo'], categories: ['Structural'], country: 'South Africa', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'news-08', title: 'Eastern Cape Health Audit Flags Malpractice', content: 'Mdantsane clinic reconstruction halted pending forensic investigation.', url: '#', sourceName: 'Herald Live', publishedAt: now, sentiment: 'negative', relevanceScore: 0.9, geographyLinks: ['Eastern Cape'], categories: ['Health'], country: 'South Africa', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'news-09', title: 'Free State Water Infrastructure Revived', content: 'Mangaung metro reports 15% reduction in non-revenue water.', url: '#', sourceName: 'The Citizen', publishedAt: now, sentiment: 'positive', relevanceScore: 0.75, geographyLinks: ['Free State'], categories: ['Civil'], country: 'South Africa', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'news-10', title: 'Northern Cape Solar Yield Hits Record High', content: 'Galeshewe solar farm feasibility study shows 30% upside.', url: '#', sourceName: 'Fin24', publishedAt: now, sentiment: 'positive', relevanceScore: 0.8, geographyLinks: ['Northern Cape'], categories: ['Structural'], country: 'South Africa', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'news-11', title: 'Manzini Logistics Hub Phase 2 Initiated', content: 'Eswatini trade node expansion to boost regional GDP.', url: '#', sourceName: 'Swazi Observer', publishedAt: now, sentiment: 'positive', relevanceScore: 0.85, geographyLinks: ['Manzini'], categories: ['Civil'], country: 'Eswatini', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'news-12', title: 'Leribe Bridge Stability Questioned', content: 'Heavy rains in Lesotho trigger structural integrity audit.', url: '#', sourceName: 'Public Eye', publishedAt: now, sentiment: 'negative', relevanceScore: 0.7, geographyLinks: ['Leribe'], categories: ['Roads'], country: 'Lesotho', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'news-13', title: 'Gauteng Premier Promises Rapid Road Repair', content: 'R500m allocated for Tembisa and Soweto main artery upgrades.', url: '#', sourceName: 'IOL', publishedAt: now, sentiment: 'neutral', relevanceScore: 0.88, geographyLinks: ['Gauteng'], categories: ['Roads'], country: 'South Africa', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'news-14', title: 'Alexandra Housing Volatility Warning', content: 'Social sentiment in Alex indicates rising risk of land invasion.', url: '#', sourceName: 'The Star', publishedAt: now, sentiment: 'negative', relevanceScore: 0.94, geographyLinks: ['Gauteng'], categories: ['Planning'], country: 'South Africa', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'news-15', title: 'KZN Coastal Sanitation Audit Overdue', content: 'Environmental groups flag sewage leaks near eThekwini hubs.', url: '#', sourceName: 'Daily News', publishedAt: now, sentiment: 'negative', relevanceScore: 0.82, geographyLinks: ['KwaZulu-Natal'], categories: ['Civil'], country: 'South Africa', status: 'active', createdAt: now, updatedAt: now },
+];
+
+export const MOCK_PROMISES: ProvincialPromise[] = [
+    { id: 'prom-gp-01', country: 'South Africa', province: 'Gauteng', premierName: 'Panyaza Lesufi', promiseText: 'Elimination of informal settlements through rapid-land release.', sector: 'Planning', deliveryDeadline: now, fulfillmentStatus: 'On Track', budgetAllocated: 2400000000, publicSentimentScore: 42, status: 'active', createdAt: now, updatedAt: now },
+    { id: 'prom-kzn-01', country: 'South Africa', province: 'KwaZulu-Natal', premierName: 'Nomusa Dube-Ncube', promiseText: '100% restoration of flood-damaged bulk water sites.', sector: 'Civil', deliveryDeadline: now, fulfillmentStatus: 'At Risk', budgetAllocated: 1200000000, publicSentimentScore: 28, status: 'active', createdAt: now, updatedAt: now },
+    { id: 'prom-wc-01', country: 'South Africa', province: 'Western Cape', premierName: 'Alan Winde', promiseText: 'Energy independence through municipal IPP procurement.', sector: 'Structural', deliveryDeadline: now, fulfillmentStatus: 'On Track', budgetAllocated: 3500000000, publicSentimentScore: 65, status: 'active', createdAt: now, updatedAt: now },
+    { id: 'prom-ec-01', country: 'South Africa', province: 'Eastern Cape', premierName: 'Oscar Mabuyane', promiseText: 'Digital health node expansion for rural districts.', sector: 'Health', deliveryDeadline: now, fulfillmentStatus: 'On Track', budgetAllocated: 800000000, publicSentimentScore: 48, status: 'active', createdAt: now, updatedAt: now },
+    { id: 'prom-fs-01', country: 'South Africa', province: 'Free State', premierName: 'Mxolisi Dukwana', promiseText: 'Revitalizing Mangaung water infrastructure.', sector: 'Civil', deliveryDeadline: now, fulfillmentStatus: 'On Track', budgetAllocated: 600000000, publicSentimentScore: 35, status: 'active', createdAt: now, updatedAt: now },
+    { id: 'prom-mp-01', country: 'South Africa', province: 'Mpumalanga', premierName: 'Refilwe Mtshweni-Tsipane', promiseText: 'Just Energy Transition social support for coal workers.', sector: 'Planning', deliveryDeadline: now, fulfillmentStatus: 'At Risk', budgetAllocated: 1500000000, publicSentimentScore: 22, status: 'active', createdAt: now, updatedAt: now },
+    { id: 'prom-lp-01', country: 'South Africa', province: 'Limpopo', premierName: 'Stanley Mathabatha', promiseText: 'Broadband connectivity to every school in Polokwane.', sector: 'Structural', deliveryDeadline: now, fulfillmentStatus: 'Fulfilled', budgetAllocated: 400000000, publicSentimentScore: 82, status: 'active', createdAt: now, updatedAt: now },
+    { id: 'prom-nw-01', country: 'South Africa', province: 'North West', premierName: 'Bushy Maape', promiseText: 'Mining corridor road safety upgrade.', sector: 'Roads', deliveryDeadline: now, fulfillmentStatus: 'On Track', budgetAllocated: 950000000, publicSentimentScore: 40, status: 'active', createdAt: now, updatedAt: now },
+    { id: 'prom-nc-01', country: 'South Africa', province: 'Northern Cape', premierName: 'Zamani Saul', promiseText: 'Solar energy export hub feasibility.', sector: 'Structural', deliveryDeadline: now, fulfillmentStatus: 'On Track', budgetAllocated: 200000000, publicSentimentScore: 72, status: 'active', createdAt: now, updatedAt: now },
+    { id: 'prom-ls-01', country: 'Lesotho', premierName: 'Sam Matekane', promiseText: 'National Water Grid restoration.', sector: 'Civil', deliveryDeadline: now, fulfillmentStatus: 'On Track', budgetAllocated: 500000000, publicSentimentScore: 58, status: 'active', createdAt: now, updatedAt: now },
+    { id: 'prom-es-01', country: 'Eswatini', premierName: 'Russell Dlamini', promiseText: 'Smart City infrastructure pilot in Mbabane.', sector: 'Planning', deliveryDeadline: now, fulfillmentStatus: 'On Track', budgetAllocated: 150000000, publicSentimentScore: 45, status: 'active', createdAt: now, updatedAt: now },
+    { id: 'prom-gp-02', country: 'South Africa', province: 'Gauteng', premierName: 'Panyaza Lesufi', promiseText: 'Installation of 6,000 CCTV cameras for smart policing backbone.', sector: 'Structural', deliveryDeadline: now, fulfillmentStatus: 'On Track', budgetAllocated: 800000000, publicSentimentScore: 55, status: 'active', createdAt: now, updatedAt: now },
+    { id: 'prom-kzn-02', country: 'South Africa', province: 'KwaZulu-Natal', premierName: 'Nomusa Dube-Ncube', promiseText: 'Expansion of eThekwini sea defenses.', sector: 'Civil', deliveryDeadline: now, fulfillmentStatus: 'On Track', budgetAllocated: 2000000000, publicSentimentScore: 30, status: 'active', createdAt: now, updatedAt: now },
+    { id: 'prom-wc-02', country: 'South Africa', province: 'Western Cape', premierName: 'Alan Winde', promiseText: 'Elimination of load-shedding by 2026.', sector: 'Structural', deliveryDeadline: now, fulfillmentStatus: 'At Risk', budgetAllocated: 4000000000, publicSentimentScore: 70, status: 'active', createdAt: now, updatedAt: now },
+    { id: 'prom-ec-02', country: 'South Africa', province: 'Eastern Cape', premierName: 'Oscar Mabuyane', promiseText: 'Automotive industrial zone expansion.', sector: 'Planning', deliveryDeadline: now, fulfillmentStatus: 'On Track', budgetAllocated: 1100000000, publicSentimentScore: 52, status: 'active', createdAt: now, updatedAt: now },
+];
+
+export const MOCK_BENCHMARKS: RegionalBenchmark[] = [
+    { id: 'bench-01', metric: 'Strategic Yield', value: 92.4, averageValue: 85, unit: '%', comparisonRegion: 'SA National Avg', trend: 'improving', country: 'South Africa', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'bench-02', metric: 'Delivery Velocity', value: 84, averageValue: 78, unit: '%', comparisonRegion: 'BRICS Peers', trend: 'stable', country: 'South Africa', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'bench-03', metric: 'Water Security Index', value: 0.68, averageValue: 0.72, unit: 'score', comparisonRegion: 'SADC Avg', trend: 'declining', country: 'South Africa', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'bench-04', metric: 'Youth Employment', value: 42, averageValue: 35, unit: '%', comparisonRegion: 'Emerging Markets', trend: 'improving', country: 'South Africa', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'bench-05', metric: 'Infrastructure Trust', value: 54, averageValue: 60, unit: '%', comparisonRegion: 'Global Average', trend: 'declining', country: 'South Africa', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'bench-06', metric: 'Digital Connectivity', value: 88, averageValue: 70, unit: '%', comparisonRegion: 'SADC Avg', trend: 'improving', country: 'South Africa', province: 'Gauteng', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'bench-07', metric: 'Sanitation Access', value: 75, averageValue: 82, unit: '%', comparisonRegion: 'National Target', trend: 'stable', country: 'South Africa', province: 'Eastern Cape', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'bench-08', metric: 'Renewable Mix', value: 12, averageValue: 8, unit: '%', comparisonRegion: 'National Avg', trend: 'improving', country: 'South Africa', province: 'Northern Cape', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'bench-09', metric: 'Project Completion Rate', value: 65, averageValue: 72, unit: '%', comparisonRegion: 'Regional Avg', trend: 'declining', country: 'Lesotho', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'bench-10', metric: 'Logistics Efficiency', value: 70, averageValue: 65, unit: '%', comparisonRegion: 'Regional Avg', trend: 'improving', country: 'Eswatini', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'bench-11', metric: 'Citizen Sentiment', value: 4.2, averageValue: 3.8, unit: 'score', comparisonRegion: 'National Avg', trend: 'improving', country: 'South Africa', province: 'Western Cape', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'bench-12', metric: 'Risk Maturity', value: 0.82, averageValue: 0.75, unit: 'score', comparisonRegion: 'Global Benchmark', trend: 'stable', country: 'South Africa', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'bench-13', metric: 'Grid Reliability', value: 72, averageValue: 80, unit: '%', comparisonRegion: 'National Target', trend: 'declining', country: 'South Africa', province: 'Gauteng', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'bench-14', metric: 'Health Node Density', value: 1.2, averageValue: 1.5, unit: 'per 10k', comparisonRegion: 'WHO Target', trend: 'improving', country: 'South Africa', province: 'Limpopo', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'bench-15', metric: 'Economic Resilience', value: 0.65, averageValue: 0.60, unit: 'score', comparisonRegion: 'Regional Peers', trend: 'improving', country: 'South Africa', status: 'active', createdAt: now, updatedAt: now },
+];
+
+export const MOCK_INSIGHTS: StrategicInsight[] = [
+    { id: 'ins-01', title: 'Hydraulic Corridor Stability - Gauteng East', briefing: 'Satellite telemetry indicates shifting demand zones in Alexandra. Current water hub expansion risks under-capacity by 2027.', priorityLevel: 'Strategic', forecastWindow: '12mo', aiModel: 'Gemini-3-Pro-GIC', groundingData: ['proj-01', 'comm-gp-01', 'vul-01'], country: 'South Africa', province: 'Gauteng', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'ins-02', title: 'Coastal Vulnerability Escalation - KZN', briefing: 'Rising sea levels and extreme weather events in eThekwini pose critical risks to bulk sanitation sites.', priorityLevel: 'Critical', forecastWindow: '6mo', aiModel: 'Gemini-3-Pro-GIC', groundingData: ['proj-15', 'comm-kzn-02', 'vul-20'], country: 'South Africa', province: 'KwaZulu-Natal', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'ins-03', title: 'Youth Transit Optimization - Soweto', briefing: 'Analysis of mobility patterns suggests a massive underserved youth demographic in Diepkloof requiring rapid feeder bus nodes.', priorityLevel: 'Tactical', forecastWindow: '6mo', aiModel: 'Gemini-3-Pro-GIC', groundingData: ['comm-gp-02', 'sig-06'], country: 'South Africa', province: 'Gauteng', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'ins-04', title: 'Macro Economic Shift - Mbabane Corridor', briefing: 'Eswatini tech corridor pivot is attracting cross-border talent from KZN. Infrastructure demand expected to spike 15% in Manzini.', priorityLevel: 'Strategic', forecastWindow: '36mo', aiModel: 'Gemini-3-Pro-GIC', groundingData: ['proj-13', 'comm-es-02'], country: 'Eswatini', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'ins-05', title: 'Energy Transition Risk - Mpumalanga', briefing: 'Carbon-deceleration is creating a high-risk social vacuum in Secunda. Transition support is 8 months behind targeted delivery.', priorityLevel: 'Strategic', forecastWindow: '12mo', aiModel: 'Gemini-3-Pro-GIC', groundingData: ['comm-mp-01', 'prom-mp-01'], country: 'South Africa', province: 'Mpumalanga', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'ins-06', title: 'Water Infrastructure Bottleneck - Free State', briefing: 'Maintenance cycles in Mangaung are failing due to mechanical parts shortage. Risk of total grid collapse in 3 months if not mitigated.', priorityLevel: 'Critical', forecastWindow: '6mo', aiModel: 'Gemini-3-Pro-GIC', groundingData: ['proj-10', 'sig-10'], country: 'South Africa', province: 'Free State', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'ins-07', title: 'Renewable Export Opportunity - Northern Cape', briefing: 'Galeshewe solar farm could over-deliver by 40% if storage nodes are prioritized over transmission expansion.', priorityLevel: 'Strategic', forecastWindow: '12mo', aiModel: 'Gemini-3-Pro-GIC', groundingData: ['proj-12', 'prom-nc-01'], country: 'South Africa', province: 'Northern Cape', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'ins-08', title: 'Cross-Border Water Security - Lesotho/FS', briefing: 'Maseru reservoir stability is critical for downstream Free State irrigation. Joint audit recommended.', priorityLevel: 'Tactical', forecastWindow: '6mo', aiModel: 'Gemini-3-Pro-GIC', groundingData: ['proj-05', 'comm-ls-01'], country: 'Lesotho', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'ins-09', title: 'Health Node Saturation - Limpopo', briefing: 'Polokwane digital hub has cleared 90% of healthcare administration backlog. Reallocation of human capital suggested.', priorityLevel: 'Tactical', forecastWindow: '12mo', aiModel: 'Gemini-3-Pro-GIC', groundingData: ['proj-11', 'comm-lp-01'], country: 'South Africa', province: 'Limpopo', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'ins-10', title: 'Mining Logistics Optimization - North West', briefing: 'Rustenburg mining access roads are hitting saturation. Rail-bypass feasibility highly recommended for 2027.', priorityLevel: 'Strategic', forecastWindow: '36mo', aiModel: 'Gemini-3-Pro-GIC', groundingData: ['proj-08', 'comm-nw-01'], country: 'South Africa', province: 'North West', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'ins-11', title: 'Educational Stability - Eastern Cape', briefing: 'Mdantsane clinic halts are spilling over into local school attendance optics. Social instability risk elevated.', priorityLevel: 'Critical', forecastWindow: '6mo', aiModel: 'Gemini-3-Pro-GIC', groundingData: ['proj-09', 'sig-09'], country: 'South Africa', province: 'Eastern Cape', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'ins-12', title: 'Western Cape Energy Resilience', briefing: 'Cape Town IPP procurement is 12% above benchmark efficiency. Potential blueprint for other metros.', priorityLevel: 'Strategic', forecastWindow: '12mo', aiModel: 'Gemini-3-Pro-GIC', groundingData: ['prom-wc-01', 'bench-11'], country: 'South Africa', province: 'Western Cape', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'ins-13', title: 'Labor Market Volatility - eThekwini', briefing: 'High risk of coordinated strikes in the construction sector impacting bulk water projects.', priorityLevel: 'Critical', forecastWindow: '6mo', aiModel: 'Gemini-3-Pro-GIC', groundingData: ['proj-03', 'vul-14', 'sig-03'], country: 'South Africa', province: 'KwaZulu-Natal', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'ins-14', title: 'Service Delivery Trajectory - Gauteng', briefing: 'Convergence of water and electricity risks in Ekurhuleni suggests systemic departmental failure.', priorityLevel: 'Critical', forecastWindow: '6mo', aiModel: 'Gemini-3-Pro-GIC', groundingData: ['comm-gp-03', 'comm-gp-04'], country: 'South Africa', province: 'Gauteng', status: 'active', createdAt: now, updatedAt: now },
+    { id: 'ins-15', title: 'Agricultural Water Reliance - Lesotho', briefing: 'Hlotse bridge and water nodes are the backbone of regional export. Maintenance is non-negotiable for 2026 stability.', priorityLevel: 'Strategic', forecastWindow: '12mo', aiModel: 'Gemini-3-Pro-GIC', groundingData: ['proj-14', 'comm-ls-02'], country: 'Lesotho', status: 'active', createdAt: now, updatedAt: now },
+];
+export const MOCK_EVIDENCE_SOURCES: EvidenceSource[] = [
+    {
+        id: 'ev-01',
+        signalId: 'sig-01',
+        title: 'Municipal Water Pressure Log - Sector 4',
+        snippet: 'Flow rate dropped from 4.2 bar to 0.8 bar over a 6-hour window starting 04:00 AM.',
+        originalSourceUrl: 'https://municipality.gov.za/reports/water/sector4',
+        verificationStatus: 'verified',
+        hash: 'sha256:7f83...92a1',
+        capturedBy: 'System Sensor Node-A1',
+        country: 'South Africa',
+        metadata: {
+            sourceName: 'Department of Water & Sanitation',
+            dateMentioned: '2024-03-12',
+            platform: 'Gov-API'
+        },
+        status: 'active',
+        createdAt: now,
+        updatedAt: now
+    },
+    {
+        id: 'ev-02',
+        signalId: 'sig-03',
+        title: 'Labor Union Circular #402',
+        snippet: 'Members instructed to gather at the eThekwini water hub main gate for "peaceful demonstration".',
+        originalSourceUrl: 'https://union-central.org/circulars/2024/402',
+        verificationStatus: 'verified',
+        hash: 'sha256:4a2d...e1c9',
+        capturedBy: 'Media Crawler',
+        country: 'South Africa',
+        metadata: {
+            sourceName: 'SAMWU Internal Feed',
+            dateMentioned: '2024-03-11',
+            platform: 'Direct PDF'
+        },
+        status: 'active',
+        createdAt: now,
+        updatedAt: now
+    },
+    {
+        id: 'ev-03',
+        signalId: 'sig-05',
+        title: 'SAPS Case Docket #SO-291',
+        snippet: 'Theft of 4x copper busbars and control unit from Diepkloof micro-grid substation.',
+        originalSourceUrl: 'https://saps.gov.za/caselog/soweto/east/291',
+        verificationStatus: 'verified',
+        hash: 'sha256:92e1...f83a',
+        capturedBy: 'Field Agent #82',
+        country: 'South Africa',
+        metadata: {
+            sourceName: 'SAPS Gauteng Central',
+            dateMentioned: '2024-03-12',
+            platform: 'Police-Net'
+        },
+        status: 'active',
+        createdAt: now,
+        updatedAt: now
+    }
+];
+
+export const MOCK_FUNDING_PARTNERS: FundingPartner[] = [
+    {
+        id: 'fund-01',
+        name: 'Southern African Development Bank (DBSA)',
+        type: 'Development Bank',
+        focusSectors: ['Civil', 'Structural'],
+        regionalFocus: ['South Africa', 'Lesotho', 'Eswatini'],
+        activeProjects: ['proj-01', 'proj-05'],
+        country: 'South Africa',
+        status: 'active',
+        createdAt: now,
+        updatedAt: now
+    },
+    {
+        id: 'fund-02',
+        name: 'GIC Private Infrastructure Fund',
+        type: 'Private Equity',
+        focusSectors: ['Apex', 'Roads'],
+        regionalFocus: ['Gauteng', 'Western Cape'],
+        activeProjects: ['proj-07'],
+        country: 'South Africa',
+        status: 'active',
+        createdAt: now,
+        updatedAt: now
+    }
+];

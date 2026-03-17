@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Outfit", sans-serif;
+  --font-sans: "Inter", sans-serif;
+
+  --color-gic-gold-bright: #FFD700;
+  --color-gic-gold: #D0A700;
+  --color-gic-dark: #0F172A;
+  
+  --color-surface-base: #F8F9FA;
+  --color-surface-card: #FFFFFF;
+  --color-border-subtle: #E2E8F0;
+  --color-border-strong: #0F172A;
+
+  /* Executive Grade Shadow System */
+  --shadow-gic-premium: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-gic-elevated: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+  --shadow-gic-neon: 0 0 15px rgba(208, 167, 0, 0.1);
+  --shadow-gic-glow: 0 0 10px rgba(208, 167, 0, 0.3);
+  --shadow-gic-hard: 2px 2px 0px 0px rgba(15, 23, 42, 1);
+}
+
+@layer base {
+  body {
+    @apply bg-surface-base text-slate-900 font-sans antialiased selection:bg-gic-gold/20;
+  }
+}
+
+@layer utilities {
+  /* Typography - Precise Scaling */
+  .text-display-xl {
+    @apply text-7xl font-bold leading-tight tracking-tight;
+  }
+
+  .text-display-lg {
+    @apply text-3xl font-bold leading-tight tracking-tight md:text-4xl;
+  }
+
+  /* Glassmorphism Refinement */
+  .gic-glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-gic-premium;
+  }
+
+  .gic-glass-premium {
+    @apply bg-white/40 backdrop-blur-2xl border border-white/20 shadow-gic-elevated;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 100%);
+  }
+
+  /* Cards - Premium Polish */
+  .gic-card, 
+  .gic-card-premium, 
+  .gic-card-blue, 
+  .gic-card-gold {
+    @apply bg-white border border-slate-200 rounded-2xl p-5 shadow-sm transition-all duration-200 md:p-6;
+  }
+
+  .gic-card:hover,
+  .gic-card-premium:hover,
+  .gic-card-blue:hover,
+  .gic-card-gold:hover {
+    @apply shadow-md border-slate-300;
+  }
+
+  .gic-card-premium {
+    @apply border-t-4 border-t-gic-dark;
+  }
+
+  .gic-card-gold {
+    @apply border-t-4 border-t-gic-gold;
+  }
+
+  /* Buttons - Sophisticated & Interactive */
+  .gic-btn {
+    @apply px-6 py-3 rounded-2xl font-semibold transition-all duration-200 disabled:opacity-50 active:scale-95 flex items-center justify-center gap-2;
+  }
+
+  .gic-btn-primary {
+    @apply bg-gic-dark text-white hover:bg-slate-800 shadow-sm hover:shadow-md;
+  }
+
+  .gic-btn-secondary {
+    @apply bg-white border border-slate-200 text-slate-900 hover:bg-slate-50 shadow-sm;
+  }
+
+  .gic-btn-outline {
+    @apply border border-slate-200 text-slate-600 hover:border-slate-400 hover:text-slate-900;
+  }
+
+  /* Layout Utilities */
+  .gic-sidebar-blur {
+    @apply bg-white/95 backdrop-blur-md border-r border-slate-100;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .gic-ease-elite {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}

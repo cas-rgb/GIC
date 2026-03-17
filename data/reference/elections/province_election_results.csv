@@ -1,0 +1,6 @@
+province_name,election_year,election_type,party_name,votes,vote_share,turnout,winner_flag,source_name,source_url
+Gauteng,2024,Provincial Legislature,ANC,,34.76,,true,"Wikipedia (2024 provincial election summary)",https://en.wikipedia.org/wiki/Gauteng_Provincial_Legislature
+Western Cape,2024,Provincial Parliament,DA,1298159,55.30,,true,"Wikipedia (2024 provincial election summary)",https://en.wikipedia.org/wiki/Western_Cape_Provincial_Parliament
+Eastern Cape,2024,Provincial Legislature,ANC,1114294,62.16,,true,"Wikipedia (2024 provincial election summary)",https://en.wikipedia.org/wiki/Eastern_Cape_Provincial_Legislature
+Mpumalanga,2024,Provincial Legislature,ANC,,51.31,,true,"SAnews election summary",https://www.sanews.gov.za/south-africa/anc-retains-control-mpumalanga
+Northern Cape,2024,Provincial Legislature,ANC,,49.47,,true,"SAnews election summary",https://www.sanews.gov.za/south-africa/anc-retains-northern-cape

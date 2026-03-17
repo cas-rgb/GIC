@@ -1,0 +1,1470 @@
+{
+  "generatedAt": "2026-03-17T09:16:47.626Z",
+  "totals": {
+    "documents": 10896,
+    "signals": 5204,
+    "service_incidents": 3589,
+    "sentiment_mentions": 1367,
+    "citizen_voice_mentions": 4017,
+    "leader_mentions": 41,
+    "municipal_leader_mentions": 186,
+    "infrastructure_projects": 0,
+    "locations": 763
+  },
+  "provinceCoverage": [
+    {
+      "province": "Alabama",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "British Columbia",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Eastern Cape",
+      "documentCount": 1610,
+      "pressureCaseCount": 122,
+      "citizenVoiceCount": 1767
+    },
+    {
+      "province": "Erongo",
+      "documentCount": 35,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Florida",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Francistown",
+      "documentCount": 34,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Free State",
+      "documentCount": 586,
+      "pressureCaseCount": 36,
+      "citizenVoiceCount": 103
+    },
+    {
+      "province": "Gauteng",
+      "documentCount": 1775,
+      "pressureCaseCount": 37,
+      "citizenVoiceCount": 122
+    },
+    {
+      "province": "Hhohho",
+      "documentCount": 30,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Khomas",
+      "documentCount": 35,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "documentCount": 1070,
+      "pressureCaseCount": 21,
+      "citizenVoiceCount": 102
+    },
+    {
+      "province": "Limpopo",
+      "documentCount": 596,
+      "pressureCaseCount": 22,
+      "citizenVoiceCount": 101
+    },
+    {
+      "province": "Manzini",
+      "documentCount": 30,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Maseru",
+      "documentCount": 30,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Michigan",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "documentCount": 986,
+      "pressureCaseCount": 61,
+      "citizenVoiceCount": 348
+    },
+    {
+      "province": "National",
+      "documentCount": 36,
+      "pressureCaseCount": 27,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "New York",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "North Dakota",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "North West",
+      "documentCount": 572,
+      "pressureCaseCount": 14,
+      "citizenVoiceCount": 50
+    },
+    {
+      "province": "Northern Cape",
+      "documentCount": 899,
+      "pressureCaseCount": 43,
+      "citizenVoiceCount": 606
+    },
+    {
+      "province": "Not found",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Nunavut, Northwest Territories, Yukon, Quebec, Labrador",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "South-East",
+      "documentCount": 31,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "South Dakota",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Various (Crete, Ionian Islands, Peloponnese, Sporades)",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Vientiane",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Western Cape",
+      "documentCount": 1702,
+      "pressureCaseCount": 95,
+      "citizenVoiceCount": 818
+    }
+  ],
+  "municipalityCoverage": [
+    {
+      "province": "Alabama",
+      "municipality": "Tuscaloosa",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "British Columbia",
+      "municipality": "Burnaby",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Eastern Cape",
+      "municipality": "All",
+      "documentCount": 20,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Eastern Cape",
+      "municipality": "Buffalo City",
+      "documentCount": 538,
+      "pressureCaseCount": 56,
+      "citizenVoiceCount": 790
+    },
+    {
+      "province": "Eastern Cape",
+      "municipality": "Chris Hani",
+      "documentCount": 100,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Eastern Cape",
+      "municipality": "Joe Gqabi",
+      "documentCount": 100,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Eastern Cape",
+      "municipality": "Nelson Mandela Bay",
+      "documentCount": 639,
+      "pressureCaseCount": 55,
+      "citizenVoiceCount": 922
+    },
+    {
+      "province": "Eastern Cape",
+      "municipality": "OR Tambo",
+      "documentCount": 107,
+      "pressureCaseCount": 6,
+      "citizenVoiceCount": 9
+    },
+    {
+      "province": "Eastern Cape",
+      "municipality": "Province Wide",
+      "documentCount": 0,
+      "pressureCaseCount": 5,
+      "citizenVoiceCount": 46
+    },
+    {
+      "province": "Erongo",
+      "municipality": "Walvis Bay",
+      "documentCount": 35,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Florida",
+      "municipality": "Jacksonville",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Francistown",
+      "municipality": "Francistown City",
+      "documentCount": 34,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Free State",
+      "municipality": "Dihlabeng",
+      "documentCount": 100,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Free State",
+      "municipality": "Maluti-a-Phofung",
+      "documentCount": 100,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mangaung",
+      "documentCount": 123,
+      "pressureCaseCount": 6,
+      "citizenVoiceCount": 27
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "documentCount": 113,
+      "pressureCaseCount": 9,
+      "citizenVoiceCount": 49
+    },
+    {
+      "province": "Free State",
+      "municipality": "Metsimaholo",
+      "documentCount": 99,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Free State",
+      "municipality": "Province Wide",
+      "documentCount": 0,
+      "pressureCaseCount": 21,
+      "citizenVoiceCount": 27
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Johannesburg",
+      "documentCount": 400,
+      "pressureCaseCount": 7,
+      "citizenVoiceCount": 23
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Tshwane",
+      "documentCount": 361,
+      "pressureCaseCount": 11,
+      "citizenVoiceCount": 18
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "Ekurhuleni",
+      "documentCount": 330,
+      "pressureCaseCount": 5,
+      "citizenVoiceCount": 19
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "Emfuleni",
+      "documentCount": 26,
+      "pressureCaseCount": 7,
+      "citizenVoiceCount": 34
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "Gauteng Africa Infrastructure Evidence",
+      "documentCount": 39,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "Province Wide",
+      "documentCount": 0,
+      "pressureCaseCount": 7,
+      "citizenVoiceCount": 28
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "Sedibeng",
+      "documentCount": 195,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "South Africa Infrastructure Protest Risk",
+      "documentCount": 91,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "West Rand",
+      "documentCount": 280,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Hhohho",
+      "municipality": "Mbabane",
+      "documentCount": 30,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Khomas",
+      "municipality": "Windhoek",
+      "documentCount": 35,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "All",
+      "documentCount": 20,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "documentCount": 212,
+      "pressureCaseCount": 4,
+      "citizenVoiceCount": 34
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "Msunduzi",
+      "documentCount": 204,
+      "pressureCaseCount": 3,
+      "citizenVoiceCount": 22
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "Newcastle",
+      "documentCount": 190,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "Newcastle, Utrecht, Vryheid, Pongola, Melmoth, Ulundi, Dundee, and Dannhauser",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "Province Wide",
+      "documentCount": 0,
+      "pressureCaseCount": 12,
+      "citizenVoiceCount": 34
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "Ray Nkonyeni",
+      "documentCount": 190,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "uMhlathuze",
+      "documentCount": 202,
+      "pressureCaseCount": 2,
+      "citizenVoiceCount": 12
+    },
+    {
+      "province": "Limpopo",
+      "municipality": "Ba-Phalaborwa",
+      "documentCount": 100,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Limpopo",
+      "municipality": "Lephalale",
+      "documentCount": 14,
+      "pressureCaseCount": 1,
+      "citizenVoiceCount": 23
+    },
+    {
+      "province": "Limpopo",
+      "municipality": "Mogalakwena",
+      "documentCount": 113,
+      "pressureCaseCount": 4,
+      "citizenVoiceCount": 36
+    },
+    {
+      "province": "Limpopo",
+      "municipality": "Polokwane",
+      "documentCount": 114,
+      "pressureCaseCount": 3,
+      "citizenVoiceCount": 4
+    },
+    {
+      "province": "Limpopo",
+      "municipality": "Province Wide",
+      "documentCount": 0,
+      "pressureCaseCount": 14,
+      "citizenVoiceCount": 38
+    },
+    {
+      "province": "Limpopo",
+      "municipality": "Thulamela",
+      "documentCount": 100,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Limpopo",
+      "municipality": "Tzaneen",
+      "documentCount": 100,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Manzini",
+      "municipality": "Manzini",
+      "documentCount": 30,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Maseru",
+      "municipality": "Maseru",
+      "documentCount": 30,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Michigan",
+      "municipality": "Detroit",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Bushbuckridge",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni",
+      "documentCount": 119,
+      "pressureCaseCount": 4,
+      "citizenVoiceCount": 25
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "eMalahleni Local Municipality",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni Local Municipality",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Govan Mbeki",
+      "documentCount": 100,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Lekwa",
+      "documentCount": 100,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Mbombela",
+      "documentCount": 130,
+      "pressureCaseCount": 16,
+      "citizenVoiceCount": 45
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Mbombela Local Municipality",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Province Wide",
+      "documentCount": 0,
+      "pressureCaseCount": 32,
+      "citizenVoiceCount": 261
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "documentCount": 106,
+      "pressureCaseCount": 3,
+      "citizenVoiceCount": 6
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete Local Municipality",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Thembisile Hani",
+      "documentCount": 13,
+      "pressureCaseCount": 6,
+      "citizenVoiceCount": 11
+    },
+    {
+      "province": "National",
+      "municipality": "Province Wide",
+      "documentCount": 0,
+      "pressureCaseCount": 27,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "New York",
+      "municipality": "New York City",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "North Dakota",
+      "municipality": "City of Williston",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "JB Marks",
+      "documentCount": 100,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "Madibeng",
+      "documentCount": 100,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "Mahikeng",
+      "documentCount": 113,
+      "pressureCaseCount": 6,
+      "citizenVoiceCount": 15
+    },
+    {
+      "province": "North West",
+      "municipality": "Matlosana",
+      "documentCount": 100,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "Province Wide",
+      "documentCount": 0,
+      "pressureCaseCount": 8,
+      "citizenVoiceCount": 12
+    },
+    {
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "documentCount": 118,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 23
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "!Kheis Local Municipality",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "31 municipalities across the province (including Sol Plaatje, Pixley ka Seme, and Namakwa Districts)",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Dawid Kruiper",
+      "documentCount": 106,
+      "pressureCaseCount": 3,
+      "citizenVoiceCount": 7
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Ga-Segonyana",
+      "documentCount": 107,
+      "pressureCaseCount": 6,
+      "citizenVoiceCount": 8
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Gamagara Local Municipality",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Nama Khoi",
+      "documentCount": 100,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Not specified",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Pixley Ka Seme District Municipality",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Prieska",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Province Wide",
+      "documentCount": 0,
+      "pressureCaseCount": 18,
+      "citizenVoiceCount": 36
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Siyancuma",
+      "documentCount": 100,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Sol Plaatje",
+      "documentCount": 376,
+      "pressureCaseCount": 16,
+      "citizenVoiceCount": 555
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Various (Province-wide including Sol Plaatje, Nama Khoi, Dawid Kruiper, and Joe Morolong)",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "ZF Mgcawu District Municipality",
+      "documentCount": 2,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Not found",
+      "municipality": "Not found",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Nunavut, Northwest Territories, Yukon, Quebec, Labrador",
+      "municipality": "Various Arctic Communities (e.g., Alert, Arviat, Alexandra Fiord)",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "South-East",
+      "municipality": "Gaborone",
+      "documentCount": 31,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "South Dakota",
+      "municipality": "Hamlin County",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Various (Crete, Ionian Islands, Peloponnese, Sporades)",
+      "municipality": "Various (Chania, Corfu, Kalamata, Kefalonia, Preveza, Skiathos, Alonissos, Ithaca, Lefkas, Paxos)",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Vientiane",
+      "municipality": "Municipality of Vientiane",
+      "documentCount": 1,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "All",
+      "documentCount": 20,
+      "pressureCaseCount": 0,
+      "citizenVoiceCount": 0
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "City of Cape Town",
+      "documentCount": 482,
+      "pressureCaseCount": 62,
+      "citizenVoiceCount": 367
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Drakenstein",
+      "documentCount": 197,
+      "pressureCaseCount": 3,
+      "citizenVoiceCount": 9
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "George",
+      "documentCount": 206,
+      "pressureCaseCount": 3,
+      "citizenVoiceCount": 21
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Province Wide",
+      "documentCount": 0,
+      "pressureCaseCount": 10,
+      "citizenVoiceCount": 69
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Saldanha Bay",
+      "documentCount": 440,
+      "pressureCaseCount": 14,
+      "citizenVoiceCount": 345
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Stellenbosch",
+      "documentCount": 196,
+      "pressureCaseCount": 3,
+      "citizenVoiceCount": 7
+    }
+  ],
+  "wardCoverage": [
+    {
+      "province": "Eastern Cape",
+      "municipality": "Buffalo City",
+      "knownWardCount": 7,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Eastern Cape",
+      "municipality": "Nelson Mandela Bay",
+      "knownWardCount": 4,
+      "evidenceBackedWardCount": 1
+    },
+    {
+      "province": "Eastern Cape",
+      "municipality": "Walter Sisulu",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Free State",
+      "municipality": "Dihlabeng",
+      "knownWardCount": 7,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Free State",
+      "municipality": "Kopanong",
+      "knownWardCount": 10,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Free State",
+      "municipality": "Letsemeng",
+      "knownWardCount": 11,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Free State",
+      "municipality": "Maluti-a-Phofung",
+      "knownWardCount": 2,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mangaung",
+      "knownWardCount": 14,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Free State",
+      "municipality": "Masilonyana",
+      "knownWardCount": 12,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Free State",
+      "municipality": "Matjhabeng",
+      "knownWardCount": 25,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Free State",
+      "municipality": "Mohokare",
+      "knownWardCount": 8,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Free State",
+      "municipality": "Nala",
+      "knownWardCount": 2,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Free State",
+      "municipality": "Ngwathe",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Free State",
+      "municipality": "Nketoana",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Free State",
+      "municipality": "Phumelela",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Free State",
+      "municipality": "Setsoto",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Free State",
+      "municipality": "Tokologo",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Free State",
+      "municipality": "Tswelopele",
+      "knownWardCount": 3,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Ekurhuleni",
+      "knownWardCount": 17,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Johannesburg",
+      "knownWardCount": 9,
+      "evidenceBackedWardCount": 7
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "City of Tshwane",
+      "knownWardCount": 7,
+      "evidenceBackedWardCount": 6
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "Ekurhuleni",
+      "knownWardCount": 4,
+      "evidenceBackedWardCount": 4
+    },
+    {
+      "province": "Gauteng",
+      "municipality": "West Rand",
+      "knownWardCount": 3,
+      "evidenceBackedWardCount": 3
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "knownWardCount": 72,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "Inkosi Langalibalele",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "Msunduzi",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "Umvoti",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "KwaZulu-Natal",
+      "municipality": "Umzumbe",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Limpopo",
+      "municipality": "Polokwane",
+      "knownWardCount": 2,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Limpopo",
+      "municipality": "Thulamela",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Albert Luthuli",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Bushbuckridge",
+      "knownWardCount": 4,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "City of Mbombela",
+      "knownWardCount": 3,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Dipaleseng",
+      "knownWardCount": 2,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Emalahleni (MP)",
+      "knownWardCount": 14,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Govan Mbeki",
+      "knownWardCount": 14,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Lekwa",
+      "knownWardCount": 13,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Mbombela",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Mkhondo",
+      "knownWardCount": 8,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Msukaligwa",
+      "knownWardCount": 6,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Nkomazi",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Pixley Ka Seme (MP)",
+      "knownWardCount": 19,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Steve Tshwete",
+      "knownWardCount": 36,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Mpumalanga",
+      "municipality": "Victor Khanye",
+      "knownWardCount": 8,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "City of Matlosana",
+      "knownWardCount": 5,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "Ditsobotla",
+      "knownWardCount": 2,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "Greater Taung",
+      "knownWardCount": 6,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "J B Marks",
+      "knownWardCount": 4,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "Kagisano-Molopo",
+      "knownWardCount": 6,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "Kgetlengrivier",
+      "knownWardCount": 5,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "Lekwa-Teemane",
+      "knownWardCount": 6,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "Madibeng",
+      "knownWardCount": 7,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "Mafikeng",
+      "knownWardCount": 4,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "Mahikeng",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "Mamusa",
+      "knownWardCount": 3,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "Maquassi Hills",
+      "knownWardCount": 9,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "Moretele",
+      "knownWardCount": 7,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "Moses Kotane",
+      "knownWardCount": 31,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "Naledi (NW)",
+      "knownWardCount": 11,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "Ramotshere Moiloa",
+      "knownWardCount": 5,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "Ratlou",
+      "knownWardCount": 7,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "Rustenburg",
+      "knownWardCount": 18,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "North West",
+      "municipality": "Tswaing",
+      "knownWardCount": 6,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "!Kai! Garib",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Dawid Kruiper",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Dikgatlong",
+      "knownWardCount": 2,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Joe Morolong",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Magareng",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Phokwane",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Northern Cape",
+      "municipality": "Sol Plaatje",
+      "knownWardCount": 11,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Bitou",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Breede Valley",
+      "knownWardCount": 2,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Agulhas",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Cape Town",
+      "knownWardCount": 41,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "City of Cape Town",
+      "knownWardCount": 2,
+      "evidenceBackedWardCount": 1
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Drakenstein",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Hessequa",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    },
+    {
+      "province": "Western Cape",
+      "municipality": "Matzikama",
+      "knownWardCount": 1,
+      "evidenceBackedWardCount": 0
+    }
+  ],
+  "leadershipCoverage": [
+    {
+      "level": "municipal",
+      "province": "Eastern Cape",
+      "municipality": "Buffalo City",
+      "leaderCount": 1,
+      "mentionCount": 10
+    },
+    {
+      "level": "municipal",
+      "province": "Free State",
+      "municipality": "Mangaung",
+      "leaderCount": 1,
+      "mentionCount": 11
+    },
+    {
+      "level": "municipal",
+      "province": "Gauteng",
+      "municipality": "City of Johannesburg",
+      "leaderCount": 1,
+      "mentionCount": 8
+    },
+    {
+      "level": "municipal",
+      "province": "Gauteng",
+      "municipality": "City of Tshwane",
+      "leaderCount": 1,
+      "mentionCount": 7
+    },
+    {
+      "level": "municipal",
+      "province": "Gauteng",
+      "municipality": "Ekurhuleni",
+      "leaderCount": 1,
+      "mentionCount": 14
+    },
+    {
+      "level": "municipal",
+      "province": "Gauteng",
+      "municipality": "Emfuleni",
+      "leaderCount": 1,
+      "mentionCount": 31
+    },
+    {
+      "level": "municipal",
+      "province": "KwaZulu-Natal",
+      "municipality": "eThekwini",
+      "leaderCount": 1,
+      "mentionCount": 34
+    },
+    {
+      "level": "municipal",
+      "province": "KwaZulu-Natal",
+      "municipality": "Msunduzi",
+      "leaderCount": 1,
+      "mentionCount": 13
+    },
+    {
+      "level": "municipal",
+      "province": "Limpopo",
+      "municipality": "Polokwane",
+      "leaderCount": 1,
+      "mentionCount": 17
+    },
+    {
+      "level": "municipal",
+      "province": "Mpumalanga",
+      "municipality": "Mbombela",
+      "leaderCount": 1,
+      "mentionCount": 7
+    },
+    {
+      "level": "municipal",
+      "province": "Mpumalanga",
+      "municipality": "Thembisile Hani",
+      "leaderCount": 1,
+      "mentionCount": 5
+    },
+    {
+      "level": "municipal",
+      "province": "Northern Cape",
+      "municipality": "Sol Plaatje",
+      "leaderCount": 1,
+      "mentionCount": 17
+    },
+    {
+      "level": "municipal",
+      "province": "Western Cape",
+      "municipality": "City of Cape Town",
+      "leaderCount": 1,
+      "mentionCount": 12
+    },
+    {
+      "level": "provincial",
+      "province": "Free State",
+      "municipality": null,
+      "leaderCount": 1,
+      "mentionCount": 1
+    },
+    {
+      "level": "provincial",
+      "province": "Gauteng",
+      "municipality": null,
+      "leaderCount": 1,
+      "mentionCount": 16
+    },
+    {
+      "level": "provincial",
+      "province": "KwaZulu-Natal",
+      "municipality": null,
+      "leaderCount": 1,
+      "mentionCount": 2
+    },
+    {
+      "level": "provincial",
+      "province": "Limpopo",
+      "municipality": null,
+      "leaderCount": 1,
+      "mentionCount": 6
+    },
+    {
+      "level": "provincial",
+      "province": "Mpumalanga",
+      "municipality": null,
+      "leaderCount": 1,
+      "mentionCount": 2
+    },
+    {
+      "level": "provincial",
+      "province": "North West",
+      "municipality": null,
+      "leaderCount": 1,
+      "mentionCount": 11
+    },
+    {
+      "level": "provincial",
+      "province": "Western Cape",
+      "municipality": null,
+      "leaderCount": 1,
+      "mentionCount": 3
+    }
+  ],
+  "projectCoverage": []
+}

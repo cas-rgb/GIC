@@ -1,0 +1,66 @@
+{
+  "dashboard_title": "GIC Intelligence Platform - Executive Command Center",
+  "position_json": "{\"CHART-1\":{\"children\":[],\"id\":\"CHART-1\",\"meta\":{\"chartId\":1,\"height\":50,\"width\":6},\"type\":\"CHART\"},\"CHART-2\":{\"children\":[],\"id\":\"CHART-2\",\"meta\":{\"chartId\":2,\"height\":50,\"width\":6},\"type\":\"CHART\"},\"GRID_ID\":{\"children\":[\"ROW-1\"],\"id\":\"GRID_ID\",\"type\":\"GRID\"},\"HEADER_ID\":{\"id\":\"HEADER_ID\",\"meta\":{\"text\":\"GIC Intelligence Platform - Executive Command Center\"},\"type\":\"HEADER\"},\"ROOT_ID\":{\"children\":[\"GRID_ID\"],\"id\":\"ROOT_ID\",\"type\":\"ROOT\"},\"ROW-1\":{\"children\":[\"CHART-1\",\"CHART-2\"],\"id\":\"ROW-1\",\"meta\":{\"background\":\"BACKGROUND_TRANSPARENT\"},\"type\":\"ROW\"}}",
+  "description": "Boardroom-ready strategic overview of infrastructure risks, regional sentiment, and project delivery targets.",
+  "css": ".dashboard { background-color: #0B0F17; } .slice_container { border-radius: 20px; overflow: hidden; background: rgba(255,255,255,0.02) !important; border: 1px solid rgba(255,255,255,0.05) !important; }",
+  "metadata": {
+    "timed_refresh_immune_slices": [],
+    "expanded_slices": {},
+    "refresh_frequency": 0,
+    "default_filters": "{}",
+    "filter_scopes": {}
+  },
+  "charts": [
+    {
+      "slice_name": "Regional Risk Heatmap",
+      "viz_type": "deck_scatter",
+      "datasource_name": "view_regional_risk_heatmap",
+      "params": {
+        "datasource": "table__view_regional_risk_heatmap",
+        "viz_type": "deck_scatter",
+        "spatial": {
+          "latCol": "latitude",
+          "lonCol": "longitude",
+          "type": "latlong"
+        },
+        "color_picker": {
+          "a": 1,
+          "b": 135,
+          "g": 57,
+          "r": 244
+        },
+        "point_radius_fixed": {
+          "fixedRadius": 500,
+          "metric": "severity"
+        }
+      }
+    },
+    {
+      "slice_name": "Infrastructure Budget by Sector",
+      "viz_type": "pie",
+      "datasource_name": "view_infrastructure_pipeline",
+      "params": {
+        "datasource": "table__view_infrastructure_pipeline",
+        "viz_type": "pie",
+        "groupby": ["sector"],
+        "metric": "sum__budget_millions",
+        "pie_label_type": "percent",
+        "donut": true,
+        "labels_outside": true
+      }
+    },
+    {
+      "slice_name": "Community Sentiment Velocity",
+      "viz_type": "bar",
+      "datasource_name": "view_community_sentiment",
+      "params": {
+        "datasource": "table__view_community_sentiment",
+        "viz_type": "bar",
+        "metrics": ["avg__sentiment_value"],
+        "groupby": ["community_name"],
+        "order_by_pos": 0,
+        "order_desc": true
+      }
+    }
+  ]
+}
