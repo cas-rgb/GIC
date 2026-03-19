@@ -64,12 +64,15 @@ export default function MunicipalityIssueMatrixPanel({
       try {
         const response = await fetch(
           `/api/analytics/municipality-issue-matrix?province=${encodeURIComponent(province)}&municipality=${encodeURIComponent(municipality)}&days=${days}${serviceDomain ? `&serviceDomain=${encodeURIComponent(serviceDomain)}` : ""}`,
-          { cache: "no-store" }
+          { cache: "no-store" },
         );
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -95,10 +98,19 @@ export default function MunicipalityIssueMatrixPanel({
     }
 
     return {
-      volume: Math.max(...state.data.rows.map((row) => row.pressureCaseCount), 1),
-      severity: Math.max(...state.data.rows.map((row) => row.highSeverityCount), 1),
-      protests: Math.max(...state.data.rows.map((row) => row.protestCount), 1),
-      responses: Math.max(...state.data.rows.map((row) => row.responseCount), 1),
+      volume: Math.max(
+        ...(state.data.rows || []).map((row) => row.pressureCaseCount),
+        1,
+      ),
+      severity: Math.max(
+        ...(state.data.rows || []).map((row) => row.highSeverityCount),
+        1,
+      ),
+      protests: Math.max(...(state.data.rows || []).map((row) => row.protestCount), 1),
+      responses: Math.max(
+        ...(state.data.rows || []).map((row) => row.responseCount),
+        1,
+      ),
     };
   }, [state]);
 
@@ -118,16 +130,20 @@ export default function MunicipalityIssueMatrixPanel({
       <div className="flex min-h-[260px] items-center justify-center text-center">
         <div>
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">{state.message}</p>
+          <p className="mt-3 text-sm font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
   }
 
-  if (state.data.rows.length === 0) {
+  if ((state.data.rows || []).length === 0) {
     return (
       <div className="rounded-2xl border border-dashed border-slate-200 p-8 text-center">
-        <p className="text-sm font-bold text-slate-500">No local issue-category rows available yet.</p>
+        <p className="text-sm font-bold text-slate-500">
+          No local issue-category rows available yet.
+        </p>
       </div>
     );
   }
@@ -139,12 +155,16 @@ export default function MunicipalityIssueMatrixPanel({
           Issue Category Matrix
         </h4>
         <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">
-          Local issue intensity across concern volume, severity, protest pressure, and responses
+          Local issue intensity across concern volume, severity, protest
+          pressure, and responses
         </p>
       </div>
 
       <div className="overflow-x-auto rounded-2xl border border-slate-100 bg-white">
-        <div className="grid min-w-[720px] gap-px bg-slate-100" style={{ gridTemplateColumns: "220px repeat(4, minmax(90px, 1fr))" }}>
+        <div
+          className="grid min-w-[720px] gap-px bg-slate-100"
+          style={{ gridTemplateColumns: "220px repeat(4, minmax(90px, 1fr))" }}
+        >
           <div className="bg-slate-50 px-4 py-3 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
             Issue Category
           </div>
@@ -161,7 +181,7 @@ export default function MunicipalityIssueMatrixPanel({
             Responses
           </div>
 
-          {state.data.rows.map((row) => (
+          {(state.data.rows || []).map((row) => (
             <Fragment key={row.serviceDomain}>
               <div
                 key={`${row.serviceDomain}-label`}
@@ -173,7 +193,7 @@ export default function MunicipalityIssueMatrixPanel({
                 key={`${row.serviceDomain}-volume`}
                 className={`px-3 py-3 text-center text-sm font-bold ${getCellClass(
                   row.pressureCaseCount,
-                  maxValues.volume
+                  maxValues.volume,
                 )}`}
               >
                 {row.pressureCaseCount}
@@ -182,7 +202,7 @@ export default function MunicipalityIssueMatrixPanel({
                 key={`${row.serviceDomain}-severity`}
                 className={`px-3 py-3 text-center text-sm font-bold ${getCellClass(
                   row.highSeverityCount,
-                  maxValues.severity
+                  maxValues.severity,
                 )}`}
               >
                 {row.highSeverityCount}
@@ -191,7 +211,7 @@ export default function MunicipalityIssueMatrixPanel({
                 key={`${row.serviceDomain}-protests`}
                 className={`px-3 py-3 text-center text-sm font-bold ${getCellClass(
                   row.protestCount,
-                  maxValues.protests
+                  maxValues.protests,
                 )}`}
               >
                 {row.protestCount}
@@ -200,7 +220,7 @@ export default function MunicipalityIssueMatrixPanel({
                 key={`${row.serviceDomain}-responses`}
                 className={`px-3 py-3 text-center text-sm font-bold ${getCellClass(
                   row.responseCount,
-                  maxValues.responses
+                  maxValues.responses,
                 )}`}
               >
                 {row.responseCount}

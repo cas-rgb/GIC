@@ -53,13 +53,19 @@ export default function MunicipalityPublicVoiceHighlightsPanel({
       }
 
       try {
-        const response = await fetch(`/api/analytics/citizen-voice-evidence?${params.toString()}`, {
-          cache: "no-store",
-        });
+        const response = await fetch(
+          `/api/analytics/citizen-voice-evidence?${params.toString()}`,
+          {
+            cache: "no-store",
+          },
+        );
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -69,7 +75,9 @@ export default function MunicipalityPublicVoiceHighlightsPanel({
         setState({
           status: "error",
           message:
-            error instanceof Error ? error.message : "Failed to load municipality public voice highlights",
+            error instanceof Error
+              ? error.message
+              : "Failed to load municipality public voice highlights",
         });
       }
     }
@@ -93,7 +101,9 @@ export default function MunicipalityPublicVoiceHighlightsPanel({
       <div className="flex min-h-[180px] items-center justify-center text-center">
         <div>
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">{state.message}</p>
+          <p className="mt-3 text-sm font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
@@ -121,7 +131,9 @@ export default function MunicipalityPublicVoiceHighlightsPanel({
           <p className="text-[9px] font-black uppercase tracking-[0.2em] text-blue-500">
             Evidence Docs
           </p>
-          <p className="mt-2 text-sm font-bold text-slate-900">{state.data.summary.documentCount}</p>
+          <p className="mt-2 text-sm font-bold text-slate-900">
+            {state.data.summary.documentCount}
+          </p>
         </div>
         <div className="rounded-2xl border border-rose-100 bg-rose-50 p-4">
           <p className="text-[9px] font-black uppercase tracking-[0.2em] text-rose-500">
@@ -144,14 +156,20 @@ export default function MunicipalityPublicVoiceHighlightsPanel({
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
         {rows.length === 0 ? (
           <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4 text-sm font-medium text-slate-500 xl:col-span-3">
-            No governed public-evidence highlights matched this municipality issue yet.
+            No governed public-evidence highlights matched this municipality
+            issue yet.
           </div>
         ) : (
           rows.map((row) => (
-            <div key={row.documentId} className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
+            <div
+              key={row.documentId}
+              className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm"
+            >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-sm font-bold text-slate-900">{row.title}</p>
+                  <p className="text-sm font-bold text-slate-900">
+                    {row.title}
+                  </p>
                   <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                     {row.province}
                     {row.municipality ? ` · ${row.municipality}` : ""}
@@ -193,7 +211,9 @@ export default function MunicipalityPublicVoiceHighlightsPanel({
                   confidence {Math.round(row.confidence * 100)}%
                 </span>
               </div>
-              <p className="mt-3 text-sm font-medium leading-6 text-slate-700">{row.excerpt}</p>
+              <p className="mt-3 text-sm font-medium leading-6 text-slate-700">
+                {row.excerpt}
+              </p>
             </div>
           ))
         )}

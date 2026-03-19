@@ -46,7 +46,7 @@ export async function getPlaceInfrastructureHistory(input: {
         order by coalesce(event_date, to_timestamp(period_year::text, 'YYYY')) desc nulls last
         limit 50
       `,
-      [province, municipality, ward]
+      [province, municipality, ward],
     );
 
     if (result.rows.length > 0) {
@@ -99,7 +99,7 @@ export async function getPlaceInfrastructureHistory(input: {
         order by coalesce(event_date, to_timestamp(period_year::text, 'YYYY')) desc nulls last
         limit 50
       `,
-      [province, municipality, ward]
+      [province, municipality, ward],
     );
 
     return {
@@ -150,7 +150,7 @@ export async function getPlaceInfrastructureHistory(input: {
         order by coalesce(event_date, to_timestamp(period_year::text, 'YYYY')) desc nulls last
         limit 50
       `,
-      [province, municipality]
+      [province, municipality],
     );
 
     return {
@@ -199,7 +199,7 @@ export async function getPlaceInfrastructureHistory(input: {
       order by coalesce(event_date, to_timestamp(period_year::text, 'YYYY')) desc nulls last
       limit 50
     `,
-    [province]
+    [province],
   );
 
   return {

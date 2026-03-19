@@ -9,18 +9,26 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   const ward = request.nextUrl.searchParams.get("ward");
 
   if (!province) {
-    return NextResponse.json({ error: "province is required" }, { status: 400 });
+    return NextResponse.json(
+      { error: "province is required" },
+      { status: 400 },
+    );
   }
 
   if (!municipality) {
     return NextResponse.json(
       { error: "municipality is required" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
   try {
-    const response = await getMunicipalityEvidence(province, municipality, topic, ward);
+    const response = await getMunicipalityEvidence(
+      province,
+      municipality,
+      topic,
+      ward,
+    );
     return NextResponse.json(response);
   } catch (error) {
     return NextResponse.json(
@@ -30,7 +38,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             ? error.message
             : "Failed to fetch municipality evidence",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
+
+

@@ -1,5 +1,5 @@
 import { query } from "@/lib/db";
-import { MunicipalityRankingResponse } from "@/lib/analytics/types";
+import { MunicipalityRankingResponse, AINarrativeSynthesisRow } from "@/lib/analytics/types";
 
 interface MunicipalityRankingSqlRow {
   municipality: string;
@@ -13,9 +13,10 @@ interface MunicipalityRankingSqlRow {
 }
 
 export async function getMunicipalityRanking(
-  province: string
+  province: string,
 ): Promise<MunicipalityRankingResponse> {
-  const result = await query<MunicipalityRankingSqlRow>(
+  const [result, aiResult] = await Promise.all([
+    query<MunicipalityRankingSqlRow>(
     `
       with ranked as (
         select
@@ -35,7 +36,7 @@ export async function getMunicipalityRanking(
         from service_incidents si
         join signals s on s.id = si.signal_id
         left join locations l on l.id = coalesce(si.location_id, s.location_id)
-        where l.province = $1
+        where ($1::text = 'All Provinces' or l.province = $1)
           and si.citizen_pressure_indicator = true
           and si.failure_indicator = true
           and l.municipality is not null
@@ -46,15 +47,46 @@ export async function getMunicipalityRanking(
       order by "riskScore" desc, "pressureCaseCount" desc
       limit 10
     `,
+    [province],
+  ),
+  query<AINarrativeSynthesisRow & { municipality: string }>(
+    `
+      select 
+        municipality as "municipality",
+        who_involved as "whoInvolved",
+        what_happened as "whatHappened",
+        why_it_happened as "whyItHappened",
+        how_resolved_or_current as "howResolvedOrCurrent",
+        when_timeline as "whenTimeline",
+        source_evidence as "sourceEvidence"
+      from ai_narrative_synthesis
+      where lens = 'municipality' and ($1::text = 'All Provinces' or $1::text is null or province = $1)
+      order by created_at desc
+    `,
     [province]
-  );
+  )
+  ]);
+
+  const aiSynthesisByMuni = new Map<string, AINarrativeSynthesisRow[]>();
+  for (const row of aiResult.rows) {
+    const current = aiSynthesisByMuni.get(row.municipality) ?? [];
+    current.push(row);
+    aiSynthesisByMuni.set(row.municipality, current);
+  }
 
   return {
     province,
     rows: result.rows.map((row) => ({
       ...row,
-      riskScore: typeof row.riskScore === "string" ? Number(row.riskScore) : row.riskScore,
-      confidence: typeof row.confidence === "string" ? Number(row.confidence) : row.confidence,
+      riskScore:
+        typeof row.riskScore === "string"
+          ? Number(row.riskScore)
+          : row.riskScore,
+      confidence:
+        typeof row.confidence === "string"
+          ? Number(row.confidence)
+          : row.confidence,
+      aiSynthesis: aiSynthesisByMuni.get(row.municipality) ?? [],
     })),
     trace: {
       table: "service_incidents",

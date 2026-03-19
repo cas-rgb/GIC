@@ -61,14 +61,20 @@ export default function MunicipalityPlaceCoverageStrip(props: {
 
       try {
         const requests: Promise<Response>[] = [
-          fetch(`/api/analytics/place-profile?${params.toString()}`, { cache: "no-store" }),
+          fetch(`/api/analytics/place-profile?${params.toString()}`, {
+            cache: "no-store",
+          }),
           fetch(`/api/analytics/place-election-history?${params.toString()}`, {
             cache: "no-store",
           }),
         ];
 
         if (ward) {
-          requests.push(fetch(`/api/analytics/ward-profile?${params.toString()}`, { cache: "no-store" }));
+          requests.push(
+            fetch(`/api/analytics/ward-profile?${params.toString()}`, {
+              cache: "no-store",
+            }),
+          );
         }
 
         const responses = await Promise.all(requests);
@@ -76,7 +82,9 @@ export default function MunicipalityPlaceCoverageStrip(props: {
         setState({
           status: "loaded",
           placeProfile: await parseJson<PlaceProfileResponse>(responses[0]),
-          electionHistory: await parseJson<ElectionHistoryResponse>(responses[1]),
+          electionHistory: await parseJson<ElectionHistoryResponse>(
+            responses[1],
+          ),
           wardProfile: ward
             ? await parseJson<WardProfileResponse>(responses[2])
             : null,
@@ -96,7 +104,11 @@ export default function MunicipalityPlaceCoverageStrip(props: {
   }, [municipality, province, ward]);
 
   if (state.status === "loading") {
-    return <p className="text-sm text-slate-500">Loading place-intelligence coverage...</p>;
+    return (
+      <p className="text-sm text-slate-500">
+        Loading place-intelligence coverage...
+      </p>
+    );
   }
 
   if (state.status === "error") {
@@ -104,12 +116,16 @@ export default function MunicipalityPlaceCoverageStrip(props: {
   }
 
   const hasDemographics = Boolean(state.placeProfile?.demographics);
-  const hasElection = Boolean(state.electionHistory && state.electionHistory.rows.length > 0);
-  const coalitionSensitive = !ward && COALITION_SENSITIVE_MUNICIPALITIES.has(municipality);
+  const hasElection = Boolean(
+    state.electionHistory && state.electionHistory.rows.length > 0,
+  );
+  const coalitionSensitive =
+    !ward && COALITION_SENSITIVE_MUNICIPALITIES.has(municipality);
   const hasWardPolitical = Boolean(
     ward &&
-      state.wardProfile &&
-      (state.wardProfile.summary.hasCouncillor || state.wardProfile.summary.hasElectionHistory)
+    state.wardProfile &&
+    (state.wardProfile.summary.hasCouncillor ||
+      state.wardProfile.summary.hasElectionHistory),
   );
 
   const items = [
@@ -119,11 +135,19 @@ export default function MunicipalityPlaceCoverageStrip(props: {
     },
     {
       label: "Politics",
-      value: hasElection ? "Loaded" : coalitionSensitive ? "Complex" : "Partial",
+      value: hasElection
+        ? "Loaded"
+        : coalitionSensitive
+          ? "Complex"
+          : "Partial",
     },
     {
       label: ward ? "Ward politics" : "Ward readiness",
-      value: ward ? (hasWardPolitical ? "Verified" : "Partial") : wardReadinessLabel ?? "Unknown",
+      value: ward
+        ? hasWardPolitical
+          ? "Verified"
+          : "Partial"
+        : (wardReadinessLabel ?? "Unknown"),
     },
     {
       label: ward ? "Ward-backed" : "Wards backed",
@@ -140,16 +164,21 @@ export default function MunicipalityPlaceCoverageStrip(props: {
         Coverage Snapshot
       </p>
       <p className="mt-2 text-sm font-medium text-slate-700">
-        How much place, political, and ward context is already loaded for this local view.
+        How much place, political, and ward context is already loaded for this
+        local view.
       </p>
       {coalitionSensitive && !hasElection ? (
         <p className="mt-2 text-xs text-slate-500">
-          Political coverage is marked complex where a single-party municipality winner would be misleading.
+          Political coverage is marked complex where a single-party municipality
+          winner would be misleading.
         </p>
       ) : null}
       <div className="mt-4 grid grid-cols-2 gap-3 xl:grid-cols-4">
         {items.map((item) => (
-          <div key={item.label} className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3">
+          <div
+            key={item.label}
+            className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3"
+          >
             <p className="text-sm font-bold text-slate-900">{item.value}</p>
             <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">
               {item.label}

@@ -1,4 +1,7 @@
-import { LeadershipEvidenceDocumentRow, LeadershipEvidenceResponse } from "@/lib/analytics/types";
+import {
+  LeadershipEvidenceDocumentRow,
+  LeadershipEvidenceResponse,
+} from "@/lib/analytics/types";
 import { query } from "@/lib/db";
 
 interface DocumentRow {
@@ -17,7 +20,7 @@ export async function getLeadershipEvidence(
   province: string,
   leaderName?: string | null,
   office?: string | null,
-  days = 30
+  days = 30,
 ): Promise<LeadershipEvidenceResponse> {
   const normalizedLeader = leaderName?.trim() || null;
   const normalizedOffice = office?.trim() || null;
@@ -52,7 +55,7 @@ export async function getLeadershipEvidence(
         order by coalesce(d.published_at, d.created_at) desc, count(sm.id) desc
         limit 6
       `,
-      [province, normalizedLeader, normalizedOffice, days]
+      [province, normalizedLeader, normalizedOffice, days],
     ),
     query<{
       documentCount: number;
@@ -77,7 +80,7 @@ export async function getLeadershipEvidence(
             or ($3::text is not null and (d.title ilike ('%' || $3 || '%') or d.content_text ilike ('%' || $3 || '%')))
           )
       `,
-      [province, normalizedLeader, normalizedOffice, days]
+      [province, normalizedLeader, normalizedOffice, days],
     ),
   ]);
 
@@ -101,7 +104,7 @@ export async function getLeadershipEvidence(
         publishedAt: row.publishedAt,
         mentionCount: row.mentionCount,
         excerpt: row.excerpt,
-      })
+      }),
     ),
     caveats: [
       "Leadership evidence highlights only show governed documents that explicitly mention the selected leader or office.",

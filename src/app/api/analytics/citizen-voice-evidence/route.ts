@@ -17,14 +17,18 @@ export async function GET(request: NextRequest) {
       ward,
       issueFamily,
       sourceType,
-      Number.isFinite(days) ? days : 30
+      Number.isFinite(days) ? days : 30,
     );
 
     return NextResponse.json(response);
   } catch (error) {
     const message =
-      error instanceof Error ? error.message : "Failed to load citizen voice evidence";
+      error instanceof Error
+        ? error.message
+        : "Failed to load citizen voice evidence";
 
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
+
+

@@ -49,7 +49,7 @@ function buildLocationKey(location: NormalizedLocation): string {
 }
 
 async function withTransaction<T>(
-  operation: (client: PoolClient) => Promise<T>
+  operation: (client: PoolClient) => Promise<T>,
 ): Promise<T> {
   const client = await pool.connect();
 
@@ -83,7 +83,7 @@ export class PostgresProcessingRepository implements ProcessingRepository {
         from documents
         where id = $1
       `,
-      [documentId]
+      [documentId],
     );
 
     if (result.rows.length === 0) {
@@ -121,7 +121,7 @@ export class PostgresProcessingRepository implements ProcessingRepository {
         location.municipality,
         location.ward,
         buildLocationKey(location),
-      ]
+      ],
     );
 
     return result.rows[0].id;
@@ -130,7 +130,7 @@ export class PostgresProcessingRepository implements ProcessingRepository {
   async saveSignals(
     documentId: string,
     locationId: string | null,
-    signals: NormalizedSignal[]
+    signals: NormalizedSignal[],
   ): Promise<string[]> {
     if (signals.length === 0) {
       return [];
@@ -171,7 +171,7 @@ export class PostgresProcessingRepository implements ProcessingRepository {
             signal.eventDate,
             signal.summaryText,
             signal.sourceUrl,
-          ]
+          ],
         );
 
         signalIds.push(result.rows[0].id);
@@ -184,7 +184,7 @@ export class PostgresProcessingRepository implements ProcessingRepository {
   async saveIncidents(
     signalIds: string[],
     locationId: string | null,
-    incidents: NormalizedIncident[]
+    incidents: NormalizedIncident[],
   ): Promise<void> {
     if (signalIds.length === 0 || incidents.length === 0) {
       return;
@@ -228,7 +228,7 @@ export class PostgresProcessingRepository implements ProcessingRepository {
             incident.classificationConfidence,
             incident.openedAt,
             incident.closedAt,
-          ]
+          ],
         );
       }
     });
@@ -237,7 +237,7 @@ export class PostgresProcessingRepository implements ProcessingRepository {
   async saveTenders(
     documentId: string,
     locationId: string | null,
-    tenders: NormalizedTender[]
+    tenders: NormalizedTender[],
   ): Promise<void> {
     if (tenders.length === 0) {
       return;
@@ -268,7 +268,7 @@ export class PostgresProcessingRepository implements ProcessingRepository {
             tender.closingDate,
             tender.estimatedValue,
             tender.status,
-          ]
+          ],
         );
       }
     });
@@ -277,7 +277,7 @@ export class PostgresProcessingRepository implements ProcessingRepository {
   async saveBudgets(
     documentId: string,
     locationId: string | null,
-    budgets: NormalizedBudget[]
+    budgets: NormalizedBudget[],
   ): Promise<void> {
     if (budgets.length === 0) {
       return;
@@ -306,7 +306,7 @@ export class PostgresProcessingRepository implements ProcessingRepository {
             budget.budgetAmount,
             budget.periodStart,
             budget.periodEnd,
-          ]
+          ],
         );
       }
     });
@@ -315,7 +315,7 @@ export class PostgresProcessingRepository implements ProcessingRepository {
   async markProcessed(
     documentId: string,
     parserVersion: string,
-    quality: ProcessingQualityReport
+    quality: ProcessingQualityReport,
   ): Promise<void> {
     await query(
       `
@@ -336,7 +336,7 @@ export class PostgresProcessingRepository implements ProcessingRepository {
         quality.extractionConfidence,
         JSON.stringify(quality.errors),
         JSON.stringify(quality.warnings),
-      ]
+      ],
     );
   }
 }

@@ -20,7 +20,9 @@ function isIsoDate(value: string | null): boolean {
   return !Number.isNaN(Date.parse(value));
 }
 
-export function validateLocation(location: NormalizedLocation | null): string[] {
+export function validateLocation(
+  location: NormalizedLocation | null,
+): string[] {
   if (!location) {
     return [];
   }
@@ -39,7 +41,7 @@ export function validateLocation(location: NormalizedLocation | null): string[] 
 }
 
 export function validateClassification(
-  classification: DocumentClassification
+  classification: DocumentClassification,
 ): string[] {
   const errors: string[] = [];
 

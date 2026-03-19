@@ -43,21 +43,22 @@ export default function MunicipalityLegacyCommunitySignalsPanel({
       try {
         const response = await fetch(
           `/api/analytics/municipality-legacy-community-signals?province=${encodeURIComponent(
-            province
+            province,
           )}&municipality=${encodeURIComponent(municipality)}&days=${days}`,
-          { cache: "no-store" }
+          { cache: "no-store" },
         );
 
         if (!response.ok) {
           throw new Error(
             await parseError(
               response,
-              `request failed with status ${response.status}`
-            )
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
-        const data = (await response.json()) as MunicipalityLegacyCommunitySignalsResponse;
+        const data =
+          (await response.json()) as MunicipalityLegacyCommunitySignalsResponse;
         setState({ status: "loaded", data });
       } catch (error) {
         setState({
@@ -77,7 +78,7 @@ export default function MunicipalityLegacyCommunitySignalsPanel({
     if (
       state.status === "loaded" &&
       !selectedIssue &&
-      state.data.issues.length > 0 &&
+      (state.data.issues || []).length > 0 &&
       onSelectIssue
     ) {
       onSelectIssue(state.data.issues[0].issue);
@@ -100,7 +101,9 @@ export default function MunicipalityLegacyCommunitySignalsPanel({
       <div className="flex min-h-[220px] items-center justify-center text-center">
         <div>
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">{state.message}</p>
+          <p className="mt-3 text-sm font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
@@ -151,12 +154,13 @@ export default function MunicipalityLegacyCommunitySignalsPanel({
           Imported legacy community issues
         </div>
         <div className="space-y-3">
-          {data.issues.length === 0 ? (
+          {(data.issues || []).length === 0 ? (
             <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4 text-sm font-medium text-slate-500">
-              No imported legacy community issues are mapped to this municipality yet.
+              No imported legacy community issues are mapped to this
+              municipality yet.
             </div>
           ) : (
-            data.issues.map((issue) => (
+            (data.issues || []).map((issue) => (
               <button
                 key={issue.issue}
                 type="button"
@@ -168,7 +172,9 @@ export default function MunicipalityLegacyCommunitySignalsPanel({
                 }`}
               >
                 <div>
-                  <p className="text-sm font-bold text-slate-900">{issue.issue}</p>
+                  <p className="text-sm font-bold text-slate-900">
+                    {issue.issue}
+                  </p>
                   <p className="mt-1 text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">
                     imported firebase community signal
                   </p>
@@ -177,13 +183,17 @@ export default function MunicipalityLegacyCommunitySignalsPanel({
                   <p className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">
                     Docs
                   </p>
-                  <p className="mt-2 text-sm font-bold text-slate-900">{issue.documentCount}</p>
+                  <p className="mt-2 text-sm font-bold text-slate-900">
+                    {issue.documentCount}
+                  </p>
                 </div>
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">
                     Avg Urgency
                   </p>
-                  <p className="mt-2 text-sm font-bold text-slate-900">{Math.round(issue.avgUrgency)}</p>
+                  <p className="mt-2 text-sm font-bold text-slate-900">
+                    {Math.round(issue.avgUrgency)}
+                  </p>
                 </div>
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">
@@ -200,7 +210,7 @@ export default function MunicipalityLegacyCommunitySignalsPanel({
       </div>
 
       <div className="rounded-2xl border border-amber-100 bg-amber-50 p-4">
-        {data.caveats.map((caveat) => (
+        {(data.caveats || []).map((caveat) => (
           <p key={caveat} className="text-sm font-medium text-slate-700">
             {caveat}
           </p>

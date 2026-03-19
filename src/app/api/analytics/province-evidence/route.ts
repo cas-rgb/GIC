@@ -7,7 +7,10 @@ export async function GET(request: NextRequest) {
   const topic = request.nextUrl.searchParams.get("topic");
 
   if (!province) {
-    return NextResponse.json({ error: "province is required" }, { status: 400 });
+    return NextResponse.json(
+      { error: "province is required" },
+      { status: 400 },
+    );
   }
 
   try {
@@ -15,8 +18,12 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(response);
   } catch (error) {
     const message =
-      error instanceof Error ? error.message : "Failed to load province evidence";
+      error instanceof Error
+        ? error.message
+        : "Failed to load province evidence";
 
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
+
+

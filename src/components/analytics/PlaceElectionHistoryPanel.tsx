@@ -25,9 +25,12 @@ export default function PlaceElectionHistoryPanel(props: {
       if (ward) params.set("ward", ward);
 
       try {
-        const response = await fetch(`/api/analytics/place-election-history?${params.toString()}`, {
-          cache: "no-store",
-        });
+        const response = await fetch(
+          `/api/analytics/place-election-history?${params.toString()}`,
+          {
+            cache: "no-store",
+          },
+        );
         if (!response.ok) {
           throw new Error(`request failed with status ${response.status}`);
         }
@@ -36,7 +39,10 @@ export default function PlaceElectionHistoryPanel(props: {
       } catch (error) {
         setState({
           status: "error",
-          message: error instanceof Error ? error.message : "Failed to load election history",
+          message:
+            error instanceof Error
+              ? error.message
+              : "Failed to load election history",
         });
       }
     }
@@ -45,16 +51,18 @@ export default function PlaceElectionHistoryPanel(props: {
   }, [municipality, province, ward]);
 
   if (state.status === "loading") {
-    return <p className="text-sm text-slate-500">Loading election history...</p>;
+    return (
+      <p className="text-sm font-bold tracking-widest uppercase text-slate-500 animate-pulse">Loading election history...</p>
+    );
   }
 
   if (state.status === "error") {
-    return <p className="text-sm text-slate-500">{state.message}</p>;
+    return <p className="text-sm font-bold tracking-widest uppercase text-red-500">{state.message}</p>;
   }
 
-  if (state.data.rows.length === 0) {
+  if ((state.data.rows || []).length === 0) {
     return (
-      <p className="text-sm text-slate-500">
+      <p className="text-sm font-bold tracking-widest uppercase text-slate-500">
         No election history has been loaded for this geography yet.
       </p>
     );
@@ -64,26 +72,35 @@ export default function PlaceElectionHistoryPanel(props: {
     <div className="overflow-x-auto">
       <table className="min-w-full text-sm">
         <thead>
-          <tr className="border-b border-slate-100 text-left text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-            <th className="px-2 py-2">Year</th>
-            <th className="px-2 py-2">Type</th>
-            <th className="px-2 py-2">Party</th>
-            <th className="px-2 py-2">Candidate</th>
-            <th className="px-2 py-2">Vote Share</th>
-            <th className="px-2 py-2">Turnout</th>
-            <th className="px-2 py-2">Winner</th>
+          <tr className="border-b border-slate-800 text-left text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
+            <th className="px-3 py-3">Year</th>
+            <th className="px-3 py-3">Type</th>
+            <th className="px-3 py-3">Party</th>
+            <th className="px-3 py-3">Candidate</th>
+            <th className="px-3 py-3">Vote Share</th>
+            <th className="px-3 py-3">Turnout</th>
+            <th className="px-3 py-3 text-emerald-400">Winner</th>
           </tr>
         </thead>
         <tbody>
           {state.data.rows.slice(0, 12).map((row, index) => (
-            <tr key={`${row.electionYear}-${row.partyName}-${index}`} className="border-b border-slate-50 text-slate-700">
-              <td className="px-2 py-2 font-medium">{row.electionYear}</td>
-              <td className="px-2 py-2">{row.electionType}</td>
-              <td className="px-2 py-2">{row.partyName}</td>
-              <td className="px-2 py-2">{row.candidateName ?? "N/A"}</td>
-              <td className="px-2 py-2">{row.voteShare ?? "N/A"}</td>
-              <td className="px-2 py-2">{row.turnout ?? "N/A"}</td>
-              <td className="px-2 py-2">{row.winnerFlag ? "Yes" : "No"}</td>
+            <tr
+              key={`${row.electionYear}-${row.partyName}-${index}`}
+              className="border-b border-slate-800 text-slate-300 hover:bg-slate-800/80 transition-colors"
+            >
+              <td className="px-3 py-3 font-medium text-white">{row.electionYear}</td>
+              <td className="px-3 py-3 text-slate-400 text-xs font-bold uppercase tracking-widest">{row.electionType}</td>
+              <td className="px-3 py-3">{row.partyName}</td>
+              <td className="px-3 py-3">{row.candidateName ?? "N/A"}</td>
+              <td className="px-3 py-3 text-blue-400 font-bold">{row.voteShare ?? "N/A"}</td>
+              <td className="px-3 py-3 text-slate-400">{row.turnout ?? "N/A"}</td>
+              <td className="px-3 py-3">
+                 {row.winnerFlag ? (
+                   <span className="px-2 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-black uppercase rounded border border-emerald-500/20">Yes</span>
+                 ) : (
+                   <span className="px-2 py-1 bg-slate-800 text-slate-500 text-xs font-black uppercase rounded">No</span>
+                 )}
+              </td>
             </tr>
           ))}
         </tbody>

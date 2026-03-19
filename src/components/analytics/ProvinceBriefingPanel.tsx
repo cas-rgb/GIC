@@ -1,7 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AlertTriangle, FileText, RefreshCw, ShieldCheck, TimerReset } from "lucide-react";
+import {
+  AlertTriangle,
+  FileText,
+  RefreshCw,
+  ShieldCheck,
+  TimerReset,
+} from "lucide-react";
 
 import { ProvinceBriefingResponse } from "@/lib/intelligence/province-briefing";
 
@@ -37,19 +43,19 @@ export default function ProvinceBriefingPanel({
       try {
         const response = await fetch(
           `/api/intelligence/province-briefing?province=${encodeURIComponent(
-            province
+            province,
           )}&days=${days}`,
           {
             cache: "no-store",
-          }
+          },
         );
 
         if (!response.ok) {
           throw new Error(
             await parseError(
               response,
-              `request failed with status ${response.status}`
-            )
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -119,7 +125,10 @@ export default function ProvinceBriefingPanel({
           What This Answers
         </p>
         <p className="mt-2 text-sm font-medium text-slate-700">
-          This province view answers four things first: what people care about most, whether concern is rising or falling, which municipalities are under the most pressure, and whether government focus is aligned strongly enough with public need.
+          This province view answers four things first: what people care about
+          most, whether concern is rising or falling, which municipalities are
+          under the most pressure, and whether government focus is aligned
+          strongly enough with public need.
         </p>
       </div>
 
@@ -210,7 +219,7 @@ export default function ProvinceBriefingPanel({
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
         <section className="rounded-2xl border border-slate-100 bg-white px-4 py-4 shadow-sm">
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-            AI Key Findings
+            Key Findings
           </p>
           <div className="mt-4 space-y-3">
             {data.briefing.keyFindings.map((line) => (
@@ -226,7 +235,7 @@ export default function ProvinceBriefingPanel({
             Situation Summary
           </p>
           <div className="mt-4 space-y-3">
-            {data.summary.map((line) => (
+            {(data.summary || []).map((line) => (
               <p key={line} className="text-sm font-medium text-slate-700">
                 {line}
               </p>
@@ -239,7 +248,7 @@ export default function ProvinceBriefingPanel({
             Hotspots
           </p>
           <div className="mt-4 space-y-3">
-            {data.hotspots.map((line) => (
+            {(data.hotspots || []).map((line) => (
               <p key={line} className="text-sm font-medium text-slate-700">
                 {line}
               </p>
@@ -265,7 +274,7 @@ export default function ProvinceBriefingPanel({
             Priority Interventions
           </p>
           <div className="mt-4 space-y-3">
-            {data.interventions.map((line) => (
+            {(data.interventions || []).map((line) => (
               <p key={line} className="text-sm font-medium text-slate-700">
                 {line}
               </p>

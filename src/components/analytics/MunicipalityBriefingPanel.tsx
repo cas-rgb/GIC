@@ -1,7 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AlertTriangle, FileText, RefreshCw, ShieldCheck, TimerReset } from "lucide-react";
+import {
+  AlertTriangle,
+  FileText,
+  RefreshCw,
+  ShieldCheck,
+  TimerReset,
+} from "lucide-react";
 
 import { MunicipalityBriefingResponse } from "@/lib/intelligence/municipality-briefing";
 
@@ -39,19 +45,19 @@ export default function MunicipalityBriefingPanel({
       try {
         const response = await fetch(
           `/api/intelligence/municipality-briefing?province=${encodeURIComponent(
-            province
+            province,
           )}&municipality=${encodeURIComponent(municipality)}&days=${days}`,
           {
             cache: "no-store",
-          }
+          },
         );
 
         if (!response.ok) {
           throw new Error(
             await parseError(
               response,
-              `request failed with status ${response.status}`
-            )
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -121,7 +127,9 @@ export default function MunicipalityBriefingPanel({
           What This Answers
         </p>
         <p className="mt-2 text-sm font-medium text-slate-700">
-          This local view answers where issue pressure is highest, what concern dominates, how fast pressure is escalating, and whether ward visibility is operational, partial, or still registry-only.
+          This local view answers where issue pressure is highest, what concern
+          dominates, how fast pressure is escalating, and whether ward
+          visibility is operational, partial, or still registry-only.
         </p>
       </div>
 
@@ -229,7 +237,7 @@ export default function MunicipalityBriefingPanel({
             Situation
           </p>
           <div className="mt-4 space-y-3">
-            {data.summary.map((line) => (
+            {(data.summary || []).map((line) => (
               <p key={line} className="text-sm font-medium text-slate-700">
                 {line}
               </p>
@@ -255,7 +263,7 @@ export default function MunicipalityBriefingPanel({
             Interventions
           </p>
           <div className="mt-4 space-y-3">
-            {data.interventions.map((line) => (
+            {(data.interventions || []).map((line) => (
               <p key={line} className="text-sm font-medium text-slate-700">
                 {line}
               </p>

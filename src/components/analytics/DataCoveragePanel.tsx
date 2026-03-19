@@ -47,18 +47,25 @@ export default function DataCoveragePanel() {
 
     async function load(): Promise<void> {
       try {
-        const [registryResponse, socialResponse, healthResponse] = await Promise.all([
-          fetch("/api/analytics/source-registry-summary", { cache: "no-store" }),
-          fetch("/api/analytics/social-coverage-summary", { cache: "no-store" }),
-          fetch("/api/analytics/source-health-summary", { cache: "no-store" }),
-        ]);
+        const [registryResponse, socialResponse, healthResponse] =
+          await Promise.all([
+            fetch("/api/analytics/source-registry-summary", {
+              cache: "no-store",
+            }),
+            fetch("/api/analytics/social-coverage-summary", {
+              cache: "no-store",
+            }),
+            fetch("/api/analytics/source-health-summary", {
+              cache: "no-store",
+            }),
+          ]);
 
         if (!registryResponse.ok) {
           throw new Error(
             await parseError(
               registryResponse,
-              `source registry failed with status ${registryResponse.status}`
-            )
+              `source registry failed with status ${registryResponse.status}`,
+            ),
           );
         }
 
@@ -66,8 +73,8 @@ export default function DataCoveragePanel() {
           throw new Error(
             await parseError(
               socialResponse,
-              `social coverage failed with status ${socialResponse.status}`
-            )
+              `social coverage failed with status ${socialResponse.status}`,
+            ),
           );
         }
 
@@ -75,8 +82,8 @@ export default function DataCoveragePanel() {
           throw new Error(
             await parseError(
               healthResponse,
-              `source health failed with status ${healthResponse.status}`
-            )
+              `source health failed with status ${healthResponse.status}`,
+            ),
           );
         }
 
@@ -95,7 +102,9 @@ export default function DataCoveragePanel() {
         setHealthState({ status: "loaded", data: healthData });
       } catch (error) {
         const message =
-          error instanceof Error ? error.message : "Failed to load data coverage";
+          error instanceof Error
+            ? error.message
+            : "Failed to load data coverage";
         setRegistryState({ status: "error", message });
         setSocialState({ status: "error", message });
         setHealthState({ status: "error", message });
@@ -115,10 +124,16 @@ export default function DataCoveragePanel() {
     }
 
     const socialMap = new Map(
-      socialState.data.byProvince.map((row) => [row.province ?? "__national__", row.accountCount])
+      (socialState.data.byProvince || []).map((row) => [
+        row.province ?? "__national__",
+        row.accountCount,
+      ]),
     );
     const healthMap = new Map(
-      healthState.data.byProvince.map((row) => [row.province ?? "__national__", row])
+      (healthState.data.byProvince || []).map((row) => [
+        row.province ?? "__national__",
+        row,
+      ]),
     );
 
     return registryState.data.byProvince
@@ -157,7 +172,7 @@ export default function DataCoveragePanel() {
           ? socialState.message
           : healthState.status === "error"
             ? healthState.message
-          : "Failed to load data coverage";
+            : "Failed to load data coverage";
 
     return (
       <div className="flex min-h-[480px] items-center justify-center text-center">
@@ -266,7 +281,9 @@ export default function DataCoveragePanel() {
                 className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm"
               >
                 <div className="flex items-center justify-between gap-3">
-                  <p className="text-sm font-bold text-slate-900">{row.province}</p>
+                  <p className="text-sm font-bold text-slate-900">
+                    {row.province}
+                  </p>
                   <p className="text-lg font-display font-bold text-slate-900">
                     {row.sourceCount}
                   </p>
@@ -274,25 +291,33 @@ export default function DataCoveragePanel() {
 
                 <div className="mt-4 grid grid-cols-4 gap-3 text-center">
                   <div className="rounded-xl bg-slate-50 p-3">
-                    <p className="text-sm font-bold text-slate-900">{row.sourceCount}</p>
+                    <p className="text-sm font-bold text-slate-900">
+                      {row.sourceCount}
+                    </p>
                     <p className="text-[8px] font-black uppercase tracking-[0.2em] text-slate-400">
                       Total
                     </p>
                   </div>
                   <div className="rounded-xl bg-blue-50 p-3">
-                    <p className="text-sm font-bold text-blue-600">{row.officialCount}</p>
+                    <p className="text-sm font-bold text-blue-600">
+                      {row.officialCount}
+                    </p>
                     <p className="text-[8px] font-black uppercase tracking-[0.2em] text-blue-400">
                       Official
                     </p>
                   </div>
                   <div className="rounded-xl bg-amber-50 p-3">
-                    <p className="text-sm font-bold text-amber-600">{row.kpiTruthCount}</p>
+                    <p className="text-sm font-bold text-amber-600">
+                      {row.kpiTruthCount}
+                    </p>
                     <p className="text-[8px] font-black uppercase tracking-[0.2em] text-amber-400">
                       KPI
                     </p>
                   </div>
                   <div className="rounded-xl bg-emerald-50 p-3">
-                    <p className="text-sm font-bold text-emerald-600">{row.socialCount}</p>
+                    <p className="text-sm font-bold text-emerald-600">
+                      {row.socialCount}
+                    </p>
                     <p className="text-[8px] font-black uppercase tracking-[0.2em] text-emerald-400">
                       Social
                     </p>
@@ -456,7 +481,9 @@ export default function DataCoveragePanel() {
                   Governance Rule
                 </p>
                 <p className="mt-1 text-sm font-medium text-slate-600">
-                  Official sources drive KPI truth. Media, civic, research, and social sources expand evidence and improve intervention context.
+                  Official sources drive KPI truth. Media, civic, research, and
+                  social sources expand evidence and improve intervention
+                  context.
                 </p>
               </div>
             </div>

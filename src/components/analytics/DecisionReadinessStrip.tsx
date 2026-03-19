@@ -25,13 +25,11 @@ type LoadState =
       status: "loaded";
       sourceHealth: SourceHealthSummaryResponse;
       recommendations: ProvinceRecommendationsResponse;
-      publicPressure:
-        | {
-            citizenMentions: number;
-            citizenRiskLevel: "Low" | "Elevated" | "High";
-            legacyDocumentCount: number;
-          }
-        | null;
+      publicPressure: {
+        citizenMentions: number;
+        citizenRiskLevel: "Low" | "Elevated" | "High";
+        legacyDocumentCount: number;
+      } | null;
     }
   | { status: "error"; message: string };
 
@@ -60,7 +58,7 @@ export default function DecisionReadinessStrip({
       try {
         const sourceHealthPromise = fetch(
           `/api/analytics/source-health-summary?province=${encodeURIComponent(province)}`,
-          { cache: "no-store" }
+          { cache: "no-store" },
         );
 
         const recommendationsUrl = municipality
@@ -74,27 +72,31 @@ export default function DecisionReadinessStrip({
           ? Promise.all([
               fetch(
                 `/api/analytics/municipality-citizen-voice-summary?province=${encodeURIComponent(
-                  province
+                  province,
                 )}&municipality=${encodeURIComponent(municipality)}&days=${days}`,
-                { cache: "no-store" }
+                { cache: "no-store" },
               ),
               fetch(
                 `/api/analytics/municipality-legacy-community-signals?province=${encodeURIComponent(
-                  province
+                  province,
                 )}&municipality=${encodeURIComponent(municipality)}&days=${days}`,
-                { cache: "no-store" }
+                { cache: "no-store" },
               ),
             ])
           : Promise.all([
               fetch(
                 `/api/analytics/social-trends-executive-summary?province=${encodeURIComponent(
-                  province
+                  province,
                 )}&days=${days}`,
-                { cache: "no-store" }
+                { cache: "no-store" },
               ),
             ]);
 
-        const [sourceHealthResponse, recommendationsResponse, publicPressureResponses] = await Promise.all([
+        const [
+          sourceHealthResponse,
+          recommendationsResponse,
+          publicPressureResponses,
+        ] = await Promise.all([
           sourceHealthPromise,
           recommendationsPromise,
           publicPressurePromise,
@@ -104,8 +106,8 @@ export default function DecisionReadinessStrip({
           throw new Error(
             await parseError(
               sourceHealthResponse,
-              `source health failed with status ${sourceHealthResponse.status}`
-            )
+              `source health failed with status ${sourceHealthResponse.status}`,
+            ),
           );
         }
 
@@ -113,8 +115,8 @@ export default function DecisionReadinessStrip({
           throw new Error(
             await parseError(
               recommendationsResponse,
-              `recommendations failed with status ${recommendationsResponse.status}`
-            )
+              `recommendations failed with status ${recommendationsResponse.status}`,
+            ),
           );
         }
 
@@ -123,56 +125,64 @@ export default function DecisionReadinessStrip({
             throw new Error(
               await parseError(
                 response,
-                `public pressure failed with status ${response.status}`
-              )
+                `public pressure failed with status ${response.status}`,
+              ),
             );
           }
         }
 
-        const [sourceHealth, recommendations, ...publicPressurePayloads] = (await Promise.all([
-          sourceHealthResponse.json(),
-          recommendationsResponse.json(),
-          ...publicPressureResponses.map((response) => response.json()),
-        ])) as [
-          SourceHealthSummaryResponse,
-          ProvinceRecommendationsResponse,
-          ...Array<
-            | SocialTrendsExecutiveSummaryResponse
-            | MunicipalityCitizenVoiceSummaryResponse
-            | MunicipalityLegacyCommunitySignalsResponse
-          >
-        ];
+        const [sourceHealth, recommendations, ...publicPressurePayloads] =
+          (await Promise.all([
+            sourceHealthResponse.json(),
+            recommendationsResponse.json(),
+            ...publicPressureResponses.map((response) => response.json()),
+          ])) as [
+            SourceHealthSummaryResponse,
+            ProvinceRecommendationsResponse,
+            ...Array<
+              | SocialTrendsExecutiveSummaryResponse
+              | MunicipalityCitizenVoiceSummaryResponse
+              | MunicipalityLegacyCommunitySignalsResponse
+            >,
+          ];
 
         const publicPressure = municipality
           ? {
               citizenMentions:
-                (publicPressurePayloads[0] as MunicipalityCitizenVoiceSummaryResponse).summary
-                  .totalCitizenMentions,
+                (publicPressurePayloads[0] as MunicipalityCitizenVoiceSummaryResponse)
+                  .summary?.totalCitizenMentions ?? 0,
               citizenRiskLevel:
-                (publicPressurePayloads[0] as MunicipalityCitizenVoiceSummaryResponse).summary
-                  .narrativeRiskLevel,
+                (publicPressurePayloads[0] as MunicipalityCitizenVoiceSummaryResponse)
+                  .summary?.narrativeRiskLevel ?? "Low",
               legacyDocumentCount:
-                (publicPressurePayloads[1] as MunicipalityLegacyCommunitySignalsResponse).summary
-                  .documentCount,
+                (publicPressurePayloads[1] as MunicipalityLegacyCommunitySignalsResponse)
+                  .summary?.documentCount ?? 0,
             }
           : {
               citizenMentions:
-                (publicPressurePayloads[0] as SocialTrendsExecutiveSummaryResponse).summary
-                  .totalCitizenMentions,
+                (publicPressurePayloads[0] as SocialTrendsExecutiveSummaryResponse)
+                  .summary?.totalCitizenMentions ?? 0,
               citizenRiskLevel:
-                (publicPressurePayloads[0] as SocialTrendsExecutiveSummaryResponse).summary
-                  .narrativeRiskLevel,
+                (publicPressurePayloads[0] as SocialTrendsExecutiveSummaryResponse)
+                  .summary?.narrativeRiskLevel ?? "Low",
               legacyDocumentCount:
-                (publicPressurePayloads[0] as SocialTrendsExecutiveSummaryResponse).summary
-                  .totalLegacyCommunityDocuments,
+                (publicPressurePayloads[0] as SocialTrendsExecutiveSummaryResponse)
+                  .summary?.totalLegacyCommunityDocuments ?? 0,
             };
 
-        setState({ status: "loaded", sourceHealth, recommendations, publicPressure });
+        setState({
+          status: "loaded",
+          sourceHealth,
+          recommendations,
+          publicPressure,
+        });
       } catch (error) {
         setState({
           status: "error",
           message:
-            error instanceof Error ? error.message : "Failed to load decision readiness",
+            error instanceof Error
+              ? error.message
+              : "Failed to load decision readiness",
         });
       }
     }
@@ -187,7 +197,8 @@ export default function DecisionReadinessStrip({
 
     const healthyRatio =
       state.sourceHealth.totals.activeSourceCount > 0
-        ? state.sourceHealth.totals.healthyCount / state.sourceHealth.totals.activeSourceCount
+        ? state.sourceHealth.totals.healthyCount /
+          state.sourceHealth.totals.activeSourceCount
         : 0;
     const recommendationStrength =
       (state.recommendations.recommendations[0]?.confidence ?? 0) * 100;
@@ -200,18 +211,18 @@ export default function DecisionReadinessStrip({
               ? 25
               : state.publicPressure.citizenRiskLevel === "Elevated"
                 ? 12
-                : 0)
+                : 0),
         )
       : 0;
-    const score = Math.round(
-      (
-        evidenceConfidenceScore * 0.25 +
-        officialEvidenceShare * 0.25 +
-        healthyRatio * 100 * 0.2 +
-        recommendationStrength * 0.15 +
-        publicPressureStrength * 0.15
-      ) * 10
-    ) / 10;
+    const score =
+      Math.round(
+        (evidenceConfidenceScore * 0.25 +
+          officialEvidenceShare * 0.25 +
+          healthyRatio * 100 * 0.2 +
+          recommendationStrength * 0.15 +
+          publicPressureStrength * 0.15) *
+          10,
+      ) / 10;
 
     return {
       healthyRatio,
@@ -238,7 +249,9 @@ export default function DecisionReadinessStrip({
         <div className="flex items-start gap-3">
           <AlertTriangle className="mt-0.5 h-4 w-4 text-amber-600" />
           <p className="text-sm font-medium text-slate-700">
-            {state.status === "error" ? state.message : "Decision readiness is unavailable."}
+            {state.status === "error"
+              ? state.message
+              : "Decision readiness is unavailable."}
           </p>
         </div>
       </div>
@@ -246,7 +259,11 @@ export default function DecisionReadinessStrip({
   }
 
   const label =
-    readiness.score >= 75 ? "High readiness" : readiness.score >= 55 ? "Moderate readiness" : "Constrained readiness";
+    readiness.score >= 75
+      ? "High readiness"
+      : readiness.score >= 55
+        ? "Moderate readiness"
+        : "Constrained readiness";
 
   return (
     <div className="rounded-[2rem] border border-blue-100 bg-blue-50 p-6">
@@ -258,7 +275,10 @@ export default function DecisionReadinessStrip({
               Decision Readiness
             </p>
             <p className="mt-2 text-sm font-medium text-slate-700">
-              {municipality ?? province} is currently at <span className="font-bold text-slate-900">{label}</span>, blending evidence confidence, official share, source health, recommendation strength, and persistent public-pressure intensity.
+              {municipality ?? province} is currently at{" "}
+              <span className="font-bold text-slate-900">{label}</span>,
+              blending evidence confidence, official share, source health,
+              recommendation strength, and persistent public-pressure intensity.
             </p>
           </div>
 

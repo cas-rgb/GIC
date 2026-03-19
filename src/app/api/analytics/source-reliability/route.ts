@@ -8,7 +8,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   if (!province) {
     return NextResponse.json(
       { error: "province is required" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -23,7 +23,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             ? error.message
             : "Failed to fetch source reliability",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
+
+

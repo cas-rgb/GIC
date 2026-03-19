@@ -65,7 +65,7 @@ export async function getPlaceBudgetAllocations(input: {
       order by period_year desc nulls last, retrieved_at desc nulls last
       limit 25
     `,
-    params
+    params,
   );
 
   return {

@@ -7,7 +7,7 @@ export function normalizeWhitespace(text: string): string {
 }
 
 export function normalizeFetchedDocument(
-  document: RawFetchedDocument
+  document: RawFetchedDocument,
 ): RawFetchedDocument {
   return {
     ...document,

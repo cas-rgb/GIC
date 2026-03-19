@@ -37,7 +37,7 @@ export async function getPlaceElectionHistory(input: {
           and ward_name = $3
         order by election_year desc, vote_share desc nulls last, votes desc nulls last
       `,
-      [province, municipality, ward]
+      [province, municipality, ward],
     );
 
     return {
@@ -79,7 +79,7 @@ export async function getPlaceElectionHistory(input: {
           and municipality_name = $2
         order by election_year desc, vote_share desc nulls last, votes desc nulls last
       `,
-      [province, municipality]
+      [province, municipality],
     );
 
     return {
@@ -119,7 +119,7 @@ export async function getPlaceElectionHistory(input: {
       where province_name = $1
       order by election_year desc, vote_share desc nulls last, votes desc nulls last
     `,
-    [province]
+    [province],
   );
 
   return {

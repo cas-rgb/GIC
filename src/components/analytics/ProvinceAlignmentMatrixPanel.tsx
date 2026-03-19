@@ -49,12 +49,15 @@ export default function ProvinceAlignmentMatrixPanel({
       try {
         const response = await fetch(
           `/api/analytics/province-alignment-matrix?province=${encodeURIComponent(province)}&days=${days}${serviceDomain ? `&serviceDomain=${encodeURIComponent(serviceDomain)}` : ""}`,
-          { cache: "no-store" }
+          { cache: "no-store" },
         );
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -98,7 +101,9 @@ export default function ProvinceAlignmentMatrixPanel({
       <div className="flex min-h-[280px] items-center justify-center text-center">
         <div>
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">{state.message}</p>
+          <p className="mt-3 text-sm font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
@@ -107,7 +112,9 @@ export default function ProvinceAlignmentMatrixPanel({
   if (rows.length === 0) {
     return (
       <div className="rounded-2xl border border-dashed border-slate-200 p-8 text-center">
-        <p className="text-sm font-bold text-slate-500">No alignment rows available yet.</p>
+        <p className="text-sm font-bold text-slate-500">
+          No alignment rows available yet.
+        </p>
       </div>
     );
   }
@@ -150,7 +157,8 @@ export default function ProvinceAlignmentMatrixPanel({
               Strategic Alignment Matrix
             </h4>
             <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">
-              Public concern share versus governed official attention share by issue category
+              Public concern share versus governed official attention share by
+              issue category
             </p>
           </div>
           <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
@@ -160,15 +168,54 @@ export default function ProvinceAlignmentMatrixPanel({
         </div>
 
         <svg viewBox="0 0 520 320" className="h-72 w-full">
-          <line x1="60" y1="260" x2="470" y2="260" stroke="#cbd5e1" strokeWidth="2" />
-          <line x1="60" y1="260" x2="60" y2="40" stroke="#cbd5e1" strokeWidth="2" />
-          <line x1="60" y1="150" x2="470" y2="150" stroke="#e2e8f0" strokeDasharray="4 4" />
-          <line x1="265" y1="40" x2="265" y2="260" stroke="#e2e8f0" strokeDasharray="4 4" />
+          <line
+            x1="60"
+            y1="260"
+            x2="470"
+            y2="260"
+            stroke="#cbd5e1"
+            strokeWidth="2"
+          />
+          <line
+            x1="60"
+            y1="260"
+            x2="60"
+            y2="40"
+            stroke="#cbd5e1"
+            strokeWidth="2"
+          />
+          <line
+            x1="60"
+            y1="150"
+            x2="470"
+            y2="150"
+            stroke="#e2e8f0"
+            strokeDasharray="4 4"
+          />
+          <line
+            x1="265"
+            y1="40"
+            x2="265"
+            y2="260"
+            stroke="#e2e8f0"
+            strokeDasharray="4 4"
+          />
 
-          <text x="265" y="300" textAnchor="middle" className="fill-slate-400 text-[10px] font-black uppercase tracking-[0.18em]">
+          <text
+            x="265"
+            y="300"
+            textAnchor="middle"
+            className="fill-slate-400 text-[10px] font-black uppercase tracking-[0.18em]"
+          >
             Public Concern Share
           </text>
-          <text x="18" y="150" textAnchor="middle" transform="rotate(-90 18 150)" className="fill-slate-400 text-[10px] font-black uppercase tracking-[0.18em]">
+          <text
+            x="18"
+            y="150"
+            textAnchor="middle"
+            transform="rotate(-90 18 150)"
+            className="fill-slate-400 text-[10px] font-black uppercase tracking-[0.18em]"
+          >
             Official Attention Share
           </text>
 
@@ -200,7 +247,9 @@ export default function ProvinceAlignmentMatrixPanel({
 
       <div className="rounded-2xl border border-amber-100 bg-amber-50 px-4 py-3">
         <p className="text-sm font-medium text-slate-700">
-          This matrix uses governed official attention signals as a proxy for government focus. It should be read as an attention-alignment surface, not a literal provincial budget allocation chart.
+          This matrix uses governed official attention signals as a proxy for
+          government focus. It should be read as an attention-alignment surface,
+          not a literal provincial budget allocation chart.
         </p>
       </div>
 
@@ -211,12 +260,17 @@ export default function ProvinceAlignmentMatrixPanel({
             className="flex items-center justify-between rounded-2xl border border-slate-100 bg-white px-4 py-3 shadow-sm"
           >
             <div>
-              <p className="text-sm font-bold text-slate-900">{row.serviceDomain}</p>
+              <p className="text-sm font-bold text-slate-900">
+                {row.serviceDomain}
+              </p>
               <p className="mt-1 text-[10px] font-black uppercase tracking-[0.15em] text-slate-400">
-                Concern {row.concernShare}% | Official attention {row.officialAttentionShare}%
+                Concern {row.concernShare}% | Official attention{" "}
+                {row.officialAttentionShare}%
               </p>
             </div>
-            <p className={`text-sm font-bold ${row.alignmentGap >= 0 ? "text-blue-700" : "text-rose-600"}`}>
+            <p
+              className={`text-sm font-bold ${row.alignmentGap >= 0 ? "text-blue-700" : "text-rose-600"}`}
+            >
               {row.alignmentGap >= 0 ? "+" : ""}
               {row.alignmentGap} pts
             </p>

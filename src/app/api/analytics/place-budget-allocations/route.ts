@@ -8,7 +8,10 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   const ward = request.nextUrl.searchParams.get("ward");
 
   if (!province) {
-    return NextResponse.json({ error: "province is required" }, { status: 400 });
+    return NextResponse.json(
+      { error: "province is required" },
+      { status: 400 },
+    );
   }
 
   try {
@@ -22,9 +25,13 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json(
       {
         error:
-          error instanceof Error ? error.message : "Failed to fetch place budget allocations",
+          error instanceof Error
+            ? error.message
+            : "Failed to fetch place budget allocations",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
+
+

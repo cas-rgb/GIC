@@ -37,17 +37,17 @@ export default function WaterReliabilityPanel({
       try {
         const response = await fetch(
           `/api/analytics/water-reliability?province=${encodeURIComponent(
-            province
+            province,
           )}&days=${days}`,
-          { cache: "no-store" }
+          { cache: "no-store" },
         );
 
         if (!response.ok) {
           throw new Error(
             await parseError(
               response,
-              `request failed with status ${response.status}`
-            )
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -138,15 +138,16 @@ export default function WaterReliabilityPanel({
               Official water evidence is contributing to the province view.
             </p>
             <p className="text-sm font-medium text-slate-600">
-              This score uses official water-related documents, governed signals, and official
-              incidents to reduce narrative bias in water-heavy pressure windows.
+              This score uses official water-related documents, governed
+              signals, and official incidents to reduce narrative bias in
+              water-heavy pressure windows.
             </p>
           </div>
         </div>
       </div>
 
       <div className="rounded-2xl border border-dashed border-slate-200 p-4">
-        {data.caveats.map((caveat) => (
+        {(data.caveats || []).map((caveat) => (
           <p key={caveat} className="text-sm font-medium text-slate-500">
             {caveat}
           </p>

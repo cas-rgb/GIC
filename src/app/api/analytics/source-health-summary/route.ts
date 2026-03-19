@@ -10,8 +10,12 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(summary);
   } catch (error) {
     const message =
-      error instanceof Error ? error.message : "Failed to load source health summary";
+      error instanceof Error
+        ? error.message
+        : "Failed to load source health summary";
 
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
+
+

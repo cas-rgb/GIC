@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React from "react";
 
 interface SparklineProps {
   data: number[];
@@ -9,11 +9,11 @@ interface SparklineProps {
   width?: number;
 }
 
-export default function Sparkline({ 
-  data, 
-  color = "#00F0FF", 
-  height = 30, 
-  width = 100 
+export default function Sparkline({
+  data,
+  color = "#00F0FF",
+  height = 30,
+  width = 100,
 }: SparklineProps) {
   if (!data || data.length < 2) return null;
 
@@ -22,11 +22,13 @@ export default function Sparkline({
   const range = max - min || 1;
   const stepX = width / (data.length - 1);
 
-  const points = data.map((val, i) => {
-    const x = i * stepX;
-    const y = height - ((val - min) / range) * height;
-    return `${x},${y}`;
-  }).join(' ');
+  const points = data
+    .map((val, i) => {
+      const x = i * stepX;
+      const y = height - ((val - min) / range) * height;
+      return `${x},${y}`;
+    })
+    .join(" ");
 
   return (
     <svg width={width} height={height} className="overflow-visible">

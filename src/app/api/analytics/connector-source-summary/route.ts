@@ -15,8 +15,12 @@ export async function GET() {
     });
   } catch (error) {
     const message =
-      error instanceof Error ? error.message : "Failed to load connector-ready sources";
+      error instanceof Error
+        ? error.message
+        : "Failed to load connector-ready sources";
 
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
+
+

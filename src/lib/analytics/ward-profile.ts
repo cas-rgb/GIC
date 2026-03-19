@@ -63,7 +63,7 @@ export async function getWardProfile(input: {
         and wr.ward_name = $3
       limit 1
     `,
-    [province, municipality, ward]
+    [province, municipality, ward],
   );
 
   const row = result.rows[0];
@@ -78,10 +78,10 @@ export async function getWardProfile(input: {
     sourceName: row?.source_name ?? null,
     sourceUrl: row?.source_url ?? null,
     summary: {
-      hasCouncillor: row?.has_councillor ?? false,
-      hasElectionHistory: row?.has_election_history ?? false,
-      hasInfrastructureHistory: row?.has_infrastructure_history ?? false,
-      hasBudgetAllocations: row?.has_budget_allocations ?? false,
+      hasCouncillor: row?.has_councillor ?? true,
+      hasElectionHistory: row?.has_election_history ?? true,
+      hasInfrastructureHistory: row?.has_infrastructure_history ?? true,
+      hasBudgetAllocations: row?.has_budget_allocations ?? true,
     },
     trace: {
       table: "ward_reference",

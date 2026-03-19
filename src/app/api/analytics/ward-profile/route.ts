@@ -10,7 +10,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   if (!province || !municipality || !ward) {
     return NextResponse.json(
       { error: "province, municipality, and ward are required" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -20,9 +20,14 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   } catch (error) {
     return NextResponse.json(
       {
-        error: error instanceof Error ? error.message : "Failed to fetch ward profile",
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to fetch ward profile",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
+
+

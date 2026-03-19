@@ -38,7 +38,7 @@ function toNumber(value: string | number | null | undefined): number | null {
 }
 
 export async function getInvestorOpportunityDetail(
-  projectId: string
+  projectId: string,
 ): Promise<InvestorOpportunityDetailResponse> {
   const detailResult = await query<DetailRow>(
     `
@@ -90,7 +90,7 @@ export async function getInvestorOpportunityDetail(
       from scored
       limit 1
     `,
-    [projectId]
+    [projectId],
   );
 
   if (!detailResult.rows[0]) {
@@ -107,7 +107,7 @@ export async function getInvestorOpportunityDetail(
       where infrastructure_project_id = $1::uuid
       order by financial_year desc nulls last, budget_phase asc nulls last
     `,
-    [projectId]
+    [projectId],
   );
 
   const updatesResult = await query<UpdateRow>(
@@ -121,7 +121,7 @@ export async function getInvestorOpportunityDetail(
       order by effective_date desc nulls last, created_at desc
       limit 8
     `,
-    [projectId]
+    [projectId],
   );
 
   const row = detailResult.rows[0];
@@ -153,7 +153,11 @@ export async function getInvestorOpportunityDetail(
       "Funding rows and updates are derived from the normalized Treasury ingestion path already present in the platform.",
     ],
     trace: {
-      tables: ["infrastructure_projects", "project_funding_sources", "project_updates"],
+      tables: [
+        "infrastructure_projects",
+        "project_funding_sources",
+        "project_updates",
+      ],
       query: `projectId=${projectId}`,
     },
   };

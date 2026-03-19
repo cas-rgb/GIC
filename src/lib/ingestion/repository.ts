@@ -14,7 +14,7 @@ export interface InsertDocumentInput {
 }
 
 export async function documentExistsByHash(
-  contentHash: string
+  contentHash: string,
 ): Promise<boolean> {
   const result = await query<{ exists: boolean }>(
     `
@@ -24,13 +24,15 @@ export async function documentExistsByHash(
         where content_hash = $1
       ) as exists
     `,
-    [contentHash]
+    [contentHash],
   );
 
   return result.rows[0]?.exists ?? false;
 }
 
-export async function insertDocument(input: InsertDocumentInput): Promise<string> {
+export async function insertDocument(
+  input: InsertDocumentInput,
+): Promise<string> {
   const result = await query<{ id: string }>(
     `
       insert into documents (
@@ -61,7 +63,7 @@ export async function insertDocument(input: InsertDocumentInput): Promise<string
       input.contentText,
       input.contentHash,
       input.parserVersion,
-    ]
+    ],
   );
 
   return result.rows[0].id;

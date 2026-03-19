@@ -7,7 +7,8 @@ import { CitizenVoiceEvidenceResponse } from "@/lib/analytics/types";
 
 interface CitizenVoiceEvidencePanelProps {
   province?: string;
-  municipality?: string;
+  municipality?: string | null;
+  serviceDomain?: string | null;
   ward?: string | null;
   issueFamily?: string | null;
   sourceType?: string | null;
@@ -21,7 +22,8 @@ type LoadState =
 
 function sentimentTone(label: string): string {
   if (label === "negative") return "bg-rose-50 text-rose-700 border-rose-100";
-  if (label === "positive") return "bg-emerald-50 text-emerald-700 border-emerald-100";
+  if (label === "positive")
+    return "bg-emerald-50 text-emerald-700 border-emerald-100";
   return "bg-slate-50 text-slate-700 border-slate-100";
 }
 
@@ -67,13 +69,19 @@ export default function CitizenVoiceEvidencePanel({
       }
 
       try {
-        const response = await fetch(`/api/analytics/citizen-voice-evidence?${params.toString()}`, {
-          cache: "no-store",
-        });
+        const response = await fetch(
+          `/api/analytics/citizen-voice-evidence?${params.toString()}`,
+          {
+            cache: "no-store",
+          },
+        );
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -109,7 +117,9 @@ export default function CitizenVoiceEvidencePanel({
       <div className="flex min-h-[220px] items-center justify-center text-center">
         <div>
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">{state.message}</p>
+          <p className="mt-3 text-sm font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
@@ -130,12 +140,14 @@ export default function CitizenVoiceEvidencePanel({
           What This Answers
         </p>
         <p className="mt-2 text-sm font-medium text-slate-700">
-          This evidence layer shows the governed posts, articles, and public documents behind the
-          active narrative in <span className="font-bold">{scopeLabel}</span> over the last{" "}
+          This evidence layer shows the governed posts, articles, and public
+          documents behind the active narrative in{" "}
+          <span className="font-bold">{scopeLabel}</span> over the last{" "}
           <span className="font-bold">{days} days</span>
           {filterBits.length > 0 ? (
             <>
-              , currently narrowed by <span className="font-bold">{filterBits.join(" and ")}</span>.
+              , currently narrowed by{" "}
+              <span className="font-bold">{filterBits.join(" and ")}</span>.
             </>
           ) : (
             "."
@@ -192,19 +204,26 @@ export default function CitizenVoiceEvidencePanel({
       </div>
 
       <div className="space-y-3">
-        {data.documents.length === 0 ? (
+        {(data.documents || []).length === 0 ? (
           <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4 text-sm font-medium text-slate-500">
-            No governed public-evidence documents matched the current filter set for{" "}
-            <span className="font-bold text-slate-700">{scopeLabel}</span>. If this view is narrowed
-            by issue family or evidence source, broaden those filters first. A narrow empty state
-            here usually means the evidence layer is sparse for this slice, not that the issue is absent.
+            No governed public-evidence documents matched the current filter set
+            for <span className="font-bold text-slate-700">{scopeLabel}</span>.
+            If this view is narrowed by issue family or evidence source, broaden
+            those filters first. A narrow empty state here usually means the
+            evidence layer is sparse for this slice, not that the issue is
+            absent.
           </div>
         ) : (
-          data.documents.map((row) => (
-            <div key={row.documentId} className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
+          (data.documents || []).map((row) => (
+            <div
+              key={row.documentId}
+              className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm"
+            >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-sm font-bold text-slate-900">{row.title}</p>
+                  <p className="text-sm font-bold text-slate-900">
+                    {row.title}
+                  </p>
                   <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                     {row.province}
                     {row.municipality ? ` | ${row.municipality}` : ""}
@@ -225,7 +244,7 @@ export default function CitizenVoiceEvidencePanel({
               <div className="mt-3 flex flex-wrap gap-2">
                 <span
                   className={`rounded-full border px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] ${sentimentTone(
-                    row.sentimentLabel
+                    row.sentimentLabel,
                   )}`}
                 >
                   {row.sentimentLabel}
@@ -241,7 +260,9 @@ export default function CitizenVoiceEvidencePanel({
                 </span>
               </div>
 
-              <p className="mt-3 text-sm font-medium leading-6 text-slate-700">{row.excerpt}</p>
+              <p className="mt-3 text-sm font-medium leading-6 text-slate-700">
+                {row.excerpt}
+              </p>
             </div>
           ))
         )}

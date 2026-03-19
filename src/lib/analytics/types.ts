@@ -36,6 +36,7 @@ export interface MunicipalityRankingRow {
   dominantServiceDomain: string | null;
   riskScore: number;
   confidence: number;
+  aiSynthesis?: AINarrativeSynthesisRow[];
 }
 
 export interface MunicipalityRankingResponse {
@@ -338,6 +339,8 @@ export interface LeadershipSentimentLeaderRow {
     mentionCount: number;
   }>;
   topNarratives: string[];
+  aiSynthesis?: AINarrativeSynthesisRow[];
+  prAdvice?: string;
 }
 
 export interface LeadershipSentimentResponse {
@@ -874,6 +877,15 @@ export interface SocialTrendEvidenceHighlightRow {
   excerpt: string;
 }
 
+export interface AINarrativeSynthesisRow {
+  whoInvolved: string | null;
+  whatHappened: string | null;
+  whyItHappened: string | null;
+  howResolvedOrCurrent: string | null;
+  whenTimeline: string | null;
+  sourceEvidence: string | null;
+}
+
 export interface SocialTrendsExecutiveSummaryResponse {
   province: string | null;
   days: number;
@@ -890,6 +902,7 @@ export interface SocialTrendsExecutiveSummaryResponse {
     narrativeRiskLevel: "Low" | "Elevated" | "High";
   };
   narratives: string[];
+  aiSynthesis: AINarrativeSynthesisRow[];
   concernProvinces: SocialTrendConcernProvinceRow[];
   evidenceHighlights: SocialTrendEvidenceHighlightRow[];
   caveats: string[];

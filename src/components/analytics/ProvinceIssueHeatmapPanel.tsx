@@ -62,12 +62,15 @@ export default function ProvinceIssueHeatmapPanel({
       try {
         const response = await fetch(
           `/api/analytics/province-issue-heatmap?province=${encodeURIComponent(province)}&days=${days}${serviceDomain ? `&serviceDomain=${encodeURIComponent(serviceDomain)}` : ""}`,
-          { cache: "no-store" }
+          { cache: "no-store" },
         );
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -89,7 +92,12 @@ export default function ProvinceIssueHeatmapPanel({
 
   const matrix = useMemo(() => {
     if (state.status !== "loaded") {
-      return { rows: [] as string[], columns: [] as string[], valueMap: new Map<string, number>(), maxValue: 0 };
+      return {
+        rows: [] as string[],
+        columns: [] as string[],
+        valueMap: new Map<string, number>(),
+        maxValue: 0,
+      };
     }
 
     const valueMap = new Map<string, number>();
@@ -125,7 +133,9 @@ export default function ProvinceIssueHeatmapPanel({
       <div className="flex min-h-[260px] items-center justify-center text-center">
         <div>
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">{state.message}</p>
+          <p className="mt-3 text-sm font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
@@ -134,7 +144,9 @@ export default function ProvinceIssueHeatmapPanel({
   if (matrix.rows.length === 0 || matrix.columns.length === 0) {
     return (
       <div className="rounded-2xl border border-dashed border-slate-200 p-8 text-center">
-        <p className="text-sm font-bold text-slate-500">No municipality issue heatmap rows available yet.</p>
+        <p className="text-sm font-bold text-slate-500">
+          No municipality issue heatmap rows available yet.
+        </p>
       </div>
     );
   }
@@ -153,7 +165,9 @@ export default function ProvinceIssueHeatmapPanel({
       <div className="overflow-x-auto rounded-2xl border border-slate-100 bg-white">
         <div
           className="grid min-w-[780px] gap-px bg-slate-100"
-          style={{ gridTemplateColumns: `220px repeat(${matrix.columns.length}, minmax(84px, 1fr))` }}
+          style={{
+            gridTemplateColumns: `220px repeat(${matrix.columns.length}, minmax(84px, 1fr))`,
+          }}
         >
           <div className="bg-slate-50 px-4 py-3 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
             Municipality
@@ -176,13 +190,14 @@ export default function ProvinceIssueHeatmapPanel({
                 {municipality}
               </div>
               {matrix.columns.map((column) => {
-                const value = matrix.valueMap.get(`${municipality}::${column}`) ?? 0;
+                const value =
+                  matrix.valueMap.get(`${municipality}::${column}`) ?? 0;
                 return (
                   <div
                     key={`${municipality}-${column}`}
                     className={`px-2 py-3 text-center text-sm font-bold ${getIntensityClass(
                       value,
-                      matrix.maxValue
+                      matrix.maxValue,
                     )}`}
                     title={`${municipality} / ${column}: ${value}`}
                   >
@@ -197,10 +212,18 @@ export default function ProvinceIssueHeatmapPanel({
 
       <div className="flex flex-wrap items-center gap-3 text-[10px] font-black uppercase tracking-[0.15em] text-slate-400">
         <span className="rounded-full bg-slate-100 px-3 py-1">Low</span>
-        <span className="rounded-full bg-emerald-200 px-3 py-1 text-slate-900">Moderate</span>
-        <span className="rounded-full bg-amber-300 px-3 py-1 text-slate-900">Elevated</span>
-        <span className="rounded-full bg-rose-400 px-3 py-1 text-white">High</span>
-        <span className="rounded-full bg-rose-600 px-3 py-1 text-white">Critical</span>
+        <span className="rounded-full bg-emerald-200 px-3 py-1 text-slate-900">
+          Moderate
+        </span>
+        <span className="rounded-full bg-amber-300 px-3 py-1 text-slate-900">
+          Elevated
+        </span>
+        <span className="rounded-full bg-rose-400 px-3 py-1 text-white">
+          High
+        </span>
+        <span className="rounded-full bg-rose-600 px-3 py-1 text-white">
+          Critical
+        </span>
       </div>
     </div>
   );

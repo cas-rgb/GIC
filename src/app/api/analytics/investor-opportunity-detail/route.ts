@@ -6,7 +6,10 @@ export async function GET(request: NextRequest) {
   const projectId = request.nextUrl.searchParams.get("projectId");
 
   if (!projectId) {
-    return NextResponse.json({ error: "projectId is required" }, { status: 400 });
+    return NextResponse.json(
+      { error: "projectId is required" },
+      { status: 400 },
+    );
   }
 
   try {
@@ -14,8 +17,12 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(detail);
   } catch (error) {
     const message =
-      error instanceof Error ? error.message : "Failed to load investor opportunity detail";
+      error instanceof Error
+        ? error.message
+        : "Failed to load investor opportunity detail";
 
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
+
+

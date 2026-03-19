@@ -26,7 +26,7 @@ type LoadState =
 export default function StructuredBriefingPanel({
   url,
   loadingLabel,
-  headlineLabel = "AI Briefing",
+  headlineLabel = "Regional Briefing",
 }: StructuredBriefingPanelProps) {
   const [state, setState] = useState<LoadState>({ status: "loading" });
 
@@ -47,7 +47,12 @@ export default function StructuredBriefingPanel({
         const response = await fetch(url, { cache: "no-store" });
 
         if (!response.ok) {
-          throw new Error(await parseError(response, `request failed with status ${response.status}`));
+          throw new Error(
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
+          );
         }
 
         const data = (await response.json()) as StructuredBriefingResponse;
@@ -55,7 +60,8 @@ export default function StructuredBriefingPanel({
       } catch (error) {
         setState({
           status: "error",
-          message: error instanceof Error ? error.message : "Failed to load briefing",
+          message:
+            error instanceof Error ? error.message : "Failed to load briefing",
         });
       }
     }
@@ -79,7 +85,9 @@ export default function StructuredBriefingPanel({
       <div className="flex min-h-[220px] items-center justify-center text-center">
         <div>
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">{state.message}</p>
+          <p className="mt-3 text-sm font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
@@ -96,8 +104,12 @@ export default function StructuredBriefingPanel({
             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-500">
               {headlineLabel}
             </p>
-            <p className="mt-2 text-lg font-display font-bold text-slate-900">{data.headline}</p>
-            <p className="mt-2 text-sm font-medium text-slate-700">{data.summary}</p>
+            <p className="mt-2 text-lg font-display font-bold text-slate-900">
+              {data.headline}
+            </p>
+            <p className="mt-2 text-sm font-medium text-slate-700">
+              {data.summary}
+            </p>
           </div>
         </div>
       </div>
@@ -107,15 +119,19 @@ export default function StructuredBriefingPanel({
           Briefing Use
         </p>
         <p className="mt-2 text-sm font-medium text-slate-700">
-          This AI briefing is grounded in filtered governed metrics and evidence for the current dashboard view. Use it as a fast executive readout, then validate the detail in the charts and evidence panels below.
+          This briefing is grounded in strictly filtered governed metrics and evidence
+          for the current dashboard view. Use it as a fast executive readout,
+          then validate the detail in the charts and evidence panels below.
         </p>
       </div>
 
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
         <section className="rounded-2xl border border-slate-100 bg-white px-4 py-4 shadow-sm">
-          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Key Findings</p>
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+            Key Findings
+          </p>
           <div className="mt-4 space-y-3">
-            {data.keyFindings.map((line) => (
+            {(data.keyFindings || []).map((line) => (
               <p key={line} className="text-sm font-medium text-slate-700">
                 {line}
               </p>
@@ -124,9 +140,11 @@ export default function StructuredBriefingPanel({
         </section>
 
         <section className="rounded-2xl border border-slate-100 bg-white px-4 py-4 shadow-sm">
-          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Risks</p>
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+            Risks
+          </p>
           <div className="mt-4 space-y-3">
-            {data.risks.map((line) => (
+            {(data.risks || []).map((line) => (
               <p key={line} className="text-sm font-medium text-slate-700">
                 {line}
               </p>
@@ -135,9 +153,11 @@ export default function StructuredBriefingPanel({
         </section>
 
         <section className="rounded-2xl border border-slate-100 bg-white px-4 py-4 shadow-sm">
-          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Actions</p>
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+            Actions
+          </p>
           <div className="mt-4 space-y-3">
-            {data.actions.map((line) => (
+            {(data.actions || []).map((line) => (
               <p key={line} className="text-sm font-medium text-slate-700">
                 {line}
               </p>
@@ -149,7 +169,9 @@ export default function StructuredBriefingPanel({
       <div className="rounded-2xl border border-emerald-100 bg-emerald-50 px-4 py-3">
         <div className="flex items-start gap-2">
           <ShieldCheck className="mt-0.5 h-4 w-4 text-emerald-600" />
-          <p className="text-sm font-medium text-slate-700">{data.confidenceNote}</p>
+          <p className="text-sm font-medium text-slate-700">
+            {data.confidenceNote}
+          </p>
         </div>
       </div>
     </div>

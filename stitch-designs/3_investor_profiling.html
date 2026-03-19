@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GIC Investor Profiling Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1861aa",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111921",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .spider-chart-bg {
+            background: radial-gradient(circle, transparent 20%, rgba(24, 97, 170, 0.05) 20.5%, rgba(24, 97, 170, 0.05) 40%, transparent 40.5%, transparent 60%, rgba(24, 97, 170, 0.05) 60.5%, rgba(24, 97, 170, 0.05) 80%, transparent 80.5%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 lg:px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight">GIC Portfolio Intelligence</h2>
+</div>
+<div class="flex flex-1 justify-end gap-4 items-center">
+<div class="hidden md:flex items-center bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-1.5 border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-slate-500 text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-64 placeholder:text-slate-500" placeholder="Search sectors or investors..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-primary text-white hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto w-full px-6 lg:px-10 py-8">
+<!-- Dashboard Header -->
+<div class="mb-8 border-l-4 border-primary pl-6">
+<h1 class="text-4xl font-black text-slate-900 dark:text-slate-100 tracking-tight">Investor Profiling</h1>
+<p class="text-slate-600 dark:text-slate-400 text-lg mt-1 font-medium">Development-fit framing and directional sector opportunities.</p>
+</div>
+<!-- Top Row: Map and Spider Chart -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+<!-- Opportunity Map -->
+<div class="lg:col-span-2 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-slate-100">Opportunity Map</h3>
+<p class="text-sm text-slate-500">Interest vs. Infrastructure Readiness</p>
+</div>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 rounded-full text-xs font-bold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-green-500"></span> High Confidence
+                        </span>
+<span class="px-3 py-1 bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400 rounded-full text-xs font-bold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-slate-400"></span> Directional Only
+                        </span>
+</div>
+</div>
+<div class="relative w-full aspect-[21/9] bg-slate-50 dark:bg-slate-800/50 rounded-lg overflow-hidden group">
+<div class="absolute inset-0 opacity-40 mix-blend-multiply dark:mix-blend-overlay bg-cover bg-center" data-alt="Topographic world map with investment heat zones" data-location="Global" style="background-image: url('https://placeholder.pics/svg/300');"></div>
+<!-- Mock Map Markers -->
+<div class="absolute top-1/4 left-1/3 group-hover:scale-110 transition-transform cursor-pointer">
+<div class="h-4 w-4 bg-primary rounded-full ring-4 ring-primary/20"></div>
+<div class="absolute top-6 left-1/2 -translate-x-1/2 whitespace-nowrap bg-white dark:bg-slate-800 shadow-lg px-2 py-1 rounded border border-slate-200 dark:border-slate-700 text-[10px] font-bold">EMEA Central (High)</div>
+</div>
+<div class="absolute bottom-1/3 right-1/4 group-hover:scale-110 transition-transform cursor-pointer">
+<div class="h-4 w-4 bg-slate-400 rounded-full ring-4 ring-slate-400/20"></div>
+<div class="absolute top-6 left-1/2 -translate-x-1/2 whitespace-nowrap bg-white dark:bg-slate-800 shadow-lg px-2 py-1 rounded border border-slate-200 dark:border-slate-700 text-[10px] font-bold">APAC South (Directional)</div>
+</div>
+</div>
+</div>
+<!-- Sector Relevance Spider Chart -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm flex flex-col">
+<h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 mb-1">Sector Alignment</h3>
+<p class="text-sm text-slate-500 mb-6">Cross-sector synergy visualization</p>
+<div class="flex-1 flex items-center justify-center relative">
+<div class="w-48 h-48 rounded-full spider-chart-bg relative flex items-center justify-center">
+<!-- Abstract Spider Web Lines using SVG -->
+<svg class="absolute inset-0 w-full h-full" viewbox="0 0 100 100">
+<polygon class="text-slate-200 dark:text-slate-700" fill="none" points="50,10 90,40 75,90 25,90 10,40" stroke="currentColor" stroke-width="0.5"></polygon>
+<polygon fill="rgba(24, 97, 170, 0.4)" points="50,25 75,45 65,75 35,75 25,45" stroke="#1861aa" stroke-width="1.5"></polygon>
+</svg>
+<span class="absolute -top-4 text-[10px] font-bold text-slate-500">ENERGY</span>
+<span class="absolute top-1/4 -right-10 text-[10px] font-bold text-slate-500">ICT</span>
+<span class="absolute -bottom-4 right-4 text-[10px] font-bold text-slate-500">LOGISTICS</span>
+<span class="absolute -bottom-4 left-4 text-[10px] font-bold text-slate-500">WATER</span>
+<span class="absolute top-1/4 -left-12 text-[10px] font-bold text-slate-500">TRANSPORT</span>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+<div class="flex justify-between text-xs font-bold text-slate-600 dark:text-slate-400">
+<span>Energy Lead Score</span>
+<span class="text-primary">88%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Row: Investor Dossiers -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
+<div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-slate-100">Potential Investor Dossiers</h3>
+<p class="text-sm text-slate-500 italic">Investor matching is directional, not confirmed.</p>
+</div>
+<button class="flex items-center gap-2 text-primary text-sm font-bold hover:underline">
+                    View Full Directory <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
+<th class="px-6 py-4">Investor Profile</th>
+<th class="px-6 py-4">Focus Sector</th>
+<th class="px-6 py-4">Fit Score</th>
+<th class="px-6 py-4">Local Need Alignment</th>
+<th class="px-6 py-4">Confidence State</th>
+<th class="px-6 py-4 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Profile 1 -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary/10 flex items-center justify-center text-primary font-bold">GP</div>
+<div>
+<p class="text-sm font-bold text-slate-900 dark:text-slate-100">Global Pension Fund A</p>
+<p class="text-xs text-slate-500">Sovereign Wealth</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded text-xs font-medium text-slate-600 dark:text-slate-300">Renewable Energy</span>
+</td>
+<td class="px-6 py-4">
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 max-w-[100px]">
+<div class="bg-primary h-1.5 rounded-full" style="width: 92%"></div>
+</div>
+<span class="text-[10px] font-bold text-slate-500 mt-1 block">92/100</span>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm font-medium text-green-600 dark:text-green-400">Exceptional</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300">High Confidence</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<!-- Profile 2 -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary/10 flex items-center justify-center text-primary font-bold">TI</div>
+<div>
+<p class="text-sm font-bold text-slate-900 dark:text-slate-100">Tech-Infra Partners</p>
+<p class="text-xs text-slate-500">Private Equity</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded text-xs font-medium text-slate-600 dark:text-slate-300">Data Centers / ICT</span>
+</td>
+<td class="px-6 py-4">
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 max-w-[100px]">
+<div class="bg-primary h-1.5 rounded-full" style="width: 74%"></div>
+</div>
+<span class="text-[10px] font-bold text-slate-500 mt-1 block">74/100</span>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">Strong</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400">Directional Only</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<!-- Profile 3 -->
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary/10 flex items-center justify-center text-primary font-bold">LV</div>
+<div>
+<p class="text-sm font-bold text-slate-900 dark:text-slate-100">Logistics Ventures</p>
+<p class="text-xs text-slate-500">Venture Capital</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded text-xs font-medium text-slate-600 dark:text-slate-300">Cold Chain / Ports</span>
+</td>
+<td class="px-6 py-4">
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 max-w-[100px]">
+<div class="bg-primary h-1.5 rounded-full" style="width: 58%"></div>
+</div>
+<span class="text-[10px] font-bold text-slate-500 mt-1 block">58/100</span>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm font-medium text-orange-600 dark:text-orange-400">Moderate</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400">Directional Only</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Quick Insight Strip -->
+<div class="mt-6 flex flex-wrap gap-4">
+<div class="flex-1 min-w-[300px] bg-primary/5 dark:bg-primary/10 border border-primary/20 rounded-lg p-4 flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-3xl">lightbulb</span>
+<div>
+<h4 class="text-sm font-bold text-primary">Directional Insight</h4>
+<p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Cross-sector alignment is currently peaking in Energy-ICT corridors. Investors from EMEA exhibit 14% higher readiness for local integration than historical averages.</p>
+</div>
+</div>
+<div class="flex-1 min-w-[300px] bg-slate-900 text-white rounded-lg p-4 flex items-center justify-between">
+<div>
+<h4 class="text-sm font-bold">Generate Intelligence Report</h4>
+<p class="text-[10px] text-slate-400">Custom mapping based on current filters</p>
+</div>
+<button class="bg-primary px-4 py-2 rounded font-bold text-xs hover:bg-primary/80 transition-all">Download PDF</button>
+</div>
+</div>
+</main>
+<footer class="mt-auto border-t border-slate-200 dark:border-slate-800 py-6 px-10 text-center">
+<p class="text-slate-500 text-xs">© 2024 GIC Global Investment Intelligence. Confidential - For Internal Use Only.</p>
+</footer>
+</div>
+</body></html>

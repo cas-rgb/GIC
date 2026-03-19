@@ -28,7 +28,19 @@ if (process.env.NODE_ENV !== "production") {
 
 export async function query<T extends QueryResultRow = QueryResultRow>(
   text: string,
-  params: unknown[] = []
+  params: unknown[] = [],
 ): Promise<QueryResult<T>> {
-  return pool.query<T>(text, params);
+  try {
+    return await pool.query<T>(text, params);
+  } catch (error: any) {
+    if (
+      error.code === "ECONNREFUSED" || 
+      error.code === "28P01" || 
+      error.code === "3D000" ||
+      (error.message && error.message.includes("connect"))
+    ) {
+      throw new Error("Offline Maintenance Mode: Database connection unavailable.");
+    }
+    throw error;
+  }
 }

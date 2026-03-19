@@ -16,7 +16,9 @@ export async function GET(request: NextRequest) {
             ? error.message
             : "Failed to load investor executive summary",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
+
+

@@ -54,7 +54,9 @@ function summarizeSeries(data: ServicePressureResponse) {
     .map((row) => ({
       ...row,
       confidence:
-        row.points > 0 ? Number((row.confidenceTotal / row.points).toFixed(2)) : 0,
+        row.points > 0
+          ? Number((row.confidenceTotal / row.points).toFixed(2))
+          : 0,
     }))
     .sort((left, right) => right.pressureCaseCount - left.pressureCaseCount);
 
@@ -70,7 +72,10 @@ function summarizeTrend(data: ServicePressureResponse) {
   const grouped = new Map<string, number>();
 
   for (const point of data.series) {
-    grouped.set(point.date, (grouped.get(point.date) ?? 0) + point.pressureCaseCount);
+    grouped.set(
+      point.date,
+      (grouped.get(point.date) ?? 0) + point.pressureCaseCount,
+    );
   }
 
   return Array.from(grouped.entries())
@@ -79,14 +84,18 @@ function summarizeTrend(data: ServicePressureResponse) {
 }
 
 function summarizeTopicTrends(data: ServicePressureResponse) {
-  const allDates = Array.from(new Set(data.series.map((point) => point.date))).sort((left, right) =>
-    left.localeCompare(right)
-  );
+  const allDates = Array.from(
+    new Set((data.series || []).map((point) => point.date)),
+  ).sort((left, right) => left.localeCompare(right));
   const grouped = new Map<string, Map<string, number>>();
 
   for (const point of data.series) {
-    const current = grouped.get(point.serviceDomain) ?? new Map<string, number>();
-    current.set(point.date, (current.get(point.date) ?? 0) + point.pressureCaseCount);
+    const current =
+      grouped.get(point.serviceDomain) ?? new Map<string, number>();
+    current.set(
+      point.date,
+      (current.get(point.date) ?? 0) + point.pressureCaseCount,
+    );
     grouped.set(point.serviceDomain, current);
   }
 
@@ -106,13 +115,20 @@ function summarizeTopicTrends(data: ServicePressureResponse) {
     dates: allDates,
     rows,
     maxValue: Math.max(
-      ...rows.flatMap((row) => row.points.map((point) => point.pressureCaseCount)),
-      1
+      ...rows.flatMap((row) =>
+        row.points.map((point) => point.pressureCaseCount),
+      ),
+      1,
     ),
   };
 }
 
-function buildPolylinePoints(values: number[], width: number, height: number, maxValue: number) {
+function buildPolylinePoints(
+  values: number[],
+  width: number,
+  height: number,
+  maxValue: number,
+) {
   if (values.length === 0) {
     return "";
   }
@@ -152,16 +168,19 @@ export default function ServicePressurePanel({
     try {
       const response = await fetch(
         `/api/analytics/service-pressure?province=${encodeURIComponent(
-          province
+          province,
         )}&days=${days}${serviceDomain ? `&serviceDomain=${encodeURIComponent(serviceDomain)}` : ""}`,
         {
           cache: "no-store",
-        }
+        },
       );
 
       if (!response.ok) {
         throw new Error(
-          await parseError(response, `request failed with status ${response.status}`)
+          await parseError(
+            response,
+            `request failed with status ${response.status}`,
+          ),
         );
       }
 
@@ -171,7 +190,9 @@ export default function ServicePressurePanel({
       setState({
         status: "error",
         message:
-          error instanceof Error ? error.message : "Failed to load service pressure",
+          error instanceof Error
+            ? error.message
+            : "Failed to load service pressure",
       });
     }
   }
@@ -223,7 +244,9 @@ export default function ServicePressurePanel({
           <p className="text-sm font-black uppercase tracking-widest text-slate-900">
             Service pressure unavailable
           </p>
-          <p className="mt-2 text-xs font-medium text-slate-500">{state.message}</p>
+          <p className="mt-2 text-xs font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
@@ -237,27 +260,36 @@ export default function ServicePressurePanel({
   const topDomain = summary.rows[0];
   const severityRate =
     data.totals.pressureCaseCount > 0
-      ? Math.round((data.totals.highSeverityCount / data.totals.pressureCaseCount) * 100)
+      ? Math.round(
+          (data.totals.highSeverityCount / data.totals.pressureCaseCount) * 100,
+        )
       : 0;
   const responseCoverage =
     data.totals.pressureCaseCount > 0
-      ? Math.round((data.totals.responseCount / data.totals.pressureCaseCount) * 100)
+      ? Math.round(
+          (data.totals.responseCount / data.totals.pressureCaseCount) * 100,
+        )
       : 0;
   const protestShare =
     data.totals.pressureCaseCount > 0
-      ? Math.round((data.totals.protestCount / data.totals.pressureCaseCount) * 100)
+      ? Math.round(
+          (data.totals.protestCount / data.totals.pressureCaseCount) * 100,
+        )
       : 0;
-  const peakDay = trend.reduce<{ date: string; pressureCaseCount: number } | null>(
-    (current, point) => {
-      if (!current || point.pressureCaseCount > current.pressureCaseCount) {
-        return point;
-      }
+  const peakDay = trend.reduce<{
+    date: string;
+    pressureCaseCount: number;
+  } | null>((current, point) => {
+    if (!current || point.pressureCaseCount > current.pressureCaseCount) {
+      return point;
+    }
 
-      return current;
-    },
-    null
+    return current;
+  }, null);
+  const maxTrendValue = Math.max(
+    ...trend.map((point) => point.pressureCaseCount),
+    1,
   );
-  const maxTrendValue = Math.max(...trend.map((point) => point.pressureCaseCount), 1);
   const lineColors = ["#0f172a", "#2563eb", "#d97706", "#dc2626"];
 
   return (
@@ -316,7 +348,9 @@ export default function ServicePressurePanel({
                 Peak Day
               </p>
               <p className="mt-1 text-sm font-bold text-slate-900">
-                {peakDay ? `${peakDay.date} · ${peakDay.pressureCaseCount}` : "No data"}
+                {peakDay
+                  ? `${peakDay.date} · ${peakDay.pressureCaseCount}`
+                  : "No data"}
               </p>
             </div>
           </div>
@@ -329,7 +363,10 @@ export default function ServicePressurePanel({
                 </div>
               ) : (
                 trend.map((point) => (
-                  <div key={point.date} className="flex flex-1 flex-col items-center gap-2">
+                  <div
+                    key={point.date}
+                    className="flex flex-1 flex-col items-center gap-2"
+                  >
                     <div className="flex h-full w-full items-end">
                       <div
                         className="w-full rounded-t-xl bg-slate-900"
@@ -360,16 +397,28 @@ export default function ServicePressurePanel({
 
           <div className="grid grid-cols-1 gap-3">
             <div className="rounded-2xl border border-rose-100 bg-rose-50 p-4">
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-rose-400">High Severity Rate</p>
-              <p className="mt-2 text-2xl font-display font-bold text-rose-600">{severityRate}%</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-rose-400">
+                High Severity Rate
+              </p>
+              <p className="mt-2 text-2xl font-display font-bold text-rose-600">
+                {severityRate}%
+              </p>
             </div>
             <div className="rounded-2xl border border-amber-100 bg-amber-50 p-4">
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-400">Protest Share</p>
-              <p className="mt-2 text-2xl font-display font-bold text-amber-600">{protestShare}%</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-400">
+                Protest Share
+              </p>
+              <p className="mt-2 text-2xl font-display font-bold text-amber-600">
+                {protestShare}%
+              </p>
             </div>
             <div className="rounded-2xl border border-emerald-100 bg-emerald-50 p-4">
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-400">Responses Logged</p>
-              <p className="mt-2 text-2xl font-display font-bold text-emerald-600">{data.totals.responseCount}</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-400">
+                Responses Logged
+              </p>
+              <p className="mt-2 text-2xl font-display font-bold text-emerald-600">
+                {data.totals.responseCount}
+              </p>
             </div>
           </div>
         </div>
@@ -419,7 +468,7 @@ export default function ServicePressurePanel({
                       row.points.map((point) => point.pressureCaseCount),
                       640,
                       220,
-                      topicTrends.maxValue
+                      topicTrends.maxValue,
                     )}
                   />
                 ))}
@@ -434,17 +483,23 @@ export default function ServicePressurePanel({
                     <div className="flex items-center gap-3">
                       <span
                         className="h-3 w-3 rounded-full"
-                        style={{ backgroundColor: lineColors[index % lineColors.length] }}
+                        style={{
+                          backgroundColor:
+                            lineColors[index % lineColors.length],
+                        }}
                       />
                       <div>
-                        <p className="text-sm font-bold text-slate-900">{row.serviceDomain}</p>
+                        <p className="text-sm font-bold text-slate-900">
+                          {row.serviceDomain}
+                        </p>
                         <p className="text-[10px] font-black uppercase tracking-[0.15em] text-slate-400">
                           {row.total} total concern volume
                         </p>
                       </div>
                     </div>
                     <p className="text-sm font-bold text-slate-900">
-                      {row.points[row.points.length - 1]?.pressureCaseCount ?? 0}
+                      {row.points[row.points.length - 1]?.pressureCaseCount ??
+                        0}
                     </p>
                   </div>
                 ))}
@@ -484,7 +539,7 @@ export default function ServicePressurePanel({
             summary.rows.map((row) => {
               const width = Math.max(
                 8,
-                Math.round((row.pressureCaseCount / summary.maxPressure) * 100)
+                Math.round((row.pressureCaseCount / summary.maxPressure) * 100),
               );
 
               return (

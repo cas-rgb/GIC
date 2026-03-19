@@ -5,23 +5,66 @@ const ISSUE_FAMILY_KEYWORDS: Array<{
 }> = [
   {
     family: "water",
-    keywords: ["water", "sanitation", "sewer", "sewage", "outage", "reservoir", "tanker"],
-    topicAliases: ["water", "water and sanitation", "water infrastructure", "sanitation"],
+    keywords: [
+      "water",
+      "sanitation",
+      "sewer",
+      "sewage",
+      "outage",
+      "reservoir",
+      "tanker",
+    ],
+    topicAliases: [
+      "water",
+      "water and sanitation",
+      "water infrastructure",
+      "sanitation",
+    ],
   },
   {
     family: "roads",
     keywords: ["road", "roads", "pothole", "bridge", "transport", "corridor"],
-    topicAliases: ["roads", "roads and transport", "road infrastructure", "transport"],
+    topicAliases: [
+      "roads",
+      "roads and transport",
+      "road infrastructure",
+      "transport",
+    ],
   },
   {
     family: "electricity",
-    keywords: ["electricity", "power", "load", "load shedding", "grid", "substation", "energy"],
-    topicAliases: ["electricity", "energy", "electricity infrastructure", "power"],
+    keywords: [
+      "electricity",
+      "power",
+      "load",
+      "load shedding",
+      "grid",
+      "substation",
+      "energy",
+    ],
+    topicAliases: [
+      "electricity",
+      "energy",
+      "electricity infrastructure",
+      "power",
+    ],
   },
   {
     family: "governance",
-    keywords: ["governance", "corruption", "council", "mayor", "leadership", "service delivery"],
-    topicAliases: ["municipal governance", "governance", "service delivery", "leadership"],
+    keywords: [
+      "governance",
+      "corruption",
+      "council",
+      "mayor",
+      "leadership",
+      "service delivery",
+    ],
+    topicAliases: [
+      "municipal governance",
+      "governance",
+      "service delivery",
+      "leadership",
+    ],
   },
   {
     family: "refuse",
@@ -30,7 +73,13 @@ const ISSUE_FAMILY_KEYWORDS: Array<{
   },
   {
     family: "housing",
-    keywords: ["housing", "settlement", "eviction", "homes", "informal settlement"],
+    keywords: [
+      "housing",
+      "settlement",
+      "eviction",
+      "homes",
+      "informal settlement",
+    ],
     topicAliases: ["housing", "human settlements", "settlements"],
   },
   {
@@ -78,7 +127,7 @@ export function normalizeIssueFamily(label?: string | null): string | null {
 }
 
 export function normalizeInfrastructureServiceFilter(
-  label?: string | null
+  label?: string | null,
 ): string | null {
   const normalized = normalizeIssueFamily(label);
 
@@ -92,10 +141,10 @@ export function normalizeInfrastructureServiceFilter(
 export function getInfrastructureServiceLabel(label?: string | null): string {
   const normalized = normalizeInfrastructureServiceFilter(label);
   const matched = INFRASTRUCTURE_SERVICE_OPTIONS.find(
-    (option) => option.value === (normalized ?? "all")
+    (option) => option.value === (normalized ?? "all"),
   );
 
-  return matched?.label ?? (normalized ?? "All Services");
+  return matched?.label ?? normalized ?? "All Services";
 }
 
 export function expandEvidenceTopics(label?: string | null): string[] {
@@ -104,7 +153,9 @@ export function expandEvidenceTopics(label?: string | null): string[] {
     return [];
   }
 
-  const matched = ISSUE_FAMILY_KEYWORDS.find((issue) => issue.family === family);
+  const matched = ISSUE_FAMILY_KEYWORDS.find(
+    (issue) => issue.family === family,
+  );
   if (!matched) {
     return [family];
   }

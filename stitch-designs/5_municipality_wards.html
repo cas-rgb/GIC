@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1861aa",
+                        "clay": "#a85d44",
+                        "ochre": "#d97706",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111921",
+                        "neutral-surface": "#f1f3f5",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 px-10 py-4 bg-white dark:bg-slate-900">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined text-3xl font-bold">account_balance</span>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight">GIC Municipality Dashboard</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="#">Municipalities</a>
+<a class="text-primary text-sm font-semibold border-b-2 border-primary pb-1" href="#">Wards</a>
+<a class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="#">Intelligence</a>
+<a class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="#">Reports</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-slate-100 dark:bg-slate-800">
+<div class="text-slate-500 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-transparent focus:ring-0 text-sm font-normal px-2" placeholder="Search wards or regions..." value=""/>
+</div>
+</label>
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
+<span class="material-symbols-outlined">person</span>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-7xl mx-auto w-full px-6 py-8">
+<div class="flex flex-wrap justify-between items-end gap-4 mb-8">
+<div class="flex flex-col gap-1">
+<h1 class="text-slate-900 dark:text-slate-100 text-4xl font-extrabold leading-tight tracking-tight">State of the Municipality &amp; Wards</h1>
+<p class="text-slate-500 dark:text-slate-400 text-lg font-medium">Local place intelligence and ward-level pressure analysis.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-5 py-2.5 bg-clay text-white rounded-lg font-bold text-sm shadow-sm hover:bg-clay/90 transition-all">
+<span class="material-symbols-outlined text-sm">download</span>
+                            Download Dossier
+                        </button>
+<button class="flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-200 dark:bg-slate-800 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg font-bold text-sm hover:bg-slate-50 transition-all">
+<span class="material-symbols-outlined text-sm">share</span>
+                            Share
+                        </button>
+</div>
+</div>
+<div class="flex items-center gap-2 mb-8 text-sm font-medium bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm w-fit">
+<span class="text-slate-500">Active Scope:</span>
+<a class="text-primary hover:underline" href="#">City of Johannesburg</a>
+<span class="text-slate-300">/</span>
+<span class="text-clay font-bold">Ward 101</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white border-l-4 border-clay shadow-sm dark:bg-slate-900">
+<div class="flex items-center justify-between text-clay">
+<p class="text-sm font-bold uppercase tracking-wider">Identity</p>
+<span class="material-symbols-outlined">home_work</span>
+</div>
+<p class="text-slate-900 dark:text-slate-100 text-2xl font-black">Urban Residential</p>
+<p class="text-slate-500 text-xs">Predominantly middle-income housing and mixed retail.</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white border-l-4 border-ochre shadow-sm dark:bg-slate-900">
+<div class="flex items-center justify-between text-ochre">
+<p class="text-sm font-bold uppercase tracking-wider">Politics</p>
+<span class="material-symbols-outlined">how_to_vote</span>
+</div>
+<p class="text-slate-900 dark:text-slate-100 text-2xl font-black">Coalition Zone</p>
+<p class="text-slate-500 text-xs">High contestation between top three parties.</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white border-l-4 border-primary shadow-sm dark:bg-slate-900">
+<div class="flex items-center justify-between text-primary">
+<p class="text-sm font-bold uppercase tracking-wider">History</p>
+<span class="material-symbols-outlined">history_edu</span>
+</div>
+<p class="text-slate-900 dark:text-slate-100 text-2xl font-black">Historical Hub</p>
+<p class="text-slate-500 text-xs">Established 1974 with significant civic heritage.</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white border-l-4 border-red-600 shadow-sm dark:bg-slate-900">
+<div class="flex items-center justify-between text-red-600">
+<p class="text-sm font-bold uppercase tracking-wider">Pressure</p>
+<span class="material-symbols-outlined">speed</span>
+</div>
+<p class="text-slate-900 dark:text-slate-100 text-2xl font-black">High Tension</p>
+<p class="text-slate-500 text-xs">Service delivery backlogs causing local strain.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+<div class="lg:col-span-1 flex flex-col gap-6">
+<div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm overflow-hidden">
+<div class="flex items-center gap-3 mb-6">
+<div class="bg-clay/10 p-2 rounded-lg text-clay">
+<span class="material-symbols-outlined">map</span>
+</div>
+<h3 class="font-bold text-lg">Ward Profile</h3>
+</div>
+<div class="flex items-center gap-4 mb-6">
+<div class="size-16 rounded-full bg-slate-200 bg-cover bg-center" data-alt="Portrait of a municipal ward councillor" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBpiIWEl0nNKbmexTStSUCd2SXkzxbPNUjE7fwhEbyESCslXGh_UBFmZIvXsYAwGfokdUBgx1_inBrAdJJI-yXWgVsbfCCMVOaKAEpEphCW_G0StGuOQhTUEbIwW14g-PavBit55QdtXC1nHxRANUpD-tm8eU7_MK_Zqp6huAvDFEnbAT1fjZ4Ig4DnlORIDcDqmv0eHa_hUKVX17sKBLJ827EYq1XpCTX6DmaR-eeYNaOJAZy8dyGzh2oH19fvdp4_3wM7PFGQDQ')"></div>
+<div>
+<p class="text-sm text-slate-500 font-medium">Councillor</p>
+<p class="text-lg font-bold text-slate-900 dark:text-slate-100">Cllr. David Khumalo</p>
+<p class="text-xs text-primary font-bold">Democratic Alliance</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center py-2 border-b border-slate-50 dark:border-slate-800">
+<span class="text-sm text-slate-500">Registered Voters</span>
+<span class="text-sm font-bold">24,812</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-slate-50 dark:border-slate-800">
+<span class="text-sm text-slate-500">Unemployment Rate</span>
+<span class="text-sm font-bold text-ochre">18.4%</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-slate-50 dark:border-slate-800">
+<span class="text-sm text-slate-500">Service Coverage</span>
+<span class="text-sm font-bold">92%</span>
+</div>
+</div>
+<div class="mt-6 p-4 bg-ochre/5 rounded-xl border border-ochre/20">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-ochre text-sm">warning</span>
+<p class="text-xs font-bold text-ochre uppercase tracking-wide">Political Context</p>
+</div>
+<p class="text-sm text-slate-700 dark:text-slate-300 italic font-medium">"Complex political context: Multiple splinter groups active in area, requiring high mediation for project rollouts."</p>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+<h3 class="font-bold text-lg mb-4">Ward Coverage Panel</h3>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs font-bold mb-1">
+<span class="text-slate-500">Evidence-backed</span>
+<span class="text-primary">68%</span>
+</div>
+<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 68%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-bold mb-1">
+<span class="text-slate-500">Registry only</span>
+<span class="text-ochre">32%</span>
+</div>
+<div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="bg-ochre h-full" style="width: 32%"></div>
+</div>
+</div>
+<p class="text-[10px] text-slate-400 leading-tight">Registry status indicates data that has not been ground-verified in the last 18 months.</p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-2 flex flex-col gap-6">
+<div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-bold text-lg">Budget Allocation &amp; Planning Signals</h3>
+<div class="flex gap-4 text-xs">
+<div class="flex items-center gap-1.5">
+<span class="size-2 rounded-full bg-primary"></span>
+<span class="text-slate-500">Planning Signals</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="size-2 rounded-full bg-clay"></span>
+<span class="text-slate-500">Ward Spend</span>
+</div>
+</div>
+</div>
+<div class="h-64 flex items-end justify-between gap-4 px-2">
+<div class="flex flex-col flex-1 gap-2 items-center">
+<div class="w-full flex flex-col gap-1 items-center">
+<div class="bg-primary/20 w-8 md:w-12 h-40 rounded-t-sm"></div>
+<div class="bg-clay w-8 md:w-12 h-12 rounded-b-sm"></div>
+</div>
+<span class="text-[10px] font-bold text-slate-400 uppercase">Energy</span>
+</div>
+<div class="flex flex-col flex-1 gap-2 items-center">
+<div class="w-full flex flex-col gap-1 items-center">
+<div class="bg-primary/20 w-8 md:w-12 h-24 rounded-t-sm"></div>
+<div class="bg-clay w-8 md:w-12 h-20 rounded-b-sm"></div>
+</div>
+<span class="text-[10px] font-bold text-slate-400 uppercase">Water</span>
+</div>
+<div class="flex flex-col flex-1 gap-2 items-center">
+<div class="w-full flex flex-col gap-1 items-center">
+<div class="bg-primary/20 w-8 md:w-12 h-48 rounded-t-sm"></div>
+<div class="bg-clay w-8 md:w-12 h-8 rounded-b-sm"></div>
+</div>
+<span class="text-[10px] font-bold text-slate-400 uppercase">Roads</span>
+</div>
+<div class="flex flex-col flex-1 gap-2 items-center">
+<div class="w-full flex flex-col gap-1 items-center">
+<div class="bg-primary/20 w-8 md:w-12 h-16 rounded-t-sm"></div>
+<div class="bg-clay w-8 md:w-12 h-28 rounded-b-sm"></div>
+</div>
+<span class="text-[10px] font-bold text-slate-400 uppercase">Health</span>
+</div>
+<div class="flex flex-col flex-1 gap-2 items-center">
+<div class="w-full flex flex-col gap-1 items-center">
+<div class="bg-primary/20 w-8 md:w-12 h-32 rounded-t-sm"></div>
+<div class="bg-clay w-8 md:w-12 h-16 rounded-b-sm"></div>
+</div>
+<span class="text-[10px] font-bold text-slate-400 uppercase">Safety</span>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<div>
+<p class="text-sm font-bold">Total Ward Spend YTD</p>
+<p class="text-2xl font-black text-clay">R48.2M</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold">Planning Alignment</p>
+<p class="text-2xl font-black text-primary">64%</p>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+<h3 class="font-bold text-lg mb-6">Infrastructure History &amp; Local Projects</h3>
+<div class="relative pl-8 space-y-8 before:absolute before:left-3 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-200 dark:before:bg-slate-800">
+<div class="relative">
+<div class="absolute -left-[25px] top-1 size-4 rounded-full border-4 border-white dark:border-slate-900 bg-primary shadow-sm"></div>
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-bold text-slate-900 dark:text-slate-100">Randburg Substation Upgrade</h4>
+<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 uppercase">Completed</span>
+</div>
+<p class="text-xs text-slate-500 mb-2">October 2023 • R12.4M Budget</p>
+<p class="text-sm text-slate-600 dark:text-slate-400">Successful overhaul of local transformer capacity. Pressure reduced by 15% in sector A.</p>
+</div>
+<div class="relative">
+<div class="absolute -left-[25px] top-1 size-4 rounded-full border-4 border-white dark:border-slate-900 bg-red-500 shadow-sm"></div>
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-bold text-slate-900 dark:text-slate-100">Ward 101 Connector Road</h4>
+<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 uppercase">Failed / Stalled</span>
+</div>
+<p class="text-xs text-slate-500 mb-2">March 2023 • Project Abandoned</p>
+<p class="text-sm text-slate-600 dark:text-slate-400">Contractor liquidation led to partial completion. Site remains a safety hazard for local school zone.</p>
+</div>
+<div class="relative">
+<div class="absolute -left-[25px] top-1 size-4 rounded-full border-4 border-white dark:border-slate-900 bg-ochre shadow-sm"></div>
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-bold text-slate-900 dark:text-slate-100">Community Park Rehabilitation</h4>
+<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 uppercase">In Progress</span>
+</div>
+<p class="text-xs text-slate-500 mb-2">Ongoing • Phase 2 of 3</p>
+<p class="text-sm text-slate-600 dark:text-slate-400">Currently installing solar lighting and security fencing. 45% completion rate reported.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-background-light dark:bg-slate-900 p-8 rounded-3xl border-2 border-dashed border-slate-200 dark:border-slate-800 flex flex-col items-center text-center gap-4">
+<div class="size-16 rounded-full bg-clay/10 flex items-center justify-center text-clay">
+<span class="material-symbols-outlined text-4xl">travel_explore</span>
+</div>
+<div>
+<h4 class="text-xl font-bold mb-1">Ground Evidence Registry</h4>
+<p class="text-slate-500 max-w-md">Our human-in-the-loop intelligence network continuously monitors site failures and project milestones across the City of Johannesburg.</p>
+</div>
+<button class="px-6 py-2 border-2 border-clay text-clay rounded-full font-bold hover:bg-clay hover:text-white transition-all">
+                        Request New Field Audit
+                    </button>
+</div>
+</main>
+<footer class="border-t border-slate-200 dark:border-slate-800 py-8 px-10 bg-white dark:bg-slate-900 mt-12">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined">verified</span>
+<span class="text-xs font-medium">GIC Verified Intelligence • Data refreshed 14 mins ago</span>
+</div>
+<div class="flex gap-8">
+<a class="text-xs font-bold text-slate-500 hover:text-primary" href="#">Methodology</a>
+<a class="text-xs font-bold text-slate-500 hover:text-primary" href="#">Data Ethics</a>
+<a class="text-xs font-bold text-slate-500 hover:text-primary" href="#">API Access</a>
+<a class="text-xs font-bold text-slate-500 hover:text-primary" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

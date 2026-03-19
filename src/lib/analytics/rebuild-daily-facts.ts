@@ -1,10 +1,12 @@
 import { query } from "@/lib/db";
 
-export async function rebuildDailyFacts(_payload: {
-  province?: string;
-  startDate?: string;
-  endDate?: string;
-} = {}): Promise<void> {
+export async function rebuildDailyFacts(
+  _payload: {
+    province?: string;
+    startDate?: string;
+    endDate?: string;
+  } = {},
+): Promise<void> {
   await query(`
     insert into fact_service_pressure_daily (
       day,

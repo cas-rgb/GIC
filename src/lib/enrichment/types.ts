@@ -1,4 +1,7 @@
-export type VerificationTier = "governed" | "verified_enrichment" | "ai_candidate";
+export type VerificationTier =
+  | "governed"
+  | "verified_enrichment"
+  | "ai_candidate";
 
 export interface EnrichmentProvenance {
   sourceUrl: string;

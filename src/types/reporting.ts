@@ -1,5 +1,5 @@
 // src/types/reporting.ts
-import { ConfidenceRating, DataTrace } from '@/lib/reporting-schema';
+import { ConfidenceRating, DataTrace } from "@/lib/reporting-schema";
 
 export type ConfidenceLevel = ConfidenceRating;
 
@@ -20,5 +20,8 @@ export interface GovernedMetric<T = unknown> {
   sourceCount: number;
   trace: DataTrace[];
   governanceNote?: string;
-  emptyState?: 'Insufficient Data' | 'Awaiting Source Integration' | 'Partial Coverage';
+  emptyState?:
+    | "Insufficient Data"
+    | "Awaiting Source Integration"
+    | "Partial Coverage";
 }

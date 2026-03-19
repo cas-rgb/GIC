@@ -15,34 +15,34 @@ export interface DocumentClassifier {
 export interface LocationResolver {
   resolve(
     document: DocumentRecord,
-    classification: DocumentClassification
+    classification: DocumentClassification,
   ): Promise<NormalizedLocation | null>;
 }
 
 export interface SignalExtractor {
   extract(
     document: DocumentRecord,
-    classification: DocumentClassification
+    classification: DocumentClassification,
   ): Promise<NormalizedSignal[]>;
 }
 
 export interface IncidentExtractor {
   extract(
     document: DocumentRecord,
-    signals: NormalizedSignal[]
+    signals: NormalizedSignal[],
   ): Promise<NormalizedIncident[]>;
 }
 
 export interface TenderExtractor {
   extract(
     document: DocumentRecord,
-    classification: DocumentClassification
+    classification: DocumentClassification,
   ): Promise<NormalizedTender[]>;
 }
 
 export interface BudgetExtractor {
   extract(
     document: DocumentRecord,
-    classification: DocumentClassification
+    classification: DocumentClassification,
   ): Promise<NormalizedBudget[]>;
 }

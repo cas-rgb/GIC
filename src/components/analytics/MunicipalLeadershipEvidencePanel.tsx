@@ -54,16 +54,20 @@ export default function MunicipalLeadershipEvidencePanel({
       try {
         const response = await fetch(
           `/api/analytics/municipal-leadership-evidence?${params.toString()}`,
-          { cache: "no-store" }
+          { cache: "no-store" },
         );
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
-        const data = (await response.json()) as MunicipalLeadershipEvidenceResponse;
+        const data =
+          (await response.json()) as MunicipalLeadershipEvidenceResponse;
         setState({ status: "loaded", data });
       } catch (error) {
         setState({
@@ -95,7 +99,9 @@ export default function MunicipalLeadershipEvidencePanel({
       <div className="flex min-h-[180px] items-center justify-center text-center">
         <div>
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">{state.message}</p>
+          <p className="mt-3 text-sm font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
@@ -145,9 +151,13 @@ export default function MunicipalLeadershipEvidencePanel({
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-sm font-bold text-slate-900">{row.title}</p>
+                  <p className="text-sm font-bold text-slate-900">
+                    {row.title}
+                  </p>
                   <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-                    {[province, municipality, row.sourceName].filter(Boolean).join(" | ")}
+                    {[province, municipality, row.sourceName]
+                      .filter(Boolean)
+                      .join(" | ")}
                   </p>
                 </div>
                 <a

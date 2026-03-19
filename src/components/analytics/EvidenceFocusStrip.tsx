@@ -14,7 +14,8 @@ export default function EvidenceFocusStrip({
   onSelectIssue,
 }: EvidenceFocusStripProps) {
   const uniqueOptions = options.filter(
-    (option, index, array): option is string => Boolean(option) && array.indexOf(option) === index
+    (option, index, array): option is string =>
+      Boolean(option) && array.indexOf(option) === index,
   );
 
   return (

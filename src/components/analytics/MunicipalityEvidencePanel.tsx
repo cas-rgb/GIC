@@ -57,16 +57,19 @@ export default function MunicipalityEvidencePanel({
           query.set("ward", ward);
         }
 
-        const response = await fetch(`/api/analytics/municipality-evidence?${query}`, {
-          cache: "no-store",
-        });
+        const response = await fetch(
+          `/api/analytics/municipality-evidence?${query}`,
+          {
+            cache: "no-store",
+          },
+        );
 
         if (!response.ok) {
           throw new Error(
             await parseError(
               response,
-              `request failed with status ${response.status}`
-            )
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -159,12 +162,12 @@ export default function MunicipalityEvidencePanel({
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
             Supporting Documents
           </p>
-          {data.documents.length === 0 ? (
+          {(data.documents || []).length === 0 ? (
             <div className="rounded-2xl border border-dashed border-slate-200 p-6 text-sm font-medium text-slate-500">
               No governed municipality documents match this filter yet.
             </div>
           ) : (
-            data.documents.map((document) => (
+            (data.documents || []).map((document) => (
               <a
                 key={document.documentId}
                 href={document.url}
@@ -201,12 +204,12 @@ export default function MunicipalityEvidencePanel({
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
             Sentiment Mentions
           </p>
-          {data.mentions.length === 0 ? (
+          {(data.mentions || []).length === 0 ? (
             <div className="rounded-2xl border border-dashed border-slate-200 p-6 text-sm font-medium text-slate-500">
               No governed sentiment mentions match this municipality filter yet.
             </div>
           ) : (
-            data.mentions.map((mention, index) => (
+            (data.mentions || []).map((mention, index) => (
               <div
                 key={`${mention.title}-${mention.topic}-${index}`}
                 className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm"
@@ -249,7 +252,7 @@ export default function MunicipalityEvidencePanel({
       </div>
 
       <div className="rounded-2xl border border-dashed border-slate-200 p-4">
-        {data.caveats.map((caveat) => (
+        {(data.caveats || []).map((caveat) => (
           <p key={caveat} className="text-sm font-medium text-slate-500">
             {caveat}
           </p>

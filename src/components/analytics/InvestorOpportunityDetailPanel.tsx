@@ -36,12 +36,12 @@ function formatCurrency(value: number | null): string {
 
 function confidenceTone(flag: string): string {
   if (flag === "OK") {
-    return "border-emerald-100 bg-emerald-50 text-emerald-700";
+    return "border-emerald-900/40 bg-emerald-900/20 text-emerald-400";
   }
   if (flag === "MEDIUM") {
-    return "border-amber-100 bg-amber-50 text-amber-700";
+    return "border-amber-900/40 bg-amber-900/20 text-amber-400";
   }
-  return "border-slate-100 bg-slate-50 text-slate-700";
+  return "border-slate-800 bg-slate-800/50 text-slate-400";
 }
 
 export default function InvestorOpportunityDetailPanel({
@@ -70,16 +70,20 @@ export default function InvestorOpportunityDetailPanel({
       try {
         const response = await fetch(
           `/api/analytics/investor-opportunity-detail?projectId=${encodeURIComponent(projectId)}`,
-          { cache: "no-store" }
+          { cache: "no-store" },
         );
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
-        const data = (await response.json()) as InvestorOpportunityDetailResponse;
+        const data =
+          (await response.json()) as InvestorOpportunityDetailResponse;
         setState({ status: "loaded", data });
       } catch (error) {
         setState({
@@ -97,14 +101,15 @@ export default function InvestorOpportunityDetailPanel({
 
   if (state.status === "idle") {
     return (
-      <div className="flex min-h-[320px] items-center justify-center text-center">
+      <div className="flex min-h-[320px] items-center justify-center text-center rounded-2xl border border-slate-800 border-dashed bg-slate-900/50 shadow-gic-premium">
         <div>
-          <Landmark className="mx-auto h-10 w-10 text-slate-300" />
-          <p className="mt-4 text-sm font-black uppercase tracking-widest text-slate-900">
-            Select an opportunity
+          <Landmark className="mx-auto h-10 w-10 text-slate-700" />
+          <p className="mt-4 text-sm font-black uppercase tracking-widest text-slate-400">
+            Awaiting Asset Selection
           </p>
           <p className="mt-2 text-sm font-medium text-slate-500">
-            Choose a ranked Treasury project to inspect funding rows, updates, and source provenance.
+            Choose a ranked Treasury project to inspect funding rows, updates,
+            and source provenance.
           </p>
         </div>
       </div>
@@ -113,10 +118,10 @@ export default function InvestorOpportunityDetailPanel({
 
   if (state.status === "loading") {
     return (
-      <div className="flex min-h-[320px] items-center justify-center">
+      <div className="flex min-h-[320px] items-center justify-center rounded-2xl border border-slate-800 bg-slate-900 shadow-gic-premium">
         <div className="flex items-center gap-3 text-sm font-bold text-slate-400">
-          <RefreshCw className="h-4 w-4 animate-spin" />
-          Loading project detail...
+          <RefreshCw className="h-4 w-4 animate-spin text-gic-blue" />
+          Loading Intelligence...
         </div>
       </div>
     );
@@ -124,13 +129,15 @@ export default function InvestorOpportunityDetailPanel({
 
   if (state.status === "error") {
     return (
-      <div className="flex min-h-[320px] items-center justify-center text-center">
+      <div className="flex min-h-[320px] items-center justify-center text-center rounded-2xl border border-rose-900/30 bg-slate-900 shadow-gic-premium">
         <div>
-          <AlertTriangle className="mx-auto h-10 w-10 text-amber-500" />
-          <p className="mt-3 text-sm font-black uppercase tracking-widest text-slate-900">
+          <AlertTriangle className="mx-auto h-10 w-10 text-rose-500" />
+          <p className="mt-3 text-sm font-black uppercase tracking-widest text-slate-200">
             Project detail unavailable
           </p>
-          <p className="mt-2 text-xs font-medium text-slate-500">{state.message}</p>
+          <p className="mt-2 text-xs font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
@@ -140,14 +147,16 @@ export default function InvestorOpportunityDetailPanel({
 
   return (
     <div className="space-y-6">
-      <div className="rounded-3xl border border-slate-100 bg-slate-50 p-5">
+      <div className="rounded-3xl border border-slate-800 bg-slate-900 p-5 shadow-gic-premium">
         <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <Coins className="h-4 w-4 text-emerald-600" />
-              <p className="text-lg font-bold text-slate-900">{data.summary.projectName}</p>
+              <Coins className="h-4 w-4 text-sky-400" />
+              <p className="text-lg font-bold text-white">
+                {data.summary.projectName}
+              </p>
             </div>
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
               {[
                 data.summary.province,
                 data.summary.municipality,
@@ -158,111 +167,83 @@ export default function InvestorOpportunityDetailPanel({
                 .join(" | ")}
             </p>
           </div>
-          {data.summary.sourceUrl ? (
-            <a
-              href={data.summary.sourceUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-slate-600"
-            >
-              Source
-              <ExternalLink className="h-3.5 w-3.5" />
-            </a>
-          ) : null}
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4 xl:grid-cols-5">
-        <div className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
-          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-            Opportunity Score
+        <div className="rounded-2xl border border-slate-800 bg-slate-900 p-4 shadow-sm">
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
+            Match Score
           </p>
-          <p className="mt-2 text-2xl font-display font-bold text-slate-900">
+          <p className="mt-2 text-2xl font-display font-bold text-white">
             {data.summary.investmentScore}
           </p>
         </div>
-        <div className="rounded-2xl border border-emerald-100 bg-emerald-50 p-4">
-          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500">
-            Latest Amount
+        <div className="rounded-2xl border border-emerald-900/40 bg-emerald-950/20 p-4">
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-400">
+            Latest Treasury Flow
           </p>
-          <p className="mt-2 text-sm font-bold text-emerald-700">
+          <p className="mt-2 text-sm font-bold text-emerald-400">
             {formatCurrency(data.summary.latestAmount)}
           </p>
         </div>
-        <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4">
-          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-500">
-            Known Spend
+        <div className="rounded-2xl border border-blue-900/40 bg-blue-950/20 p-4">
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400">
+            Known Capital Sync
           </p>
-          <p className="mt-2 text-sm font-bold text-blue-700">
+          <p className="mt-2 text-sm font-bold text-blue-400">
             {formatCurrency(data.summary.totalKnownExpenditure)}
           </p>
         </div>
-        <div className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
-          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-            Budget Year
+        <div className="rounded-2xl border border-slate-800 bg-slate-900 p-4 shadow-sm">
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
+            Budget Cycle Target
           </p>
-          <p className="mt-2 text-sm font-bold text-slate-900">
+          <p className="mt-2 text-sm font-bold text-white">
             {data.summary.latestBudgetYear ?? "Unavailable"}
           </p>
         </div>
-        <div className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
-          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-            Confidence Tier
-          </p>
-          <span className={`mt-2 inline-flex rounded-xl border px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] ${confidenceTone(data.summary.dataQualityFlag)}`}>
-            {data.summary.dataQualityFlag}
-          </span>
-        </div>
-      </div>
-
-      <div className="rounded-2xl border border-amber-100 bg-amber-50 p-4">
-        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-600">
-          Directional Readiness Note
-        </p>
-        <p className="mt-2 text-sm font-medium text-slate-700">
-          This detail view shows normalized Treasury project evidence and confidence tiering. It supports opportunity positioning and government engagement, not confirmation of investor commitment.
-        </p>
       </div>
 
       <div className="grid grid-cols-1 gap-8 xl:grid-cols-[1fr_1.1fr]">
         <div className="space-y-4">
           <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
             <Database className="h-3.5 w-3.5" />
-            Funding rows
+            Treasury Verification Track
           </div>
           <div className="space-y-3">
-            {data.fundingRows.length === 0 ? (
-              <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4 text-sm font-medium text-slate-500">
-                No funding rows were normalized for this project yet.
+            {(data.fundingRows || []).length === 0 ? (
+              <div className="rounded-2xl border border-dashed border-slate-700 bg-slate-800/50 p-4 text-sm font-medium text-slate-500">
+                No normalized lifecycle funding has been audited for this asset yet.
               </div>
             ) : (
-              data.fundingRows.map((row) => (
+              (data.fundingRows || []).map((row) => (
                 <div
                   key={`${row.financialYear ?? "none"}-${row.budgetPhase ?? "none"}-${row.amount}`}
-                  className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm"
+                  className="rounded-2xl border border-slate-800 bg-slate-900 p-4 shadow-sm"
                 >
                   <div className="grid grid-cols-3 gap-3">
                     <div>
-                      <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">
-                        Financial Year
+                      <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500">
+                        Fiscal Year
                       </p>
-                      <p className="mt-2 text-sm font-bold text-slate-900">
-                        {row.financialYear ?? "Unavailable"}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">
-                        Budget Phase
-                      </p>
-                      <p className="mt-2 text-sm font-bold text-slate-900">
-                        {row.budgetPhase ?? "Unavailable"}
+                      <p className="mt-2 text-sm font-bold text-white">
+                        {row.financialYear ?? "TBA"}
                       </p>
                     </div>
                     <div>
-                      <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">
-                        Amount
+                      <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500">
+                        Execution Phase
                       </p>
-                      <p className="mt-2 text-sm font-bold text-slate-900">
+                      <p className="mt-2 text-sm font-bold text-white">
+                        {row.budgetPhase ?? "Awaiting Phase"}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-[9px] font-black uppercase tracking-[0.2em] text-emerald-500/80">
+                        Capital Volume
+                      </p>
+                      <p className="mt-2 text-sm font-bold text-emerald-400">
                         {formatCurrency(row.amount)}
                       </p>
                     </div>
@@ -276,24 +257,24 @@ export default function InvestorOpportunityDetailPanel({
         <div className="space-y-4">
           <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
             <RefreshCw className="h-3.5 w-3.5" />
-            Project updates
+            Execution Milestones
           </div>
           <div className="space-y-3">
-            {data.updateRows.length === 0 ? (
-              <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4 text-sm font-medium text-slate-500">
-                No normalized project updates were found for this opportunity.
+            {(data.updateRows || []).length === 0 ? (
+              <div className="rounded-2xl border border-dashed border-slate-700 bg-slate-800/50 p-4 text-sm font-medium text-slate-500">
+                No formalized execution progress reporting has been indexed for this asset.
               </div>
             ) : (
-              data.updateRows.map((row, index) => (
+              (data.updateRows || []).map((row, index) => (
                 <div
                   key={`${row.updateType}-${row.effectiveDate ?? index}`}
-                  className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm"
+                  className="rounded-2xl border border-slate-800 bg-slate-900 p-4 shadow-sm"
                 >
-                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-sky-500/80">
                     {row.updateType}
                     {row.effectiveDate ? ` | ${row.effectiveDate}` : ""}
                   </p>
-                  <p className="mt-2 text-sm font-medium text-slate-700">
+                  <p className="mt-2 text-sm font-medium text-slate-300">
                     {row.updateSummary}
                   </p>
                 </div>
@@ -303,10 +284,10 @@ export default function InvestorOpportunityDetailPanel({
         </div>
       </div>
 
-      <div className="rounded-2xl border border-amber-100 bg-amber-50 p-4">
+      <div className="rounded-2xl border border-amber-900/30 bg-amber-950/20 p-4">
         <div className="space-y-2">
-          {data.caveats.map((caveat) => (
-            <p key={caveat} className="text-sm font-medium text-slate-700">
+          {(data.caveats || []).map((caveat) => (
+            <p key={caveat} className="text-sm font-medium text-amber-500/80">
               {caveat}
             </p>
           ))}

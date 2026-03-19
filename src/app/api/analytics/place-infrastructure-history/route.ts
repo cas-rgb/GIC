@@ -8,7 +8,10 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   const ward = request.nextUrl.searchParams.get("ward");
 
   if (!province) {
-    return NextResponse.json({ error: "province is required" }, { status: 400 });
+    return NextResponse.json(
+      { error: "province is required" },
+      { status: 400 },
+    );
   }
 
   try {
@@ -26,7 +29,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             ? error.message
             : "Failed to fetch place infrastructure history",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
+
+

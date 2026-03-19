@@ -1,7 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AlertTriangle, CheckCircle2, Download, FileJson, RefreshCw } from "lucide-react";
+import {
+  AlertTriangle,
+  CheckCircle2,
+  Download,
+  FileJson,
+  RefreshCw,
+} from "lucide-react";
 
 import { ProvinceRecommendationsResponse } from "@/lib/recommendations/types";
 
@@ -43,19 +49,19 @@ export default function ProvinceRecommendationsPanel({
       try {
         const response = await fetch(
           `/api/intelligence/province-recommendations?province=${encodeURIComponent(
-            province
+            province,
           )}&days=${days}`,
           {
             cache: "no-store",
-          }
+          },
         );
 
         if (!response.ok) {
           throw new Error(
             await parseError(
               response,
-              `request failed with status ${response.status}`
-            )
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -130,7 +136,7 @@ export default function ProvinceRecommendationsPanel({
       "trace_chips",
     ];
 
-    const lines = data.recommendations.map((recommendation) =>
+    const lines = (data.recommendations || []).map((recommendation) =>
       [
         recommendation.title,
         recommendation.issue,
@@ -147,7 +153,7 @@ export default function ProvinceRecommendationsPanel({
         recommendation.traceChips.join(" | "),
       ]
         .map((value) => `"${String(value).replace(/"/g, '""')}"`)
-        .join(",")
+        .join(","),
     );
 
     const blob = new Blob([[header.join(","), ...lines].join("\n")], {
@@ -181,7 +187,7 @@ export default function ProvinceRecommendationsPanel({
           Export JSON
         </button>
       </div>
-      {data.recommendations.map((recommendation) => (
+      {(data.recommendations || []).map((recommendation) => (
         <div
           key={recommendation.title}
           className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm"
@@ -237,7 +243,8 @@ export default function ProvinceRecommendationsPanel({
                 Linked Leaders
               </p>
               <p className="mt-2 text-sm font-medium text-slate-700">
-                {recommendation.linkedLeaders.join(", ") || "Operational leadership focus"}
+                {recommendation.linkedLeaders.join(", ") ||
+                  "Operational leadership focus"}
               </p>
             </div>
           </div>
@@ -324,7 +331,9 @@ export default function ProvinceRecommendationsPanel({
                     : "bg-slate-100 text-slate-500 hover:bg-slate-200"
                 }`}
               >
-                {selectedIssue === recommendation.issue ? "Evidence Open" : "Open Evidence"}
+                {selectedIssue === recommendation.issue
+                  ? "Evidence Open"
+                  : "Open Evidence"}
               </button>
             </div>
           ) : null}

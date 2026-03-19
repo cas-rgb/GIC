@@ -46,13 +46,14 @@ function mapOpportunityRow(row: OpportunityRowDb): InvestorOpportunityRow {
 export async function getInvestorOpportunities(
   province?: string | null,
   municipality?: string | null,
-  limit = 12
+  serviceDomain?: string | null,
+  limit = 12,
 ): Promise<InvestorOpportunitiesResponse> {
   const latestSnapshotResult = await query<{ snapshotDate: string | null }>(
     `
       select max(day)::text as "snapshotDate"
       from fact_infrastructure_projects_daily
-    `
+    `,
   );
 
   const snapshotDate = latestSnapshotResult.rows[0]?.snapshotDate ?? null;
@@ -98,6 +99,7 @@ export async function getInvestorOpportunities(
           and coalesce(data_quality_flag, 'LOW') <> 'LOW'
           and ($1::text is null or province = $1)
           and ($2::text is null or municipality = $2)
+          and ($3::text is null or normalized_sector = $3)
       )
       select
         count(*)::int as "opportunityCount",
@@ -106,7 +108,7 @@ export async function getInvestorOpportunities(
         round(avg(investment_score)::numeric, 2) as "averageInvestmentScore"
       from scored
     `,
-    [province ?? null, municipality ?? null]
+    [province ?? null, municipality ?? null, serviceDomain ?? null],
   );
 
   const rowsResult = await query<OpportunityRowDb>(
@@ -158,13 +160,14 @@ export async function getInvestorOpportunities(
           and coalesce(data_quality_flag, 'LOW') <> 'LOW'
           and ($1::text is null or province = $1)
           and ($2::text is null or municipality = $2)
+          and ($3::text is null or normalized_sector = $3)
       )
       select *
       from scored
       order by "investmentScore" desc, "totalKnownExpenditure" desc, "projectName" asc
-      limit $3
+      limit $4
     `,
-    [province ?? null, municipality ?? null, limit]
+    [province ?? null, municipality ?? null, serviceDomain ?? null, limit],
   );
 
   const topSectorResult = await query<{ normalizedSector: string | null }>(
@@ -174,10 +177,11 @@ export async function getInvestorOpportunities(
       where day = $1::date
         and ($2::text is null or province = $2)
         and ($3::text is null or municipality = $3)
+        and ($4::text is null or normalized_sector = $4)
       order by project_count desc, normalized_sector asc
       limit 1
     `,
-    [snapshotDate, province ?? null, municipality ?? null]
+    [snapshotDate, province ?? null, municipality ?? null, serviceDomain ?? null],
   );
 
   const summary = summaryResult.rows[0] ?? {

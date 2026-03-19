@@ -1,7 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AlertTriangle, RefreshCw, ShieldCheck, TimerReset } from "lucide-react";
+import {
+  AlertTriangle,
+  RefreshCw,
+  ShieldCheck,
+  TimerReset,
+} from "lucide-react";
 
 import { SourceHealthSummaryResponse } from "@/lib/source-registry/types";
 
@@ -37,12 +42,15 @@ export default function MunicipalitySourceHealthPanel({
       try {
         const response = await fetch(
           `/api/analytics/source-health-summary?province=${encodeURIComponent(province)}`,
-          { cache: "no-store" }
+          { cache: "no-store" },
         );
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -81,7 +89,9 @@ export default function MunicipalitySourceHealthPanel({
           <p className="mt-3 text-sm font-black uppercase tracking-widest text-slate-900">
             Source health unavailable
           </p>
-          <p className="mt-2 text-xs font-medium text-slate-500">{state.message}</p>
+          <p className="mt-2 text-xs font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
@@ -96,8 +106,9 @@ export default function MunicipalitySourceHealthPanel({
           Municipality dependency
         </p>
         <p className="mt-2 text-sm font-medium text-slate-700">
-          {municipality} is currently backed by the {province} connector estate. This makes
-          the local view only as current as the province source refresh cycle behind it.
+          {municipality} is currently backed by the {province} connector estate.
+          This makes the local view only as current as the province source
+          refresh cycle behind it.
         </p>
       </div>
 

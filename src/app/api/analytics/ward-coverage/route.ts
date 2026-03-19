@@ -9,7 +9,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   if (!province || !municipality) {
     return NextResponse.json(
       { error: "province and municipality are required" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -24,7 +24,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             ? error.message
             : "Failed to fetch ward coverage",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
+
+

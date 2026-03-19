@@ -48,7 +48,7 @@ export interface MunicipalityBriefingResponse {
 export async function getMunicipalityBriefing(
   province: string,
   municipality: string,
-  days = 30
+  days = 30,
 ): Promise<MunicipalityBriefingResponse> {
   const [
     summary,
@@ -62,17 +62,17 @@ export async function getMunicipalityBriefing(
     legacyCommunity,
     wardCoverage,
   ] = await Promise.all([
-      getMunicipalitySummary(province, municipality, days),
-      getMunicipalitySentiment(province, municipality, days),
-      getMunicipalityEvidenceBalance(province, municipality, days),
-      getMunicipalLeadershipSentiment(province, municipality, days),
-      getMunicipalityRecommendations(province, municipality, days),
-      getWaterReliability(province, days),
-      getSourceHealthSummary(province),
-      getMunicipalityCitizenVoiceSummary(province, municipality, days),
-      getMunicipalityLegacyCommunitySignals(province, municipality, days),
-      getWardCoverage(province, municipality),
-    ]);
+    getMunicipalitySummary(province, municipality, days),
+    getMunicipalitySentiment(province, municipality, days),
+    getMunicipalityEvidenceBalance(province, municipality, days),
+    getMunicipalLeadershipSentiment(province, municipality, days),
+    getMunicipalityRecommendations(province, municipality, days),
+    getWaterReliability(province, days),
+    getSourceHealthSummary(province),
+    getMunicipalityCitizenVoiceSummary(province, municipality, days),
+    getMunicipalityLegacyCommunitySignals(province, municipality, days),
+    getWardCoverage(province, municipality),
+  ]);
 
   const topLeader = leadership.leaders[0] ?? null;
   const topRecommendation = recommendations.recommendations[0] ?? null;
@@ -84,24 +84,24 @@ export async function getMunicipalityBriefing(
     "municipal service delivery";
   const officialShare = Math.max(
     summary.summary.officialEvidenceShare,
-    evidenceBalance.summary.officialDocumentShare
+    evidenceBalance.summary.officialDocumentShare,
   );
   const summaryLines = [
     `${summary.summary.pressureCaseCount} governed pressure cases and ${summary.summary.highSeverityCount} high-severity cases are in the current municipality window.`,
     `${Math.round(sentiment.summary.negativeShare * 100)}% of the latest governed sentiment window is negative, with ${summary.summary.topComplaintTopic ?? topIssue} carrying the strongest complaint signal.`,
     `${summary.summary.evidenceConfidenceScore}% evidence confidence is backed by ${Math.round(officialShare)}% official local evidence share.`,
     `${publicVoice.summary.totalCitizenMentions} governed citizen-voice mentions are attached to ${municipality}, with ${Math.round(
-      publicVoice.summary.averageNegativeShare * 100
+      publicVoice.summary.averageNegativeShare * 100,
     )}% negative share and ${publicVoice.summary.narrativeRiskLevel.toLowerCase()} narrative risk.`,
     `Imported community evidence adds ${legacyCommunity.summary.documentCount} legacy resident/civic signals, with ${Math.round(
-      legacyCommunity.summary.negativeShare * 100
+      legacyCommunity.summary.negativeShare * 100,
     )}% negative share${legacyCommunity.issues[0]?.issue ? ` and ${legacyCommunity.issues[0]?.issue} as the strongest recurring local issue` : ""}.`,
     `Ward readiness is ${wardCoverage.summary.wardReadinessLabel.toLowerCase()}, with ${wardCoverage.summary.wardCount} formal ward rows and ${wardCoverage.summary.wardReadyCommunityCount} ward-ready community rows available for local drilldown.`,
   ];
 
   if ((topIssue ?? "").includes("Water")) {
     summaryLines.push(
-      `${province} official water reliability is ${waterReliability.summary.waterReliabilityScore}, which should be used to verify local water pressure before intervention decisions are finalized.`
+      `${province} official water reliability is ${waterReliability.summary.waterReliabilityScore}, which should be used to verify local water pressure before intervention decisions are finalized.`,
     );
   }
 
@@ -119,35 +119,42 @@ export async function getMunicipalityBriefing(
 
   if (publicVoice.summary.totalCitizenMentions >= 6) {
     risks.push(
-      `Public complaint pressure is material in ${municipality}, dominated by ${publicVoice.summary.dominantIssueFamily ?? topIssue}, and should be treated as a local visibility risk if response stays slow.`
+      `Public complaint pressure is material in ${municipality}, dominated by ${publicVoice.summary.dominantIssueFamily ?? topIssue}, and should be treated as a local visibility risk if response stays slow.`,
     );
   }
 
-  if (legacyCommunity.summary.documentCount >= 10 && legacyCommunity.summary.negativeShare >= 0.45) {
+  if (
+    legacyCommunity.summary.documentCount >= 10 &&
+    legacyCommunity.summary.negativeShare >= 0.45
+  ) {
     risks.push(
-      `Imported community evidence shows entrenched local pressure around ${legacyCommunity.issues[0]?.issue ?? topIssue}, so the current complaint picture is not only a short-cycle narrative spike.`
+      `Imported community evidence shows entrenched local pressure around ${legacyCommunity.issues[0]?.issue ?? topIssue}, so the current complaint picture is not only a short-cycle narrative spike.`,
     );
   }
 
   if (wardCoverage.summary.wardReadinessLabel === "Community-led") {
     risks.push(
-      `Formal ward mapping is still sparse in ${municipality}, so local intervention design should use community-level fallback evidence until ward-coded reporting improves.`
+      `Formal ward mapping is still sparse in ${municipality}, so local intervention design should use community-level fallback evidence until ward-coded reporting improves.`,
     );
   } else if (wardCoverage.summary.wardReadinessLabel === "Sparse") {
     risks.push(
-      `Ward-level visibility is still sparse in ${municipality}, so hyperlocal action should be handled cautiously until more local reporting is mapped.`
+      `Ward-level visibility is still sparse in ${municipality}, so hyperlocal action should be handled cautiously until more local reporting is mapped.`,
     );
   }
 
-  if ((topIssue ?? "").includes("Water") && waterReliability.summary.waterReliabilityScore < 75) {
+  if (
+    (topIssue ?? "").includes("Water") &&
+    waterReliability.summary.waterReliabilityScore < 75
+  ) {
     risks.push(
-      `Water-specific decisions should be handled cautiously because the current official water reliability score is only ${waterReliability.summary.waterReliabilityScore}.`
+      `Water-specific decisions should be handled cautiously because the current official water reliability score is only ${waterReliability.summary.waterReliabilityScore}.`,
     );
   }
 
   const issueMix = [
     {
-      serviceDomain: summary.summary.topPressureDomain ?? "Mixed service delivery",
+      serviceDomain:
+        summary.summary.topPressureDomain ?? "Mixed service delivery",
       volume: summary.summary.pressureCaseCount,
       severe: summary.summary.highSeverityCount,
       protests: summary.summary.protestCount,
@@ -210,7 +217,7 @@ export async function getMunicipalityBriefing(
         sourceName: "Citizen voice",
         sourceType: "citizen_voice",
         excerpt: `${publicVoice.summary.totalCitizenMentions} governed mentions with ${Math.round(
-          publicVoice.summary.averageNegativeShare * 100
+          publicVoice.summary.averageNegativeShare * 100,
         )}% negative share.`,
       },
       {

@@ -14,9 +14,10 @@ export async function getMunicipalityPressureTrend(
   province: string,
   municipality: string,
   days = 30,
-  serviceDomain?: string | null
+  serviceDomain?: string | null,
 ): Promise<MunicipalityPressureTrendResponse> {
-  const normalizedServiceDomain = normalizeInfrastructureServiceFilter(serviceDomain);
+  const normalizedServiceDomain =
+    normalizeInfrastructureServiceFilter(serviceDomain);
   const result = await query<TrendRow>(
     `
       select
@@ -33,7 +34,7 @@ export async function getMunicipalityPressureTrend(
       group by day
       order by day asc
     `,
-    [province, municipality, days, normalizedServiceDomain]
+    [province, municipality, days, normalizedServiceDomain],
   );
 
   return {

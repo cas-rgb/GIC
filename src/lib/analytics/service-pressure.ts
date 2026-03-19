@@ -22,9 +22,10 @@ interface ServicePressureTotalsRow {
 export async function getServicePressure(
   province: string,
   days = 30,
-  serviceDomain?: string | null
+  serviceDomain?: string | null,
 ): Promise<ServicePressureResponse> {
-  const normalizedServiceDomain = normalizeInfrastructureServiceFilter(serviceDomain);
+  const normalizedServiceDomain =
+    normalizeInfrastructureServiceFilter(serviceDomain);
   const seriesResult = await query<ServicePressureRow>(
     `
       select
@@ -41,7 +42,7 @@ export async function getServicePressure(
         and ($3::text is null or service_domain = $3)
       order by day asc, service_domain asc
     `,
-    [province, days, normalizedServiceDomain]
+    [province, days, normalizedServiceDomain],
   );
 
   const totalsResult = await query<ServicePressureTotalsRow>(
@@ -56,7 +57,7 @@ export async function getServicePressure(
         and day >= current_date - ($2::int - 1)
         and ($3::text is null or service_domain = $3)
     `,
-    [province, days, normalizedServiceDomain]
+    [province, days, normalizedServiceDomain],
   );
 
   return {

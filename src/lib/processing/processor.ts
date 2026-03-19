@@ -36,7 +36,9 @@ export class DocumentProcessor {
   constructor(private readonly dependencies: ProcessorDependencies) {}
 
   async process(job: ProcessDocumentJob): Promise<ProcessedDocumentResult> {
-    const document = await this.dependencies.repository.getDocument(job.documentId);
+    const document = await this.dependencies.repository.getDocument(
+      job.documentId,
+    );
 
     if (!document.contentText.trim()) {
       const quality = buildQualityReport({
@@ -46,16 +48,17 @@ export class DocumentProcessor {
       await this.dependencies.repository.markProcessed(
         document.id,
         job.parserVersion,
-        quality
+        quality,
       );
 
       throw new Error("document content is empty");
     }
 
-    const classification = await this.dependencies.classifier.classify(document);
+    const classification =
+      await this.dependencies.classifier.classify(document);
     const location = await this.dependencies.locationResolver.resolve(
       document,
-      classification
+      classification,
     );
 
     const signals = (
@@ -63,15 +66,15 @@ export class DocumentProcessor {
     ).map(normalizeSignal);
     const incidents = await this.dependencies.incidentExtractor.extract(
       document,
-      signals
+      signals,
     );
     const tenders = await this.dependencies.tenderExtractor.extract(
       document,
-      classification
+      classification,
     );
     const budgets = await this.dependencies.budgetExtractor.extract(
       document,
-      classification
+      classification,
     );
 
     const errors = [
@@ -89,7 +92,7 @@ export class DocumentProcessor {
       confidences: [
         classification.confidence,
         ...(location ? [location.confidence] : []),
-        ...signals.map((signal) => signal.confidenceScore),
+        ...(signals || []).map((signal) => signal.confidenceScore),
         ...incidents.map((incident) => incident.classificationConfidence),
       ],
     });
@@ -101,30 +104,30 @@ export class DocumentProcessor {
       const signalIds = await this.dependencies.repository.saveSignals(
         document.id,
         locationId,
-        signals
+        signals,
       );
 
       await this.dependencies.repository.saveIncidents(
         signalIds,
         locationId,
-        incidents
+        incidents,
       );
       await this.dependencies.repository.saveTenders(
         document.id,
         locationId,
-        tenders
+        tenders,
       );
       await this.dependencies.repository.saveBudgets(
         document.id,
         locationId,
-        budgets
+        budgets,
       );
     }
 
     await this.dependencies.repository.markProcessed(
       document.id,
       job.parserVersion,
-      quality
+      quality,
     );
 
     return {

@@ -35,9 +35,33 @@ function toNumber(value: string | number | null | undefined): number {
 
 export async function getCitizenVoiceTrends(
   province: string | null,
-  days = 30
+  days = 30,
+  municipality: string | null = null,
+  serviceDomain: string | null = null,
 ): Promise<CitizenVoiceTrendsResponse> {
-  const params = [province, days];
+  const params: any[] = [province, days];
+  
+  let baseWhere = `($1::text is null or province = $1) and day >= current_date - ($2::int - 1)`;
+  
+  if (municipality && municipality !== "All Municipalities") {
+    params.push(municipality);
+    baseWhere += ` and municipality = $${params.length}`;
+  }
+  
+  if (serviceDomain && serviceDomain !== "all") {
+    const { INFRASTRUCTURE_SERVICE_OPTIONS } = await import("./issue-taxonomy");
+    const mapped = INFRASTRUCTURE_SERVICE_OPTIONS.find((t: any) => t.value === serviceDomain)?.label;
+    if (mapped) {
+      params.push(mapped);
+      baseWhere += ` and issue_family = $${params.length}`;
+    }
+  }
+
+  const fcvdWhere = baseWhere
+    .replace(/\bprovince\b/g, 'fcvd.province')
+    .replace(/\bday\b/g, 'fcvd.day')
+    .replace(/\bmunicipality\b/g, 'fcvd.municipality')
+    .replace(/\bissue_family\b/g, 'fcvd.issue_family');
 
   const [trendResult, issueResult, issueTrendResult] = await Promise.all([
     query<TrendRow>(
@@ -49,12 +73,11 @@ export async function getCitizenVoiceTrends(
           round(avg(negative_share)::numeric, 3) as "negativeShare",
           round(avg(avg_sentiment_score)::numeric, 2) as "avgSentimentScore"
         from fact_citizen_voice_daily
-        where ($1::text is null or province = $1)
-          and day >= current_date - ($2::int - 1)
+        where ${baseWhere}
         group by day
         order by day asc
       `,
-      params
+      params,
     ),
     query<IssueRow>(
       `
@@ -66,12 +89,11 @@ export async function getCitizenVoiceTrends(
           round(avg(avg_sentiment_score)::numeric, 2) as "avgSentimentScore",
           round(avg(avg_confidence)::numeric, 3) as "avgConfidence"
         from fact_citizen_voice_daily
-        where ($1::text is null or province = $1)
-          and day >= current_date - ($2::int - 1)
+        where ${baseWhere}
         group by issue_family
         order by "mentionCount" desc, "issueFamily" asc
       `,
-      params
+      params,
     ),
     query<IssueTrendRow>(
       `
@@ -80,8 +102,7 @@ export async function getCitizenVoiceTrends(
             issue_family,
             sum(mention_count)::int as mention_count
           from fact_citizen_voice_daily
-          where ($1::text is null or province = $1)
-            and day >= current_date - ($2::int - 1)
+          where ${baseWhere}
           group by issue_family
           order by mention_count desc, issue_family asc
           limit 4
@@ -93,12 +114,11 @@ export async function getCitizenVoiceTrends(
           sum(fcvd.document_count)::int as "documentCount"
         from fact_citizen_voice_daily fcvd
         join ranked_issues ri on ri.issue_family = fcvd.issue_family
-        where ($1::text is null or fcvd.province = $1)
-          and fcvd.day >= current_date - ($2::int - 1)
+        where ${fcvdWhere}
         group by fcvd.issue_family, fcvd.day
         order by fcvd.day asc, fcvd.issue_family asc
       `,
-      params
+      params,
     ),
   ]);
 
@@ -139,7 +159,11 @@ export async function getCitizenVoiceTrends(
       documentCount: trend.reduce((sum, point) => sum + point.documentCount, 0),
       avgNegativeShare:
         trend.length > 0
-          ? Math.round((trend.reduce((sum, point) => sum + point.negativeShare, 0) / trend.length) * 1000) / 1000
+          ? Math.round(
+              (trend.reduce((sum, point) => sum + point.negativeShare, 0) /
+                trend.length) *
+                1000,
+            ) / 1000
           : 0,
       dominantIssueFamily: topIssue?.issueFamily ?? null,
     },

@@ -11,14 +11,14 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   if (!province) {
     return NextResponse.json(
       { error: "province is required" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
   if (!Number.isFinite(days) || days <= 0) {
     return NextResponse.json(
       { error: "days must be a positive number" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -33,7 +33,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             ? error.message
             : "Failed to fetch service pressure",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
+
+

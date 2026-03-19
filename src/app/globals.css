@@ -21,9 +21,33 @@
   --shadow-gic-hard: 2px 2px 0px 0px rgba(15, 23, 42, 1);
 }
 
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
 @layer base {
   body {
     @apply bg-surface-base text-slate-900 font-sans antialiased selection:bg-gic-gold/20;
+  }
+
+  /* Custom Slim Branded Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 rounded-full border-[1px] border-transparent bg-clip-padding;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-400;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
   }
 }
 
@@ -87,6 +111,31 @@
     @apply border border-slate-200 text-slate-600 hover:border-slate-400 hover:text-slate-900;
   }
 
+  /* Badge Pills */
+  .gic-badge {
+    @apply px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1 border;
+  }
+
+  .gic-badge-critical {
+    @apply bg-rose-50 text-rose-700 border-rose-200;
+  }
+
+  .gic-badge-warning {
+    @apply bg-amber-50 text-amber-700 border-amber-200;
+  }
+
+  .gic-badge-success {
+    @apply bg-emerald-50 text-emerald-700 border-emerald-200;
+  }
+
+  .gic-badge-info {
+    @apply bg-blue-50 text-blue-700 border-blue-200;
+  }
+
+  .gic-badge-neutral {
+    @apply bg-slate-100 text-slate-600 border-slate-200;
+  }
+
   /* Layout Utilities */
   .gic-sidebar-blur {
     @apply bg-white/95 backdrop-blur-md border-r border-slate-100;
@@ -103,5 +152,9 @@
 
   .gic-ease-elite {
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-marquee-fast {
+    animation: marquee 25s linear infinite;
   }
 }

@@ -30,7 +30,7 @@ function toNumber(value: string | number | null | undefined): number | null {
 export async function getMunicipalitySentiment(
   province: string,
   municipality: string,
-  days = 30
+  days = 30,
 ): Promise<ProvinceSentimentResponse> {
   const [trendResult, topicResult] = await Promise.all([
     query<TrendRow>(
@@ -48,7 +48,7 @@ export async function getMunicipalitySentiment(
         group by day
         order by day asc
       `,
-      [province, municipality, days]
+      [province, municipality, days],
     ),
     query<TopicRow>(
       `
@@ -83,7 +83,7 @@ export async function getMunicipalitySentiment(
         from topic_sentiment ts
         order by ts."mentionCount" desc, ts.topic asc
       `,
-      [province, municipality, days]
+      [province, municipality, days],
     ),
   ]);
 
@@ -106,13 +106,12 @@ export async function getMunicipalitySentiment(
   }));
 
   const latestTrendPoint = trend[trend.length - 1] ?? null;
-  const topComplaintTopic = [...topics]
-    .sort((left, right) => {
-      if (right.negativeShare !== left.negativeShare) {
-        return right.negativeShare - left.negativeShare;
-      }
-      return right.mentionCount - left.mentionCount;
-    })[0];
+  const topComplaintTopic = [...topics].sort((left, right) => {
+    if (right.negativeShare !== left.negativeShare) {
+      return right.negativeShare - left.negativeShare;
+    }
+    return right.mentionCount - left.mentionCount;
+  })[0];
 
   return {
     province,

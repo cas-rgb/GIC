@@ -21,7 +21,7 @@ export async function getMunicipalLeadershipEvidence(
   municipality: string,
   leaderName?: string | null,
   office?: string | null,
-  days = 30
+  days = 30,
 ): Promise<MunicipalLeadershipEvidenceResponse> {
   const normalizedLeader = leaderName?.trim() || null;
   const normalizedOffice = office?.trim() || null;
@@ -57,7 +57,7 @@ export async function getMunicipalLeadershipEvidence(
         order by coalesce(d.published_at, d.created_at) desc, count(sm.id) desc
         limit 6
       `,
-      [province, municipality, normalizedLeader, normalizedOffice, days]
+      [province, municipality, normalizedLeader, normalizedOffice, days],
     ),
     query<{
       documentCount: number;
@@ -81,7 +81,7 @@ export async function getMunicipalLeadershipEvidence(
             or ($4::text is not null and (d.title ilike ('%' || $4 || '%') or d.content_text ilike ('%' || $4 || '%')))
           )
       `,
-      [province, municipality, normalizedLeader, normalizedOffice, days]
+      [province, municipality, normalizedLeader, normalizedOffice, days],
     ),
   ]);
 
@@ -105,7 +105,7 @@ export async function getMunicipalLeadershipEvidence(
         publishedAt: row.publishedAt,
         mentionCount: row.mentionCount,
         excerpt: row.excerpt,
-      })
+      }),
     ),
     caveats: [
       "Municipal leadership evidence only includes governed documents that explicitly mention the selected mayor or municipal office.",

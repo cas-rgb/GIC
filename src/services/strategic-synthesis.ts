@@ -7,29 +7,32 @@ import { StrategicReasoning } from "@/types";
 import { CommunitySignal } from "@/types/database";
 
 export async function generateLiveStrategicReasoning(): Promise<StrategicReasoning | null> {
-    console.log("Synthesizing National Strategic Intelligence...");
+  console.log("Synthesizing National Strategic Intelligence...");
 
-    try {
-        // 1. Fetch live signals from Firestore
-        const signalsRef = collection(db, "communitySignals");
-        const q = query(signalsRef, orderBy("createdAt", "desc"), limit(15));
-        const querySnapshot = await getDocs(q);
-        
-        const signals: CommunitySignal[] = [];
-        querySnapshot.forEach((doc) => {
-            signals.push(doc.data() as CommunitySignal);
-        });
+  try {
+    // 1. Fetch live signals from Firestore
+    const signalsRef = collection(db, "communitySignals");
+    const q = query(signalsRef, orderBy("createdAt", "desc"), limit(15));
+    const querySnapshot = await getDocs(q);
 
-        if (signals.length === 0) {
-            console.log("No live signals found, falling back to basic context.");
-        }
+    const signals: CommunitySignal[] = [];
+    querySnapshot.forEach((doc) => {
+      signals.push(doc.data() as CommunitySignal);
+    });
 
-        const signalContext = signals.map(s => 
-            `- ${s.category} [${s.urgency}/5]: ${s.text} (Source: ${s.source})`
-        ).join("\n");
+    if (signals.length === 0) {
+      console.log("No live signals found, falling back to basic context.");
+    }
 
-        // 2. Build the Strategic Reasoning Prompt
-        const prompt = `
+    const signalContext = signals
+      .map(
+        (s) =>
+          `- ${s.category} [${s.urgency}/5]: ${s.text} (Source: ${s.source})`,
+      )
+      .join("\n");
+
+    // 2. Build the Strategic Reasoning Prompt
+    const prompt = `
             You are the GIC (Gauteng Infrastructure Company) Apex Reasoner.
             Your task is to synthesize the following real-time infrastructure signals into a "Strategic Reasoning Chain".
             
@@ -60,13 +63,15 @@ export async function generateLiveStrategicReasoning(): Promise<StrategicReasoni
             }
         `;
 
-        // 3. AI Synthesis
-        const result = await geminiPro.generateContent(prompt);
-        const reasoning: StrategicReasoning | null = extractJsonObject(result.response.text());
+    // 3. AI Synthesis
+    const result = await geminiPro.generateContent(prompt);
+    const reasoning: StrategicReasoning | null = extractJsonObject(
+      result.response.text(),
+    );
 
-        return reasoning;
-    } catch (error) {
-        console.error("Strategic Synthesis Error:", error);
-        return null;
-    }
+    return reasoning;
+  } catch (error) {
+    console.error("Strategic Synthesis Error:", error);
+    return null;
+  }
 }

@@ -42,7 +42,9 @@ export default function DataCoveragePage() {
                   className="flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3"
                 >
                   <div className="w-2 h-2 rounded-full bg-gic-blue" />
-                  <span className="text-sm font-medium text-slate-700">{item}</span>
+                  <span className="text-sm font-medium text-slate-700">
+                    {item}
+                  </span>
                 </div>
               ))}
             </div>

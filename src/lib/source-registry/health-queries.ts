@@ -5,30 +5,32 @@ import {
   SourceHealthSummaryRow,
 } from "@/lib/source-registry/types";
 
-interface SourceHealthSqlRow extends SourceHealthSummaryRow {}
+type SourceHealthSqlRow = SourceHealthSummaryRow;
 
 function summarize(rows: SourceHealthSummaryRow[]) {
-  const latestSuccessAt = rows
-    .map((row) => row.lastIngestedAt)
-    .filter((value): value is string => Boolean(value))
-    .sort()
-    .reverse()[0] ?? null;
+  const latestSuccessAt =
+    rows
+      .map((row) => row.lastIngestedAt)
+      .filter((value): value is string => Boolean(value))
+      .sort()
+      .reverse()[0] ?? null;
 
   return {
     activeSourceCount: rows.length,
     healthyCount: rows.filter((row) => row.healthStatus === "healthy").length,
     staleCount: rows.filter((row) => row.healthStatus === "stale").length,
     failingCount: rows.filter((row) => row.healthStatus === "failing").length,
-    neverRunCount: rows.filter((row) => row.healthStatus === "never_run").length,
+    neverRunCount: rows.filter((row) => row.healthStatus === "never_run")
+      .length,
     refreshedLast24hCount: rows.filter(
-      (row) => row.hoursSinceSuccess !== null && row.hoursSinceSuccess <= 24
+      (row) => row.hoursSinceSuccess !== null && row.hoursSinceSuccess <= 24,
     ).length,
     latestSuccessAt,
   };
 }
 
 export async function getSourceHealthSummary(
-  province?: string | null
+  province?: string | null,
 ): Promise<SourceHealthSummaryResponse> {
   const sourceResult = await query<SourceHealthSqlRow>(
     `
@@ -83,7 +85,7 @@ export async function getSourceHealthSummary(
         end,
         "sourceName" asc
     `,
-    [province ?? null]
+    [province ?? null],
   );
 
   const bySource = sourceResult.rows.map((row) => ({
@@ -101,7 +103,9 @@ export async function getSourceHealthSummary(
     provinceMap.set(key, current);
   }
 
-  const byProvince: SourceHealthProvinceRow[] = Array.from(provinceMap.entries())
+  const byProvince: SourceHealthProvinceRow[] = Array.from(
+    provinceMap.entries(),
+  )
     .map(([key, rows]) => ({
       province: key === "__national__" ? null : key,
       ...summarize(rows),

@@ -10,7 +10,10 @@ const DOC_TYPE_RULES: Array<{
   type: CanonicalDocType;
   patterns: RegExp[];
 }> = [
-  { type: "tender", patterns: [/tender/i, /rfp/i, /bid number/i, /closing date/i] },
+  {
+    type: "tender",
+    patterns: [/tender/i, /rfp/i, /bid number/i, /closing date/i],
+  },
   {
     type: "budget",
     patterns: [/budget vote/i, /appropriation/i, /medium term/i, /allocation/i],
@@ -27,15 +30,33 @@ const DOC_TYPE_RULES: Array<{
 ];
 
 const SECTOR_RULES: Array<{ sector: CanonicalSector; patterns: RegExp[] }> = [
-  { sector: "Civil", patterns: [/water/i, /sewer/i, /sanitation/i, /wastewater/i] },
+  {
+    sector: "Civil",
+    patterns: [/water/i, /sewer/i, /sanitation/i, /wastewater/i],
+  },
   { sector: "Roads", patterns: [/road/i, /pothole/i, /bridge/i, /transport/i] },
-  { sector: "Health", patterns: [/clinic/i, /hospital/i, /health/i, /medical/i] },
+  {
+    sector: "Health",
+    patterns: [/clinic/i, /hospital/i, /health/i, /medical/i],
+  },
   {
     sector: "Planning",
-    patterns: [/rezoning/i, /spatial/i, /idp/i, /land use/i, /housing development/i],
+    patterns: [
+      /rezoning/i,
+      /spatial/i,
+      /idp/i,
+      /land use/i,
+      /housing development/i,
+    ],
   },
-  { sector: "Structural", patterns: [/building/i, /collapse/i, /structural/i, /facility/i] },
-  { sector: "Apex", patterns: [/executive/i, /provincial strategy/i, /intervention plan/i] },
+  {
+    sector: "Structural",
+    patterns: [/building/i, /collapse/i, /structural/i, /facility/i],
+  },
+  {
+    sector: "Apex",
+    patterns: [/executive/i, /provincial strategy/i, /intervention plan/i],
+  },
 ];
 
 function detectDocType(text: string): CanonicalDocType {
@@ -50,7 +71,7 @@ function detectDocType(text: string): CanonicalDocType {
 
 function detectSectorHints(text: string): CanonicalSector[] {
   const sectors = SECTOR_RULES.filter((rule) =>
-    rule.patterns.some((pattern) => pattern.test(text))
+    rule.patterns.some((pattern) => pattern.test(text)),
   ).map((rule) => rule.sector);
 
   return sectors.length > 0 ? sectors : ["Civil"];

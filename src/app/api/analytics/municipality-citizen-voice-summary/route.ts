@@ -11,14 +11,14 @@ export async function GET(request: NextRequest) {
     if (!province || !municipality) {
       return NextResponse.json(
         { error: "province and municipality are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     const response = await getMunicipalityCitizenVoiceSummary(
       province,
       municipality,
-      Number.isFinite(days) ? days : 30
+      Number.isFinite(days) ? days : 30,
     );
 
     return NextResponse.json(response);
@@ -31,3 +31,5 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
+
+

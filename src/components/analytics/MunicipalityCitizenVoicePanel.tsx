@@ -1,7 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AlertTriangle, MessageSquareWarning, RefreshCw, Siren, Speech } from "lucide-react";
+import {
+  AlertTriangle,
+  MessageSquareWarning,
+  RefreshCw,
+  Siren,
+  Speech,
+} from "lucide-react";
 
 import {
   MunicipalityCitizenVoiceSummaryResponse,
@@ -62,21 +68,24 @@ export default function MunicipalityCitizenVoicePanel({
         const [response, legacyResponse] = await Promise.all([
           fetch(
             `/api/analytics/municipality-citizen-voice-summary?province=${encodeURIComponent(
-              province
+              province,
             )}&municipality=${encodeURIComponent(municipality)}&days=${days}`,
-            { cache: "no-store" }
+            { cache: "no-store" },
           ),
           fetch(
             `/api/analytics/municipality-legacy-community-signals?province=${encodeURIComponent(
-              province
+              province,
             )}&municipality=${encodeURIComponent(municipality)}&days=${days}`,
-            { cache: "no-store" }
+            { cache: "no-store" },
           ),
         ]);
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -84,8 +93,8 @@ export default function MunicipalityCitizenVoicePanel({
           throw new Error(
             await parseError(
               legacyResponse,
-              `request failed with status ${legacyResponse.status}`
-            )
+              `request failed with status ${legacyResponse.status}`,
+            ),
           );
         }
 
@@ -115,7 +124,7 @@ export default function MunicipalityCitizenVoicePanel({
     if (
       state.status === "loaded" &&
       !selectedIssue &&
-      state.data.issues.length > 0 &&
+      (state.data.issues || []).length > 0 &&
       onSelectIssue
     ) {
       onSelectIssue(state.data.issues[0].issueFamily);
@@ -138,14 +147,16 @@ export default function MunicipalityCitizenVoicePanel({
       <div className="flex min-h-[220px] items-center justify-center text-center">
         <div>
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">{state.message}</p>
+          <p className="mt-3 text-sm font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
   }
 
   const { data, legacy } = state;
-  const strongestLegacyIssue = legacy.issues[0]?.issue ?? null;
+  const strongestLegacyIssue = legacy.issues?.[0]?.issue ?? null;
 
   return (
     <div className="space-y-6">
@@ -155,7 +166,7 @@ export default function MunicipalityCitizenVoicePanel({
             Citizen Mentions
           </p>
           <p className="mt-2 text-3xl font-display font-bold text-slate-900">
-            {data.summary.totalCitizenMentions}
+            {data.summary?.totalCitizenMentions ?? 0}
           </p>
         </div>
         <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4">
@@ -163,7 +174,7 @@ export default function MunicipalityCitizenVoicePanel({
             Evidence Docs
           </p>
           <p className="mt-2 text-3xl font-display font-bold text-blue-700">
-            {data.summary.totalCitizenDocuments}
+            {data.summary?.totalCitizenDocuments ?? 0}
           </p>
         </div>
         <div className="rounded-2xl border border-indigo-100 bg-indigo-50 p-4">
@@ -179,15 +190,17 @@ export default function MunicipalityCitizenVoicePanel({
             Dominant Complaint
           </p>
           <p className="mt-2 text-lg font-display font-bold text-slate-900">
-            {data.summary.dominantIssueFamily ?? "Unavailable"}
+            {data.summary?.dominantIssueFamily ?? "Unavailable"}
           </p>
         </div>
-        <div className={`rounded-2xl border p-4 ${riskTone(data.summary.narrativeRiskLevel)}`}>
+        <div
+          className={`rounded-2xl border p-4 ${riskTone(data.summary?.narrativeRiskLevel ?? "Low")}`}
+        >
           <p className="text-[10px] font-black uppercase tracking-[0.2em]">
             Narrative Risk
           </p>
           <p className="mt-2 text-2xl font-display font-bold">
-            {data.summary.narrativeRiskLevel}
+            {data.summary?.narrativeRiskLevel ?? "Low"}
           </p>
         </div>
       </div>
@@ -199,16 +212,22 @@ export default function MunicipalityCitizenVoicePanel({
             Local readout
           </div>
           <div className="mt-4 space-y-3">
-            {data.narratives.map((narrative) => (
-              <p key={narrative} className="text-sm font-medium leading-6 text-slate-700">
+            {(data.narratives || []).map((narrative) => (
+              <p
+                key={narrative}
+                className="text-sm font-medium leading-6 text-slate-700"
+              >
                 {narrative}
               </p>
             ))}
             {legacy.summary.documentCount > 0 ? (
               <p className="text-sm font-medium leading-6 text-slate-700">
-                Imported community history adds {legacy.summary.documentCount} legacy resident/civic documents
-                {strongestLegacyIssue ? `, with ${strongestLegacyIssue} as the strongest recurring local complaint` : ""}
-                {" "}at average urgency {legacy.summary.avgUrgency.toFixed(1)}.
+                Imported community history adds {legacy.summary.documentCount}{" "}
+                legacy resident/civic documents
+                {strongestLegacyIssue
+                  ? `, with ${strongestLegacyIssue} as the strongest recurring local complaint`
+                  : ""}{" "}
+                at average urgency {legacy.summary.avgUrgency.toFixed(1)}.
               </p>
             ) : null}
           </div>
@@ -217,14 +236,16 @@ export default function MunicipalityCitizenVoicePanel({
               Local mood
             </p>
             <p className="mt-2 text-xl font-display font-bold text-slate-900">
-              {Math.round(data.summary.averageNegativeShare * 100)}% negative share
+              {Math.round((data.summary?.averageNegativeShare ?? 0) * 100)}% negative
+              share
             </p>
             <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
               {municipality}, {province}
             </p>
             {legacy.summary.documentCount > 0 ? (
               <p className="mt-2 text-[10px] font-black uppercase tracking-[0.2em] text-indigo-500">
-                legacy urgency {legacy.summary.avgUrgency.toFixed(1)} | {Math.round(legacy.summary.negativeShare * 100)}% negative
+                legacy urgency {legacy.summary.avgUrgency.toFixed(1)} |{" "}
+                {Math.round(legacy.summary.negativeShare * 100)}% negative
               </p>
             ) : null}
           </div>
@@ -236,12 +257,12 @@ export default function MunicipalityCitizenVoicePanel({
             Complaint families
           </div>
           <div className="mt-4 space-y-3">
-            {data.issues.length === 0 ? (
+            {(data.issues || []).length === 0 ? (
               <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4 text-sm font-medium text-slate-500">
                 No governed municipality public-voice issues are available yet.
               </div>
             ) : (
-              data.issues.map((issue) => {
+              (data.issues || []).map((issue) => {
                 const active = selectedIssue === issue.issueFamily;
 
                 return (
@@ -257,7 +278,9 @@ export default function MunicipalityCitizenVoicePanel({
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <p className="text-sm font-bold text-slate-900">{issue.issueFamily}</p>
+                        <p className="text-sm font-bold text-slate-900">
+                          {issue.issueFamily}
+                        </p>
                         <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                           local citizen complaint family
                         </p>
@@ -273,7 +296,9 @@ export default function MunicipalityCitizenVoicePanel({
                     </div>
                     <div className="mt-3 grid grid-cols-3 gap-3 text-center">
                       <div className="rounded-xl bg-white p-3">
-                        <p className="text-sm font-bold text-slate-900">{issue.documentCount}</p>
+                        <p className="text-sm font-bold text-slate-900">
+                          {issue.documentCount}
+                        </p>
                         <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">
                           docs
                         </p>
@@ -307,7 +332,7 @@ export default function MunicipalityCitizenVoicePanel({
         <div className="flex items-start gap-2">
           <MessageSquareWarning className="mt-0.5 h-4 w-4 text-amber-600" />
           <div className="space-y-2">
-            {data.caveats.map((caveat) => (
+            {(data.caveats || []).map((caveat) => (
               <p key={caveat} className="text-sm font-medium text-slate-700">
                 {caveat}
               </p>

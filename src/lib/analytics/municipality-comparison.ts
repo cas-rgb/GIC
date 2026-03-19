@@ -7,13 +7,17 @@ import { getMunicipalitySummary } from "@/lib/analytics/municipality-summary";
 
 export async function getMunicipalityComparison(
   province: string,
-  days = 30
+  days = 30,
 ): Promise<MunicipalityComparisonResponse> {
   const directory = await getMunicipalityDirectory(province);
 
   const rows = await Promise.all(
     directory.rows.map(async (entry): Promise<MunicipalityComparisonRow> => {
-      const summary = await getMunicipalitySummary(province, entry.municipality, days);
+      const summary = await getMunicipalitySummary(
+        province,
+        entry.municipality,
+        days,
+      );
 
       return {
         municipality: entry.municipality,
@@ -25,7 +29,7 @@ export async function getMunicipalityComparison(
         topPressureDomain: summary.summary.topPressureDomain,
         topComplaintTopic: summary.summary.topComplaintTopic,
       };
-    })
+    }),
   );
 
   return {

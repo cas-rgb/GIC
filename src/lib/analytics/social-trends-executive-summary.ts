@@ -3,6 +3,7 @@ import {
   SocialTrendEvidenceHighlightRow,
   SocialTrendConcernProvinceRow,
   SocialTrendsExecutiveSummaryResponse,
+  AINarrativeSynthesisRow,
 } from "@/lib/analytics/types";
 import { getProvinceLegacyCommunitySignals } from "@/lib/analytics/province-legacy-community-signals";
 
@@ -51,7 +52,10 @@ function toNumber(value: string | number | null | undefined): number {
   return typeof value === "string" ? Number(value) : value;
 }
 
-function toRiskLevel(negativeShare: number, mentionCount: number): "Low" | "Elevated" | "High" {
+function toRiskLevel(
+  negativeShare: number,
+  mentionCount: number,
+): "Low" | "Elevated" | "High" {
   if (negativeShare >= 0.7 || (negativeShare >= 0.55 && mentionCount >= 20)) {
     return "High";
   }
@@ -65,11 +69,18 @@ function toRiskLevel(negativeShare: number, mentionCount: number): "Low" | "Elev
 
 export async function getSocialTrendsExecutiveSummary(
   province: string | null,
-  days = 30
+  days = 30,
 ): Promise<SocialTrendsExecutiveSummaryResponse> {
   const params = [province, days];
 
-  const [summaryResult, issueResult, concernResult, evidenceResult, legacyCommunity] = await Promise.all([
+  const [
+    summaryResult,
+    issueResult,
+    concernResult,
+    evidenceResult,
+    legacyCommunity,
+    aiSynthesisResult,
+  ] = await Promise.all([
     query<SummaryRow>(
       `
         select
@@ -81,7 +92,7 @@ export async function getSocialTrendsExecutiveSummary(
         where ($1::text is null or province = $1)
           and day >= current_date - ($2::int - 1)
       `,
-      params
+      params,
     ),
     query<IssueRow>(
       `
@@ -95,7 +106,7 @@ export async function getSocialTrendsExecutiveSummary(
         order by "mentionCount" desc, "issueFamily" asc
         limit 1
       `,
-      params
+      params,
     ),
     query<ProvinceRowDb>(
       `
@@ -135,7 +146,7 @@ export async function getSocialTrendsExecutiveSummary(
         group by fcvd.province
         order by "intensityScore" desc, "mentionCount" desc, fcvd.province asc
       `,
-      params
+      params,
     ),
     query<EvidenceHighlightRowDb>(
       `
@@ -164,9 +175,25 @@ export async function getSocialTrendsExecutiveSummary(
           d.created_at desc
         limit 3
       `,
-      params
+      params,
     ),
     getProvinceLegacyCommunitySignals(province, days),
+    query<AINarrativeSynthesisRow>(
+      `
+        select 
+          who_involved as "whoInvolved",
+          what_happened as "whatHappened",
+          why_it_happened as "whyItHappened",
+          how_resolved_or_current as "howResolvedOrCurrent",
+          when_timeline as "whenTimeline",
+          source_evidence as "sourceEvidence"
+        from ai_narrative_synthesis
+        where lens = 'social' and ($1::text is null or province = $1)
+        order by created_at desc
+        limit 5
+      `,
+      [province]
+    ),
   ]);
 
   const summary = summaryResult.rows[0] ?? {
@@ -176,44 +203,46 @@ export async function getSocialTrendsExecutiveSummary(
     averageNegativeShare: 0,
   };
   const dominantIssueFamily = issueResult.rows[0]?.issueFamily ?? null;
-  const concernProvinces: SocialTrendConcernProvinceRow[] = concernResult.rows.map((row) => ({
-    province: row.province,
-    mentionCount: row.mentionCount,
-    documentCount: row.documentCount,
-    avgNegativeShare: toNumber(row.avgNegativeShare),
-    avgSentimentScore: toNumber(row.avgSentimentScore),
-    dominantIssueFamily: row.dominantIssueFamily,
-    intensityScore: toNumber(row.intensityScore),
-  }));
-  const evidenceHighlights: SocialTrendEvidenceHighlightRow[] = evidenceResult.rows.map((row) => ({
-    documentId: row.documentId,
-    title: row.title,
-    url: row.url,
-    sourceName: row.sourceName,
-    sourceType: row.sourceType,
-    province: row.province,
-    municipality: row.municipality,
-    issueFamily: row.issueFamily,
-    sentimentLabel: row.sentimentLabel,
-    sentimentScore: toNumber(row.sentimentScore),
-    confidence: toNumber(row.confidence),
-    excerpt: row.excerpt,
-  }));
+  const concernProvinces: SocialTrendConcernProvinceRow[] =
+    concernResult.rows.map((row) => ({
+      province: row.province,
+      mentionCount: row.mentionCount,
+      documentCount: row.documentCount,
+      avgNegativeShare: toNumber(row.avgNegativeShare),
+      avgSentimentScore: toNumber(row.avgSentimentScore),
+      dominantIssueFamily: row.dominantIssueFamily,
+      intensityScore: toNumber(row.intensityScore),
+    }));
+  const evidenceHighlights: SocialTrendEvidenceHighlightRow[] =
+    evidenceResult.rows.map((row) => ({
+      documentId: row.documentId,
+      title: row.title,
+      url: row.url,
+      sourceName: row.sourceName,
+      sourceType: row.sourceType,
+      province: row.province,
+      municipality: row.municipality,
+      issueFamily: row.issueFamily,
+      sentimentLabel: row.sentimentLabel,
+      sentimentScore: toNumber(row.sentimentScore),
+      confidence: toNumber(row.confidence),
+      excerpt: row.excerpt,
+    }));
   const hottestProvince = concernProvinces[0] ?? null;
   const blendedNegativeShare = Math.max(
     toNumber(summary.averageNegativeShare),
-    legacyCommunity.summary.negativeShare
+    legacyCommunity.summary.negativeShare,
   );
   const riskLevel = toRiskLevel(
     blendedNegativeShare,
-    summary.totalCitizenMentions + legacyCommunity.summary.documentCount
+    summary.totalCitizenMentions + legacyCommunity.summary.documentCount,
   );
   const strongestLegacyIssue = legacyCommunity.issues[0]?.issue ?? null;
 
   const narratives = [
     hottestProvince
       ? `${hottestProvince.province} is currently the hottest public-pressure province, with ${hottestProvince.mentionCount} governed citizen-voice mentions and ${Math.round(
-          hottestProvince.avgNegativeShare * 100
+          hottestProvince.avgNegativeShare * 100,
         )}% negative share, producing an intensity score of ${Math.round(hottestProvince.intensityScore)}.`
       : "No province currently has enough governed citizen-voice evidence to identify a clear hotspot.",
     dominantIssueFamily
@@ -225,8 +254,8 @@ export async function getSocialTrendsExecutiveSummary(
     riskLevel === "High"
       ? "The public narrative is currently hostile enough to warrant immediate executive monitoring and faster official response visibility."
       : riskLevel === "Elevated"
-      ? "The public narrative is elevated and should be treated as an early-warning layer for intervention planning."
-      : "The current public narrative layer is present but not yet intense enough to imply broad escalation on its own.",
+        ? "The public narrative is elevated and should be treated as an early-warning layer for intervention planning."
+        : "The current public narrative layer is present but not yet intense enough to imply broad escalation on its own.",
   ];
 
   return {
@@ -245,6 +274,7 @@ export async function getSocialTrendsExecutiveSummary(
       narrativeRiskLevel: riskLevel,
     },
     narratives,
+    aiSynthesis: aiSynthesisResult.rows,
     concernProvinces: concernProvinces.slice(0, province ? 1 : 6),
     evidenceHighlights,
     caveats: [
@@ -253,7 +283,13 @@ export async function getSocialTrendsExecutiveSummary(
       "Citizen voice remains an evidence and sentiment layer; it should accelerate attention, not replace official service or treasury facts.",
     ],
     trace: {
-      tables: ["fact_citizen_voice_daily", "citizen_voice_mentions", "documents", "sources", "locations"],
+      tables: [
+        "fact_citizen_voice_daily",
+        "citizen_voice_mentions",
+        "documents",
+        "sources",
+        "locations",
+      ],
       query: `province=${province ?? "all"};days=${days}`,
     },
   };

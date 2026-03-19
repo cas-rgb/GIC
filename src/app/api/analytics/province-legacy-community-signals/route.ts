@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
 
     const response = await getProvinceLegacyCommunitySignals(
       province && province !== "All Provinces" ? province : null,
-      Number.isFinite(days) ? days : 30
+      Number.isFinite(days) ? days : 30,
     );
 
     return NextResponse.json(response);
@@ -21,7 +21,9 @@ export async function GET(request: NextRequest) {
             ? error.message
             : "Failed to load province legacy community signals",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
+
+

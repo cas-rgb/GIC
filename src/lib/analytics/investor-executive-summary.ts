@@ -102,7 +102,7 @@ const SCORED_PROJECTS_CTE = `
 `;
 
 export async function getInvestorExecutiveSummary(
-  province?: string | null
+  province?: string | null,
 ): Promise<InvestorExecutiveSummaryResponse> {
   const snapshotResult = await query<SnapshotRow>(`
     select max(day)::text as "snapshotDate"
@@ -111,10 +111,14 @@ export async function getInvestorExecutiveSummary(
 
   const snapshotDate = snapshotResult.rows[0]?.snapshotDate ?? null;
 
-  const [summaryResult, provincesResult, topSectorResult, leadOpportunityResult] =
-    await Promise.all([
-      query<SummaryRow>(
-        `
+  const [
+    summaryResult,
+    provincesResult,
+    topSectorResult,
+    leadOpportunityResult,
+  ] = await Promise.all([
+    query<SummaryRow>(
+      `
           ${SCORED_PROJECTS_CTE}
           select
             count(distinct province)::int as "provinceCount",
@@ -124,10 +128,10 @@ export async function getInvestorExecutiveSummary(
             round(avg(investment_score)::numeric, 2) as "averageInvestmentScore"
           from scored
         `,
-        [province ?? null]
-      ),
-      query<ProvinceRowDb>(
-        `
+      [province ?? null],
+    ),
+    query<ProvinceRowDb>(
+      `
           ${SCORED_PROJECTS_CTE},
           sector_ranked as (
             select
@@ -169,11 +173,11 @@ export async function getInvestorExecutiveSummary(
           group by s.province
           order by "averageInvestmentScore" desc nulls last, "totalKnownExpenditure" desc, s.province asc
         `,
-        [province ?? null]
-      ),
-      snapshotDate
-        ? query<{ normalizedSector: string | null }>(
-            `
+      [province ?? null],
+    ),
+    snapshotDate
+      ? query<{ normalizedSector: string | null }>(
+          `
               select normalized_sector as "normalizedSector"
               from fact_infrastructure_projects_daily
               where day = $1::date
@@ -181,11 +185,13 @@ export async function getInvestorExecutiveSummary(
               order by project_count desc, normalized_sector asc
               limit 1
             `,
-            [snapshotDate, province ?? null]
-          )
-        : Promise.resolve({ rows: [] } as { rows: Array<{ normalizedSector: string | null }> }),
-      query<LeadOpportunityRow>(
-        `
+          [snapshotDate, province ?? null],
+        )
+      : Promise.resolve({ rows: [] } as {
+          rows: Array<{ normalizedSector: string | null }>;
+        }),
+    query<LeadOpportunityRow>(
+      `
           ${SCORED_PROJECTS_CTE}
           select
             project_name as "projectName",
@@ -195,9 +201,9 @@ export async function getInvestorExecutiveSummary(
           order by investment_score desc, opportunity_value desc, project_name asc
           limit 1
         `,
-        [province ?? null]
-      ),
-    ]);
+      [province ?? null],
+    ),
+  ]);
 
   const summary = summaryResult.rows[0] ?? {
     provinceCount: 0,
@@ -210,7 +216,9 @@ export async function getInvestorExecutiveSummary(
   const leadProvince = provinces[0] ?? null;
   const weakestProvince =
     [...provinces].sort(
-      (left, right) => left.dataQualityOkShare - right.dataQualityOkShare || left.province.localeCompare(right.province)
+      (left, right) =>
+        left.dataQualityOkShare - right.dataQualityOkShare ||
+        left.province.localeCompare(right.province),
     )[0] ?? null;
   const leadOpportunity = leadOpportunityResult.rows[0] ?? null;
 

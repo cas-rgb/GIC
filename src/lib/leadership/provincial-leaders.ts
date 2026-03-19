@@ -24,7 +24,12 @@ export const PROVINCIAL_LEADERS: ProvincialLeader[] = [
     province: "Free State",
     leaderName: "MaQueen Joyce Letsoha-Mathae",
     office: "Office of the Premier",
-    aliases: ["MaQueen Joyce Letsoha-Mathae", "Letsoha-Mathae", "Premier Letsoha-Mathae", "Free State Premier"],
+    aliases: [
+      "MaQueen Joyce Letsoha-Mathae",
+      "Letsoha-Mathae",
+      "Premier Letsoha-Mathae",
+      "Free State Premier",
+    ],
   },
   {
     province: "Gauteng",
@@ -36,13 +41,25 @@ export const PROVINCIAL_LEADERS: ProvincialLeader[] = [
     province: "KwaZulu-Natal",
     leaderName: "Arthur Thamsanqa (Thami) Ntuli",
     office: "Office of the Premier",
-    aliases: ["Arthur Thamsanqa (Thami) Ntuli", "Thami Ntuli", "Ntuli", "Premier Ntuli", "KwaZulu-Natal Premier", "KZN Premier"],
+    aliases: [
+      "Arthur Thamsanqa (Thami) Ntuli",
+      "Thami Ntuli",
+      "Ntuli",
+      "Premier Ntuli",
+      "KwaZulu-Natal Premier",
+      "KZN Premier",
+    ],
   },
   {
     province: "Limpopo",
     leaderName: "Phophi Ramathuba",
     office: "Office of the Premier",
-    aliases: ["Phophi Ramathuba", "Ramathuba", "Premier Ramathuba", "Limpopo Premier"],
+    aliases: [
+      "Phophi Ramathuba",
+      "Ramathuba",
+      "Premier Ramathuba",
+      "Limpopo Premier",
+    ],
   },
   {
     province: "Mpumalanga",
@@ -61,7 +78,12 @@ export const PROVINCIAL_LEADERS: ProvincialLeader[] = [
     province: "North West",
     leaderName: "Lazarus Mokgosi",
     office: "Office of the Premier",
-    aliases: ["Lazarus Mokgosi", "Mokgosi", "Premier Mokgosi", "North West Premier"],
+    aliases: [
+      "Lazarus Mokgosi",
+      "Mokgosi",
+      "Premier Mokgosi",
+      "North West Premier",
+    ],
   },
   {
     province: "Northern Cape",

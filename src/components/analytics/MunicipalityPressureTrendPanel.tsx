@@ -40,18 +40,22 @@ export default function MunicipalityPressureTrendPanel({
       try {
         const response = await fetch(
           `/api/analytics/municipality-pressure-trend?province=${encodeURIComponent(
-            province
+            province,
           )}&municipality=${encodeURIComponent(municipality)}&days=${days}${serviceDomain ? `&serviceDomain=${encodeURIComponent(serviceDomain)}` : ""}`,
-          { cache: "no-store" }
+          { cache: "no-store" },
         );
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
-        const data = (await response.json()) as MunicipalityPressureTrendResponse;
+        const data =
+          (await response.json()) as MunicipalityPressureTrendResponse;
         setState({ status: "loaded", data });
       } catch (error) {
         setState({
@@ -83,14 +87,19 @@ export default function MunicipalityPressureTrendPanel({
       <div className="flex min-h-[260px] items-center justify-center text-center">
         <div>
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">{state.message}</p>
+          <p className="mt-3 text-sm font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
   }
 
   const { data } = state;
-  const maxValue = Math.max(...data.series.map((point) => point.pressureCaseCount), 1);
+  const maxValue = Math.max(
+    ...(data.series || []).map((point) => point.pressureCaseCount),
+    1,
+  );
 
   return (
     <div className="space-y-4">
@@ -99,26 +108,30 @@ export default function MunicipalityPressureTrendPanel({
           Pressure Trend
         </h4>
         <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">
-          Daily municipality pressure volume{serviceDomain ? ` for ${serviceDomain}` : ""}
+          Daily municipality pressure volume
+          {serviceDomain ? ` for ${serviceDomain}` : ""}
         </p>
       </div>
 
       <div className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
         <div className="flex h-44 items-end gap-2">
-          {data.series.length === 0 ? (
+          {(data.series || []).length === 0 ? (
             <div className="flex h-full w-full items-center justify-center text-sm font-medium text-slate-500">
               No municipality pressure rows available yet.
             </div>
           ) : (
-            data.series.map((point) => (
-              <div key={point.date} className="flex flex-1 flex-col items-center gap-2">
+            (data.series || []).map((point) => (
+              <div
+                key={point.date}
+                className="flex flex-1 flex-col items-center gap-2"
+              >
                 <div className="flex h-full w-full items-end">
                   <div
                     className="w-full rounded-t-xl bg-slate-900"
                     style={{
                       height: `${Math.max(
                         10,
-                        Math.round((point.pressureCaseCount / maxValue) * 100)
+                        Math.round((point.pressureCaseCount / maxValue) * 100),
                       )}%`,
                     }}
                   />

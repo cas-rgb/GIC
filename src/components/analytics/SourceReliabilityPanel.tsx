@@ -32,14 +32,17 @@ export default function SourceReliabilityPanel({
       try {
         const response = await fetch(
           `/api/analytics/source-reliability?province=${encodeURIComponent(
-            province
+            province,
           )}`,
-          { cache: "no-store" }
+          { cache: "no-store" },
         );
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -76,10 +79,13 @@ export default function SourceReliabilityPanel({
   }
 
   const { data } = state;
-  const totalDocuments = data.rows.reduce((sum, row) => sum + row.documentCount, 0);
+  const totalDocuments = data.rows.reduce(
+    (sum, row) => sum + row.documentCount,
+    0,
+  );
   const topSource = data.rows[0];
 
-  if (data.rows.length === 0) {
+  if ((data.rows || []).length === 0) {
     return (
       <div className="flex min-h-[220px] items-center justify-center text-center">
         <p className="text-sm font-medium text-slate-500">
@@ -122,7 +128,9 @@ export default function SourceReliabilityPanel({
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
             Evidence Quality Mix
           </p>
-          <p className="mt-1 text-sm font-bold text-slate-900">{data.province}</p>
+          <p className="mt-1 text-sm font-bold text-slate-900">
+            {data.province}
+          </p>
         </div>
         <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
           <Database className="h-3.5 w-3.5" />
@@ -131,9 +139,12 @@ export default function SourceReliabilityPanel({
       </div>
 
       <div className="space-y-3">
-        {data.rows.map((row) => {
+        {(data.rows || []).map((row) => {
           const width = Math.max(8, Math.round(row.avgReliabilityScore * 100));
-          const coverage = totalDocuments > 0 ? Math.round((row.documentCount / totalDocuments) * 100) : 0;
+          const coverage =
+            totalDocuments > 0
+              ? Math.round((row.documentCount / totalDocuments) * 100)
+              : 0;
 
           return (
             <div

@@ -41,7 +41,10 @@ export default function MunicipalitySourceCoveragePanel({
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -66,7 +69,9 @@ export default function MunicipalitySourceCoveragePanel({
       return null;
     }
 
-    return state.data.byProvince.find((row) => row.province === province) ?? null;
+    return (
+      state.data.byProvince.find((row) => row.province === province) ?? null
+    );
   }, [province, state]);
 
   if (state.status === "loading") {
@@ -82,7 +87,9 @@ export default function MunicipalitySourceCoveragePanel({
       <div className="flex min-h-[180px] items-center justify-center text-center">
         <div>
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">{state.message}</p>
+          <p className="mt-3 text-sm font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
@@ -110,20 +117,25 @@ export default function MunicipalitySourceCoveragePanel({
           Municipality dependency
         </p>
         <p className="mt-2 text-sm font-medium text-slate-700">
-          {municipality} inherits the verified {province} source estate. Local evidence is only
-          as decision-grade as the provincial official and KPI-truth coverage behind it.
+          {municipality} inherits the verified {province} source estate. Local
+          evidence is only as decision-grade as the provincial official and
+          KPI-truth coverage behind it.
         </p>
       </div>
 
       <div className="grid grid-cols-3 gap-3 text-center">
         <div className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
-          <p className="text-lg font-bold text-slate-900">{provinceRow.sourceCount}</p>
+          <p className="text-lg font-bold text-slate-900">
+            {provinceRow.sourceCount}
+          </p>
           <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">
             Verified
           </p>
         </div>
         <div className="rounded-2xl border border-emerald-100 bg-emerald-50 p-4">
-          <p className="text-lg font-bold text-emerald-700">{provinceRow.officialCount}</p>
+          <p className="text-lg font-bold text-emerald-700">
+            {provinceRow.officialCount}
+          </p>
           <p className="text-[9px] font-black uppercase tracking-[0.2em] text-emerald-500">
             Official
           </p>

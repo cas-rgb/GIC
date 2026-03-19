@@ -1,7 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AlertTriangle, MapPin, ShieldCheck, TrendingUp, Users } from "lucide-react";
+import {
+  AlertTriangle,
+  MapPin,
+  ShieldCheck,
+  TrendingUp,
+  Users,
+} from "lucide-react";
 
 import {
   ElectionHistoryResponse,
@@ -66,35 +72,46 @@ export default function PlaceIntelligenceSummaryPanel({
 
       try {
         const requests: Promise<Response>[] = [
-          fetch(`/api/analytics/place-profile?${params.toString()}`, { cache: "no-store" }),
-          fetch(
-            `/api/analytics/place-election-history?${params.toString()}`,
-            { cache: "no-store" }
-          ),
+          fetch(`/api/analytics/place-profile?${params.toString()}`, {
+            cache: "no-store",
+          }),
+          fetch(`/api/analytics/place-election-history?${params.toString()}`, {
+            cache: "no-store",
+          }),
           fetch(
             `/api/analytics/place-infrastructure-history?${params.toString()}`,
-            { cache: "no-store" }
+            { cache: "no-store" },
           ),
         ];
 
         if (!ward) {
           requests.push(
-            fetch(`/api/analytics/place-context?${params.toString()}`, { cache: "no-store" })
+            fetch(`/api/analytics/place-context?${params.toString()}`, {
+              cache: "no-store",
+            }),
           );
         }
 
         if (ward && municipality) {
           requests.push(
-            fetch(`/api/analytics/ward-councillor?${params.toString()}`, { cache: "no-store" })
+            fetch(`/api/analytics/ward-councillor?${params.toString()}`, {
+              cache: "no-store",
+            }),
           );
         }
 
         const responses = await Promise.all(requests);
         let index = 0;
 
-        const profile = await parseJson<PlaceProfileResponse>(responses[index++]);
-        const election = await parseJson<ElectionHistoryResponse>(responses[index++]);
-        const history = await parseJson<HistoricalInfrastructureResponse>(responses[index++]);
+        const profile = await parseJson<PlaceProfileResponse>(
+          responses[index++],
+        );
+        const election = await parseJson<ElectionHistoryResponse>(
+          responses[index++],
+        );
+        const history = await parseJson<HistoricalInfrastructureResponse>(
+          responses[index++],
+        );
         const context = !ward
           ? await parseJson<PlaceContextResponse>(responses[index++])
           : null;
@@ -115,7 +132,9 @@ export default function PlaceIntelligenceSummaryPanel({
         setState({
           status: "error",
           message:
-            error instanceof Error ? error.message : "Failed to load place intelligence summary",
+            error instanceof Error
+              ? error.message
+              : "Failed to load place intelligence summary",
         });
       }
     }
@@ -124,7 +143,11 @@ export default function PlaceIntelligenceSummaryPanel({
   }, [municipality, province, ward]);
 
   if (state.status === "loading") {
-    return <p className="text-sm text-slate-500">Loading place intelligence summary...</p>;
+    return (
+      <p className="text-sm text-slate-500">
+        Loading place intelligence summary...
+      </p>
+    );
   }
 
   if (state.status === "error") {
@@ -136,9 +159,15 @@ export default function PlaceIntelligenceSummaryPanel({
   const electionRows = state.election?.rows ?? [];
   const historyRows = state.history?.rows ?? [];
   const councillor = state.councillor;
-  const scopeLabel = buildScopeLabel(ward, councillor?.wardNumber ?? null, municipality, province);
+  const scopeLabel = buildScopeLabel(
+    ward,
+    councillor?.wardNumber ?? null,
+    municipality,
+    province,
+  );
 
-  const winningRow = electionRows.find((row) => row.winnerFlag) ?? electionRows[0] ?? null;
+  const winningRow =
+    electionRows.find((row) => row.winnerFlag) ?? electionRows[0] ?? null;
   const recentHistory = historyRows[0] ?? null;
   const serviceAccessSignals = [
     {
@@ -157,19 +186,22 @@ export default function PlaceIntelligenceSummaryPanel({
 
   return (
     <div className="space-y-4">
-      <div className="rounded-2xl border border-blue-100 bg-blue-50 px-4 py-4">
+      <div className="gic-card-blue bg-blue-50/50 p-6">
         <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-500">
           Place Intelligence Summary
         </p>
-        <p className="mt-2 text-lg font-display font-bold text-slate-900">{scopeLabel}</p>
+        <p className="mt-2 text-lg font-display font-bold text-slate-900">
+          {scopeLabel}
+        </p>
         <p className="mt-2 text-sm font-medium text-slate-700">
-          This panel combines place identity, political context, and historical infrastructure
-          patterns so the active geography can be read as more than a live pressure score.
+          This panel combines place identity, political context, and historical
+          infrastructure patterns so the active geography can be read as more
+          than a live pressure score.
         </p>
       </div>
 
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
-        <section className="rounded-2xl border border-slate-100 bg-white px-4 py-4 shadow-sm">
+        <section className="gic-card">
           <div className="flex items-start gap-3">
             <Users className="mt-1 h-5 w-5 text-slate-500" />
             <div className="min-w-0">
@@ -184,7 +216,7 @@ export default function PlaceIntelligenceSummaryPanel({
                   {serviceAccessSignals.map((signal) => (
                     <span
                       key={signal.label}
-                      className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700"
+                      className="gic-badge gic-badge-neutral"
                     >
                       {signal.label}: {signal.value}
                     </span>
@@ -195,7 +227,7 @@ export default function PlaceIntelligenceSummaryPanel({
           </div>
         </section>
 
-        <section className="rounded-2xl border border-slate-100 bg-white px-4 py-4 shadow-sm">
+        <section className="gic-card">
           <div className="flex items-start gap-3">
             <ShieldCheck className="mt-1 h-5 w-5 text-slate-500" />
             <div className="min-w-0">
@@ -203,18 +235,24 @@ export default function PlaceIntelligenceSummaryPanel({
                 Political Context
               </p>
               <p className="mt-3 text-sm font-medium text-slate-700">
-                {buildPoliticalLine(scopeLabel, municipality, ward, winningRow, councillor)}
+                {buildPoliticalLine(
+                  scopeLabel,
+                  municipality,
+                  ward,
+                  winningRow,
+                  councillor,
+                )}
               </p>
               {winningRow ? (
                 <div className="mt-4 flex flex-wrap gap-2">
-                  <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700">
+                  <span className="gic-badge gic-badge-neutral">
                     {winningRow.electionYear} {winningRow.electionType}
                   </span>
-                  <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700">
+                  <span className="gic-badge gic-badge-info bg-blue-50 text-blue-700">
                     {winningRow.partyName}
                   </span>
                   {winningRow.voteShare !== null ? (
-                    <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700">
+                    <span className="gic-badge gic-badge-success">
                       {winningRow.voteShare}% share
                     </span>
                   ) : null}
@@ -224,7 +262,7 @@ export default function PlaceIntelligenceSummaryPanel({
           </div>
         </section>
 
-        <section className="rounded-2xl border border-slate-100 bg-white px-4 py-4 shadow-sm">
+        <section className="gic-card">
           <div className="flex items-start gap-3">
             <TrendingUp className="mt-1 h-5 w-5 text-slate-500" />
             <div className="min-w-0">
@@ -232,16 +270,24 @@ export default function PlaceIntelligenceSummaryPanel({
                 Historical Pattern
               </p>
               <p className="mt-3 text-sm font-medium text-slate-700">
-                {buildHistoryLine(scopeLabel, recentHistory, historyRows.length)}
+                {buildHistoryLine(
+                  scopeLabel,
+                  recentHistory,
+                  historyRows.length,
+                )}
               </p>
               {recentHistory ? (
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {[recentHistory.issueFamily, recentHistory.serviceDomain, recentHistory.severity]
+                  {[
+                    recentHistory.issueFamily,
+                    recentHistory.serviceDomain,
+                    recentHistory.severity,
+                  ]
                     .filter(Boolean)
                     .map((value) => (
                       <span
                         key={value}
-                        className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700"
+                        className="gic-badge gic-badge-warning"
                       >
                         {value}
                       </span>
@@ -254,7 +300,7 @@ export default function PlaceIntelligenceSummaryPanel({
       </div>
 
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
-        <div className="rounded-2xl border border-slate-100 bg-white px-4 py-4 shadow-sm">
+        <div className="gic-card">
           <div className="flex items-start gap-3">
             <MapPin className="mt-1 h-5 w-5 text-slate-500" />
             <div>
@@ -262,13 +308,18 @@ export default function PlaceIntelligenceSummaryPanel({
                 Current Readiness
               </p>
               <p className="mt-3 text-sm font-medium text-slate-700">
-                {buildReadinessLine(scopeLabel, context, historyRows.length, ward)}
+                {buildReadinessLine(
+                  scopeLabel,
+                  context,
+                  historyRows.length,
+                  ward,
+                )}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="rounded-2xl border border-amber-100 bg-amber-50 px-4 py-4 shadow-sm">
+        <div className="gic-card border-t-4 border-t-amber-400 bg-amber-50/50">
           <div className="flex items-start gap-3">
             <AlertTriangle className="mt-1 h-5 w-5 text-amber-600" />
             <div>
@@ -276,7 +327,13 @@ export default function PlaceIntelligenceSummaryPanel({
                 Coverage Note
               </p>
               <p className="mt-3 text-sm font-medium text-slate-700">
-                {buildCoverageLine(context, demographics !== null && demographics !== undefined, electionRows.length, historyRows.length, ward)}
+                {buildCoverageLine(
+                  context,
+                  demographics !== null && demographics !== undefined,
+                  electionRows.length,
+                  historyRows.length,
+                  ward,
+                )}
               </p>
             </div>
           </div>
@@ -289,7 +346,7 @@ export default function PlaceIntelligenceSummaryPanel({
 function buildIdentityLine(
   scopeLabel: string,
   demographics: PlaceProfileResponse["demographics"] | undefined,
-  context: PlaceContextResponse | null
+  context: PlaceContextResponse | null,
 ) {
   if (demographics) {
     const parts = [
@@ -308,7 +365,11 @@ function buildIdentityLine(
   }
 
   if (context?.wikipediaDescription || context?.wikipediaExtract) {
-    return context.wikipediaDescription ?? context.wikipediaExtract ?? `${scopeLabel} has partial contextual enrichment loaded.`;
+    return (
+      context.wikipediaDescription ??
+      context.wikipediaExtract ??
+      `${scopeLabel} has partial contextual enrichment loaded.`
+    );
   }
 
   return `${scopeLabel} does not yet have a structured demographic baseline loaded, so this view currently relies on contextual reference and live issue evidence.`;
@@ -318,7 +379,7 @@ function buildScopeLabel(
   ward: string | null,
   wardNumber: number | null,
   municipality: string | null,
-  province: string
+  province: string,
 ) {
   if (ward) {
     return formatWardDisplayLabel(ward, wardNumber);
@@ -332,11 +393,13 @@ function buildPoliticalLine(
   municipality: string | null,
   ward: string | null,
   winningRow: ElectionHistoryResponse["rows"][number] | null,
-  councillor: WardCouncillorResponse | null
+  councillor: WardCouncillorResponse | null,
 ) {
   if (winningRow && councillor?.councillorName) {
     const share =
-      winningRow.voteShare !== null ? ` with ${winningRow.voteShare}% vote share` : "";
+      winningRow.voteShare !== null
+        ? ` with ${winningRow.voteShare}% vote share`
+        : "";
 
     return `${scopeLabel} currently has ward leadership reference for ${councillor.councillorName}, while the latest loaded election result shows ${winningRow.partyName} leading${share}.`;
   }
@@ -348,7 +411,11 @@ function buildPoliticalLine(
     return `${scopeLabel} currently shows ${winningRow.partyName} as the strongest loaded election result in ${winningRow.electionYear}${turnout}.`;
   }
 
-  if (!ward && municipality && COALITION_SENSITIVE_MUNICIPALITIES.has(municipality)) {
+  if (
+    !ward &&
+    municipality &&
+    COALITION_SENSITIVE_MUNICIPALITIES.has(municipality)
+  ) {
     return `${scopeLabel} is treated as politically complex. A simple single-party municipality winner has not been loaded because coalition-sensitive council control would be easy to overstate.`;
   }
 
@@ -362,11 +429,17 @@ function buildPoliticalLine(
 function buildHistoryLine(
   scopeLabel: string,
   recentHistory: HistoricalInfrastructureResponse["rows"][number] | null,
-  historyCount: number
+  historyCount: number,
 ) {
   if (recentHistory) {
-    const issue = recentHistory.issueFamily ?? recentHistory.serviceDomain ?? "infrastructure";
-    const period = recentHistory.periodYear ?? recentHistory.eventDate ?? "the recorded period";
+    const issue =
+      recentHistory.issueFamily ??
+      recentHistory.serviceDomain ??
+      "infrastructure";
+    const period =
+      recentHistory.periodYear ??
+      recentHistory.eventDate ??
+      "the recorded period";
 
     return `${scopeLabel} already has ${historyCount} structured historical issue records, with recent evidence pointing to ${issue} pressure around ${period}.`;
   }
@@ -378,7 +451,7 @@ function buildReadinessLine(
   scopeLabel: string,
   context: PlaceContextResponse | null,
   historyCount: number,
-  ward: string | null
+  ward: string | null,
 ) {
   if (ward) {
     return `${scopeLabel} is being read as a ward-focused operating view. Current readiness depends on whether that ward has evidence-backed issue history rather than registry-only coverage.`;
@@ -396,7 +469,7 @@ function buildCoverageLine(
   hasDemographics: boolean,
   electionCount: number,
   historyCount: number,
-  ward: string | null
+  ward: string | null,
 ) {
   const gaps: string[] = [];
 
@@ -409,7 +482,12 @@ function buildCoverageLine(
   if (historyCount === 0) {
     gaps.push("historical infrastructure");
   }
-  if (!ward && context && context.knownWardCount > 0 && context.evidenceBackedWardCount < context.knownWardCount) {
+  if (
+    !ward &&
+    context &&
+    context.knownWardCount > 0 &&
+    context.evidenceBackedWardCount < context.knownWardCount
+  ) {
     gaps.push("full ward evidence coverage");
   }
 

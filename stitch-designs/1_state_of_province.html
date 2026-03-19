@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;family=Source+Serif+4:opsz,wght@8..60,400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1861aa",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111921",
+                        "mineral-green": "#3d5a5a",
+                        "slate-blue": "#4a617d",
+                        "accent-warm": "#f4f1ea",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"],
+                        "serif": ["Source Serif 4", "serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .sidebar-item-active {
+            background-color: rgba(24, 97, 170, 0.1);
+            border-right: 3px solid #1861aa;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="flex min-h-screen">
+<!-- Strategic Navigation Rail -->
+<aside class="w-20 lg:w-64 flex-shrink-0 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col transition-all duration-300">
+<div class="p-6 flex items-center gap-3">
+<div class="size-10 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<span class="hidden lg:block font-bold text-lg tracking-tight text-primary">GIC Intelligence</span>
+</div>
+<nav class="flex-1 mt-6 px-3 space-y-2">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-primary sidebar-item-active group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="hidden lg:block font-semibold">Strategic Overview</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="hidden lg:block font-medium">Regional Analysis</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+<span class="hidden lg:block font-medium">Infrastructure</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">gpp_maybe</span>
+<span class="hidden lg:block font-medium">Risk Assessment</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="hidden lg:block font-medium">Executive Briefings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<button class="w-full flex items-center justify-center lg:justify-start gap-3 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all shadow-md">
+<span class="material-symbols-outlined">download</span>
+<span class="hidden lg:block font-bold text-sm">Export Intelligence</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto">
+<!-- Header -->
+<header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-8 py-6 sticky top-0 z-10">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h1 class="font-serif text-4xl font-bold text-slate-900 dark:text-white leading-tight">State of the Province</h1>
+<p class="text-slate-500 dark:text-slate-400 mt-1 max-w-2xl italic">Strategic overview of regional pressure patterns and alignment.</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative group">
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+</div>
+<div class="flex items-center gap-3 pl-4 border-l border-slate-200 dark:border-slate-800">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold text-slate-900 dark:text-white leading-none">Min. Lesufi Office</p>
+<p class="text-xs text-slate-500 mt-1">Gauteng Executive</p>
+</div>
+<div class="size-10 rounded-full bg-slate-200 overflow-hidden ring-2 ring-primary/20">
+<img alt="Executive Profile" data-alt="Professional portrait of a government official" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBraJzik3FWdaBlt94t_11TmxRT0jy_p3TCRiKhcxVpgBuDRk0UYdbsnNuDclmjXwFNmeALSi-BZiCYjXtkgoeLVk2xpE4S7kgal_euKTmYHUWw0OkxPsrLEUAGybXSG9nlH3P1V2hi-JfPlKWzW1el-HfCgQd-Y-SoB1U0AOu5J6laLjfV9p8osifRGvcPKjZHslku-OyILsiO-Tk-bNlZtOg8a7s3EMb7_KLEg-E6okrzzYIs2WaSPe4dTxvke4QSDw0VEQRi4w"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Active Scope Strip -->
+<div class="bg-accent-warm dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800 px-8 py-3">
+<div class="max-w-7xl mx-auto flex flex-wrap items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="text-xs uppercase tracking-widest font-bold text-slate-400">Scope</span>
+<button class="flex items-center gap-2 bg-white dark:bg-slate-900 px-3 py-1 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-semibold shadow-sm">
+                            Gauteng <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs uppercase tracking-widest font-bold text-slate-400">Timeframe</span>
+<button class="flex items-center gap-2 bg-white dark:bg-slate-900 px-3 py-1 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-semibold shadow-sm">
+                            Last 30 Days <span class="material-symbols-outlined text-sm">calendar_today</span>
+</button>
+</div>
+<div class="ml-auto flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-green-500"></span>
+<span class="text-xs font-bold text-slate-600 dark:text-slate-300">Governed</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-amber-500"></span>
+<span class="text-xs font-bold text-slate-600 dark:text-slate-300">Complex</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-red-500"></span>
+<span class="text-xs font-bold text-slate-600 dark:text-slate-300">Thin</span>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 py-8 space-y-8">
+<!-- AI Briefing Panel -->
+<section class="bg-white dark:bg-slate-900 rounded-xl shadow-xl overflow-hidden border border-primary/10">
+<div class="grid md:grid-cols-3">
+<div class="md:col-span-2 p-8 border-r border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-2 text-primary mb-4">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="text-xs font-bold uppercase tracking-widest">AI Strategic Briefing</span>
+</div>
+<h2 class="font-serif text-3xl font-bold text-slate-900 dark:text-white mb-4">Service Delivery &amp; Infrastructure Resilience</h2>
+<p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed font-light mb-6">
+                                Gauteng exhibits heightened economic pressure with a 4% increase in service delivery demands. Alignment across municipal borders remains fragmented but is showing consolidation in high-growth infrastructure corridors.
+                            </p>
+<div class="grid sm:grid-cols-2 gap-6">
+<div class="space-y-2">
+<h4 class="text-sm font-bold text-red-600 flex items-center gap-2 uppercase tracking-wide">
+<span class="material-symbols-outlined text-base">warning</span> Key Risks
+                                    </h4>
+<ul class="text-sm text-slate-500 dark:text-slate-400 space-y-1 list-disc list-inside">
+<li>Infrastructure lag in urban expansion zones.</li>
+<li>Legislative delays in municipal budget approvals.</li>
+</ul>
+</div>
+<div class="flex items-end justify-end">
+<div class="text-right">
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Confidence Note</p>
+<div class="flex items-center gap-2">
+<div class="w-32 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 92%"></div>
+</div>
+<span class="text-sm font-bold text-primary">92%</span>
+</div>
+<p class="text-[10px] text-slate-400 mt-1 italic">Based on census &amp; municipal data</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/30 p-8 flex flex-col justify-center">
+<div class="space-y-6">
+<div>
+<p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Coverage Snapshot</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 rounded-full text-xs font-bold">64% Governed</span>
+<span class="px-3 py-1 bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 rounded-full text-xs font-bold">22% Complex</span>
+<span class="px-3 py-1 bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 rounded-full text-xs font-bold">14% Thin</span>
+</div>
+</div>
+<button class="w-full py-3 border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all font-bold rounded-lg text-sm">
+                                    Read Full Analysis Report
+                                </button>
+</div>
+</div>
+</div>
+</section>
+<!-- KPI Ribbon -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm group hover:border-primary transition-colors">
+<div class="flex items-center justify-between mb-4">
+<span class="text-slate-500 font-bold text-xs uppercase tracking-widest">Civic Sentiment</span>
+<span class="material-symbols-outlined text-mineral-green">sentiment_satisfied</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-bold text-slate-900 dark:text-white font-serif">72.4</span>
+<span class="text-green-600 text-sm font-bold">+2.1%</span>
+</div>
+<div class="mt-4 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-mineral-green" style="width: 72%"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm group hover:border-primary transition-colors">
+<div class="flex items-center justify-between mb-4">
+<span class="text-slate-500 font-bold text-xs uppercase tracking-widest">Infrastructure Spend</span>
+<span class="material-symbols-outlined text-primary">account_balance_wallet</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-bold text-slate-900 dark:text-white font-serif">R4.8B</span>
+<span class="text-red-600 text-sm font-bold">-0.5%</span>
+</div>
+<div class="mt-4 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 48%"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm group hover:border-primary transition-colors">
+<div class="flex items-center justify-between mb-4">
+<span class="text-slate-500 font-bold text-xs uppercase tracking-widest">Municipality Risk Index</span>
+<span class="material-symbols-outlined text-amber-500">warning</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-bold text-slate-900 dark:text-white font-serif">38.2</span>
+<span class="text-slate-400 text-sm font-medium">Stable</span>
+</div>
+<div class="mt-4 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-amber-500" style="width: 38%"></div>
+</div>
+</div>
+</div>
+<!-- Main Content Grid -->
+<div class="grid lg:grid-cols-3 gap-8">
+<!-- Regional Pressure Map -->
+<div class="lg:col-span-2 space-y-6">
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden h-[500px] flex flex-col">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">explore</span> Regional Pressure Map
+                                </h3>
+<div class="flex gap-2">
+<button class="text-xs font-bold px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded">Population</button>
+<button class="text-xs font-bold px-3 py-1 bg-primary text-white rounded shadow-sm">Pressure Intensity</button>
+</div>
+</div>
+<div class="flex-1 relative bg-slate-50 dark:bg-slate-950">
+<!-- Mock Map -->
+<div class="absolute inset-0 bg-cover bg-center opacity-80" data-alt="Heatmap of Gauteng province showing high activity areas in Johannesburg and Pretoria" data-location="Johannesburg" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDo5LBnXZXP2WaOK5eZO5GGrFyc6jiMe8_K3Re3GxTNwyhMEapA8vcklSn5kp7c_8G170LOiTBEMEYbQk2hie2WB3flCIAseB4F9c388foJoDey-Gk8PLm2WD9YQi5RQBvL4h1lEcQG3ApYVgxigU-Km5qAniKs7_UyxPtaVHmM5MzbgW8DnBOvDXzkUFD4kUj8B59p5QQcaCqWIRcYrE3FWZBjJMI7NNIydDsjDoIhEed0uedk_wvmOl2jEcc9Czfflg7KQjFNRw')">
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent"></div>
+<!-- Hotspots -->
+<div class="absolute top-1/2 left-1/3 size-24 bg-red-500/20 rounded-full animate-pulse border border-red-500/30 flex items-center justify-center">
+<div class="size-4 bg-red-600 rounded-full ring-4 ring-red-500/20"></div>
+</div>
+<div class="absolute top-1/4 left-1/2 size-32 bg-amber-500/10 rounded-full border border-amber-500/20 flex items-center justify-center">
+<div class="size-4 bg-amber-500 rounded-full ring-4 ring-amber-500/10"></div>
+</div>
+</div>
+<!-- Legend -->
+<div class="absolute bottom-6 right-6 p-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur rounded-lg shadow-xl border border-slate-200 dark:border-slate-700 text-[10px] space-y-2">
+<p class="font-bold uppercase tracking-widest text-slate-400 mb-2">Pressure Index</p>
+<div class="flex items-center gap-2">
+<div class="h-2 w-12 bg-gradient-to-r from-blue-500 via-amber-500 to-red-500 rounded"></div>
+</div>
+<div class="flex justify-between font-bold">
+<span>LOW</span>
+<span>HIGH</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Critical Infrastructure Table -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800">
+<h3 class="font-bold text-slate-900 dark:text-white">Critical Infrastructure Projects</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50 dark:bg-slate-800/50">
+<tr>
+<th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Project</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Status</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Alignment</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Completion</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr>
+<td class="px-6 py-4">
+<p class="text-sm font-bold text-slate-900 dark:text-white">R21 Expansion Phase 2</p>
+<p class="text-xs text-slate-500">Logistics Corridor</p>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 rounded text-[10px] font-black">ON TRACK</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-green-500">check_circle</span>
+<span class="text-xs font-medium">High</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-mono text-slate-600 dark:text-slate-400">82%</td>
+</tr>
+<tr>
+<td class="px-6 py-4">
+<p class="text-sm font-bold text-slate-900 dark:text-white">Vaal SEZ Development</p>
+<p class="text-xs text-slate-500">Economic Hub</p>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 rounded text-[10px] font-black">DELAYED</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-amber-500">pending</span>
+<span class="text-xs font-medium">Medium</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm font-mono text-slate-600 dark:text-slate-400">34%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Side Analytics -->
+<div class="space-y-6">
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6">
+<h3 class="font-bold text-slate-900 dark:text-white mb-6">Municipal Alignment</h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between text-xs font-bold mb-2">
+<span class="text-slate-500">Johannesburg</span>
+<span class="text-primary">88%</span>
+</div>
+<div class="h-2 bg-slate-100 dark:bg-slate-800 rounded-full">
+<div class="h-full bg-primary rounded-full" style="width: 88%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-bold mb-2">
+<span class="text-slate-500">Tshwane</span>
+<span class="text-mineral-green">74%</span>
+</div>
+<div class="h-2 bg-slate-100 dark:bg-slate-800 rounded-full">
+<div class="h-full bg-mineral-green rounded-full" style="width: 74%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-bold mb-2">
+<span class="text-slate-500">Ekurhuleni</span>
+<span class="text-slate-blue">62%</span>
+</div>
+<div class="h-2 bg-slate-100 dark:bg-slate-800 rounded-full">
+<div class="h-full bg-slate-blue rounded-full" style="width: 62%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-bold mb-2">
+<span class="text-slate-500">Sedibeng</span>
+<span class="text-amber-500">41%</span>
+</div>
+<div class="h-2 bg-slate-100 dark:bg-slate-800 rounded-full">
+<div class="h-full bg-amber-500 rounded-full" style="width: 41%"></div>
+</div>
+</div>
+</div>
+<p class="mt-8 text-xs text-slate-400 leading-relaxed">Alignment metrics calculate policy synchronization, budget sharing, and combined infrastructure planning indices.</p>
+</div>
+<!-- Alerts/Highlights Card -->
+<div class="bg-primary/5 rounded-xl border border-primary/10 p-6">
+<h3 class="font-bold text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">priority_high</span> Critical Alignment Alert
+                            </h3>
+<p class="text-sm text-slate-700 dark:text-slate-300 mb-4">
+                                Sedibeng has fallen below the 45% threshold. Strategic intervention recommended for Vaal corridor alignment.
+                            </p>
+<button class="text-xs font-bold text-primary underline underline-offset-4 decoration-2">
+                                View Detailed Intervention Plan
+                            </button>
+</div>
+<!-- Mini Chart Box -->
+<div class="bg-slate-900 rounded-xl p-6 text-white shadow-lg overflow-hidden relative">
+<div class="relative z-10">
+<p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Growth Forecast</p>
+<p class="text-2xl font-bold font-serif">+3.4% YoY</p>
+</div>
+<div class="absolute bottom-0 right-0 left-0 h-16 opacity-30">
+<svg class="w-full h-full preserve-3d" viewbox="0 0 100 20">
+<path d="M0 20 L0 15 Q 10 5, 20 10 T 40 5 T 60 12 T 80 4 T 100 8 L 100 20 Z" fill="currentColor"></path>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

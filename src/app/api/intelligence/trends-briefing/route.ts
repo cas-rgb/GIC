@@ -8,7 +8,10 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   const days = daysParam ? Number(daysParam) : 30;
 
   if (!Number.isFinite(days) || days <= 0) {
-    return NextResponse.json({ error: "days must be a positive number" }, { status: 400 });
+    return NextResponse.json(
+      { error: "days must be a positive number" },
+      { status: 400 },
+    );
   }
 
   try {
@@ -16,8 +19,13 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json(response);
   } catch (error) {
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Failed to fetch trends briefing" },
-      { status: 500 }
+      {
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to fetch trends briefing",
+      },
+      { status: 500 },
     );
   }
 }

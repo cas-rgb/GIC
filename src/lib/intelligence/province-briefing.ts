@@ -46,7 +46,7 @@ export interface ProvinceBriefingResponse {
 
 export async function getProvinceBriefing(
   province: string,
-  days = 30
+  days = 30,
 ): Promise<ProvinceBriefingResponse> {
   const [
     summary,
@@ -59,25 +59,26 @@ export async function getProvinceBriefing(
     sourceHealth,
     citizenVoice,
     legacyCommunity,
-  ] =
-    await Promise.all([
-      getProvinceSummary(province, days),
-      getMunicipalityRanking(province),
-      getProvinceSentiment(province, days),
-      getProvinceEvidenceBalance(province, days),
-      getLeadershipSentiment(province, days),
-      getProvinceRecommendations(province, days),
-      getWaterReliability(province, days),
-      getSourceHealthSummary(province),
-      getSocialTrendsExecutiveSummary(province, days),
-      getProvinceLegacyCommunitySignals(province, days),
-    ]);
+  ] = await Promise.all([
+    getProvinceSummary(province, days),
+    getMunicipalityRanking(province),
+    getProvinceSentiment(province, days),
+    getProvinceEvidenceBalance(province, days),
+    getLeadershipSentiment(province, days),
+    getProvinceRecommendations(province, days),
+    getWaterReliability(province, days),
+    getSourceHealthSummary(province),
+    getSocialTrendsExecutiveSummary(province, days),
+    getProvinceLegacyCommunitySignals(province, days),
+  ]);
 
   const topMunicipality = municipalities.rows[0] ?? null;
   const topLeader = leadership.leaders[0] ?? null;
   const topRecommendation = recommendations.recommendations[0] ?? null;
   const topComplaintTopic =
-    sentiment.summary.topComplaintTopic ?? summary.summary.topPressureDomain ?? "service delivery";
+    sentiment.summary.topComplaintTopic ??
+    summary.summary.topPressureDomain ??
+    "service delivery";
   const topLegacyCommunityIssue = legacyCommunity.issues[0]?.issue ?? null;
   const topConcernTopic = topComplaintTopic;
 
@@ -87,17 +88,17 @@ export async function getProvinceBriefing(
     `${summary.summary.pressureCaseCount} governed pressure cases and ${summary.summary.highSeverityCount} high-severity cases were recorded in the last ${days} days.`,
     `Public sentiment is centering on ${topComplaintTopic}, with ${Math.round(sentiment.summary.negativeShare * 100)}% of the latest governed sentiment window negative.`,
     `Citizen voice recorded ${citizenVoice.summary.totalCitizenMentions} governed public-pressure mentions, with ${Math.round(
-      citizenVoice.summary.averageNegativeShare * 100
+      citizenVoice.summary.averageNegativeShare * 100,
     )}% average negative share and ${citizenVoice.summary.narrativeRiskLevel.toLowerCase()} narrative risk.`,
     `Imported community evidence adds ${legacyCommunity.summary.documentCount} legacy resident/civic signals, with ${Math.round(
-      legacyCommunity.summary.negativeShare * 100
+      legacyCommunity.summary.negativeShare * 100,
     )}% negative share${topLegacyCommunityIssue ? ` and ${topLegacyCommunityIssue} as the strongest recurring community issue` : ""}.`,
     `Evidence confidence is ${summary.summary.evidenceConfidenceScore}%, with ${Math.round(evidenceBalance.summary.officialDocumentShare)}% of the current evidence mix coming from official sources.`,
   ];
 
   if ((summary.summary.topPressureDomain ?? "").includes("Water")) {
     summaryLines.push(
-      `Official water reliability is ${waterReliability.summary.waterReliabilityScore}, based on ${waterReliability.summary.officialDocumentCount} official water documents and ${waterReliability.summary.officialIncidentCount} official water incidents in scope.`
+      `Official water reliability is ${waterReliability.summary.waterReliabilityScore}, based on ${waterReliability.summary.officialDocumentCount} official water documents and ${waterReliability.summary.officialIncidentCount} official water incidents in scope.`,
     );
   }
 
@@ -114,10 +115,15 @@ export async function getProvinceBriefing(
       : `No imported legacy community signal layer is currently strong enough to change the province hotspot view.`,
   ];
 
-  const interventions = recommendations.recommendations.slice(0, 3).map((item) => {
-    const leaderSuffix = item.linkedLeaders.length > 0 ? ` Lead signal: ${item.linkedLeaders.join(", ")}.` : "";
-    return `${item.title}: ${item.recommendedAction}${leaderSuffix}`;
-  });
+  const interventions = recommendations.recommendations
+    .slice(0, 3)
+    .map((item) => {
+      const leaderSuffix =
+        item.linkedLeaders.length > 0
+          ? ` Lead signal: ${item.linkedLeaders.join(", ")}.`
+          : "";
+      return `${item.title}: ${item.recommendedAction}${leaderSuffix}`;
+    });
 
   const risks = [
     evidenceBalance.summary.officialDocumentShare < 40
@@ -126,7 +132,8 @@ export async function getProvinceBriefing(
     citizenVoice.summary.narrativeRiskLevel === "High"
       ? "Public complaint intensity is already high enough that slow visible response could escalate narrative pressure faster than formal systems register it."
       : "Citizen-voice intensity is present but not yet overwhelming enough to outweigh the operational and official evidence layers.",
-    legacyCommunity.summary.documentCount >= 25 && legacyCommunity.summary.negativeShare >= 0.45
+    legacyCommunity.summary.documentCount >= 25 &&
+    legacyCommunity.summary.negativeShare >= 0.45
       ? `Imported community evidence shows entrenched resident pressure around ${topLegacyCommunityIssue ?? "recurring service complaints"}, so current frustration is not only a short-cycle narrative spike.`
       : "Imported legacy community evidence is present but not yet strong enough to change the current province risk posture on its own.",
     topLeader
@@ -177,7 +184,7 @@ export async function getProvinceBriefing(
         row.shareOfVoice -
           (summary.summary.topPressureDomain === row.topic
             ? evidenceBalance.summary.officialDocumentShare / 100
-            : 0)
+            : 0),
       ),
     })),
     evidence: [
@@ -186,7 +193,7 @@ export async function getProvinceBriefing(
         sourceName: "Governed analytics",
         sourceType: "official",
         excerpt: `${Math.round(
-          evidenceBalance.summary.officialDocumentShare
+          evidenceBalance.summary.officialDocumentShare,
         )}% of current evidence is official.`,
       },
       {
@@ -194,7 +201,7 @@ export async function getProvinceBriefing(
         sourceName: "Citizen voice",
         sourceType: "citizen_voice",
         excerpt: `${citizenVoice.summary.totalCitizenMentions} governed mentions with ${Math.round(
-          citizenVoice.summary.averageNegativeShare * 100
+          citizenVoice.summary.averageNegativeShare * 100,
         )}% negative share.`,
       },
     ],

@@ -43,7 +43,10 @@ function toNumber(value: string | number | null | undefined): number {
   return typeof value === "string" ? Number(value) : value;
 }
 
-function inferLegacySentimentScore(sentimentLabel: string, urgency: number): number {
+function inferLegacySentimentScore(
+  sentimentLabel: string,
+  urgency: number,
+): number {
   if (sentimentLabel === "negative") {
     return urgency * 10;
   }
@@ -61,12 +64,19 @@ export async function getCitizenVoiceEvidence(
   ward: string | null,
   issueFamily: string | null,
   sourceType: string | null,
-  days = 30
+  days = 30,
 ): Promise<CitizenVoiceEvidenceResponse> {
   const normalizedIssueFamily = normalizeIssueFamily(issueFamily);
   const normalizedWard = ward?.trim() ? ward.trim() : null;
   const normalizedSourceType = sourceType?.trim() ? sourceType.trim() : null;
-  const params = [province, municipality, normalizedWard, normalizedIssueFamily, normalizedSourceType, days];
+  const params = [
+    province,
+    municipality,
+    normalizedWard,
+    normalizedIssueFamily,
+    normalizedSourceType,
+    days,
+  ];
 
   const [citizenDocumentsResult, legacyDocumentsResult] = await Promise.all([
     query<EvidenceRow>(
@@ -99,7 +109,7 @@ export async function getCitizenVoiceEvidence(
         order by d.published_at desc nulls last, d.created_at desc
         limit 18
       `,
-      params
+      params,
     ),
     query<LegacyEvidenceRow>(
       `
@@ -135,7 +145,7 @@ export async function getCitizenVoiceEvidence(
         order by d.published_at desc nulls last, d.created_at desc
         limit 30
       `,
-      params
+      params,
     ),
   ]);
 
@@ -143,7 +153,10 @@ export async function getCitizenVoiceEvidence(
   const legacyDocuments = legacyDocumentsResult.rows
     .map((row): EvidenceRow | null => {
       const mappedIssueFamily = normalizeIssueFamily(row.rawIssue);
-      if (normalizedIssueFamily && mappedIssueFamily !== normalizedIssueFamily) {
+      if (
+        normalizedIssueFamily &&
+        mappedIssueFamily !== normalizedIssueFamily
+      ) {
         return null;
       }
 
@@ -187,20 +200,28 @@ export async function getCitizenVoiceEvidence(
   combinedDocuments.forEach((row) => {
     documentIds.add(row.documentId);
     sourceKeys.add(row.sourceKey);
-    sourceTypeCounts.set(row.sourceType, (sourceTypeCounts.get(row.sourceType) ?? 0) + 1);
+    sourceTypeCounts.set(
+      row.sourceType,
+      (sourceTypeCounts.get(row.sourceType) ?? 0) + 1,
+    );
   });
 
   const dominantSourceType =
-    [...sourceTypeCounts.entries()].sort((left, right) => right[1] - left[1])[0]?.[0] ?? null;
+    [...sourceTypeCounts.entries()].sort(
+      (left, right) => right[1] - left[1],
+    )[0]?.[0] ?? null;
   const avgNegativeScore =
     negativeScores.length > 0
       ? Number(
           (
-            negativeScores.reduce((sum, value) => sum + value, 0) / negativeScores.length
-          ).toFixed(2)
+            negativeScores.reduce((sum, value) => sum + value, 0) /
+            negativeScores.length
+          ).toFixed(2),
         )
       : 0;
-  const legacyDocumentIds = new Set(legacyDocuments.map((row) => row.documentId));
+  const legacyDocumentIds = new Set(
+    legacyDocuments.map((row) => row.documentId),
+  );
 
   return {
     province,
@@ -211,7 +232,9 @@ export async function getCitizenVoiceEvidence(
     summary: {
       documentCount: documentIds.size,
       sourceCount: sourceKeys.size,
-      legacyDocumentCount: [...documentIds].filter((documentId) => legacyDocumentIds.has(documentId)).length,
+      legacyDocumentCount: [...documentIds].filter((documentId) =>
+        legacyDocumentIds.has(documentId),
+      ).length,
       avgNegativeScore,
       dominantSourceType,
     },

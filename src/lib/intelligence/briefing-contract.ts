@@ -126,7 +126,12 @@ export interface MunicipalityWardsBriefingInput extends BriefingInputBase {
     escalationScore: number;
     topIssue: string | null;
     issueVolume: number;
-    wardReadinessLabel: "Operational" | "Partial" | "Registry Only" | "Community-led" | "Sparse";
+    wardReadinessLabel:
+      | "Operational"
+      | "Partial"
+      | "Registry Only"
+      | "Community-led"
+      | "Sparse";
     registryWardCount: number;
     evidenceBackedWardCount: number;
   };

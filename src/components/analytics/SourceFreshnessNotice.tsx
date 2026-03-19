@@ -37,15 +37,15 @@ export default function SourceFreshnessNotice({
       try {
         const response = await fetch(
           `/api/analytics/source-health-summary?province=${encodeURIComponent(province)}`,
-          { cache: "no-store" }
+          { cache: "no-store" },
         );
 
         if (!response.ok) {
           throw new Error(
             await parseError(
               response,
-              `request failed with status ${response.status}`
-            )
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -82,7 +82,10 @@ export default function SourceFreshnessNotice({
               Source Freshness
             </p>
             <p className="mt-2 text-sm font-medium text-slate-700">
-              {municipality ? `${municipality} is currently` : `${province} is currently`} backed by a healthy province-level source refresh cycle.
+              {municipality
+                ? `${municipality} is currently`
+                : `${province} is currently`}{" "}
+              backed by a healthy province-level source refresh cycle.
             </p>
           </div>
         </div>
@@ -99,9 +102,10 @@ export default function SourceFreshnessNotice({
             Source Freshness Warning
           </p>
           <p className="mt-2 text-sm font-medium text-slate-700">
-            {province} has {totals.staleCount} stale and {totals.failingCount} failing
-            active connectors. Treat local and provincial narrative-heavy views with extra
-            caution until the source refresh cycle stabilizes.
+            {province} has {totals.staleCount} stale and {totals.failingCount}{" "}
+            failing active connectors. Treat local and provincial
+            narrative-heavy views with extra caution until the source refresh
+            cycle stabilizes.
           </p>
         </div>
       </div>

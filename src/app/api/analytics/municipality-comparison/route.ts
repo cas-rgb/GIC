@@ -7,7 +7,10 @@ export async function GET(request: NextRequest) {
   const days = Number(request.nextUrl.searchParams.get("days") ?? "30");
 
   if (!province) {
-    return NextResponse.json({ error: "province is required" }, { status: 400 });
+    return NextResponse.json(
+      { error: "province is required" },
+      { status: 400 },
+    );
   }
 
   try {
@@ -15,8 +18,12 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(response);
   } catch (error) {
     const message =
-      error instanceof Error ? error.message : "Failed to load municipality comparison";
+      error instanceof Error
+        ? error.message
+        : "Failed to load municipality comparison";
 
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
+
+

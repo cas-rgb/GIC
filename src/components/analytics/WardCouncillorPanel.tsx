@@ -24,9 +24,12 @@ export default function WardCouncillorPanel(props: {
       const params = new URLSearchParams({ province, municipality, ward });
 
       try {
-        const response = await fetch(`/api/analytics/ward-councillor?${params.toString()}`, {
-          cache: "no-store",
-        });
+        const response = await fetch(
+          `/api/analytics/ward-councillor?${params.toString()}`,
+          {
+            cache: "no-store",
+          },
+        );
         if (!response.ok) {
           throw new Error(`request failed with status ${response.status}`);
         }
@@ -35,7 +38,10 @@ export default function WardCouncillorPanel(props: {
       } catch (error) {
         setState({
           status: "error",
-          message: error instanceof Error ? error.message : "Failed to load ward councillor",
+          message:
+            error instanceof Error
+              ? error.message
+              : "Failed to load ward councillor",
         });
       }
     }
@@ -59,8 +65,7 @@ export default function WardCouncillorPanel(props: {
     );
   }
 
-  const wardLabel =
-    state.data.wardLabel || state.data.ward;
+  const wardLabel = state.data.wardLabel || state.data.ward;
 
   return (
     <div className="space-y-3">

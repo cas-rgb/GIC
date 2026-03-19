@@ -25,7 +25,7 @@ function toNumber(value: string | number): number {
 export async function getMunicipalLeadershipSentiment(
   province: string,
   municipality: string,
-  days = 30
+  days = 30,
 ): Promise<MunicipalLeadershipSentimentResponse> {
   const [leaderResult, topicResult] = await Promise.all([
     query<LeadershipAggregateRow>(
@@ -46,7 +46,7 @@ export async function getMunicipalLeadershipSentiment(
         group by leader_name, office
         order by sum(mention_count) desc, leader_name asc
       `,
-      [province, municipality, days]
+      [province, municipality, days],
     ),
     query<LeadershipTopicRow>(
       `
@@ -61,7 +61,7 @@ export async function getMunicipalLeadershipSentiment(
         group by leader_name, topic
         order by leader_name asc, sum(mention_count) desc, topic asc
       `,
-      [province, municipality, days]
+      [province, municipality, days],
     ),
   ]);
 

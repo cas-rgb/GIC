@@ -1,10 +1,18 @@
 "use client";
 
-import React from 'react';
-import { GovernedMetric } from '@/lib/reporting-schema';
-import { Info, Database, AlertCircle, ShieldCheck, ChevronUp, ChevronDown, Minus } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import Sparkline from '@/components/analytics/Sparkline';
+import React from "react";
+import { GovernedMetric } from "@/lib/reporting-schema";
+import {
+  Info,
+  Database,
+  AlertCircle,
+  ShieldCheck,
+  ChevronUp,
+  ChevronDown,
+  Minus,
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import Sparkline from "@/components/analytics/Sparkline";
 
 interface GovernedValueProps {
   metric: GovernedMetric<any>;
@@ -12,16 +20,16 @@ interface GovernedValueProps {
   valueClassName?: string;
   showTrace?: boolean;
   sparklineData?: number[];
-  trend?: 'up' | 'down' | 'stable';
+  trend?: "up" | "down" | "stable";
 }
 
-export default function GovernedValue({ 
-  metric, 
-  className = "", 
+export default function GovernedValue({
+  metric,
+  className = "",
   valueClassName = "",
   showTrace = false,
   sparklineData,
-  trend
+  trend,
 }: GovernedValueProps) {
   if (!metric) {
     return (
@@ -32,13 +40,14 @@ export default function GovernedValue({
     );
   }
 
-  const isInsufficient = metric.rating === 'INSUFFICIENT' || metric.value === null;
-  
+  const isInsufficient =
+    metric.rating === "INSUFFICIENT" || metric.value === null;
+
   const ratingColors = {
-    HIGH: 'text-emerald-500',
-    PARTIAL: 'text-amber-500',
-    LOW: 'text-rose-500',
-    INSUFFICIENT: 'text-slate-400'
+    HIGH: "text-emerald-500",
+    PARTIAL: "text-amber-500",
+    LOW: "text-rose-500",
+    INSUFFICIENT: "text-slate-400",
   };
 
   return (
@@ -46,37 +55,61 @@ export default function GovernedValue({
       <div className="flex items-center justify-between gap-2">
         <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-1">
           {metric.label}
-          {metric.rating === 'HIGH' && <ShieldCheck className="w-3 h-3 text-emerald-500" />}
+          {metric.rating === "HIGH" && (
+            <ShieldCheck className="w-3 h-3 text-emerald-500" />
+          )}
         </label>
-        
-        <div className={`px-2 py-0.5 rounded text-[8px] font-black uppercase tracking-tighter border ${ratingColors[metric.rating]} border-current opacity-70`}>
-          {metric.rating === 'INSUFFICIENT' ? 'Awaiting Data' : `${metric.rating} CONFIDENCE`}
+
+        <div
+          className={`px-2 py-0.5 rounded text-[8px] font-black uppercase tracking-tighter border ${ratingColors[metric.rating]} border-current opacity-70`}
+        >
+          {metric.rating === "INSUFFICIENT"
+            ? "Awaiting Data"
+            : `${metric.rating} CONFIDENCE`}
         </div>
       </div>
 
       <div className="flex items-baseline gap-1">
         {isInsufficient ? (
-          <span className={`text-slate-400 italic text-sm font-medium ${valueClassName}`}>
-            {metric.governanceNote || 'Insufficient data'}
+          <span
+            className={`text-slate-400 italic text-sm font-medium ${valueClassName}`}
+          >
+            {metric.governanceNote || "Insufficient data"}
           </span>
         ) : (
           <div className="flex items-center gap-3">
             <div className="flex items-baseline gap-1">
-              <span className={`text-slate-900 font-black tracking-tighter ${valueClassName}`}>
-                {typeof metric.value === 'number' ? metric.value.toLocaleString() : metric.value}
+              <span
+                className={`text-slate-900 font-black tracking-tighter ${valueClassName}`}
+              >
+                {typeof metric.value === "number"
+                  ? metric.value.toLocaleString()
+                  : metric.value}
               </span>
               {metric.unit && (
-                <span className="text-xs font-bold text-slate-400">{metric.unit}</span>
+                <span className="text-xs font-bold text-slate-400">
+                  {metric.unit}
+                </span>
               )}
             </div>
-            
+
             {trend && (
-              <div className={`p-1 rounded-full ${
-                trend === 'up' ? 'bg-rose-50 text-rose-500' : 
-                trend === 'down' ? 'bg-emerald-50 text-emerald-500' : 'bg-slate-50 text-slate-400'
-              }`}>
-                {trend === 'up' ? <ChevronUp className="w-3 h-3" /> : 
-                 trend === 'down' ? <ChevronDown className="w-3 h-3" /> : <Minus className="w-3 h-3" />}
+              <div
+                className={`p-1 rounded-full ${
+                  trend === "up"
+                    ? "bg-rose-50 text-rose-500"
+                    : trend === "down"
+                      ? "bg-emerald-50 text-emerald-500"
+                      : "bg-slate-50 text-slate-400"
+                }`}
+              >
+                {trend === "up" ? (
+                  <ChevronUp className="w-3 h-3" />
+                ) : trend === "down" ? (
+                  <ChevronDown className="w-3 h-3" />
+                ) : (
+                  <Minus className="w-3 h-3" />
+                )}
               </div>
             )}
           </div>
@@ -85,9 +118,15 @@ export default function GovernedValue({
 
       {!isInsufficient && sparklineData && sparklineData.length > 1 && (
         <div className="mt-3">
-          <Sparkline 
-            data={sparklineData} 
-            color={metric.rating === 'HIGH' ? '#10b981' : metric.rating === 'PARTIAL' ? '#f59e0b' : '#D0A700'} 
+          <Sparkline
+            data={sparklineData}
+            color={
+              metric.rating === "HIGH"
+                ? "#10b981"
+                : metric.rating === "PARTIAL"
+                  ? "#f59e0b"
+                  : "#D0A700"
+            }
           />
         </div>
       )}
@@ -99,7 +138,10 @@ export default function GovernedValue({
           </p>
           <div className="space-y-1">
             {(metric.trace || []).map((t, i) => (
-              <div key={i} className="flex justify-between items-center text-[9px] font-medium text-slate-500">
+              <div
+                key={i}
+                className="flex justify-between items-center text-[9px] font-medium text-slate-500"
+              >
                 <span>{t.table}</span>
                 <span className="text-slate-300">n={t.sourceCount}</span>
               </div>

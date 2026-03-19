@@ -66,12 +66,11 @@ function splitSentences(text: string): string[] {
 export class RuleBasedSignalExtractor implements SignalExtractor {
   async extract(
     document: DocumentRecord,
-    classification: DocumentClassification
+    classification: DocumentClassification,
   ): Promise<NormalizedSignal[]> {
-    const sentences = splitSentences(`${document.title}. ${document.contentText}`).slice(
-      0,
-      50
-    );
+    const sentences = splitSentences(
+      `${document.title}. ${document.contentText}`,
+    ).slice(0, 50);
     const signals: NormalizedSignal[] = [];
 
     for (const sentence of sentences) {

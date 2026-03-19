@@ -28,7 +28,7 @@ function toNumber(value: string | number | null | undefined): number {
 
 export async function getProvinceLegacyCommunitySignals(
   province: string | null,
-  days = 30
+  days = 30,
 ): Promise<ProvinceLegacyCommunitySignalsResponse> {
   const params = [province, days];
 
@@ -81,7 +81,7 @@ export async function getProvinceLegacyCommunitySignals(
         from expanded
         left join source_ranked using (source_name)
       `,
-      params
+      params,
     ),
     query<IssueRow>(
       `
@@ -117,14 +117,14 @@ export async function getProvinceLegacyCommunitySignals(
           count(*)::int as "documentCount",
           count(distinct province)::int as "provinceCount",
           round(avg(urgency)::numeric, 1) as "avgUrgency",
-          max(sentiment) filter (where sentiment_rank = 1) as "dominantSentiment"
+          max(sentiment_ranked.sentiment) filter (where sentiment_rank = 1) as "dominantSentiment"
         from legacy_docs
         left join sentiment_ranked using (issue)
         group by issue
         order by "documentCount" desc, "avgUrgency" desc nulls last, issue asc
         limit 8
       `,
-      params
+      params,
     ),
   ]);
 

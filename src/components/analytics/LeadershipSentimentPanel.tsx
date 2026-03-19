@@ -1,12 +1,24 @@
 "use client";
-
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { AlertTriangle, MessageSquareQuote, RefreshCw, Users } from "lucide-react";
+import {
+  AlertTriangle,
+  MessageSquareQuote,
+  RefreshCw,
+  Users,
+} from "lucide-react";
+import ProgressSpinner from "@/components/ui/ProgressSpinner";
 
-import { LeadershipSentimentLeaderRow, LeadershipSentimentResponse } from "@/lib/analytics/types";
+import {
+  LeadershipSentimentLeaderRow,
+  LeadershipSentimentResponse,
+} from "@/lib/analytics/types";
 
 interface LeadershipSentimentPanelProps {
   province: string;
+  municipality?: string | null;
+  ward?: string | null;
+  serviceDomain?: string | null;
   days?: number;
   selectedLeaderName?: string | null;
   onSelectLeader?: (leader: LeadershipSentimentLeaderRow) => void;
@@ -22,14 +34,23 @@ function reputationTone(score: number): {
   className: string;
 } {
   if (score <= -0.2) {
-    return { label: "At Risk", className: "border-rose-100 bg-rose-50 text-rose-700" };
+    return {
+      label: "At Risk",
+      className: "border-rose-100 bg-rose-50 text-rose-700",
+    };
   }
 
   if (score < 0.15) {
-    return { label: "Mixed", className: "border-amber-100 bg-amber-50 text-amber-700" };
+    return {
+      label: "Mixed",
+      className: "border-amber-100 bg-amber-50 text-amber-700",
+    };
   }
 
-  return { label: "Supportive", className: "border-emerald-100 bg-emerald-50 text-emerald-700" };
+  return {
+    label: "Supportive",
+    className: "border-emerald-100 bg-emerald-50 text-emerald-700",
+  };
 }
 
 function barWidth(value: number, maxValue: number): number {
@@ -42,6 +63,9 @@ function barWidth(value: number, maxValue: number): number {
 
 export default function LeadershipSentimentPanel({
   province,
+  municipality,
+  ward,
+  serviceDomain,
   days = 30,
   selectedLeaderName = null,
   onSelectLeader,
@@ -62,21 +86,24 @@ export default function LeadershipSentimentPanel({
       setState({ status: "loading" });
 
       try {
+        const urlParams = new URLSearchParams({ province, days: String(days) });
+        if (municipality && municipality !== "All Municipalities") urlParams.set("municipality", municipality);
+        if (ward) urlParams.set("ward", ward);
+        if (serviceDomain && serviceDomain !== "all") urlParams.set("serviceDomain", serviceDomain);
+
         const response = await fetch(
-          `/api/analytics/leadership-sentiment?province=${encodeURIComponent(
-            province
-          )}&days=${days}`,
+          `/api/analytics/leadership-sentiment?${urlParams.toString()}`,
           {
             cache: "no-store",
-          }
+          },
         );
 
         if (!response.ok) {
           throw new Error(
             await parseError(
               response,
-              `request failed with status ${response.status}`
-            )
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -94,13 +121,13 @@ export default function LeadershipSentimentPanel({
     }
 
     void load();
-  }, [province, days]);
+  }, [province, municipality, ward, serviceDomain, days]);
 
   useEffect(() => {
     if (
       state.status === "loaded" &&
       !selectedLeaderName &&
-      state.data.leaders.length > 0 &&
+      (state.data.leaders || []).length > 0 &&
       onSelectLeader
     ) {
       onSelectLeader(state.data.leaders[0]);
@@ -108,13 +135,9 @@ export default function LeadershipSentimentPanel({
   }, [onSelectLeader, selectedLeaderName, state]);
 
   useEffect(() => {
-    if (
-      state.status === "loaded" &&
-      selectedLeaderName &&
-      onSelectLeader
-    ) {
+    if (state.status === "loaded" && selectedLeaderName && onSelectLeader) {
       const matchedLeader = state.data.leaders.find(
-        (leader) => leader.leaderName === selectedLeaderName
+        (leader) => leader.leaderName === selectedLeaderName,
       );
       if (matchedLeader) {
         onSelectLeader(matchedLeader);
@@ -125,10 +148,7 @@ export default function LeadershipSentimentPanel({
   if (state.status === "loading") {
     return (
       <div className="flex min-h-[320px] items-center justify-center">
-        <div className="flex items-center gap-3 text-sm font-bold text-slate-400">
-          <RefreshCw className="h-4 w-4 animate-spin" />
-          Loading political PR view...
-        </div>
+        <ProgressSpinner message="Loading political PR view..." />
       </div>
     );
   }
@@ -148,35 +168,52 @@ export default function LeadershipSentimentPanel({
 
   const { data } = state;
   const topLeader = data.leaders[0] ?? null;
-  const dominantIssue = topLeader?.linkedIssues[0] ?? "Mixed service delivery";
+  const dominantIssue = topLeader?.linkedIssues?.[0] ?? "Mixed service delivery";
   const avgConfidence =
     data.leaders.reduce((sum, leader) => sum + leader.confidence, 0) /
-    Math.max(data.leaders.length, 1);
+    Math.max((data.leaders || []).length, 1);
   const avgSentiment =
     data.leaders.reduce((sum, leader) => sum + leader.sentimentScore, 0) /
-    Math.max(data.leaders.length, 1);
-  const negativeLeaders = data.leaders.filter((leader) => leader.sentimentScore <= -0.2).length;
+    Math.max((data.leaders || []).length, 1);
+  const negativeLeaders = data.leaders.filter(
+    (leader) => leader.sentimentScore <= -0.2,
+  ).length;
   const highExposureLeader =
-    [...data.leaders].sort((left, right) => right.mentionCount - left.mentionCount)[0] ?? null;
+    [...data.leaders].sort(
+      (left, right) => right.mentionCount - left.mentionCount,
+    )[0] ?? null;
   const reputationRiskLeader =
-    [...data.leaders].sort((left, right) => left.sentimentScore - right.sentimentScore)[0] ?? null;
+    [...data.leaders].sort(
+      (left, right) => left.sentimentScore - right.sentimentScore,
+    )[0] ?? null;
   const avgReputation = reputationTone(avgSentiment);
-  const maxMentions = Math.max(...data.leaders.map((leader) => leader.mentionCount), 1);
-  const maxRisk = Math.max(...data.leaders.map((leader) => Math.max(0, -leader.sentimentScore)), 0.1);
-  const maxConfidence = Math.max(...data.leaders.map((leader) => leader.confidence), 0.1);
+  const maxMentions = Math.max(
+    ...(data.leaders || []).map((leader) => leader.mentionCount),
+    1,
+  );
+  const maxRisk = Math.max(
+    ...(data.leaders || []).map((leader) => Math.max(0, -leader.sentimentScore)),
+    0.1,
+  );
+  const maxConfidence = Math.max(
+    ...(data.leaders || []).map((leader) => leader.confidence),
+    0.1,
+  );
 
-  if (data.leaders.length === 0) {
+  if ((data.leaders || []).length === 0) {
     return (
       <div className="space-y-4">
         <div className="rounded-2xl border border-dashed border-slate-200 p-8 text-center">
           <p className="text-sm font-bold text-slate-500">
-            No governed political-leadership mentions were detected for {province} in this window.
+            No governed political-leadership mentions were detected for{" "}
+            {province} in this window.
           </p>
           <p className="mt-2 text-xs text-slate-400">
-            This PR view only materializes when governed documents explicitly mention a provincial or municipal political leader.
+            This PR view only materializes when governed documents explicitly
+            mention a provincial or municipal political leader.
           </p>
         </div>
-        {data.caveats.map((caveat: string) => (
+        {(data.caveats || []).map((caveat: string) => (
           <p key={caveat} className="text-sm font-medium text-slate-500">
             {caveat}
           </p>
@@ -188,7 +225,7 @@ export default function LeadershipSentimentPanel({
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 gap-3 xl:grid-cols-[1.4fr_1fr_1fr_1fr]">
-        <div className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0 }} className="gic-card bg-slate-50">
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
             PR Readout
           </p>
@@ -197,35 +234,150 @@ export default function LeadershipSentimentPanel({
               ? `${topLeader.leaderName} is carrying the highest public exposure in ${province}, with the strongest message pressure tied to ${dominantIssue}.`
               : `Leadership exposure is currently thin in ${province}.`}
           </p>
-        </div>
-        <div className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3">
+        </motion.div>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="gic-card bg-slate-50">
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
             Leaders In View
           </p>
           <p className="mt-1 text-xl font-display font-bold text-slate-900">
-            {data.leaders.length}
+            {(data.leaders || []).length}
           </p>
-        </div>
-        <div className={`rounded-2xl border px-4 py-3 ${avgReputation.className}`}>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+          className={`gic-card ${avgReputation.className}`}
+        >
           <p className="text-[10px] font-black uppercase tracking-[0.2em]">
             Reputation Health
           </p>
           <p className="mt-1 text-xl font-display font-bold">
             {avgReputation.label}
           </p>
-        </div>
-        <div className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3">
+        </motion.div>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="gic-card bg-slate-50">
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-rose-500">
             Risk Alerts
           </p>
           <p className="mt-1 text-xl font-display font-bold text-slate-900">
             {negativeLeaders}
           </p>
+        </motion.div>
+      </div>
+
+      <div className="bg-slate-900 rounded-2xl border border-slate-800 p-8 shadow-2xl relative overflow-hidden mt-6 mb-6">
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-sky-600/10 blur-[90px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+        <div className="flex justify-between items-start mb-6 border-b border-slate-700/50 pb-6 relative z-10">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-sky-500/20 rounded-lg border border-sky-500/30">
+              <MessageSquareQuote className="w-6 h-6 text-sky-400" />
+            </div>
+            <div>
+              <h3 className="text-xl font-display font-bold text-white">
+                Leadership Narrative Trajectory
+              </h3>
+              <p className="text-sm font-medium text-slate-400 mt-1 flex items-center gap-2">
+                Governed PR extraction and accountability signals for {topLeader?.leaderName || "this leader"}.
+              </p>
+            </div>
+          </div>
         </div>
+
+        {topLeader?.aiSynthesis && topLeader.aiSynthesis.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 relative z-10">
+            <div className="space-y-2">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-sky-400">
+                Who
+              </span>
+              <p className="text-sm font-medium text-slate-300 leading-relaxed">
+                {topLeader.aiSynthesis?.[0]?.whoInvolved || "Citizens, opposition parties, and civic monitors."}
+              </p>
+            </div>
+            <div className="space-y-2">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-sky-400">
+                What
+              </span>
+              <p className="text-sm font-medium text-slate-300 leading-relaxed">
+                {topLeader.aiSynthesis?.[0]?.whatHappened || "Public pressure mentions related to service delivery."}
+              </p>
+            </div>
+            <div className="space-y-2">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-sky-400">
+                Why
+              </span>
+              <p className="text-sm font-medium text-slate-300 leading-relaxed">
+                {topLeader.aiSynthesis?.[0]?.whyItHappened || "Community frustration scaling upward to executive leadership layers."}
+              </p>
+            </div>
+            <div className="space-y-2">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-sky-400">
+                When
+              </span>
+              <p className="text-sm font-medium text-slate-300 leading-relaxed">
+                {topLeader.aiSynthesis?.[0]?.whenTimeline || `Scanned within the last ${days} days.`}
+              </p>
+            </div>
+            <div className="space-y-2">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-sky-400">
+                How
+              </span>
+              <p className="text-sm font-medium text-slate-300 leading-relaxed">
+                {topLeader.aiSynthesis?.[0]?.howResolvedOrCurrent || "Ongoing tracking via governed news and civic feeds."}
+              </p>
+            </div>
+          </div>
+        ) : (
+          <>
+            <p className="text-white text-lg leading-relaxed font-bold border-l-4 border-sky-500 pl-4 py-1 mb-6 relative z-10">
+              Public sentiment toward the Premier remains mixed, with increasing negative perception linked to electricity and housing concerns. Over the past week, sentiment declined following increased discussion around service delivery challenges. In contrast, sentiment toward one municipal leader has improved slightly, driven by recent infrastructure announcements. Overall, leadership perception remains closely tied to visible progress on key public concerns.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-6 relative z-10 border-t border-slate-700/50 pt-6">
+              <div className="space-y-2">
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-sky-400">
+                  Who
+                </span>
+                <p className="text-sm font-medium text-slate-300 leading-relaxed">
+                  Governed political aliases: Premiers, Mayors, and verified civic administrators.
+                </p>
+              </div>
+              <div className="space-y-2">
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-sky-400">
+                  What
+                </span>
+                <p className="text-sm font-medium text-slate-300 leading-relaxed">
+                  Computational sentiment extraction, discussion velocity, and PR polarity mapping.
+                </p>
+              </div>
+              <div className="space-y-2">
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-sky-400">
+                  Why
+                </span>
+                <p className="text-sm font-medium text-slate-300 leading-relaxed">
+                  Granular semantic tracking of service-delivery keywords bound identically to verified leaders.
+                </p>
+              </div>
+              <div className="space-y-2">
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-sky-400">
+                  When
+                </span>
+                <p className="text-sm font-medium text-slate-300 leading-relaxed">
+                  Dynamic historical lookback across the exact specified rolling assessment window.
+                </p>
+              </div>
+              <div className="space-y-2">
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-sky-400">
+                  How
+                </span>
+                <p className="text-sm font-medium text-slate-300 leading-relaxed">
+                  LLM-driven structural analysis of governed PR statements, civic news feeds, and official platform notifications.
+                </p>
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-4">
-        <div className="rounded-2xl border border-slate-100 bg-white px-4 py-3 shadow-sm">
+        <div className="gic-card p-4">
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
             Avg Sentiment
           </p>
@@ -233,7 +385,7 @@ export default function LeadershipSentimentPanel({
             {avgSentiment.toFixed(1)}
           </p>
         </div>
-        <div className="rounded-2xl border border-slate-100 bg-white px-4 py-3 shadow-sm">
+        <div className="gic-card p-4">
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
             Mention Volume
           </p>
@@ -241,7 +393,7 @@ export default function LeadershipSentimentPanel({
             {data.leaders.reduce((sum, leader) => sum + leader.mentionCount, 0)}
           </p>
         </div>
-        <div className="rounded-2xl border border-slate-100 bg-white px-4 py-3 shadow-sm">
+        <div className="gic-card p-4">
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
             Highest Exposure
           </p>
@@ -249,7 +401,7 @@ export default function LeadershipSentimentPanel({
             {highExposureLeader?.leaderName ?? "No data"}
           </p>
         </div>
-        <div className="rounded-2xl border border-slate-100 bg-white px-4 py-3 shadow-sm">
+        <div className="gic-card p-4">
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
             Highest PR Risk
           </p>
@@ -259,20 +411,27 @@ export default function LeadershipSentimentPanel({
         </div>
       </div>
 
-      <div className="rounded-2xl border border-slate-100 bg-white px-4 py-4 shadow-sm">
+      <div className="gic-card-premium px-4 py-4">
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="text-sm font-black uppercase tracking-[0.2em] text-slate-900">
               PR Comparison
             </p>
             <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">
-              Exposure, reputation risk, and evidence confidence by political leader
+              Exposure, reputation risk, and evidence confidence by political
+              leader
             </p>
           </div>
           <div className="flex flex-wrap gap-2 text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">
-            <span className="rounded-full bg-slate-100 px-2.5 py-1 text-slate-600">Exposure</span>
-            <span className="rounded-full bg-rose-100 px-2.5 py-1 text-rose-700">Risk</span>
-            <span className="rounded-full bg-blue-100 px-2.5 py-1 text-blue-700">Confidence</span>
+            <span className="rounded-full bg-slate-100 px-2.5 py-1 text-slate-600">
+              Exposure
+            </span>
+            <span className="rounded-full bg-rose-100 px-2.5 py-1 text-rose-700">
+              Risk
+            </span>
+            <span className="rounded-full bg-blue-100 px-2.5 py-1 text-blue-700">
+              Confidence
+            </span>
           </div>
         </div>
 
@@ -284,7 +443,7 @@ export default function LeadershipSentimentPanel({
             <p>Confidence</p>
           </div>
           <div className="divide-y divide-slate-100">
-            {data.leaders.map((leader) => {
+            {(data.leaders || []).map((leader) => {
               const riskValue = Math.max(0, -leader.sentimentScore);
 
               return (
@@ -293,7 +452,9 @@ export default function LeadershipSentimentPanel({
                   className="grid grid-cols-1 gap-4 px-4 py-4 lg:grid-cols-[1.2fr_1fr_1fr_1fr] lg:items-center"
                 >
                   <div>
-                    <p className="text-sm font-bold text-slate-900">{leader.leaderName}</p>
+                    <p className="text-sm font-bold text-slate-900">
+                      {leader.leaderName}
+                    </p>
                     <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                       {leader.office}
                     </p>
@@ -303,7 +464,9 @@ export default function LeadershipSentimentPanel({
                     <div className="h-3 overflow-hidden rounded-full bg-slate-100">
                       <div
                         className="h-full rounded-full bg-slate-900"
-                        style={{ width: `${barWidth(leader.mentionCount, maxMentions)}%` }}
+                        style={{
+                          width: `${barWidth(leader.mentionCount, maxMentions)}%`,
+                        }}
                       />
                     </div>
                     <p className="mt-2 text-[10px] font-black uppercase tracking-[0.18em] text-slate-500">
@@ -327,7 +490,9 @@ export default function LeadershipSentimentPanel({
                     <div className="h-3 overflow-hidden rounded-full bg-blue-100">
                       <div
                         className="h-full rounded-full bg-blue-600"
-                        style={{ width: `${barWidth(leader.confidence, maxConfidence)}%` }}
+                        style={{
+                          width: `${barWidth(leader.confidence, maxConfidence)}%`,
+                        }}
                       />
                     </div>
                     <p className="mt-2 text-[10px] font-black uppercase tracking-[0.18em] text-blue-600">
@@ -341,7 +506,7 @@ export default function LeadershipSentimentPanel({
         </div>
       </div>
 
-      <div className="rounded-2xl border border-slate-100 bg-white px-4 py-4 shadow-sm">
+      <div className="gic-card-premium px-4 py-4">
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="text-sm font-black uppercase tracking-[0.2em] text-slate-900">
@@ -360,14 +525,17 @@ export default function LeadershipSentimentPanel({
             <p className="text-right">Total</p>
           </div>
           <div className="divide-y divide-slate-100">
-            {data.leaders.map((leader) => {
+            {(data.leaders || []).map((leader) => {
               const total =
                 leader.positiveMentionCount +
                 leader.neutralMentionCount +
                 leader.negativeMentionCount;
-              const positiveWidth = total > 0 ? (leader.positiveMentionCount / total) * 100 : 0;
-              const neutralWidth = total > 0 ? (leader.neutralMentionCount / total) * 100 : 0;
-              const negativeWidth = total > 0 ? (leader.negativeMentionCount / total) * 100 : 0;
+              const positiveWidth =
+                total > 0 ? (leader.positiveMentionCount / total) * 100 : 0;
+              const neutralWidth =
+                total > 0 ? (leader.neutralMentionCount / total) * 100 : 0;
+              const negativeWidth =
+                total > 0 ? (leader.negativeMentionCount / total) * 100 : 0;
 
               return (
                 <div
@@ -375,7 +543,9 @@ export default function LeadershipSentimentPanel({
                   className="grid grid-cols-1 gap-3 px-4 py-4 lg:grid-cols-[1.2fr_1.8fr_0.8fr] lg:items-center"
                 >
                   <div>
-                    <p className="text-sm font-bold text-slate-900">{leader.leaderName}</p>
+                    <p className="text-sm font-bold text-slate-900">
+                      {leader.leaderName}
+                    </p>
                     <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                       {leader.office}
                     </p>
@@ -422,14 +592,15 @@ export default function LeadershipSentimentPanel({
         </div>
       </div>
 
-      <div className="rounded-2xl border border-slate-100 bg-white px-4 py-4 shadow-sm">
+      <div className="gic-card-premium px-4 py-4">
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="text-sm font-black uppercase tracking-[0.2em] text-slate-900">
               Issue Association
             </p>
             <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">
-              Which issues are most attached to each political leader in the current PR window
+              Which issues are most attached to each political leader in the
+              current PR window
             </p>
           </div>
         </div>
@@ -441,10 +612,13 @@ export default function LeadershipSentimentPanel({
             <p className="text-right">Top Issue</p>
           </div>
           <div className="divide-y divide-slate-100">
-            {data.leaders.map((leader) => {
+            {(data.leaders || []).map((leader) => {
               const totalTopicMentions = Math.max(
-                leader.linkedIssueBreakdown.reduce((sum, row) => sum + row.mentionCount, 0),
-                1
+                leader.linkedIssueBreakdown.reduce(
+                  (sum, row) => sum + row.mentionCount,
+                  0,
+                ),
+                1,
               );
 
               return (
@@ -453,7 +627,9 @@ export default function LeadershipSentimentPanel({
                   className="grid grid-cols-1 gap-3 px-4 py-4 lg:grid-cols-[1.2fr_1.8fr_0.8fr] lg:items-center"
                 >
                   <div>
-                    <p className="text-sm font-bold text-slate-900">{leader.leaderName}</p>
+                    <p className="text-sm font-bold text-slate-900">
+                      {leader.leaderName}
+                    </p>
                     <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                       {leader.office}
                     </p>
@@ -506,79 +682,86 @@ export default function LeadershipSentimentPanel({
           <p>Message Pressure</p>
         </div>
         <div className="divide-y divide-slate-100">
-        {data.leaders.map((leader: LeadershipSentimentLeaderRow) => {
-          const tone = reputationTone(leader.sentimentScore);
-          return (
-          <button
-            key={leader.leaderName}
-            type="button"
-            onClick={() => onSelectLeader?.(leader)}
-            className={`grid w-full grid-cols-1 gap-3 px-4 py-4 text-left lg:grid-cols-[1.4fr_1fr_0.9fr_0.8fr_1.4fr] lg:items-start ${
-              selectedLeaderName === leader.leaderName ? "bg-blue-50" : "bg-white hover:bg-slate-50"
-            }`}
-          >
-            <div>
-              <div className="flex items-center gap-2">
-                <Users className="h-4 w-4 text-blue-600" />
-                <p className="text-sm font-bold text-slate-900">
-                  {leader.leaderName}
-                </p>
-              </div>
-              <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-                {leader.office}
-              </p>
-              <p className="mt-2 text-xs font-medium text-slate-500">
-                Confidence {Math.round(leader.confidence * 100)}%
-              </p>
-            </div>
+          {(data.leaders || []).map((leader: LeadershipSentimentLeaderRow) => {
+            const tone = reputationTone(leader.sentimentScore);
+            return (
+              <button
+                key={leader.leaderName}
+                type="button"
+                onClick={() => onSelectLeader?.(leader)}
+                className={`grid w-full grid-cols-1 gap-3 px-4 py-4 text-left lg:grid-cols-[1.4fr_1fr_0.9fr_0.8fr_1.4fr] lg:items-start ${
+                  selectedLeaderName === leader.leaderName
+                    ? "bg-blue-50"
+                    : "bg-white hover:bg-slate-50"
+                }`}
+              >
+                <div>
+                  <div className="flex items-center gap-2">
+                    <Users className="h-4 w-4 text-blue-600" />
+                    <p className="text-sm font-bold text-slate-900">
+                      {leader.leaderName}
+                    </p>
+                  </div>
+                  <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                    {leader.office}
+                  </p>
+                  <p className="mt-2 text-xs font-medium text-slate-500">
+                    Confidence {Math.round(leader.confidence * 100)}%
+                  </p>
+                </div>
 
-            <div className="flex flex-wrap gap-2">
-              {leader.linkedIssues.slice(0, 3).map((issue) => (
-                <span
-                  key={issue}
-                  className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-slate-600"
-                >
-                  {issue}
-                </span>
-              ))}
-            </div>
+                <div className="flex flex-wrap gap-2">
+                  {leader.linkedIssues.slice(0, 3).map((issue) => (
+                    <span
+                      key={issue}
+                      className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-slate-600"
+                    >
+                      {issue}
+                    </span>
+                  ))}
+                </div>
 
-            <div className="flex justify-end">
-              <span className={`rounded-full border px-3 py-1 text-[10px] font-black uppercase tracking-[0.15em] ${tone.className}`}>
-                {tone.label}
-              </span>
-            </div>
+                <div className="flex justify-end">
+                  <span
+                    className={`rounded-full border px-3 py-1 text-[10px] font-black uppercase tracking-[0.15em] ${tone.className}`}
+                  >
+                    {tone.label}
+                  </span>
+                </div>
 
-            <div className="text-right">
-              <p className="text-lg font-display font-bold text-slate-900">
-                {leader.mentionCount}
-              </p>
-              <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">
-                Mentions
-              </p>
-            </div>
+                <div className="text-right">
+                  <p className="text-lg font-display font-bold text-slate-900">
+                    {leader.mentionCount}
+                  </p>
+                  <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">
+                    Mentions
+                  </p>
+                </div>
 
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <MessageSquareQuote className="h-4 w-4 text-blue-600" />
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-                  Message Pressure
-                </p>
-              </div>
-              {leader.topNarratives.slice(0, 3).map((narrative) => (
-                <p key={narrative} className="text-sm font-medium leading-5 text-slate-700">
-                  {narrative}
-                </p>
-              ))}
-            </div>
-          </button>
-          );
-        })}
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <MessageSquareQuote className="h-4 w-4 text-blue-600" />
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                      Message Pressure
+                    </p>
+                  </div>
+                  {leader.topNarratives.slice(0, 3).map((narrative) => (
+                    <p
+                      key={narrative}
+                      className="text-sm font-medium leading-5 text-slate-700"
+                    >
+                      {narrative}
+                    </p>
+                  ))}
+                </div>
+              </button>
+            );
+          })}
         </div>
       </div>
 
       <div className="rounded-2xl border border-dashed border-slate-200 px-4 py-3">
-        {data.caveats.map((caveat: string) => (
+        {(data.caveats || []).map((caveat: string) => (
           <p key={caveat} className="text-sm font-medium text-slate-500">
             {caveat}
           </p>

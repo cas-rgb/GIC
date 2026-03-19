@@ -14,9 +14,10 @@ interface ProvinceIssueHeatmapRow {
 export async function getProvinceIssueHeatmap(
   province: string,
   days = 30,
-  serviceDomain?: string | null
+  serviceDomain?: string | null,
 ): Promise<ProvinceIssueHeatmapResponse> {
-  const normalizedServiceDomain = normalizeInfrastructureServiceFilter(serviceDomain);
+  const normalizedServiceDomain =
+    normalizeInfrastructureServiceFilter(serviceDomain);
   const result = await query<ProvinceIssueHeatmapRow>(
     `
       select
@@ -35,12 +36,16 @@ export async function getProvinceIssueHeatmap(
       group by municipality, service_domain
       order by sum(pressure_case_count) desc, municipality asc, service_domain asc
     `,
-    [province, days, normalizedServiceDomain]
+    [province, days, normalizedServiceDomain],
   );
 
   const cells = result.rows;
-  const municipalities = Array.from(new Set(cells.map((row) => row.municipality)));
-  const serviceDomains = Array.from(new Set(cells.map((row) => row.serviceDomain)));
+  const municipalities = Array.from(
+    new Set(cells.map((row) => row.municipality)),
+  );
+  const serviceDomains = Array.from(
+    new Set(cells.map((row) => row.serviceDomain)),
+  );
 
   return {
     province,

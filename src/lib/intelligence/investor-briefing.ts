@@ -20,11 +20,11 @@ export interface InvestorBriefingResponse extends BriefingOutput {
 export async function getInvestorBriefing(
   province: string | null = null,
   municipality: string | null = null,
-  days = 30
+  days = 30,
 ): Promise<InvestorBriefingResponse> {
   const [executive, opportunities, projects] = await Promise.all([
     getInvestorExecutiveSummary(province),
-    getInvestorOpportunities(province, municipality, 8),
+    getInvestorOpportunities(province, municipality, null, 8),
     getInfrastructureProjectsSummary(province),
   ]);
 
@@ -43,7 +43,8 @@ export async function getInvestorBriefing(
       totalKnownExpenditure: opportunities.summary.totalKnownExpenditure,
       topProvince: province ?? executive.summary.topProvince,
       topSector: opportunities.summary.topSector ?? executive.summary.topSector,
-      highValueOpportunityCount: opportunities.summary.highValueOpportunityCount,
+      highValueOpportunityCount:
+        opportunities.summary.highValueOpportunityCount,
       averageInvestmentScore: opportunities.summary.averageInvestmentScore,
     },
     rankings: opportunities.rows.map((row) => ({
@@ -68,7 +69,11 @@ export async function getInvestorBriefing(
       totalKnownExpenditure: row.totalKnownExpenditure,
     })),
     evidence: [],
-    caveats: [...executive.caveats, ...opportunities.caveats, ...projects.caveats],
+    caveats: [
+      ...executive.caveats,
+      ...opportunities.caveats,
+      ...projects.caveats,
+    ],
   };
 
   return {
@@ -77,7 +82,12 @@ export async function getInvestorBriefing(
     municipality,
     days,
     trace: {
-      sources: ["infrastructure_projects", "fact_infrastructure_projects_daily", "project_funding_sources", "project_updates"],
+      sources: [
+        "infrastructure_projects",
+        "fact_infrastructure_projects_daily",
+        "project_funding_sources",
+        "project_updates",
+      ],
       query: `province=${province ?? "all"};municipality=${municipality ?? "all"};days=${days}`,
     },
   };

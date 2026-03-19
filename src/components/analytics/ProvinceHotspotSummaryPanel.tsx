@@ -30,9 +30,13 @@ type LoadState =
 function determineActionPosture(
   trendDirection: string,
   dominantIssueFamily: string | null,
-  highestExposureMunicipality: string | null
+  highestExposureMunicipality: string | null,
 ) {
-  if (trendDirection === "Rising" && dominantIssueFamily && highestExposureMunicipality) {
+  if (
+    trendDirection === "Rising" &&
+    dominantIssueFamily &&
+    highestExposureMunicipality
+  ) {
     return `Escalate visible intervention in ${highestExposureMunicipality} around ${dominantIssueFamily.toLowerCase()} before narrative pressure hardens further.`;
   }
 
@@ -81,14 +85,20 @@ export default function ProvinceHotspotSummaryPanel({
           fetch(`/api/analytics/complaint-clusters?${params.toString()}`, {
             cache: "no-store",
           }),
-          fetch(`/api/analytics/province-legacy-community-signals?${params.toString()}`, {
-            cache: "no-store",
-          }),
+          fetch(
+            `/api/analytics/province-legacy-community-signals?${params.toString()}`,
+            {
+              cache: "no-store",
+            },
+          ),
         ]);
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -96,21 +106,26 @@ export default function ProvinceHotspotSummaryPanel({
           throw new Error(
             await parseError(
               legacyResponse,
-              `request failed with status ${legacyResponse.status}`
-            )
+              `request failed with status ${legacyResponse.status}`,
+            ),
           );
         }
 
         const [data, legacySignals] = (await Promise.all([
           response.json(),
           legacyResponse.json(),
-        ])) as [ComplaintClustersResponse, ProvinceLegacyCommunitySignalsResponse];
+        ])) as [
+          ComplaintClustersResponse,
+          ProvinceLegacyCommunitySignalsResponse,
+        ];
         setState({ status: "loaded", data, legacySignals });
       } catch (error) {
         setState({
           status: "error",
           message:
-            error instanceof Error ? error.message : "Failed to load province hotspot summary",
+            error instanceof Error
+              ? error.message
+              : "Failed to load province hotspot summary",
         });
       }
     }
@@ -134,7 +149,9 @@ export default function ProvinceHotspotSummaryPanel({
       <div className="flex min-h-[220px] items-center justify-center text-center">
         <div>
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">{state.message}</p>
+          <p className="mt-3 text-sm font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
@@ -146,7 +163,7 @@ export default function ProvinceHotspotSummaryPanel({
   const actionPosture = determineActionPosture(
     trendDirection,
     dominantCluster?.issueFamily ?? null,
-    highestExposureMunicipality
+    highestExposureMunicipality,
   );
 
   return (
@@ -181,7 +198,9 @@ export default function ProvinceHotspotSummaryPanel({
             {dominantCluster?.issueFamily ?? "No clear complaint family"}
           </p>
           <p className="mt-1 text-[10px] font-black uppercase tracking-[0.18em] text-rose-500">
-            {dominantCluster ? `intensity ${Math.round(dominantCluster.intensityScore)}` : "insufficient public voice"}
+            {dominantCluster
+              ? `intensity ${Math.round(dominantCluster.intensityScore)}`
+              : "insufficient public voice"}
           </p>
         </div>
         <div className="rounded-2xl border border-blue-100 bg-blue-50 px-4 py-3">
@@ -203,7 +222,8 @@ export default function ProvinceHotspotSummaryPanel({
             {dominantLegacyIssue ?? "No imported cluster"}
           </p>
           <p className="mt-1 text-[10px] font-black uppercase tracking-[0.18em] text-amber-500">
-            {legacySignals.summary.documentCount} docs | urgency {legacySignals.summary.avgUrgency.toFixed(1)}
+            {legacySignals.summary.documentCount} docs | urgency{" "}
+            {legacySignals.summary.avgUrgency.toFixed(1)}
           </p>
         </div>
       </div>
@@ -213,10 +233,13 @@ export default function ProvinceHotspotSummaryPanel({
           <TrendingUp className="h-4 w-4" />
           Executive action posture
         </div>
-        <p className="mt-3 text-sm font-medium leading-6 text-slate-700">{actionPosture}</p>
+        <p className="mt-3 text-sm font-medium leading-6 text-slate-700">
+          {actionPosture}
+        </p>
         {legacySignals.summary.documentCount > 0 ? (
           <p className="mt-3 text-xs font-semibold uppercase tracking-[0.16em] text-amber-600">
-            Imported community history reinforces this hotspot with {legacySignals.summary.documentCount} governed legacy docs.
+            Imported community history reinforces this hotspot with{" "}
+            {legacySignals.summary.documentCount} governed legacy docs.
           </p>
         ) : null}
       </div>
@@ -230,31 +253,39 @@ export default function ProvinceHotspotSummaryPanel({
           <p className="text-right">Negative</p>
         </div>
         <div className="divide-y divide-slate-100">
-        {data.rows.slice(0, 4).map((row) => (
-          <button
-            key={row.issueFamily}
-            type="button"
-            onClick={() => onSelectIssueFamily?.(row.issueFamily)}
-            className={`grid w-full grid-cols-1 gap-3 px-4 py-3 text-left lg:grid-cols-[1.2fr_0.8fr_0.9fr_0.8fr_0.8fr] lg:items-start ${
-              selectedIssueFamily === row.issueFamily
-                ? "bg-blue-50"
-                : "bg-white hover:bg-slate-50"
-            }`}
-          >
-            <div>
-              <p className="text-sm font-bold text-slate-900">{row.issueFamily}</p>
-              <p className="mt-1 text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">
-                hotspot complaint family
+          {data.rows.slice(0, 4).map((row) => (
+            <button
+              key={row.issueFamily}
+              type="button"
+              onClick={() => onSelectIssueFamily?.(row.issueFamily)}
+              className={`grid w-full grid-cols-1 gap-3 px-4 py-3 text-left lg:grid-cols-[1.2fr_0.8fr_0.9fr_0.8fr_0.8fr] lg:items-start ${
+                selectedIssueFamily === row.issueFamily
+                  ? "bg-blue-50"
+                  : "bg-white hover:bg-slate-50"
+              }`}
+            >
+              <div>
+                <p className="text-sm font-bold text-slate-900">
+                  {row.issueFamily}
+                </p>
+                <p className="mt-1 text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">
+                  hotspot complaint family
+                </p>
+              </div>
+              <p className="text-right text-sm font-bold text-slate-900">
+                {row.mentionCount}
               </p>
-            </div>
-            <p className="text-right text-sm font-bold text-slate-900">{row.mentionCount}</p>
-            <p className="text-right text-sm font-bold text-slate-900">{row.municipalityCount} municipalities</p>
-            <p className="text-right text-sm font-bold text-blue-700">{Math.round(row.intensityScore)}</p>
-            <p className="text-right text-sm font-bold text-rose-700">
-              {Math.round(row.avgNegativeShare * 100)}%
-            </p>
-          </button>
-        ))}
+              <p className="text-right text-sm font-bold text-slate-900">
+                {row.municipalityCount} municipalities
+              </p>
+              <p className="text-right text-sm font-bold text-blue-700">
+                {Math.round(row.intensityScore)}
+              </p>
+              <p className="text-right text-sm font-bold text-rose-700">
+                {Math.round(row.avgNegativeShare * 100)}%
+              </p>
+            </button>
+          ))}
         </div>
       </div>
     </div>

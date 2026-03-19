@@ -1,7 +1,4 @@
-import {
-  BudgetExtractor,
-  TenderExtractor,
-} from "@/lib/processing/contracts";
+import { BudgetExtractor, TenderExtractor } from "@/lib/processing/contracts";
 import {
   DocumentClassification,
   DocumentRecord,
@@ -12,7 +9,7 @@ import {
 export class NoopTenderExtractor implements TenderExtractor {
   async extract(
     _document: DocumentRecord,
-    _classification: DocumentClassification
+    _classification: DocumentClassification,
   ): Promise<NormalizedTender[]> {
     return [];
   }
@@ -21,7 +18,7 @@ export class NoopTenderExtractor implements TenderExtractor {
 export class NoopBudgetExtractor implements BudgetExtractor {
   async extract(
     _document: DocumentRecord,
-    _classification: DocumentClassification
+    _classification: DocumentClassification,
   ): Promise<NormalizedBudget[]> {
     return [];
   }

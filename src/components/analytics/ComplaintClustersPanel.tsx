@@ -7,6 +7,8 @@ import { ComplaintClustersResponse } from "@/lib/analytics/types";
 
 interface ComplaintClustersPanelProps {
   province?: string;
+  municipality?: string | null;
+  serviceDomain?: string | null;
   days?: number;
   selectedIssueFamily?: string | null;
   onSelectIssueFamily?: (issueFamily: string) => void;
@@ -43,13 +45,19 @@ export default function ComplaintClustersPanel({
       }
 
       try {
-        const response = await fetch(`/api/analytics/complaint-clusters?${params.toString()}`, {
-          cache: "no-store",
-        });
+        const response = await fetch(
+          `/api/analytics/complaint-clusters?${params.toString()}`,
+          {
+            cache: "no-store",
+          },
+        );
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -59,7 +67,9 @@ export default function ComplaintClustersPanel({
         setState({
           status: "error",
           message:
-            error instanceof Error ? error.message : "Failed to load complaint clusters",
+            error instanceof Error
+              ? error.message
+              : "Failed to load complaint clusters",
         });
       }
     }
@@ -71,7 +81,7 @@ export default function ComplaintClustersPanel({
     if (
       state.status === "loaded" &&
       !selectedIssueFamily &&
-      state.data.rows.length > 0 &&
+      (state.data.rows || []).length > 0 &&
       onSelectIssueFamily
     ) {
       onSelectIssueFamily(state.data.rows[0].issueFamily);
@@ -94,7 +104,9 @@ export default function ComplaintClustersPanel({
       <div className="flex min-h-[220px] items-center justify-center text-center">
         <div>
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">{state.message}</p>
+          <p className="mt-3 text-sm font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
@@ -110,7 +122,7 @@ export default function ComplaintClustersPanel({
             Issue Families
           </p>
           <p className="mt-1 text-xl font-display font-bold text-slate-900">
-            {data.summary.issueCount}
+            {data.summary?.issueCount ?? 0}
           </p>
         </div>
         <div className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3">
@@ -118,7 +130,7 @@ export default function ComplaintClustersPanel({
             Total Mentions
           </p>
           <p className="mt-1 text-xl font-display font-bold text-slate-900">
-            {data.summary.totalMentions}
+            {data.summary?.totalMentions ?? 0}
           </p>
         </div>
         <div className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3">
@@ -126,7 +138,7 @@ export default function ComplaintClustersPanel({
             Dominant Issue
           </p>
           <p className="mt-1 text-sm font-display font-bold text-slate-900">
-            {data.summary.dominantIssueFamily ?? "Unavailable"}
+            {data.summary?.dominantIssueFamily ?? "Unavailable"}
           </p>
         </div>
         <div className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3">
@@ -134,13 +146,13 @@ export default function ComplaintClustersPanel({
             Widest Spread
           </p>
           <p className="mt-1 text-sm font-display font-bold text-slate-900">
-            {data.summary.widestSpreadIssueFamily ?? "Unavailable"}
+            {data.summary?.widestSpreadIssueFamily ?? "Unavailable"}
           </p>
         </div>
       </div>
 
       <div className="overflow-hidden rounded-2xl border border-slate-100">
-        {data.rows.length === 0 ? (
+        {(data.rows || []).length === 0 ? (
           <div className="bg-slate-50 px-4 py-4 text-sm font-medium text-slate-500">
             No complaint clusters are available yet.
           </div>
@@ -156,7 +168,7 @@ export default function ComplaintClustersPanel({
               <p className="text-right">Score</p>
             </div>
             <div className="divide-y divide-slate-100">
-              {data.rows.map((row) => (
+              {(data.rows || []).map((row) => (
                 <button
                   key={row.issueFamily}
                   type="button"
@@ -168,19 +180,31 @@ export default function ComplaintClustersPanel({
                   }`}
                 >
                   <div>
-                    <p className="text-sm font-bold text-slate-900">{row.issueFamily}</p>
+                    <p className="text-sm font-bold text-slate-900">
+                      {row.issueFamily}
+                    </p>
                     <p className="mt-1 text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">
                       governed complaint cluster
                     </p>
                   </div>
-                  <p className="text-right text-sm font-bold text-slate-900">{row.mentionCount}</p>
-                  <p className="text-right text-sm font-bold text-slate-900">{row.documentCount}</p>
-                  <p className="text-right text-sm font-bold text-slate-900">{row.municipalityCount}</p>
+                  <p className="text-right text-sm font-bold text-slate-900">
+                    {row.mentionCount}
+                  </p>
+                  <p className="text-right text-sm font-bold text-slate-900">
+                    {row.documentCount}
+                  </p>
+                  <p className="text-right text-sm font-bold text-slate-900">
+                    {row.municipalityCount}
+                  </p>
                   <p className="text-right text-sm font-bold text-rose-700">
                     {Math.round(row.avgNegativeShare * 100)}%
                   </p>
-                  <p className="text-right text-sm font-bold text-blue-700">{Math.round(row.intensityScore)}</p>
-                  <p className="text-right text-sm font-bold text-slate-900">{row.avgSentimentScore}</p>
+                  <p className="text-right text-sm font-bold text-blue-700">
+                    {Math.round(row.intensityScore)}
+                  </p>
+                  <p className="text-right text-sm font-bold text-slate-900">
+                    {row.avgSentimentScore}
+                  </p>
                 </button>
               ))}
             </div>
@@ -189,7 +213,7 @@ export default function ComplaintClustersPanel({
       </div>
 
       <div className="rounded-2xl border border-amber-100 bg-amber-50 px-4 py-3">
-        {data.caveats.map((caveat) => (
+        {(data.caveats || []).map((caveat) => (
           <p key={caveat} className="text-sm font-medium text-slate-700">
             {caveat}
           </p>

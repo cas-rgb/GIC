@@ -27,7 +27,10 @@ function toNumber(value: string | number | null | undefined): number {
   return typeof value === "string" ? Number(value) : value;
 }
 
-function toRiskLevel(negativeShare: number, mentionCount: number): "Low" | "Elevated" | "High" {
+function toRiskLevel(
+  negativeShare: number,
+  mentionCount: number,
+): "Low" | "Elevated" | "High" {
   if (negativeShare >= 0.7 || (negativeShare >= 0.55 && mentionCount >= 12)) {
     return "High";
   }
@@ -42,7 +45,7 @@ function toRiskLevel(negativeShare: number, mentionCount: number): "Low" | "Elev
 export async function getMunicipalityCitizenVoiceSummary(
   province: string,
   municipality: string,
-  days = 30
+  days = 30,
 ): Promise<MunicipalityCitizenVoiceSummaryResponse> {
   const [summaryResult, issueResult] = await Promise.all([
     query<SummaryRow>(
@@ -56,7 +59,7 @@ export async function getMunicipalityCitizenVoiceSummary(
           and municipality = $2
           and day >= current_date - ($3::int - 1)
       `,
-      [province, municipality, days]
+      [province, municipality, days],
     ),
     query<IssueRow>(
       `
@@ -81,7 +84,7 @@ export async function getMunicipalityCitizenVoiceSummary(
         group by issue_family
         order by "intensityScore" desc, "mentionCount" desc, "issueFamily" asc
       `,
-      [province, municipality, days]
+      [province, municipality, days],
     ),
   ]);
 
@@ -90,18 +93,20 @@ export async function getMunicipalityCitizenVoiceSummary(
     totalCitizenDocuments: 0,
     averageNegativeShare: 0,
   };
-  const issues: MunicipalityCitizenVoiceIssueRow[] = issueResult.rows.map((row) => ({
-    issueFamily: row.issueFamily,
-    mentionCount: row.mentionCount,
-    documentCount: row.documentCount,
-    avgNegativeShare: toNumber(row.avgNegativeShare),
-    avgSentimentScore: toNumber(row.avgSentimentScore),
-    intensityScore: toNumber(row.intensityScore),
-  }));
+  const issues: MunicipalityCitizenVoiceIssueRow[] = issueResult.rows.map(
+    (row) => ({
+      issueFamily: row.issueFamily,
+      mentionCount: row.mentionCount,
+      documentCount: row.documentCount,
+      avgNegativeShare: toNumber(row.avgNegativeShare),
+      avgSentimentScore: toNumber(row.avgSentimentScore),
+      intensityScore: toNumber(row.intensityScore),
+    }),
+  );
   const dominantIssueFamily = issues[0]?.issueFamily ?? null;
   const riskLevel = toRiskLevel(
     toNumber(summary.averageNegativeShare),
-    summary.totalCitizenMentions
+    summary.totalCitizenMentions,
   );
 
   const narratives = [

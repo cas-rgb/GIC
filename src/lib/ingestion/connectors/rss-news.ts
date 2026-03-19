@@ -41,7 +41,9 @@ export class RssNewsConnector implements SourceConnector {
     return items.slice(0, 25).map((item) => {
       const guidValue = item.guid?.[0];
       const externalId =
-        typeof guidValue === "string" ? guidValue : guidValue?._ ?? item.link?.[0];
+        typeof guidValue === "string"
+          ? guidValue
+          : (guidValue?._ ?? item.link?.[0]);
 
       return {
         externalId,

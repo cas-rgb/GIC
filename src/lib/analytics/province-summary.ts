@@ -24,12 +24,14 @@ interface TopMunicipalityRow {
 export async function getProvinceSummary(
   province: string,
   days = 30,
-  serviceDomain?: string | null
+  serviceDomain?: string | null,
 ): Promise<ProvinceSummaryResponse> {
-  const normalizedServiceDomain = normalizeInfrastructureServiceFilter(serviceDomain);
-  const [summaryResult, topDomainResult, topMunicipalityResult] = await Promise.all([
-    query<ProvinceSummarySqlRow>(
-      `
+  const normalizedServiceDomain =
+    normalizeInfrastructureServiceFilter(serviceDomain);
+  const [summaryResult, topDomainResult, topMunicipalityResult] =
+    await Promise.all([
+      query<ProvinceSummarySqlRow>(
+        `
         with pressure_window as (
           select *
           from fact_service_pressure_daily
@@ -124,10 +126,10 @@ export async function getProvinceSummary(
         from pressure_scores ps
         cross join reliability_summary rs
       `,
-        [province, days, normalizedServiceDomain]
+        [province, days, normalizedServiceDomain],
       ),
-    query<TopDomainRow>(
-      `
+      query<TopDomainRow>(
+        `
         select
           service_domain as "topPressureDomain"
         from fact_service_pressure_daily
@@ -138,10 +140,10 @@ export async function getProvinceSummary(
         order by sum(pressure_case_count) desc
         limit 1
       `,
-      [province, days, normalizedServiceDomain]
-    ),
-    query<TopMunicipalityRow>(
-      `
+        [province, days, normalizedServiceDomain],
+      ),
+      query<TopMunicipalityRow>(
+        `
         select
           municipality as "highestExposureMunicipality"
         from fact_service_pressure_daily
@@ -153,9 +155,9 @@ export async function getProvinceSummary(
         order by sum(pressure_case_count) desc
         limit 1
       `,
-      [province, days, normalizedServiceDomain]
-    ),
-  ]);
+        [province, days, normalizedServiceDomain],
+      ),
+    ]);
 
   const summary = summaryResult.rows[0] ?? {
     pressureScore: 0,
@@ -173,8 +175,14 @@ export async function getProvinceSummary(
     days,
     serviceDomain: normalizedServiceDomain,
     summary: {
-      pressureScore: typeof summary.pressureScore === "string" ? Number(summary.pressureScore) : summary.pressureScore,
-      escalationScore: typeof summary.escalationScore === "string" ? Number(summary.escalationScore) : summary.escalationScore,
+      pressureScore:
+        typeof summary.pressureScore === "string"
+          ? Number(summary.pressureScore)
+          : summary.pressureScore,
+      escalationScore:
+        typeof summary.escalationScore === "string"
+          ? Number(summary.escalationScore)
+          : summary.escalationScore,
       evidenceConfidenceScore:
         typeof summary.evidenceConfidenceScore === "string"
           ? Number(summary.evidenceConfidenceScore)
@@ -192,10 +200,7 @@ export async function getProvinceSummary(
         topMunicipalityResult.rows[0]?.highestExposureMunicipality ?? null,
     },
     trace: {
-      tables: [
-        "fact_service_pressure_daily",
-        "fact_source_reliability_daily",
-      ],
+      tables: ["fact_service_pressure_daily", "fact_source_reliability_daily"],
       query: `province=${province};days=${days};serviceDomain=${normalizedServiceDomain ?? "all"}`,
     },
   };

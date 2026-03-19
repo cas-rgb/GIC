@@ -9,7 +9,7 @@ interface SocialSourceMixSqlRow {
 
 export async function getSocialSourceMix(
   province: string | null,
-  days = 30
+  days = 30,
 ): Promise<SocialSourceMixResponse> {
   const params = [province, days];
 
@@ -27,12 +27,12 @@ export async function getSocialSourceMix(
       group by src.source_type
       order by count(cvm.id) desc, src.source_type asc
     `,
-    params
+    params,
   );
 
   const totalMentions = Math.max(
     result.rows.reduce((sum, row) => sum + row.mentionCount, 0),
-    1
+    1,
   );
 
   return {

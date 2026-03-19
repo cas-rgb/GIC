@@ -5,14 +5,20 @@ import { getCitizenVoiceTrends } from "@/lib/analytics/citizen-voice-trends";
 export async function GET(request: NextRequest) {
   const province = request.nextUrl.searchParams.get("province");
   const days = Number(request.nextUrl.searchParams.get("days") ?? "30");
+  const municipality = request.nextUrl.searchParams.get("municipality");
+  const serviceDomain = request.nextUrl.searchParams.get("serviceDomain");
 
   try {
-    const response = await getCitizenVoiceTrends(province, days);
+    const response = await getCitizenVoiceTrends(province, days, municipality, serviceDomain);
     return NextResponse.json(response);
   } catch (error) {
     const message =
-      error instanceof Error ? error.message : "Failed to load citizen voice trends";
+      error instanceof Error
+        ? error.message
+        : "Failed to load citizen voice trends";
 
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
+
+

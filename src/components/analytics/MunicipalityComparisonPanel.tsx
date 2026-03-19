@@ -37,7 +37,9 @@ export default function MunicipalityComparisonPanel({
   useEffect(() => {
     if (
       queryRankBy &&
-      ["pressure", "escalation", "sentiment", "evidence", "official"].includes(queryRankBy) &&
+      ["pressure", "escalation", "sentiment", "evidence", "official"].includes(
+        queryRankBy,
+      ) &&
       queryRankBy !== rankBy
     ) {
       setRankBy(queryRankBy as RankBy);
@@ -68,12 +70,15 @@ export default function MunicipalityComparisonPanel({
       try {
         const response = await fetch(
           `/api/analytics/municipality-comparison?province=${encodeURIComponent(province)}&days=${days}`,
-          { cache: "no-store" }
+          { cache: "no-store" },
         );
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -83,7 +88,9 @@ export default function MunicipalityComparisonPanel({
         setState({
           status: "error",
           message:
-            error instanceof Error ? error.message : "Failed to load municipality comparison",
+            error instanceof Error
+              ? error.message
+              : "Failed to load municipality comparison",
         });
       }
     }
@@ -116,16 +123,24 @@ export default function MunicipalityComparisonPanel({
         .sort((left, right) => right.pressureScore - left.pressureScore)
         .slice(0, 5);
       const worstSentiment = [...sorted]
-        .sort((left, right) => (left.sentimentScore ?? -999) - (right.sentimentScore ?? -999))
+        .sort(
+          (left, right) =>
+            (left.sentimentScore ?? -999) - (right.sentimentScore ?? -999),
+        )
         .slice(0, 5);
       const weakestOfficial = [...sorted]
-        .sort((left, right) => left.officialEvidenceShare - right.officialEvidenceShare)
+        .sort(
+          (left, right) =>
+            left.officialEvidenceShare - right.officialEvidenceShare,
+        )
         .slice(0, 5);
       const byMunicipality = new Map<string, MunicipalityComparisonRow>();
 
-      [...highPressure, ...worstSentiment, ...weakestOfficial].forEach((row) => {
-        byMunicipality.set(row.municipality, row);
-      });
+      [...highPressure, ...worstSentiment, ...weakestOfficial].forEach(
+        (row) => {
+          byMunicipality.set(row.municipality, row);
+        },
+      );
 
       sorted = [...byMunicipality.values()];
     }
@@ -158,10 +173,23 @@ export default function MunicipalityComparisonPanel({
     }
 
     return {
-      avgPressure: Math.round((rows.reduce((sum, row) => sum + row.pressureScore, 0) / rows.length) * 10) / 10,
-      avgEvidence: Math.round((rows.reduce((sum, row) => sum + row.evidenceConfidenceScore, 0) / rows.length) * 10) / 10,
-      lowOfficialCount: rows.filter((row) => row.officialEvidenceShare < 50).length,
-      negativeSentimentCount: rows.filter((row) => (row.sentimentScore ?? 100) < 45).length,
+      avgPressure:
+        Math.round(
+          (rows.reduce((sum, row) => sum + row.pressureScore, 0) /
+            rows.length) *
+            10,
+        ) / 10,
+      avgEvidence:
+        Math.round(
+          (rows.reduce((sum, row) => sum + row.evidenceConfidenceScore, 0) /
+            rows.length) *
+            10,
+        ) / 10,
+      lowOfficialCount: rows.filter((row) => row.officialEvidenceShare < 50)
+        .length,
+      negativeSentimentCount: rows.filter(
+        (row) => (row.sentimentScore ?? 100) < 45,
+      ).length,
     };
   }, [rows]);
 
@@ -172,7 +200,7 @@ export default function MunicipalityComparisonPanel({
 
     const leader = rows[0];
     const weakestOfficial = [...rows].sort(
-      (left, right) => left.officialEvidenceShare - right.officialEvidenceShare
+      (left, right) => left.officialEvidenceShare - right.officialEvidenceShare,
     )[0];
 
     if (filterMode === "watchlist") {
@@ -204,7 +232,7 @@ export default function MunicipalityComparisonPanel({
         row.officialEvidenceShare,
         row.topPressureDomain ?? "",
         row.topComplaintTopic ?? "",
-      ].join(",")
+      ].join(","),
     );
 
     const blob = new Blob([[header.join(","), ...lines].join("\n")], {
@@ -242,7 +270,9 @@ export default function MunicipalityComparisonPanel({
       <div className="flex min-h-[320px] items-center justify-center text-center">
         <div>
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">{state.message}</p>
+          <p className="mt-3 text-sm font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
@@ -268,11 +298,15 @@ export default function MunicipalityComparisonPanel({
           </select>
           <select
             value={filterMode}
-            onChange={(event) => setFilterMode(event.target.value as FilterMode)}
+            onChange={(event) =>
+              setFilterMode(event.target.value as FilterMode)
+            }
             className="rounded-xl border border-slate-100 bg-slate-50 px-4 py-2 text-sm font-bold text-slate-900"
           >
             <option value="all">All Municipalities</option>
-            <option value="watchlist">Watchlist: High Pressure / Weak Sentiment / Low Official</option>
+            <option value="watchlist">
+              Watchlist: High Pressure / Weak Sentiment / Low Official
+            </option>
           </select>
         </div>
         <button
@@ -290,45 +324,98 @@ export default function MunicipalityComparisonPanel({
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
             Avg Pressure
           </p>
-          <p className="mt-2 text-2xl font-display font-bold text-slate-900">{summary.avgPressure}</p>
+          <p className="mt-2 text-2xl font-display font-bold text-slate-900">
+            {summary.avgPressure}
+          </p>
         </div>
         <div className="rounded-2xl border border-emerald-100 bg-emerald-50 p-4">
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500">
             Avg Evidence
           </p>
-          <p className="mt-2 text-2xl font-display font-bold text-emerald-700">{summary.avgEvidence}%</p>
+          <p className="mt-2 text-2xl font-display font-bold text-emerald-700">
+            {summary.avgEvidence}%
+          </p>
         </div>
         <div className="rounded-2xl border border-amber-100 bg-amber-50 p-4">
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-500">
             Low Official
           </p>
-          <p className="mt-2 text-2xl font-display font-bold text-amber-700">{summary.lowOfficialCount}</p>
+          <p className="mt-2 text-2xl font-display font-bold text-amber-700">
+            {summary.lowOfficialCount}
+          </p>
         </div>
         <div className="rounded-2xl border border-rose-100 bg-rose-50 p-4">
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-rose-500">
             Negative Sentiment
           </p>
-          <p className="mt-2 text-2xl font-display font-bold text-rose-700">{summary.negativeSentimentCount}</p>
+          <p className="mt-2 text-2xl font-display font-bold text-rose-700">
+            {summary.negativeSentimentCount}
+          </p>
         </div>
       </div>
 
-      <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4">
-        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-500">
-          Comparison Readout
-        </p>
-        <p className="mt-2 text-sm font-medium text-slate-700">{narrative}</p>
+      <div className="rounded-2xl border border-blue-100 bg-blue-50 p-6 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-sky-600/10 blur-[90px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+        <div className="relative z-10">
+          <p className="text-blue-900 text-lg leading-relaxed font-bold border-l-4 border-blue-500 pl-4 py-1 mb-6">
+            At the municipal level, issue concentration is highest in a small number of areas, with water and road infrastructure dominating local concerns. Several municipalities show rising issue volumes over recent weeks, suggesting increasing service delivery pressure. Ward-level visibility remains partial, but available signals indicate recurring issues rather than isolated incidents.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 border-t border-blue-200/50 pt-6">
+            <div className="space-y-2">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600">
+                Who
+              </span>
+              <p className="text-sm font-medium text-slate-700 leading-relaxed">
+                Municipality and Ward-level (where supported).
+              </p>
+            </div>
+            <div className="space-y-2">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600">
+                What
+              </span>
+              <p className="text-sm font-medium text-slate-700 leading-relaxed">
+                Top local issues and specific issue volumes.
+              </p>
+            </div>
+            <div className="space-y-2">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600">
+                Why
+              </span>
+              <p className="text-sm font-medium text-slate-700 leading-relaxed">
+                Issue categories (e.g. water, roads) linking to broader infrastructure failure signals.
+              </p>
+            </div>
+            <div className="space-y-2">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600">
+                When
+              </span>
+              <p className="text-sm font-medium text-slate-700 leading-relaxed">
+                Issue trend tracking local volumes over time.
+              </p>
+            </div>
+            <div className="space-y-2">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600">
+                How
+              </span>
+              <p className="text-sm font-medium text-slate-700 leading-relaxed">
+                Escalation patterns emphasizing repeated complaints or long-term systemic issues.
+              </p>
+            </div>
+          </div>
+        </div>
         {rows[0] ? (
-          <div className="mt-4 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-wrap gap-3 relative z-10">
             <button
               type="button"
               onClick={() => {
                 window.location.assign(
-                  `/municipality-wards?province=${encodeURIComponent(province)}&municipality=${encodeURIComponent(rows[0].municipality)}&days=${days}&from=${encodeURIComponent(buildReturnTo())}`
+                  `/municipality-wards?province=${encodeURIComponent(province)}&municipality=${encodeURIComponent(rows[0].municipality)}&days=${days}&from=${encodeURIComponent(buildReturnTo())}`,
                 );
               }}
               className="rounded-xl border border-blue-200 bg-white px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-blue-700"
             >
-              Open Lead Municipality
+              Open Lead Municipality Dashboard
             </button>
           </div>
         ) : null}
@@ -342,7 +429,9 @@ export default function MunicipalityComparisonPanel({
           >
             <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
               <div>
-                <p className="text-base font-bold text-slate-900">{row.municipality}</p>
+                <p className="text-base font-bold text-slate-900">
+                  {row.municipality}
+                </p>
                 <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                   {row.topPressureDomain ?? "No dominant domain"}
                   {row.topComplaintTopic ? ` · ${row.topComplaintTopic}` : ""}
@@ -350,19 +439,25 @@ export default function MunicipalityComparisonPanel({
               </div>
               <div className="grid grid-cols-3 gap-3 xl:min-w-[360px]">
                 <div className="rounded-xl bg-slate-50 p-3 text-center">
-                  <p className="text-lg font-bold text-slate-900">{row.pressureScore}</p>
+                  <p className="text-lg font-bold text-slate-900">
+                    {row.pressureScore}
+                  </p>
                   <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">
                     Pressure
                   </p>
                 </div>
                 <div className="rounded-xl bg-rose-50 p-3 text-center">
-                  <p className="text-lg font-bold text-rose-700">{row.escalationScore}</p>
+                  <p className="text-lg font-bold text-rose-700">
+                    {row.escalationScore}
+                  </p>
                   <p className="text-[9px] font-black uppercase tracking-[0.2em] text-rose-500">
                     Escalation
                   </p>
                 </div>
                 <div className="rounded-xl bg-emerald-50 p-3 text-center">
-                  <p className="text-lg font-bold text-emerald-700">{row.evidenceConfidenceScore}%</p>
+                  <p className="text-lg font-bold text-emerald-700">
+                    {row.evidenceConfidenceScore}%
+                  </p>
                   <p className="text-[9px] font-black uppercase tracking-[0.2em] text-emerald-500">
                     Evidence
                   </p>
@@ -402,7 +497,7 @@ export default function MunicipalityComparisonPanel({
                 type="button"
                 onClick={() => {
                   window.location.assign(
-                    `/municipality-wards?province=${encodeURIComponent(province)}&municipality=${encodeURIComponent(row.municipality)}&days=${days}&from=${encodeURIComponent(buildReturnTo())}`
+                    `/municipality-wards?province=${encodeURIComponent(province)}&municipality=${encodeURIComponent(row.municipality)}&days=${days}&from=${encodeURIComponent(buildReturnTo())}`,
                   );
                 }}
                 className="rounded-xl border border-blue-100 bg-blue-50 px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-blue-700"

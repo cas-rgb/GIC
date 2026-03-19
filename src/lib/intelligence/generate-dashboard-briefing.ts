@@ -129,27 +129,33 @@ function riskLines(input: DashboardBriefingInput): string[] {
   }
 
   if (input.dashboard === "municipality_wards") {
-    lines.push("Ward visibility may still be stronger in the location registry than in ward-resolved issue evidence.");
+    lines.push(
+      "Ward visibility may still be stronger in the location registry than in ward-resolved issue evidence.",
+    );
   }
 
   if (input.dashboard === "leadership") {
-    lines.push("Leadership coverage remains selective where named leader mentions are sparse.");
+    lines.push(
+      "Leadership coverage remains selective where named leader mentions are sparse.",
+    );
   }
 
   if (input.dashboard === "investor") {
-    lines.push("Investor outputs are directional opportunity signals, not confirmed commitments.");
+    lines.push(
+      "Investor outputs are directional opportunity signals, not confirmed commitments.",
+    );
   }
 
   return lines.slice(0, 2);
 }
 
 export function generateDashboardBriefing(
-  input: DashboardBriefingInput
+  input: DashboardBriefingInput,
 ): BriefingOutput {
   const area = geographyLabel(input);
   const headline = `${dashboardLabel(input.dashboard)}: ${topFinding(input)}`;
   const summary = `This view covers ${area} over the last ${input.filters.days} days and is grounded in filtered governed metrics, ranked rows, trend rows, and supporting evidence. ${secondaryFinding(
-    input
+    input,
   )}`;
 
   return {
@@ -163,13 +169,15 @@ export function generateDashboardBriefing(
 }
 
 export function buildDashboardBriefingPromptPackage(
-  input: DashboardBriefingInput
+  input: DashboardBriefingInput,
 ): DashboardBriefingPromptPackage {
   const output = generateDashboardBriefing(input);
 
   return {
     system:
-      "You are generating a client-facing executive dashboard briefing. Use only the structured data provided. Do not invent facts. If coverage is weak or partial, say so clearly. Prefer concise analytical language. Separate observed facts from interpretation. Treat caveats as mandatory.",
+      input.dashboard === "trends"
+        ? "You are an expert socio-political analyst generating a macro-level executive trends briefing. Focus entirely on broad political movements, major municipal shifts, and vast public sentiment narratives rather than hyper-specific micro-complaints. Synthesize massive narrative movements. Use only the structured data provided. Do not invent facts. Prefer concise, high-impact analytical language."
+        : "You are generating a client-facing executive dashboard briefing. Use only the structured data provided. Do not invent facts. If coverage is weak or partial, say so clearly. Prefer concise analytical language. Separate observed facts from interpretation. Treat caveats as mandatory.",
     user: [
       `Dashboard: ${dashboardLabel(input.dashboard)}`,
       `Geography: ${geographyLabel(input)}`,

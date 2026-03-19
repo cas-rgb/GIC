@@ -7,6 +7,8 @@ import { SocialSourceMixResponse } from "@/lib/analytics/types";
 
 interface SocialSourceMixPanelProps {
   province?: string;
+  municipality?: string | null;
+  serviceDomain?: string | null;
   days?: number;
 }
 
@@ -15,7 +17,14 @@ type LoadState =
   | { status: "loaded"; data: SocialSourceMixResponse }
   | { status: "error"; message: string };
 
-const COLORS = ["#0f172a", "#2563eb", "#d97706", "#dc2626", "#0f766e", "#7c3aed"];
+const COLORS = [
+  "#0f172a",
+  "#2563eb",
+  "#d97706",
+  "#dc2626",
+  "#0f766e",
+  "#7c3aed",
+];
 
 function labelForSourceType(sourceType: string): string {
   switch (sourceType) {
@@ -60,13 +69,19 @@ export default function SocialSourceMixPanel({
       params.set("days", String(days));
 
       try {
-        const response = await fetch(`/api/analytics/social-source-mix?${params.toString()}`, {
-          cache: "no-store",
-        });
+        const response = await fetch(
+          `/api/analytics/social-source-mix?${params.toString()}`,
+          {
+            cache: "no-store",
+          },
+        );
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -76,7 +91,9 @@ export default function SocialSourceMixPanel({
         setState({
           status: "error",
           message:
-            error instanceof Error ? error.message : "Failed to load social source mix",
+            error instanceof Error
+              ? error.message
+              : "Failed to load social source mix",
         });
       }
     }
@@ -100,22 +117,26 @@ export default function SocialSourceMixPanel({
       <div className="flex min-h-[240px] items-center justify-center text-center">
         <div>
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">{state.message}</p>
+          <p className="mt-3 text-sm font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
   }
 
-  if (state.data.rows.length === 0) {
+  if ((state.data.rows || []).length === 0) {
     return (
       <div className="rounded-2xl border border-dashed border-slate-200 p-8 text-center">
-        <p className="text-sm font-bold text-slate-500">No source-mix rows available yet.</p>
+        <p className="text-sm font-bold text-slate-500">
+          No source-mix rows available yet.
+        </p>
       </div>
     );
   }
 
   let cumulative = 0;
-  const segments = state.data.rows.map((row) => {
+  const segments = (state.data.rows || []).map((row) => {
     const start = cumulative;
     cumulative += row.share;
     return {
@@ -132,18 +153,27 @@ export default function SocialSourceMixPanel({
           Source Mix
         </h4>
         <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">
-          News, social, public statement, and civic composition behind the current signal layer
+          News, social, public statement, and civic composition behind the
+          current signal layer
         </p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[260px_1fr]">
         <div className="flex items-center justify-center rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
           <svg viewBox="0 0 220 220" className="h-56 w-56">
-            <circle cx="110" cy="110" r="70" fill="none" stroke="#e2e8f0" strokeWidth="28" />
+            <circle
+              cx="110"
+              cy="110"
+              r="70"
+              fill="none"
+              stroke="#e2e8f0"
+              strokeWidth="28"
+            />
             {segments.map((segment, index) => {
               const circumference = 2 * Math.PI * 70;
               const dash = (segment.share / 100) * circumference;
-              const offset = circumference - (segment.start / 100) * circumference;
+              const offset =
+                circumference - (segment.start / 100) * circumference;
               return (
                 <circle
                   key={segment.sourceType}
@@ -163,17 +193,27 @@ export default function SocialSourceMixPanel({
             <g>
               <PieChart x="98" y="84" className="h-6 w-6 text-slate-400" />
             </g>
-            <text x="110" y="118" textAnchor="middle" className="fill-slate-900 text-[14px] font-bold">
-              {state.data.rows.length}
+            <text
+              x="110"
+              y="118"
+              textAnchor="middle"
+              className="fill-slate-900 text-[14px] font-bold"
+            >
+              {(state.data.rows || []).length}
             </text>
-            <text x="110" y="136" textAnchor="middle" className="fill-slate-400 text-[9px] font-black uppercase tracking-[0.18em]">
+            <text
+              x="110"
+              y="136"
+              textAnchor="middle"
+              className="fill-slate-400 text-[9px] font-black uppercase tracking-[0.18em]"
+            >
               source types
             </text>
           </svg>
         </div>
 
         <div className="space-y-3">
-          {state.data.rows.map((row, index) => (
+          {(state.data.rows || []).map((row, index) => (
             <div
               key={row.sourceType}
               className="flex items-center justify-between rounded-2xl border border-slate-100 bg-white px-4 py-3 shadow-sm"

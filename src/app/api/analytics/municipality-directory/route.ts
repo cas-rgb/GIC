@@ -6,7 +6,10 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   const province = request.nextUrl.searchParams.get("province");
 
   if (!province) {
-    return NextResponse.json({ error: "province is required" }, { status: 400 });
+    return NextResponse.json(
+      { error: "province is required" },
+      { status: 400 },
+    );
   }
 
   try {
@@ -20,7 +23,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             ? error.message
             : "Failed to fetch municipality directory",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
+
+

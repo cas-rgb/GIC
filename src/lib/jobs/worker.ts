@@ -48,7 +48,7 @@ async function markCompleted(jobId: string): Promise<void> {
           updated_at = now()
       where id = $1
     `,
-    [jobId]
+    [jobId],
   );
 }
 
@@ -56,7 +56,7 @@ async function markFailed(
   jobId: string,
   errorMessage: string,
   attempts: number,
-  maxAttempts: number
+  maxAttempts: number,
 ): Promise<void> {
   const status = attempts >= maxAttempts ? "failed" : "queued";
 
@@ -73,7 +73,7 @@ async function markFailed(
         updated_at = now()
       where id = $1
     `,
-    [jobId, status, errorMessage]
+    [jobId, status, errorMessage],
   );
 }
 
@@ -86,7 +86,7 @@ async function handleJob(job: JobRow): Promise<void> {
         `
           insert into job_queue (job_type, payload)
           values ('rebuild_daily_facts', '{}'::jsonb)
-        `
+        `,
       );
       return;
     }
@@ -113,8 +113,7 @@ export async function runWorkerOnce(): Promise<boolean> {
     await handleJob(job);
     await markCompleted(job.id);
   } catch (error) {
-    const errorMessage =
-      error instanceof Error ? error.message : String(error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
     await markFailed(job.id, errorMessage, job.attempts, job.max_attempts);
   }
 

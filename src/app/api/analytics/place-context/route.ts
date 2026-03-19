@@ -7,7 +7,10 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   const municipality = request.nextUrl.searchParams.get("municipality");
 
   if (!province) {
-    return NextResponse.json({ error: "province is required" }, { status: 400 });
+    return NextResponse.json(
+      { error: "province is required" },
+      { status: 400 },
+    );
   }
 
   try {
@@ -17,9 +20,13 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json(
       {
         error:
-          error instanceof Error ? error.message : "Failed to fetch place context",
+          error instanceof Error
+            ? error.message
+            : "Failed to fetch place context",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
+
+

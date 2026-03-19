@@ -1,13 +1,20 @@
 "use client";
 
-import { MunicipalitySummaryResponse, WardCoverageResponse } from "@/lib/analytics/types";
+import {
+  MunicipalitySummaryResponse,
+  WardCoverageResponse,
+} from "@/lib/analytics/types";
 
 interface MunicipalityOperationalSnapshotPanelProps {
   summary: MunicipalitySummaryResponse;
   wardCoverage: WardCoverageResponse | null;
 }
 
-function toneClass(value: number, highCutoff: number, mediumCutoff: number): string {
+function toneClass(
+  value: number,
+  highCutoff: number,
+  mediumCutoff: number,
+): string {
   if (value >= highCutoff) {
     return "border-rose-100 bg-rose-50 text-rose-700";
   }
@@ -31,7 +38,10 @@ export default function MunicipalityOperationalSnapshotPanel({
     },
     {
       label: "Top concern",
-      value: summary.summary.topComplaintTopic ?? summary.summary.topPressureDomain ?? "Unavailable",
+      value:
+        summary.summary.topComplaintTopic ??
+        summary.summary.topPressureDomain ??
+        "Unavailable",
       note: "Strongest local issue theme",
       tone: "border-slate-100 bg-slate-50 text-slate-700",
     },
@@ -51,17 +61,19 @@ export default function MunicipalityOperationalSnapshotPanel({
       label: "Official share",
       value: `${Math.round(summary.summary.officialEvidenceShare)}%`,
       note: "Official evidence in current mix",
-      tone: summary.summary.officialEvidenceShare >= 50
-        ? "border-emerald-100 bg-emerald-50 text-emerald-700"
-        : "border-amber-100 bg-amber-50 text-amber-700",
+      tone:
+        summary.summary.officialEvidenceShare >= 50
+          ? "border-emerald-100 bg-emerald-50 text-emerald-700"
+          : "border-amber-100 bg-amber-50 text-amber-700",
     },
     {
       label: "Evidence confidence",
       value: `${Math.round(summary.summary.evidenceConfidenceScore)}%`,
       note: "Source reliability weighted confidence",
-      tone: summary.summary.evidenceConfidenceScore >= 60
-        ? "border-emerald-100 bg-emerald-50 text-emerald-700"
-        : "border-amber-100 bg-amber-50 text-amber-700",
+      tone:
+        summary.summary.evidenceConfidenceScore >= 60
+          ? "border-emerald-100 bg-emerald-50 text-emerald-700"
+          : "border-amber-100 bg-amber-50 text-amber-700",
     },
     {
       label: "Known wards",
@@ -73,11 +85,12 @@ export default function MunicipalityOperationalSnapshotPanel({
       label: "Ward readiness",
       value: wardCoverage?.summary.wardReadinessLabel ?? "Unavailable",
       note: `${wardCoverage?.summary.evidenceBackedWardCount ?? 0} evidence-backed wards`,
-      tone: wardCoverage?.summary.wardReadinessLabel === "Operational"
-        ? "border-emerald-100 bg-emerald-50 text-emerald-700"
-        : wardCoverage?.summary.wardReadinessLabel === "Partial"
-          ? "border-amber-100 bg-amber-50 text-amber-700"
-          : "border-slate-100 bg-slate-50 text-slate-700",
+      tone:
+        wardCoverage?.summary.wardReadinessLabel === "Operational"
+          ? "border-emerald-100 bg-emerald-50 text-emerald-700"
+          : wardCoverage?.summary.wardReadinessLabel === "Partial"
+            ? "border-amber-100 bg-amber-50 text-amber-700"
+            : "border-slate-100 bg-slate-50 text-slate-700",
     },
   ];
 
@@ -88,10 +101,10 @@ export default function MunicipalityOperationalSnapshotPanel({
           Snapshot Use
         </p>
         <p className="mt-2 text-sm font-medium text-slate-700">
-          Use this table to read the municipality operating position at a glance. Treat ward-linked
-          panels as operational intelligence only when ward readiness is{" "}
-          <span className="font-bold">{readiness}</span>; otherwise the ward layer is still partial
-          or registry-only.
+          Use this table to read the municipality operating position at a
+          glance. Treat ward-linked panels as operational intelligence only when
+          ward readiness is <span className="font-bold">{readiness}</span>;
+          otherwise the ward layer is still partial or registry-only.
         </p>
       </div>
       <div className="overflow-hidden rounded-2xl border border-slate-100">

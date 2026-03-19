@@ -4,7 +4,10 @@ import {
   ProvinceEvidenceResponse,
 } from "@/lib/analytics/types";
 import { query } from "@/lib/db";
-import { expandEvidenceTopics, normalizeIssueFamily } from "@/lib/analytics/issue-taxonomy";
+import {
+  expandEvidenceTopics,
+  normalizeIssueFamily,
+} from "@/lib/analytics/issue-taxonomy";
 
 interface DocumentRow {
   documentId: string;
@@ -35,7 +38,7 @@ function toNumber(value: string | number): number {
 
 export async function getProvinceEvidence(
   province: string,
-  topic?: string | null
+  topic?: string | null,
 ): Promise<ProvinceEvidenceResponse> {
   const normalizedTopic = topic?.trim() ? topic.trim() : null;
   const evidenceTopics = expandEvidenceTopics(normalizedTopic);
@@ -76,7 +79,7 @@ export async function getProvinceEvidence(
         order by coalesce(d.published_at, d.created_at) desc, count(sm.id) desc
         limit 8
       `,
-      [province, normalizedTopic, evidenceTopics]
+      [province, normalizedTopic, evidenceTopics],
     ),
     query<MentionRow>(
       `
@@ -102,7 +105,7 @@ export async function getProvinceEvidence(
         order by coalesce(d.published_at, d.created_at) desc, sm.confidence desc
         limit 10
       `,
-      [province, normalizedTopic, evidenceTopics]
+      [province, normalizedTopic, evidenceTopics],
     ),
     query<{
       documentCount: number;
@@ -141,7 +144,7 @@ export async function getProvinceEvidence(
             )
           )
       `,
-      [province, normalizedTopic, evidenceTopics]
+      [province, normalizedTopic, evidenceTopics],
     ),
   ]);
 
@@ -165,7 +168,7 @@ export async function getProvinceEvidence(
         publishedAt: row.publishedAt,
         mentionCount: row.mentionCount,
         excerpt: row.excerpt,
-      })
+      }),
     ),
     mentions: mentionResult.rows.map(
       (row): ProvinceEvidenceMentionRow => ({
@@ -177,7 +180,7 @@ export async function getProvinceEvidence(
         evidenceText: row.evidenceText,
         title: row.title,
         sourceName: row.sourceName,
-      })
+      }),
     ),
     caveats: [
       "Province evidence drilldown is limited to governed documents already mapped to the selected province.",

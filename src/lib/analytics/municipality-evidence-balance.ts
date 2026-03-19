@@ -12,7 +12,9 @@ interface SourceMixRow {
 }
 
 function classifySourceType(sourceType: string): string {
-  if (["gov", "official_gov", "treasury", "utility", "stats"].includes(sourceType)) {
+  if (
+    ["gov", "official_gov", "treasury", "utility", "stats"].includes(sourceType)
+  ) {
     return "Official";
   }
 
@@ -34,7 +36,7 @@ function toNumber(value: string | number): number {
 export async function getMunicipalityEvidenceBalance(
   province: string,
   municipality: string,
-  days = 30
+  days = 30,
 ): Promise<MunicipalityEvidenceBalanceResponse> {
   const result = await query<SourceMixRow>(
     `
@@ -53,13 +55,22 @@ export async function getMunicipalityEvidenceBalance(
       group by src.source_type
       order by count(distinct d.id) desc, src.source_type asc
     `,
-    [province, municipality, days]
+    [province, municipality, days],
   );
 
-  const totalDocuments = result.rows.reduce((sum, row) => sum + row.documentCount, 0);
+  const totalDocuments = result.rows.reduce(
+    (sum, row) => sum + row.documentCount,
+    0,
+  );
   const grouped = new Map<
     string,
-    { evidenceClass: string; sourceCount: number; documentCount: number; reliabilityTotal: number; rows: number }
+    {
+      evidenceClass: string;
+      sourceCount: number;
+      documentCount: number;
+      reliabilityTotal: number;
+      rows: number;
+    }
   >();
 
   for (const row of result.rows) {
@@ -103,9 +114,9 @@ export async function getMunicipalityEvidenceBalance(
           (
             rows.reduce(
               (sum, row) => sum + row.avgReliabilityScore * row.documentCount,
-              0
+              0,
             ) / totalDocuments
-          ).toFixed(3)
+          ).toFixed(3),
         )
       : 0;
 
@@ -124,7 +135,9 @@ export async function getMunicipalityEvidenceBalance(
     rows,
     caveats:
       totalDocuments === 0
-        ? ["No municipality-level evidence rows are currently mapped for this municipality."]
+        ? [
+            "No municipality-level evidence rows are currently mapped for this municipality.",
+          ]
         : [],
     trace: {
       table: "documents,sources,locations",

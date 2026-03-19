@@ -1,7 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AlertTriangle, RefreshCw, ShieldCheck, TimerReset } from "lucide-react";
+import {
+  AlertTriangle,
+  RefreshCw,
+  ShieldCheck,
+  TimerReset,
+} from "lucide-react";
 
 import { SourceHealthSummaryResponse } from "@/lib/source-registry/types";
 
@@ -35,12 +40,15 @@ export default function ProvinceSourceHealthPanel({
       try {
         const response = await fetch(
           `/api/analytics/source-health-summary?province=${encodeURIComponent(province)}`,
-          { cache: "no-store" }
+          { cache: "no-store" },
         );
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -50,7 +58,9 @@ export default function ProvinceSourceHealthPanel({
         setState({
           status: "error",
           message:
-            error instanceof Error ? error.message : "Failed to load province source health",
+            error instanceof Error
+              ? error.message
+              : "Failed to load province source health",
         });
       }
     }
@@ -74,7 +84,9 @@ export default function ProvinceSourceHealthPanel({
       <div className="flex min-h-[160px] items-center justify-center text-center">
         <div>
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">{state.message}</p>
+          <p className="mt-3 text-sm font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );

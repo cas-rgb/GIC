@@ -16,7 +16,7 @@ function toNumber(value: string | number): number {
 
 export async function getWaterReliability(
   province: string,
-  days = 30
+  days = 30,
 ): Promise<WaterReliabilityResponse> {
   const result = await query<WaterReliabilityRow>(
     `
@@ -32,7 +32,7 @@ export async function getWaterReliability(
         and day >= current_date - ($2::int - 1)
       order by day asc
     `,
-    [province, days]
+    [province, days],
   );
 
   const series = result.rows.map((row) => ({

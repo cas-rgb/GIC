@@ -45,13 +45,20 @@ function getProvinceOwnerOffice(issue: string, hasLeader: boolean): string {
   }
 
   if (issue.includes("Governance")) {
-    return hasLeader ? "Office of the Premier" : "Provincial Governance Intervention Cell";
+    return hasLeader
+      ? "Office of the Premier"
+      : "Provincial Governance Intervention Cell";
   }
 
-  return hasLeader ? "Office of the Premier" : "Provincial Service Delivery War Room";
+  return hasLeader
+    ? "Office of the Premier"
+    : "Provincial Service Delivery War Room";
 }
 
-function getImpactTier(confidence: number, urgency: ProvinceRecommendation["urgency"]) {
+function getImpactTier(
+  confidence: number,
+  urgency: ProvinceRecommendation["urgency"],
+) {
   if (urgency === "High" && confidence >= 0.7) {
     return "Transformative" as const;
   }
@@ -65,7 +72,7 @@ function getImpactTier(confidence: number, urgency: ProvinceRecommendation["urge
 
 export async function getProvinceRecommendations(
   province: string,
-  days = 30
+  days = 30,
 ): Promise<ProvinceRecommendationsResponse> {
   const [
     summary,
@@ -76,22 +83,23 @@ export async function getProvinceRecommendations(
     waterReliability,
     citizenVoice,
     legacyCommunity,
-  ] =
-    await Promise.all([
-      getProvinceSummary(province, days),
-      getMunicipalityRanking(province),
-      getProvinceSentiment(province, days),
-      getProvinceEvidenceBalance(province, days),
-      getLeadershipSentiment(province, days),
-      getWaterReliability(province, days),
-      getSocialTrendsExecutiveSummary(province, days),
-      getProvinceLegacyCommunitySignals(province, days),
-    ]);
+  ] = await Promise.all([
+    getProvinceSummary(province, days),
+    getMunicipalityRanking(province),
+    getProvinceSentiment(province, days),
+    getProvinceEvidenceBalance(province, days),
+    getLeadershipSentiment(province, days),
+    getWaterReliability(province, days),
+    getSocialTrendsExecutiveSummary(province, days),
+    getProvinceLegacyCommunitySignals(province, days),
+  ]);
 
   const topMunicipality = municipalities.rows[0] ?? null;
   const topLeader = leadership.leaders[0] ?? null;
   const topComplaintTopic =
-    sentiment.summary.topComplaintTopic ?? summary.summary.topPressureDomain ?? "Municipal Governance";
+    sentiment.summary.topComplaintTopic ??
+    summary.summary.topPressureDomain ??
+    "Municipal Governance";
   const dominantCitizenIssue =
     citizenVoice.summary.dominantIssueFamily ?? topComplaintTopic;
   const dominantCommunityIssue =
@@ -106,84 +114,103 @@ export async function getProvinceRecommendations(
     recommendations.push({
       title: `Stabilize ${summary.summary.topPressureDomain ?? "service delivery"} in ${topMunicipality?.municipality ?? province}`,
       issue: summary.summary.topPressureDomain ?? "Service Delivery",
-      affectedMunicipalities: topMunicipality ? [topMunicipality.municipality] : [],
-      recommendedAction: buildOperationalAction(summary.summary.topPressureDomain ?? "Service Delivery"),
+      affectedMunicipalities: topMunicipality
+        ? [topMunicipality.municipality]
+        : [],
+      recommendedAction: buildOperationalAction(
+        summary.summary.topPressureDomain ?? "Service Delivery",
+      ),
       urgency: summary.summary.escalationScore >= 50 ? "High" : "Medium",
       impactTier: getImpactTier(
         Number(
           (
-            ((summary.summary.evidenceConfidenceScore / 100) +
+            (summary.summary.evidenceConfidenceScore / 100 +
               (topMunicipality?.confidence ?? 0.6)) /
             2
-          ).toFixed(2)
+          ).toFixed(2),
         ),
-        summary.summary.escalationScore >= 50 ? "High" : "Medium"
+        summary.summary.escalationScore >= 50 ? "High" : "Medium",
       ),
-      expectedImpact: "Reduce the highest visible operational pressure and lower near-term protest or escalation risk in the most exposed municipality.",
+      expectedImpact:
+        "Reduce the highest visible operational pressure and lower near-term protest or escalation risk in the most exposed municipality.",
       ownerOffice: getProvinceOwnerOffice(
         summary.summary.topPressureDomain ?? "Service Delivery",
-        Boolean(topLeader)
+        Boolean(topLeader),
       ),
       evidenceCount: summary.summary.pressureCaseCount,
       officialShare,
       publicPressureMentions: citizenVoice.summary.totalCitizenMentions,
       legacyCommunityDocuments: legacyCommunity.summary.documentCount,
-      traceChips: ["pressure facts", "municipality ranking", "evidence confidence"],
+      traceChips: [
+        "pressure facts",
+        "municipality ranking",
+        "evidence confidence",
+      ],
       confidence: Number(
         (
-          ((summary.summary.evidenceConfidenceScore / 100) +
+          (summary.summary.evidenceConfidenceScore / 100 +
             (topMunicipality?.confidence ?? 0.6)) /
           2
-        ).toFixed(2)
+        ).toFixed(2),
       ),
       linkedLeaders: topLeader ? [topLeader.leaderName] : [],
       rationale: `Pressure is concentrated in ${topMunicipality?.municipality ?? province} and the dominant issue is ${summary.summary.topPressureDomain ?? "mixed service pressure"}.`,
     });
   }
 
-    recommendations.push({
-      title: `Run a visible public response on ${topComplaintTopic}`,
-      issue: dominantCitizenIssue,
-      affectedMunicipalities: topMunicipality ? [topMunicipality.municipality] : [],
-      recommendedAction:
-        "Issue a 7-day public action note, publish municipal progress checkpoints, and route leadership communication to the most affected communities.",
-      urgency:
-        sentiment.summary.negativeShare >= 0.35 ||
-        citizenVoice.summary.narrativeRiskLevel === "High"
-          ? "High"
-          : "Medium",
-      impactTier: getImpactTier(
-        Number(
-          (
-            (
-              Math.max(sentiment.summary.negativeShare, sentiment.summary.positiveShare) +
-              citizenVoice.summary.averageNegativeShare +
-              0.5
-            ) / 2.5
-          ).toFixed(2)
-        ),
-        sentiment.summary.negativeShare >= 0.35 ||
-          citizenVoice.summary.narrativeRiskLevel === "High"
-          ? "High"
-          : "Medium"
-      ),
-      expectedImpact:
-        "Reduce narrative escalation, show visible leadership intent, and improve public trust in the province response path.",
-      ownerOffice: topLeader ? topLeader.office : "Provincial Communications and Response Coordination",
-      evidenceCount: sentiment.summary.mentionCount + citizenVoice.summary.totalCitizenMentions,
-      officialShare,
-      publicPressureMentions: citizenVoice.summary.totalCitizenMentions,
-      legacyCommunityDocuments: legacyCommunity.summary.documentCount,
-      traceChips: ["sentiment facts", "public voice", "leadership sentiment"],
-      confidence: Number(
+  recommendations.push({
+    title: `Run a visible public response on ${topComplaintTopic}`,
+    issue: dominantCitizenIssue,
+    affectedMunicipalities: topMunicipality
+      ? [topMunicipality.municipality]
+      : [],
+    recommendedAction:
+      "Issue a 7-day public action note, publish municipal progress checkpoints, and route leadership communication to the most affected communities.",
+    urgency:
+      sentiment.summary.negativeShare >= 0.35 ||
+      citizenVoice.summary.narrativeRiskLevel === "High"
+        ? "High"
+        : "Medium",
+    impactTier: getImpactTier(
+      Number(
         (
-          (
-            Math.max(sentiment.summary.negativeShare, sentiment.summary.positiveShare) +
+          (Math.max(
+            sentiment.summary.negativeShare,
+            sentiment.summary.positiveShare,
+          ) +
             citizenVoice.summary.averageNegativeShare +
-            0.5
-          ) / 2.5
-        ).toFixed(2)
+            0.5) /
+          2.5
+        ).toFixed(2),
       ),
+      sentiment.summary.negativeShare >= 0.35 ||
+        citizenVoice.summary.narrativeRiskLevel === "High"
+        ? "High"
+        : "Medium",
+    ),
+    expectedImpact:
+      "Reduce narrative escalation, show visible leadership intent, and improve public trust in the province response path.",
+    ownerOffice: topLeader
+      ? topLeader.office
+      : "Provincial Communications and Response Coordination",
+    evidenceCount:
+      sentiment.summary.mentionCount +
+      citizenVoice.summary.totalCitizenMentions,
+    officialShare,
+    publicPressureMentions: citizenVoice.summary.totalCitizenMentions,
+    legacyCommunityDocuments: legacyCommunity.summary.documentCount,
+    traceChips: ["sentiment facts", "public voice", "leadership sentiment"],
+    confidence: Number(
+      (
+        (Math.max(
+          sentiment.summary.negativeShare,
+          sentiment.summary.positiveShare,
+        ) +
+          citizenVoice.summary.averageNegativeShare +
+          0.5) /
+        2.5
+      ).toFixed(2),
+    ),
     linkedLeaders: topLeader ? [topLeader.leaderName] : [],
     rationale: `Public pressure is clustering around ${dominantCitizenIssue} with ${sentiment.summary.mentionCount} governed sentiment mentions and ${citizenVoice.summary.totalCitizenMentions} citizen-voice mentions in the selected window.`,
   });
@@ -195,23 +222,28 @@ export async function getProvinceRecommendations(
     recommendations.push({
       title: `Respond visibly to ${dominantCitizenIssue} public pressure`,
       issue: dominantCitizenIssue,
-      affectedMunicipalities: topMunicipality ? [topMunicipality.municipality] : [],
+      affectedMunicipalities: topMunicipality
+        ? [topMunicipality.municipality]
+        : [],
       recommendedAction:
         "Stand up a public-facing response line for the dominant complaint family, publish daily response proof, and route issue updates through the highest-pressure municipalities first.",
-      urgency: citizenVoice.summary.narrativeRiskLevel === "High" ? "High" : "Medium",
+      urgency:
+        citizenVoice.summary.narrativeRiskLevel === "High" ? "High" : "Medium",
       impactTier: getImpactTier(
         Number(
           (
             (citizenVoice.summary.averageNegativeShare +
               Math.min(1, citizenVoice.summary.totalCitizenMentions / 40)) /
             2
-          ).toFixed(2)
+          ).toFixed(2),
         ),
-        citizenVoice.summary.narrativeRiskLevel === "High" ? "High" : "Medium"
+        citizenVoice.summary.narrativeRiskLevel === "High" ? "High" : "Medium",
       ),
       expectedImpact:
         "Reduce the gap between public complaint pressure and visible executive response, especially where social and narrative evidence are moving faster than formal reporting.",
-      ownerOffice: topLeader ? topLeader.office : "Provincial Communications and Response Coordination",
+      ownerOffice: topLeader
+        ? topLeader.office
+        : "Provincial Communications and Response Coordination",
       evidenceCount: citizenVoice.summary.totalCitizenMentions,
       officialShare,
       publicPressureMentions: citizenVoice.summary.totalCitizenMentions,
@@ -222,11 +254,11 @@ export async function getProvinceRecommendations(
           (citizenVoice.summary.averageNegativeShare +
             Math.min(1, citizenVoice.summary.totalCitizenMentions / 40)) /
           2
-        ).toFixed(2)
+        ).toFixed(2),
       ),
       linkedLeaders: topLeader ? [topLeader.leaderName] : [],
       rationale: `${province} has ${citizenVoice.summary.totalCitizenMentions} governed citizen-voice mentions with ${Math.round(
-        citizenVoice.summary.averageNegativeShare * 100
+        citizenVoice.summary.averageNegativeShare * 100,
       )}% average negative share, making the public narrative an immediate intervention signal.`,
     });
   }
@@ -235,7 +267,9 @@ export async function getProvinceRecommendations(
     recommendations.push({
       title: `Address entrenched community pressure around ${dominantCommunityIssue}`,
       issue: dominantCommunityIssue,
-      affectedMunicipalities: topMunicipality ? [topMunicipality.municipality] : [],
+      affectedMunicipalities: topMunicipality
+        ? [topMunicipality.municipality]
+        : [],
       recommendedAction:
         "Use ward and municipal operations teams to verify the recurring community complaints, publish response proof in the affected communities, and route executive follow-up through the longest-running complaint clusters first.",
       urgency: legacyCommunity.summary.avgUrgency >= 7 ? "High" : "Medium",
@@ -245,28 +279,35 @@ export async function getProvinceRecommendations(
             (legacyCommunity.summary.negativeShare +
               Math.min(1, legacyCommunity.summary.documentCount / 60)) /
             2
-          ).toFixed(2)
+          ).toFixed(2),
         ),
-        legacyCommunity.summary.avgUrgency >= 7 ? "High" : "Medium"
+        legacyCommunity.summary.avgUrgency >= 7 ? "High" : "Medium",
       ),
       expectedImpact:
         "Reduce the gap between long-running community complaints and visible provincial response, especially where legacy civic evidence shows pressure persisting over time.",
-      ownerOffice: getProvinceOwnerOffice(dominantCommunityIssue, Boolean(topLeader)),
+      ownerOffice: getProvinceOwnerOffice(
+        dominantCommunityIssue,
+        Boolean(topLeader),
+      ),
       evidenceCount: legacyCommunity.summary.documentCount,
       officialShare,
       publicPressureMentions: citizenVoice.summary.totalCitizenMentions,
       legacyCommunityDocuments: legacyCommunity.summary.documentCount,
-      traceChips: ["public voice", "legacy community signals", "evidence balance"],
+      traceChips: [
+        "public voice",
+        "legacy community signals",
+        "evidence balance",
+      ],
       confidence: Number(
         (
           (legacyCommunity.summary.negativeShare +
             Math.min(1, legacyCommunity.summary.documentCount / 60)) /
           2
-        ).toFixed(2)
+        ).toFixed(2),
       ),
       linkedLeaders: topLeader ? [topLeader.leaderName] : [],
       rationale: `${province} has ${legacyCommunity.summary.documentCount} imported community-signal documents with ${Math.round(
-        legacyCommunity.summary.negativeShare * 100
+        legacyCommunity.summary.negativeShare * 100,
       )}% negative share, indicating older resident complaint pressure is still materially relevant to the current decision view.`,
     });
   }
@@ -275,23 +316,28 @@ export async function getProvinceRecommendations(
     recommendations.push({
       title: "Increase official field verification behind the province view",
       issue: "Evidence Quality",
-      affectedMunicipalities: topMunicipality ? [topMunicipality.municipality] : [],
+      affectedMunicipalities: topMunicipality
+        ? [topMunicipality.municipality]
+        : [],
       recommendedAction:
         "Require department and municipal situation reports for the top issue clusters within 48 hours so the decision view is less dependent on narrative sources alone.",
       urgency: "Medium",
       impactTier: getImpactTier(
         Number((evidenceBalance.summary.weightedConfidence || 0).toFixed(2)),
-        "Medium"
+        "Medium",
       ),
       expectedImpact:
         "Raise decision confidence, reduce the risk of acting on partial evidence, and improve the official evidence share behind the dashboard.",
       ownerOffice: "Provincial Performance Monitoring and Evaluation",
-      evidenceCount: summary.summary.pressureCaseCount + sentiment.summary.mentionCount,
+      evidenceCount:
+        summary.summary.pressureCaseCount + sentiment.summary.mentionCount,
       officialShare,
       publicPressureMentions: citizenVoice.summary.totalCitizenMentions,
       legacyCommunityDocuments: legacyCommunity.summary.documentCount,
       traceChips: ["evidence balance", "source reliability", "pressure facts"],
-      confidence: Number((evidenceBalance.summary.weightedConfidence || 0).toFixed(2)),
+      confidence: Number(
+        (evidenceBalance.summary.weightedConfidence || 0).toFixed(2),
+      ),
       linkedLeaders: topLeader ? [topLeader.leaderName] : [],
       rationale: `Only ${officialShare}% of the current province evidence mix is official, so operational decisions still need stronger field verification.`,
     });
@@ -304,24 +350,29 @@ export async function getProvinceRecommendations(
     recommendations.push({
       title: "Stabilize official water visibility and response",
       issue: "Water Infrastructure",
-      affectedMunicipalities: topMunicipality ? [topMunicipality.municipality] : [],
+      affectedMunicipalities: topMunicipality
+        ? [topMunicipality.municipality]
+        : [],
       recommendedAction:
         "Use DWS and province response teams to publish a visible water-status picture, verify outages directly, and align emergency repair action with the weakest official water coverage areas.",
-      urgency: waterReliability.summary.waterReliabilityScore < 60 ? "High" : "Medium",
+      urgency:
+        waterReliability.summary.waterReliabilityScore < 60 ? "High" : "Medium",
       impactTier: getImpactTier(
         Number(
           (
             (waterReliability.summary.avgSourceReliability +
               summary.summary.officialEvidenceShare / 100) /
             2
-          ).toFixed(2)
+          ).toFixed(2),
         ),
-        waterReliability.summary.waterReliabilityScore < 60 ? "High" : "Medium"
+        waterReliability.summary.waterReliabilityScore < 60 ? "High" : "Medium",
       ),
       expectedImpact:
         "Improve water-specific decision confidence and reduce the chance that water intervention is driven only by narrative evidence.",
       ownerOffice: "Provincial Water and Infrastructure Command",
-      evidenceCount: waterReliability.summary.officialDocumentCount + waterReliability.summary.officialIncidentCount,
+      evidenceCount:
+        waterReliability.summary.officialDocumentCount +
+        waterReliability.summary.officialIncidentCount,
       officialShare,
       publicPressureMentions: citizenVoice.summary.totalCitizenMentions,
       legacyCommunityDocuments: legacyCommunity.summary.documentCount,
@@ -331,7 +382,7 @@ export async function getProvinceRecommendations(
           (waterReliability.summary.avgSourceReliability +
             summary.summary.officialEvidenceShare / 100) /
           2
-        ).toFixed(2)
+        ).toFixed(2),
       ),
       linkedLeaders: topLeader ? [topLeader.leaderName] : [],
       rationale: `Official water reliability for ${province} is ${waterReliability.summary.waterReliabilityScore}, based on ${waterReliability.summary.officialDocumentCount} official water documents in the current window.`,
@@ -342,11 +393,16 @@ export async function getProvinceRecommendations(
     recommendations.push({
       title: `Protect leadership credibility around ${topLeader.linkedIssues[0] ?? "service delivery"}`,
       issue: topLeader.linkedIssues[0] ?? "Leadership Exposure",
-      affectedMunicipalities: topMunicipality ? [topMunicipality.municipality] : [],
+      affectedMunicipalities: topMunicipality
+        ? [topMunicipality.municipality]
+        : [],
       recommendedAction:
         "Tie the premier or leadership office to a specific corrective action, visible milestone, and public accountability checkpoint in the affected area.",
       urgency: "Medium",
-      impactTier: getImpactTier(Number(topLeader.confidence.toFixed(2)), "Medium"),
+      impactTier: getImpactTier(
+        Number(topLeader.confidence.toFixed(2)),
+        "Medium",
+      ),
       expectedImpact:
         "Reduce leader-to-failure association and shift the narrative from blame toward visible intervention.",
       ownerOffice: topLeader.office,

@@ -44,7 +44,7 @@ export async function getPlaceProfile(input: {
         order by year desc
         limit 1
       `,
-      [province, municipality, ward]
+      [province, municipality, ward],
     );
 
     return {
@@ -95,7 +95,7 @@ export async function getPlaceProfile(input: {
         order by year desc
         limit 1
       `,
-      [province, municipality]
+      [province, municipality],
     );
 
     return {
@@ -144,7 +144,7 @@ export async function getPlaceProfile(input: {
       order by year desc
       limit 1
     `,
-    [province]
+    [province],
   );
 
   return {

@@ -20,7 +20,9 @@ type State =
     }
   | { status: "error"; message: string };
 
-export default function ProvincePlaceCoverageStrip(props: { province: string }) {
+export default function ProvincePlaceCoverageStrip(props: {
+  province: string;
+}) {
   const { province } = props;
   const [state, setState] = useState<State>({ status: "loading" });
 
@@ -38,30 +40,37 @@ export default function ProvincePlaceCoverageStrip(props: { province: string }) 
       const params = new URLSearchParams({ province });
 
       try {
-        const [profileResponse, contextResponse, electionResponse, historyResponse] =
-          await Promise.all([
-            fetch(`/api/analytics/place-profile?${params.toString()}`, {
+        const [
+          profileResponse,
+          contextResponse,
+          electionResponse,
+          historyResponse,
+        ] = await Promise.all([
+          fetch(`/api/analytics/place-profile?${params.toString()}`, {
+            cache: "no-store",
+          }),
+          fetch(`/api/analytics/place-context?${params.toString()}`, {
+            cache: "no-store",
+          }),
+          fetch(`/api/analytics/place-election-history?${params.toString()}`, {
+            cache: "no-store",
+          }),
+          fetch(
+            `/api/analytics/place-infrastructure-history?${params.toString()}`,
+            {
               cache: "no-store",
-            }),
-            fetch(`/api/analytics/place-context?${params.toString()}`, {
-              cache: "no-store",
-            }),
-            fetch(`/api/analytics/place-election-history?${params.toString()}`, {
-              cache: "no-store",
-            }),
-            fetch(`/api/analytics/place-infrastructure-history?${params.toString()}`, {
-              cache: "no-store",
-            }),
-          ]);
+            },
+          ),
+        ]);
 
         setState({
           status: "loaded",
           placeProfile: await parseJson<PlaceProfileResponse>(profileResponse),
           placeContext: await parseJson<PlaceContextResponse>(contextResponse),
-          electionHistory: await parseJson<ElectionHistoryResponse>(electionResponse),
-          infrastructureHistory: await parseJson<HistoricalInfrastructureResponse>(
-            historyResponse
-          ),
+          electionHistory:
+            await parseJson<ElectionHistoryResponse>(electionResponse),
+          infrastructureHistory:
+            await parseJson<HistoricalInfrastructureResponse>(historyResponse),
         });
       } catch (error) {
         setState({
@@ -78,7 +87,11 @@ export default function ProvincePlaceCoverageStrip(props: { province: string }) 
   }, [province]);
 
   if (state.status === "loading") {
-    return <p className="text-sm text-slate-500">Loading province place-intelligence coverage...</p>;
+    return (
+      <p className="text-sm text-slate-500">
+        Loading province place-intelligence coverage...
+      </p>
+    );
   }
 
   if (state.status === "error") {
@@ -88,12 +101,12 @@ export default function ProvincePlaceCoverageStrip(props: { province: string }) 
   const hasProfile = Boolean(state.placeProfile?.demographics);
   const hasContext = Boolean(
     state.placeContext &&
-      (state.placeContext.wikipediaDescription ||
-        state.placeContext.wikipediaExtract ||
-        state.placeContext.storyAngles.length > 0)
+    (state.placeContext.wikipediaDescription ||
+      state.placeContext.wikipediaExtract ||
+      state.placeContext.storyAngles.length > 0),
   );
   const hasElection = Boolean(
-    state.electionHistory && state.electionHistory.rows.length > 0
+    state.electionHistory && state.electionHistory.rows.length > 0,
   );
   const historyCount = state.infrastructureHistory?.rows.length ?? 0;
   const knownWards = state.placeContext?.knownWardCount ?? 0;
@@ -132,7 +145,8 @@ export default function ProvincePlaceCoverageStrip(props: { province: string }) 
         Coverage Snapshot
       </p>
       <p className="mt-2 text-sm font-medium text-slate-700">
-        How much place, political, and ward-backed context is already loaded for this province.
+        How much place, political, and ward-backed context is already loaded for
+        this province.
       </p>
       <div className="mt-4 grid grid-cols-2 gap-3 xl:grid-cols-6">
         {items.map((item) => (

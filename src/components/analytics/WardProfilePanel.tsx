@@ -24,9 +24,12 @@ export default function WardProfilePanel(props: {
       const params = new URLSearchParams({ province, municipality, ward });
 
       try {
-        const response = await fetch(`/api/analytics/ward-profile?${params.toString()}`, {
-          cache: "no-store",
-        });
+        const response = await fetch(
+          `/api/analytics/ward-profile?${params.toString()}`,
+          {
+            cache: "no-store",
+          },
+        );
         if (!response.ok) {
           throw new Error(`request failed with status ${response.status}`);
         }
@@ -35,7 +38,10 @@ export default function WardProfilePanel(props: {
       } catch (error) {
         setState({
           status: "error",
-          message: error instanceof Error ? error.message : "Failed to load ward profile",
+          message:
+            error instanceof Error
+              ? error.message
+              : "Failed to load ward profile",
         });
       }
     }
@@ -51,7 +57,10 @@ export default function WardProfilePanel(props: {
     return <p className="text-sm text-slate-500">{state.message}</p>;
   }
 
-  const label = formatWardDisplayLabel(state.data.wardLabel, state.data.wardNumber);
+  const label = formatWardDisplayLabel(
+    state.data.wardLabel,
+    state.data.wardNumber,
+  );
   const flags = [
     { label: "Councillor", active: state.data.summary.hasCouncillor },
     { label: "Election", active: state.data.summary.hasElectionHistory },
@@ -65,7 +74,9 @@ export default function WardProfilePanel(props: {
         <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
           Ward Reference
         </p>
-        <p className="mt-2 text-lg font-display font-bold text-slate-900">{label}</p>
+        <p className="mt-2 text-lg font-display font-bold text-slate-900">
+          {label}
+        </p>
         <p className="mt-1 text-sm text-slate-600">
           {state.data.municipality}
           {state.data.districtName ? ` | ${state.data.districtName}` : ""}
@@ -82,7 +93,9 @@ export default function WardProfilePanel(props: {
                 : "border-slate-100 bg-slate-50"
             }`}
           >
-            <p className="text-sm font-bold text-slate-900">{flag.active ? "Yes" : "No"}</p>
+            <p className="text-sm font-bold text-slate-900">
+              {flag.active ? "Yes" : "No"}
+            </p>
             <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">
               {flag.label}
             </p>

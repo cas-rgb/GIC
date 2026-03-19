@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-
-import { getLeadershipSentiment } from "@/lib/analytics/leadership-sentiment";
+import { generateExhaustiveLeadership } from "@/lib/analytics/generative-leadership";
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   const province = request.nextUrl.searchParams.get("province");
@@ -11,25 +10,16 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ error: "province is required" }, { status: 400 });
   }
 
-  if (!Number.isFinite(days) || days <= 0) {
-    return NextResponse.json(
-      { error: "days must be a positive number" },
-      { status: 400 }
-    );
-  }
-
   try {
-    const response = await getLeadershipSentiment(province, days);
+    const response = await generateExhaustiveLeadership(province, days);
     return NextResponse.json(response);
   } catch (error) {
-    return NextResponse.json(
-      {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Failed to fetch leadership sentiment",
+    return NextResponse.json({
+        error: error instanceof Error ? error.message : "Failed to fetch generative leadership sentiment",
       },
       { status: 500 }
     );
   }
 }
+
+

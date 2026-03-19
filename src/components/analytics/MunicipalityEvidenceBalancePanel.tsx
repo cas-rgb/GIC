@@ -3,7 +3,10 @@
 import { useEffect, useState } from "react";
 import { AlertTriangle, RefreshCw, ShieldCheck } from "lucide-react";
 
-import { EvidenceBalanceRow, MunicipalityEvidenceBalanceResponse } from "@/lib/analytics/types";
+import {
+  EvidenceBalanceRow,
+  MunicipalityEvidenceBalanceResponse,
+} from "@/lib/analytics/types";
 
 interface MunicipalityEvidenceBalancePanelProps {
   province: string;
@@ -38,14 +41,17 @@ export default function MunicipalityEvidenceBalancePanel({
       try {
         const response = await fetch(
           `/api/analytics/municipality-evidence-balance?province=${encodeURIComponent(
-            province
+            province,
           )}&municipality=${encodeURIComponent(municipality)}&days=${days}`,
-          { cache: "no-store" }
+          { cache: "no-store" },
         );
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -82,7 +88,9 @@ export default function MunicipalityEvidenceBalancePanel({
       <div className="flex min-h-[260px] items-center justify-center text-center">
         <div>
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">{state.message}</p>
+          <p className="mt-3 text-sm font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
@@ -120,7 +128,7 @@ export default function MunicipalityEvidenceBalancePanel({
       </div>
 
       <div className="space-y-3">
-        {data.rows.map((row: EvidenceBalanceRow) => (
+        {(data.rows || []).map((row: EvidenceBalanceRow) => (
           <div
             key={row.evidenceClass}
             className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm"
@@ -129,14 +137,18 @@ export default function MunicipalityEvidenceBalancePanel({
               <div className="flex items-center gap-2">
                 <ShieldCheck className="h-4 w-4 text-blue-600" />
                 <div>
-                  <p className="text-sm font-bold text-slate-900">{row.evidenceClass}</p>
+                  <p className="text-sm font-bold text-slate-900">
+                    {row.evidenceClass}
+                  </p>
                   <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                     {row.documentCount} docs · {row.sourceCount} sources
                   </p>
                 </div>
               </div>
               <div className="text-right">
-                <p className="text-lg font-bold text-slate-900">{row.documentShare}%</p>
+                <p className="text-lg font-bold text-slate-900">
+                  {row.documentShare}%
+                </p>
                 <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                   Share
                 </p>
@@ -146,7 +158,7 @@ export default function MunicipalityEvidenceBalancePanel({
         ))}
       </div>
 
-      {data.caveats.map((caveat) => (
+      {(data.caveats || []).map((caveat) => (
         <p key={caveat} className="text-sm font-medium text-slate-500">
           {caveat}
         </p>

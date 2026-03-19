@@ -14,26 +14,26 @@ export interface ProcessingRepository {
   saveSignals(
     documentId: string,
     locationId: string | null,
-    signals: NormalizedSignal[]
+    signals: NormalizedSignal[],
   ): Promise<string[]>;
   saveIncidents(
     signalIds: string[],
     locationId: string | null,
-    incidents: NormalizedIncident[]
+    incidents: NormalizedIncident[],
   ): Promise<void>;
   saveTenders(
     documentId: string,
     locationId: string | null,
-    tenders: NormalizedTender[]
+    tenders: NormalizedTender[],
   ): Promise<void>;
   saveBudgets(
     documentId: string,
     locationId: string | null,
-    budgets: NormalizedBudget[]
+    budgets: NormalizedBudget[],
   ): Promise<void>;
   markProcessed(
     documentId: string,
     parserVersion: string,
-    quality: ProcessingQualityReport
+    quality: ProcessingQualityReport,
   ): Promise<void>;
 }

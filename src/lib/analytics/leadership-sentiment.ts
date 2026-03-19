@@ -1,5 +1,5 @@
 import { query } from "@/lib/db";
-import { LeadershipSentimentResponse } from "@/lib/analytics/types";
+import { LeadershipSentimentResponse, AINarrativeSynthesisRow } from "@/lib/analytics/types";
 
 interface LeadershipAggregateRow {
   leaderName: string;
@@ -24,9 +24,12 @@ function toNumber(value: string | number): number {
 
 export async function getLeadershipSentiment(
   province: string,
-  days = 30
+  days = 30,
+  municipality?: string | null,
+  ward?: string | null,
+  serviceDomain?: string | null
 ): Promise<LeadershipSentimentResponse> {
-  const [leaderResult, topicResult] = await Promise.all([
+  const [leaderResult, topicResult, aiSynthesisResult] = await Promise.all([
     query<LeadershipAggregateRow>(
       `
         select
@@ -44,7 +47,7 @@ export async function getLeadershipSentiment(
         group by leader_name, office
         order by sum(mention_count) desc, leader_name asc
       `,
-      [province, days]
+      [province, days],
     ),
     query<LeadershipTopicRow>(
       `
@@ -58,7 +61,28 @@ export async function getLeadershipSentiment(
         group by leader_name, topic
         order by leader_name asc, sum(mention_count) desc, topic asc
       `,
-      [province, days]
+      [province, days],
+    ),
+    query<AINarrativeSynthesisRow>(
+      `
+        select 
+          leader_name as "leaderName",
+          who_involved as "whoInvolved",
+          what_happened as "whatHappened",
+          why_it_happened as "whyItHappened",
+          how_resolved_or_current as "howResolvedOrCurrent",
+          when_timeline as "whenTimeline",
+          source_evidence as "sourceEvidence"
+        from ai_narrative_synthesis
+        where lens = 'leadership' 
+          and ($1::text is null or province = $1)
+          and created_at >= current_date - ($2::int - 1)
+          and ($3::text is null or municipality = $3)
+          and ($4::text is null or ward = $4)
+          and ($5::text is null or service_category = $5)
+        order by created_at desc
+      `,
+      [province, days, municipality || null, ward || null, serviceDomain || null]
     ),
   ]);
 
@@ -70,11 +94,50 @@ export async function getLeadershipSentiment(
     topicsByLeader.set(row.leaderName, current);
   }
 
+  const aiSynthesisByLeader = new Map<string, AINarrativeSynthesisRow[]>();
+  const localizedLeaders = new Set<string>();
+
+  for (const row of aiSynthesisResult.rows) {
+    // @ts-ignore
+    const leaderName = row.leaderName;
+    const current = aiSynthesisByLeader.get(leaderName) ?? [];
+    current.push(row);
+    aiSynthesisByLeader.set(leaderName, current);
+    
+    // If we're filtering by municipality, only show leaders who have a direct mention in this localized area
+    if (municipality || ward) {
+      localizedLeaders.add(leaderName);
+    }
+  }
+
+  // Filter main leader array if drilling down into municipality/ward level
+  let finalLeaders = [...leaderResult.rows];
+  if ((municipality || ward) && localizedLeaders.size > 0) {
+    finalLeaders = finalLeaders.filter(row => localizedLeaders.has(row.leaderName));
+  }
+
+  // Handled leaders that exist purely in AI synthesis (e.g. Mayors not in the mock aggregate)
+  for (const [leaderName, evidence] of aiSynthesisByLeader.entries()) {
+    if (!finalLeaders.find(l => l.leaderName === leaderName)) {
+      finalLeaders.push({
+        leaderName,
+        office: "Executive",
+        sentimentScore: 0.1, // Default neutral-ish
+        mentionCount: evidence.length,
+        positiveMentionCount: 0,
+        neutralMentionCount: evidence.length,
+        negativeMentionCount: 0,
+        confidence: 0.8
+      } as LeadershipAggregateRow);
+    }
+  }
+
   return {
     province,
     days,
-    leaders: leaderResult.rows.map((row) => {
+    leaders: finalLeaders.map((row) => {
       const topics = (topicsByLeader.get(row.leaderName) ?? []).slice(0, 3);
+      const aiSynthesis = aiSynthesisByLeader.get(row.leaderName) ?? [];
 
       return {
         leaderName: row.leaderName,
@@ -91,8 +154,9 @@ export async function getLeadershipSentiment(
           mentionCount: topic.mentionCount,
         })),
         topNarratives: topics.map((topic) => `${topic.topic} pressure`),
+        aiSynthesis,
       };
-    }),
+    }).sort((a, b) => b.mentionCount - a.mentionCount),
     caveats: [
       "Leadership sentiment only appears where governed documents explicitly mention a provincial leader or premier alias.",
       "Current coverage depends on the live source mix and is thinner than the province sentiment layer.",

@@ -10,8 +10,12 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(response);
   } catch (error) {
     const message =
-      error instanceof Error ? error.message : "Failed to load province comparison";
+      error instanceof Error
+        ? error.message
+        : "Failed to load province comparison";
 
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
+
+

@@ -1,4 +1,7 @@
-import { ProvinceComparisonResponse, ProvinceComparisonRow } from "@/lib/analytics/types";
+import {
+  ProvinceComparisonResponse,
+  ProvinceComparisonRow,
+} from "@/lib/analytics/types";
 import { getProvinceSentiment } from "@/lib/analytics/province-sentiment";
 import { getProvinceSummary } from "@/lib/analytics/province-summary";
 import { getSourceHealthSummary } from "@/lib/source-registry/health-queries";
@@ -16,7 +19,7 @@ const PROVINCES = [
 ];
 
 export async function getProvinceComparison(
-  days = 30
+  days = 30,
 ): Promise<ProvinceComparisonResponse> {
   const rows = await Promise.all(
     PROVINCES.map(async (province): Promise<ProvinceComparisonRow> => {
@@ -34,12 +37,13 @@ export async function getProvinceComparison(
         evidenceConfidenceScore: summary.summary.evidenceConfidenceScore,
         officialEvidenceShare: summary.summary.officialEvidenceShare,
         topPressureDomain: summary.summary.topPressureDomain,
-        highestExposureMunicipality: summary.summary.highestExposureMunicipality,
+        highestExposureMunicipality:
+          summary.summary.highestExposureMunicipality,
         healthyConnectorCount: health.totals.healthyCount,
         staleConnectorCount: health.totals.staleCount,
         failingConnectorCount: health.totals.failingCount,
       };
-    })
+    }),
   );
 
   return {

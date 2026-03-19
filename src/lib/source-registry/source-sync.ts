@@ -2,7 +2,7 @@ import { query } from "@/lib/db";
 import { getConnectorReadyRegistrySources } from "@/lib/source-registry/connector-queries";
 
 function mapRegistryTypeToOperationalType(
-  sourceType: string
+  sourceType: string,
 ): "news" | "gov" | "internal" | "social" | "ngo" {
   switch (sourceType) {
     case "official_gov":
@@ -68,7 +68,7 @@ export async function syncConnectorReadySources(): Promise<{
         source.connectorUrl ?? source.sourceUrl,
         mapReliabilityTierToScore(source.reliabilityTier),
         source.id,
-      ]
+      ],
     );
   }
 

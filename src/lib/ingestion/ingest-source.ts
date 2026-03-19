@@ -16,7 +16,7 @@ import {
 export async function ingestSource(
   connector: SourceConnector,
   config: IngestionSourceConfig,
-  parserVersion = "ingestion-v1"
+  parserVersion = "ingestion-v1",
 ): Promise<IngestionResult> {
   const result: IngestionResult = {
     fetched: 0,
@@ -70,7 +70,9 @@ export async function ingestSource(
 
       result.enqueued += 1;
     } catch (error) {
-      result.errors.push(error instanceof Error ? error.message : String(error));
+      result.errors.push(
+        error instanceof Error ? error.message : String(error),
+      );
     }
   }
 

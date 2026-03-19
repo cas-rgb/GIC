@@ -27,7 +27,7 @@ function toNumber(value: string | number | null | undefined): number {
 export async function getMunicipalityLegacyCommunitySignals(
   province: string,
   municipality: string,
-  days = 30
+  days = 30,
 ): Promise<MunicipalityLegacyCommunitySignalsResponse> {
   const [summaryResult, issueResult] = await Promise.all([
     query<SummaryRow>(
@@ -76,7 +76,7 @@ export async function getMunicipalityLegacyCommunitySignals(
         from expanded
         left join source_ranked using (source_name)
       `,
-      [province, municipality, days]
+      [province, municipality, days],
     ),
     query<IssueRow>(
       `
@@ -118,7 +118,7 @@ export async function getMunicipalityLegacyCommunitySignals(
         order by "documentCount" desc, "avgUrgency" desc nulls last, issue asc
         limit 6
       `,
-      [province, municipality, days]
+      [province, municipality, days],
     ),
   ]);
 

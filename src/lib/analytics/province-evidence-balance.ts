@@ -16,7 +16,9 @@ function toNumber(value: string | number): number {
 }
 
 function classifySourceType(sourceType: string): string {
-  if (["gov", "official_gov", "treasury", "utility", "stats"].includes(sourceType)) {
+  if (
+    ["gov", "official_gov", "treasury", "utility", "stats"].includes(sourceType)
+  ) {
     return "Official";
   }
 
@@ -33,7 +35,7 @@ function classifySourceType(sourceType: string): string {
 
 export async function getProvinceEvidenceBalance(
   province: string,
-  days = 30
+  days = 30,
 ): Promise<ProvinceEvidenceBalanceResponse> {
   const result = await query<EvidenceBalanceSqlRow>(
     `
@@ -48,17 +50,23 @@ export async function getProvinceEvidenceBalance(
       group by source_type
       order by sum(document_count) desc, source_type asc
     `,
-    [province, days]
+    [province, days],
   );
 
   const totalDocuments = result.rows.reduce(
     (sum, row) => sum + row.documentCount,
-    0
+    0,
   );
 
   const grouped = new Map<
     string,
-    { evidenceClass: string; sourceCount: number; documentCount: number; reliabilityTotal: number; rows: number }
+    {
+      evidenceClass: string;
+      sourceCount: number;
+      documentCount: number;
+      reliabilityTotal: number;
+      rows: number;
+    }
   >();
 
   for (const row of result.rows) {
@@ -103,9 +111,9 @@ export async function getProvinceEvidenceBalance(
           (
             rows.reduce(
               (sum, row) => sum + row.avgReliabilityScore * row.documentCount,
-              0
+              0,
             ) / totalDocuments
-          ).toFixed(3)
+          ).toFixed(3),
         )
       : 0;
 

@@ -29,7 +29,7 @@ function reputationLabel(score: number): string {
 
 export async function getLeadershipBriefing(
   province: string,
-  days = 30
+  days = 30,
 ): Promise<LeadershipBriefingResponse> {
   const [leadership, evidence] = await Promise.all([
     getLeadershipSentiment(province, days),
@@ -37,9 +37,13 @@ export async function getLeadershipBriefing(
   ]);
 
   const highestExposureLeader =
-    [...leadership.leaders].sort((left, right) => right.mentionCount - left.mentionCount)[0] ?? null;
+    [...leadership.leaders].sort(
+      (left, right) => right.mentionCount - left.mentionCount,
+    )[0] ?? null;
   const highestRiskLeader =
-    [...leadership.leaders].sort((left, right) => left.sentimentScore - right.sentimentScore)[0] ?? null;
+    [...leadership.leaders].sort(
+      (left, right) => left.sentimentScore - right.sentimentScore,
+    )[0] ?? null;
   const avgSentiment =
     leadership.leaders.reduce((sum, leader) => sum + leader.sentimentScore, 0) /
     Math.max(leadership.leaders.length, 1);
@@ -54,10 +58,17 @@ export async function getLeadershipBriefing(
       confidenceMode: "governed",
     },
     summary: {
-      averageSentiment: Number.isFinite(avgSentiment) ? Number(avgSentiment.toFixed(2)) : null,
+      averageSentiment: Number.isFinite(avgSentiment)
+        ? Number(avgSentiment.toFixed(2))
+        : null,
       leaderCount: leadership.leaders.length,
-      mentionVolume: leadership.leaders.reduce((sum, leader) => sum + leader.mentionCount, 0),
-      riskAlertCount: leadership.leaders.filter((leader) => leader.sentimentScore <= -0.2).length,
+      mentionVolume: leadership.leaders.reduce(
+        (sum, leader) => sum + leader.mentionCount,
+        0,
+      ),
+      riskAlertCount: leadership.leaders.filter(
+        (leader) => leader.sentimentScore <= -0.2,
+      ).length,
       highestExposureLeader: highestExposureLeader?.leaderName ?? null,
       highestRiskLeader: highestRiskLeader?.leaderName ?? null,
     },
@@ -96,7 +107,12 @@ export async function getLeadershipBriefing(
     province,
     days,
     trace: {
-      sources: ["fact_leadership_sentiment_daily", "documents", "sentiment_mentions", "sources"],
+      sources: [
+        "fact_leadership_sentiment_daily",
+        "documents",
+        "sentiment_mentions",
+        "sources",
+      ],
       query: `province=${province};days=${days}`,
     },
   };

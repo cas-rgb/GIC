@@ -24,7 +24,7 @@ interface SourceReliabilitySqlRow {
 }
 
 export async function getSourceReliability(
-  province: string
+  province: string,
 ): Promise<SourceReliabilityResponse> {
   const result = await query<SourceReliabilitySqlRow>(
     `
@@ -38,7 +38,7 @@ export async function getSourceReliability(
       group by source_type
       order by "documentCount" desc
     `,
-    [province]
+    [province],
   );
 
   return {

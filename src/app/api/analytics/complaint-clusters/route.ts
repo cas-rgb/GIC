@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
 
     const response = await getComplaintClusters(
       province && province !== "All Provinces" ? province : null,
-      Number.isFinite(days) ? days : 30
+      Number.isFinite(days) ? days : 30,
     );
 
     return NextResponse.json(response);
@@ -17,9 +17,13 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(
       {
         error:
-          error instanceof Error ? error.message : "Failed to load complaint clusters",
+          error instanceof Error
+            ? error.message
+            : "Failed to load complaint clusters",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
+
+

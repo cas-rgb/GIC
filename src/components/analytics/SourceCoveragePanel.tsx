@@ -26,7 +26,9 @@ export default function SourceCoveragePanel({
   province,
 }: SourceCoveragePanelProps) {
   const [state, setState] = useState<LoadState>({ status: "loading" });
-  const [healthState, setHealthState] = useState<HealthState>({ status: "loading" });
+  const [healthState, setHealthState] = useState<HealthState>({
+    status: "loading",
+  });
 
   useEffect(() => {
     async function parseError(response: Response, fallback: string) {
@@ -46,7 +48,7 @@ export default function SourceCoveragePanel({
           }),
           fetch(
             `/api/analytics/source-health-summary?province=${encodeURIComponent(province)}`,
-            { cache: "no-store" }
+            { cache: "no-store" },
           ),
         ]);
 
@@ -54,8 +56,8 @@ export default function SourceCoveragePanel({
           throw new Error(
             await parseError(
               response,
-              `request failed with status ${response.status}`
-            )
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -63,8 +65,8 @@ export default function SourceCoveragePanel({
           throw new Error(
             await parseError(
               healthResponse,
-              `request failed with status ${healthResponse.status}`
-            )
+              `request failed with status ${healthResponse.status}`,
+            ),
           );
         }
 
@@ -119,7 +121,8 @@ export default function SourceCoveragePanel({
     }
 
     return (
-      healthState.data.byProvince.find((row) => row.province === province) ?? null
+      healthState.data.byProvince.find((row) => row.province === province) ??
+      null
     );
   }, [healthState, province]);
 
@@ -178,8 +181,9 @@ export default function SourceCoveragePanel({
           </p>
           <p className="mt-2 text-sm font-medium text-slate-700">
             {province} currently has {provinceHealth?.staleCount ?? 0} stale and{" "}
-            {provinceHealth?.failingCount ?? 0} failing connectors. Read operational
-            charts with extra care until the source refresh cycle recovers.
+            {provinceHealth?.failingCount ?? 0} failing connectors. Read
+            operational charts with extra care until the source refresh cycle
+            recovers.
           </p>
         </div>
       ) : null}
@@ -198,7 +202,9 @@ export default function SourceCoveragePanel({
             </p>
           </div>
           <div className="rounded-xl bg-white px-3 py-2 text-right">
-            <p className="text-lg font-bold text-blue-600">{provinceRow.kpiTruthCount}</p>
+            <p className="text-lg font-bold text-blue-600">
+              {provinceRow.kpiTruthCount}
+            </p>
             <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400">
               KPI truth
             </p>

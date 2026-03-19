@@ -33,7 +33,10 @@ export default function CitizenVoiceReadinessPanel() {
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -43,7 +46,9 @@ export default function CitizenVoiceReadinessPanel() {
         setState({
           status: "error",
           message:
-            error instanceof Error ? error.message : "Failed to load citizen voice readiness",
+            error instanceof Error
+              ? error.message
+              : "Failed to load citizen voice readiness",
         });
       }
     }
@@ -56,18 +61,17 @@ export default function CitizenVoiceReadinessPanel() {
       return [];
     }
 
-    return state.data.byScope.reduce<Array<{ scopeName: string; packCount: number }>>(
-      (rows, row) => {
-        const existing = rows.find((entry) => entry.scopeName === row.scopeName);
-        if (existing) {
-          existing.packCount += row.packCount;
-        } else {
-          rows.push({ scopeName: row.scopeName, packCount: row.packCount });
-        }
-        return rows;
-      },
-      []
-    );
+    return state.data.byScope.reduce<
+      Array<{ scopeName: string; packCount: number }>
+    >((rows, row) => {
+      const existing = rows.find((entry) => entry.scopeName === row.scopeName);
+      if (existing) {
+        existing.packCount += row.packCount;
+      } else {
+        rows.push({ scopeName: row.scopeName, packCount: row.packCount });
+      }
+      return rows;
+    }, []);
   }, [state]);
 
   if (state.status === "loading") {
@@ -86,7 +90,9 @@ export default function CitizenVoiceReadinessPanel() {
       <div className="flex min-h-[220px] items-center justify-center text-center">
         <div>
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">{state.message}</p>
+          <p className="mt-3 text-sm font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
@@ -137,7 +143,9 @@ export default function CitizenVoiceReadinessPanel() {
                 key={row.scopeName}
                 className="flex items-center justify-between rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3"
               >
-                <span className="text-sm font-bold text-slate-900">{row.scopeName}</span>
+                <span className="text-sm font-bold text-slate-900">
+                  {row.scopeName}
+                </span>
                 <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
                   {row.packCount} packs
                 </span>
@@ -151,12 +159,14 @@ export default function CitizenVoiceReadinessPanel() {
             Issue Family Coverage
           </p>
           <div className="mt-4 space-y-3">
-            {data.byIssue.map((row) => (
+            {(data.byIssue || []).map((row) => (
               <div
                 key={row.issueFamily}
                 className="flex items-center justify-between rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3"
               >
-                <span className="text-sm font-bold text-slate-900">{row.issueFamily}</span>
+                <span className="text-sm font-bold text-slate-900">
+                  {row.issueFamily}
+                </span>
                 <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
                   {row.packCount} packs
                 </span>

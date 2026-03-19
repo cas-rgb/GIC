@@ -66,6 +66,7 @@
     "smoke:v2:registry": "node --require ts-node/register --require tsconfig-paths/register scripts/smoke-source-registry.ts"
   },
   "dependencies": {
+    "@ai-sdk/google": "^3.0.43",
     "@deck.gl/google-maps": "^9.2.11",
     "@deck.gl/layers": "^9.2.11",
     "@deck.gl/react": "^9.2.11",
@@ -76,6 +77,7 @@
     "@tavily/core": "^0.7.2",
     "@types/three": "^0.183.1",
     "@vis.gl/react-google-maps": "^1.7.1",
+    "ai": "^6.0.116",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "deck.gl": "^9.2.11",
@@ -93,7 +95,8 @@
     "recharts": "^3.8.0",
     "tailwind-merge": "^3.5.0",
     "three": "^0.183.2",
-    "xml2js": "^0.6.2"
+    "xml2js": "^0.6.2",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@googlemaps/js-api-loader": "^2.0.2",

@@ -8,7 +8,7 @@ interface MunicipalityRow {
 }
 
 export async function getMunicipalityDirectory(
-  province: string
+  province: string,
 ): Promise<MunicipalityDirectoryResponse> {
   const result = await query<MunicipalityRow>(
     `
@@ -71,14 +71,15 @@ export async function getMunicipalityDirectory(
       from combined
       order by ("pressureDocumentCount" + "sentimentMentionCount") desc, municipality asc
     `,
-    [province]
+    [province],
   );
 
   return {
     province,
     rows: result.rows,
     trace: {
-      table: "fact_service_pressure_daily,fact_sentiment_daily,locations,source_registry",
+      table:
+        "fact_service_pressure_daily,fact_sentiment_daily,locations,source_registry",
       query: `province=${province}`,
     },
   };

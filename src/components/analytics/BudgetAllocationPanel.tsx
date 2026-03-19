@@ -29,7 +29,7 @@ export default function BudgetAllocationPanel(props: {
           `/api/analytics/place-budget-allocations?${params.toString()}`,
           {
             cache: "no-store",
-          }
+          },
         );
         if (!response.ok) {
           throw new Error(`request failed with status ${response.status}`);
@@ -40,7 +40,9 @@ export default function BudgetAllocationPanel(props: {
         setState({
           status: "error",
           message:
-            error instanceof Error ? error.message : "Failed to load budget allocations",
+            error instanceof Error
+              ? error.message
+              : "Failed to load budget allocations",
         });
       }
     }
@@ -49,17 +51,22 @@ export default function BudgetAllocationPanel(props: {
   }, [municipality, province, ward]);
 
   if (state.status === "loading") {
-    return <p className="text-sm text-slate-500">Loading budget and allocation records...</p>;
+    return (
+      <p className="text-sm text-slate-500">
+        Loading budget and allocation records...
+      </p>
+    );
   }
 
   if (state.status === "error") {
     return <p className="text-sm text-slate-500">{state.message}</p>;
   }
 
-  if (state.data.rows.length === 0) {
+  if ((state.data.rows || []).length === 0) {
     return (
       <p className="text-sm text-slate-500">
-        No structured budget or allocation records have been loaded for this geography yet.
+        No structured budget or allocation records have been loaded for this
+        geography yet.
       </p>
     );
   }
@@ -90,7 +97,12 @@ export default function BudgetAllocationPanel(props: {
             <p className="mt-2 text-sm text-slate-700">{row.summaryText}</p>
           ) : null}
           <p className="mt-2 text-xs text-slate-500">
-            {[row.issueFamily, row.serviceDomain, row.projectStatus, row.sourceName]
+            {[
+              row.issueFamily,
+              row.serviceDomain,
+              row.projectStatus,
+              row.sourceName,
+            ]
               .filter(Boolean)
               .join(" | ")}
           </p>

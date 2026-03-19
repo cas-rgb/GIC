@@ -8,8 +8,12 @@ export async function GET() {
     return NextResponse.json(summary);
   } catch (error) {
     const message =
-      error instanceof Error ? error.message : "Failed to load citizen voice readiness";
+      error instanceof Error
+        ? error.message
+        : "Failed to load citizen voice readiness";
 
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
+
+

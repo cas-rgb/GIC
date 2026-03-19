@@ -14,9 +14,10 @@ export async function getMunicipalityIssueMatrix(
   province: string,
   municipality: string,
   days = 30,
-  serviceDomain?: string | null
+  serviceDomain?: string | null,
 ): Promise<MunicipalityIssueMatrixResponse> {
-  const normalizedServiceDomain = normalizeInfrastructureServiceFilter(serviceDomain);
+  const normalizedServiceDomain =
+    normalizeInfrastructureServiceFilter(serviceDomain);
   const result = await query<MunicipalityIssueMatrixSqlRow>(
     `
       select
@@ -34,7 +35,7 @@ export async function getMunicipalityIssueMatrix(
       group by service_domain
       order by sum(pressure_case_count) desc, service_domain asc
     `,
-    [province, municipality, days, normalizedServiceDomain]
+    [province, municipality, days, normalizedServiceDomain],
   );
 
   return {

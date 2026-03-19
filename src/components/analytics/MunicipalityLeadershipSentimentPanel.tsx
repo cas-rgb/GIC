@@ -1,7 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AlertTriangle, MessageSquareQuote, RefreshCw, Users } from "lucide-react";
+import {
+  AlertTriangle,
+  MessageSquareQuote,
+  RefreshCw,
+  Users,
+} from "lucide-react";
+
+import ProgressSpinner from "@/components/ui/ProgressSpinner";
 
 import {
   LeadershipSentimentLeaderRow,
@@ -46,19 +53,19 @@ export default function MunicipalityLeadershipSentimentPanel({
       try {
         const response = await fetch(
           `/api/analytics/municipal-leadership-sentiment?province=${encodeURIComponent(
-            province
+            province,
           )}&municipality=${encodeURIComponent(municipality)}&days=${days}`,
           {
             cache: "no-store",
-          }
+          },
         );
 
         if (!response.ok) {
           throw new Error(
             await parseError(
               response,
-              `request failed with status ${response.status}`
-            )
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -83,7 +90,7 @@ export default function MunicipalityLeadershipSentimentPanel({
     if (
       state.status === "loaded" &&
       !selectedLeaderName &&
-      state.data.leaders.length > 0 &&
+      (state.data.leaders || []).length > 0 &&
       onSelectLeader
     ) {
       onSelectLeader(state.data.leaders[0]);
@@ -93,10 +100,7 @@ export default function MunicipalityLeadershipSentimentPanel({
   if (state.status === "loading") {
     return (
       <div className="flex min-h-[280px] items-center justify-center">
-        <div className="flex items-center gap-3 text-sm font-bold text-slate-400">
-          <RefreshCw className="h-4 w-4 animate-spin" />
-          Loading local political PR view...
-        </div>
+        <ProgressSpinner message="Loading local political PR view..." />
       </div>
     );
   }
@@ -116,7 +120,7 @@ export default function MunicipalityLeadershipSentimentPanel({
 
   const { data } = state;
 
-  if (data.leaders.length === 0) {
+  if ((data.leaders || []).length === 0) {
     return (
       <div className="space-y-4">
         <div className="rounded-2xl border border-dashed border-slate-200 p-8 text-center">
@@ -125,11 +129,11 @@ export default function MunicipalityLeadershipSentimentPanel({
             {municipality} in this window.
           </p>
           <p className="mt-2 text-xs text-slate-400">
-            This PR layer only materializes when governed documents explicitly mention a
-            verified local political leader alias.
+            This PR layer only materializes when governed documents explicitly
+            mention a verified local political leader alias.
           </p>
         </div>
-        {data.caveats.map((caveat) => (
+        {(data.caveats || []).map((caveat) => (
           <p key={caveat} className="text-sm font-medium text-slate-500">
             {caveat}
           </p>
@@ -154,7 +158,7 @@ export default function MunicipalityLeadershipSentimentPanel({
             Leaders In View
           </p>
           <p className="mt-2 text-2xl font-display font-bold text-slate-900">
-            {data.leaders.length}
+            {(data.leaders || []).length}
           </p>
         </div>
         <div className="rounded-2xl border border-amber-100 bg-amber-50 p-4">
@@ -168,7 +172,7 @@ export default function MunicipalityLeadershipSentimentPanel({
       </div>
 
       <div className="space-y-3">
-        {data.leaders.map((leader: LeadershipSentimentLeaderRow) => (
+        {(data.leaders || []).map((leader: LeadershipSentimentLeaderRow) => (
           <button
             key={leader.leaderName}
             type="button"
@@ -282,7 +286,10 @@ export default function MunicipalityLeadershipSentimentPanel({
                 </p>
                 <div className="mt-3 space-y-2">
                   {leader.topNarratives.map((narrative) => (
-                    <p key={narrative} className="text-sm font-medium text-slate-700">
+                    <p
+                      key={narrative}
+                      className="text-sm font-medium text-slate-700"
+                    >
                       {narrative}
                     </p>
                   ))}
@@ -294,7 +301,7 @@ export default function MunicipalityLeadershipSentimentPanel({
       </div>
 
       <div className="rounded-2xl border border-dashed border-slate-200 p-4">
-        {data.caveats.map((caveat) => (
+        {(data.caveats || []).map((caveat) => (
           <p key={caveat} className="text-sm font-medium text-slate-500">
             {caveat}
           </p>

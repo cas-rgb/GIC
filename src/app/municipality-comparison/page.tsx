@@ -29,7 +29,11 @@ export default function MunicipalityComparisonPage() {
   const [province, setProvince] = useState("Gauteng");
 
   useEffect(() => {
-    if (queryProvince && PROVINCES.includes(queryProvince) && queryProvince !== province) {
+    if (
+      queryProvince &&
+      PROVINCES.includes(queryProvince) &&
+      queryProvince !== province
+    ) {
       setProvince(queryProvince);
     }
   }, [province, queryProvince]);

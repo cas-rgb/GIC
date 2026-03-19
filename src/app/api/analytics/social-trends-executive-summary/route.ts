@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
 
     const response = await getSocialTrendsExecutiveSummary(
       province && province !== "All Provinces" ? province : null,
-      Number.isFinite(days) ? days : 30
+      Number.isFinite(days) ? days : 30,
     );
 
     return NextResponse.json(response);
@@ -23,7 +23,9 @@ export async function GET(request: NextRequest) {
             ? error.message
             : "Failed to load social trends executive summary",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
+
+

@@ -46,13 +46,19 @@ export default function ProvinceEvidencePanel({
           query.set("topic", topic);
         }
 
-        const response = await fetch(`/api/analytics/province-evidence?${query}`, {
-          cache: "no-store",
-        });
+        const response = await fetch(
+          `/api/analytics/province-evidence?${query}`,
+          {
+            cache: "no-store",
+          },
+        );
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -62,7 +68,9 @@ export default function ProvinceEvidencePanel({
         setState({
           status: "error",
           message:
-            error instanceof Error ? error.message : "Failed to load province evidence",
+            error instanceof Error
+              ? error.message
+              : "Failed to load province evidence",
         });
       }
     }
@@ -86,7 +94,9 @@ export default function ProvinceEvidencePanel({
       <div className="flex min-h-[280px] items-center justify-center text-center">
         <div>
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">{state.message}</p>
+          <p className="mt-3 text-sm font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
@@ -144,12 +154,12 @@ export default function ProvinceEvidencePanel({
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
             Supporting Documents
           </p>
-          {data.documents.length === 0 ? (
+          {(data.documents || []).length === 0 ? (
             <div className="rounded-2xl border border-dashed border-slate-200 p-6 text-sm font-medium text-slate-500">
               No governed province documents match this filter yet.
             </div>
           ) : (
-            data.documents.map((document) => (
+            (data.documents || []).map((document) => (
               <a
                 key={document.documentId}
                 href={document.url}
@@ -161,10 +171,14 @@ export default function ProvinceEvidencePanel({
                   <div className="flex items-start gap-2">
                     <FileText className="mt-0.5 h-4 w-4 text-blue-600" />
                     <div>
-                      <p className="text-sm font-bold text-slate-900">{document.title}</p>
+                      <p className="text-sm font-bold text-slate-900">
+                        {document.title}
+                      </p>
                       <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                         {document.sourceName} · {document.sourceType}
-                        {document.municipality ? ` · ${document.municipality}` : ""}
+                        {document.municipality
+                          ? ` · ${document.municipality}`
+                          : ""}
                       </p>
                     </div>
                   </div>
@@ -185,12 +199,12 @@ export default function ProvinceEvidencePanel({
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
             Sentiment Mentions
           </p>
-          {data.mentions.length === 0 ? (
+          {(data.mentions || []).length === 0 ? (
             <div className="rounded-2xl border border-dashed border-slate-200 p-6 text-sm font-medium text-slate-500">
               No governed sentiment mentions match this province filter yet.
             </div>
           ) : (
-            data.mentions.map((mention, index) => (
+            (data.mentions || []).map((mention, index) => (
               <div
                 key={`${mention.title}-${mention.topic}-${index}`}
                 className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm"
@@ -199,10 +213,14 @@ export default function ProvinceEvidencePanel({
                   <div className="flex items-start gap-2">
                     <MessageSquareQuote className="mt-0.5 h-4 w-4 text-blue-600" />
                     <div>
-                      <p className="text-sm font-bold text-slate-900">{mention.topic}</p>
+                      <p className="text-sm font-bold text-slate-900">
+                        {mention.topic}
+                      </p>
                       <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                         {mention.sourceName} · {mention.title}
-                        {mention.municipality ? ` · ${mention.municipality}` : ""}
+                        {mention.municipality
+                          ? ` · ${mention.municipality}`
+                          : ""}
                       </p>
                     </div>
                   </div>
@@ -218,9 +236,12 @@ export default function ProvinceEvidencePanel({
                     {mention.sentimentLabel}
                   </span>
                 </div>
-                <p className="mt-3 text-sm font-medium text-slate-600">{mention.evidenceText}</p>
+                <p className="mt-3 text-sm font-medium text-slate-600">
+                  {mention.evidenceText}
+                </p>
                 <p className="mt-3 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-                  Score {mention.sentimentScore} · Confidence {Math.round(mention.confidence * 100)}%
+                  Score {mention.sentimentScore} · Confidence{" "}
+                  {Math.round(mention.confidence * 100)}%
                 </p>
               </div>
             ))
@@ -229,7 +250,7 @@ export default function ProvinceEvidencePanel({
       </div>
 
       <div className="rounded-2xl border border-dashed border-slate-200 p-4">
-        {data.caveats.map((caveat) => (
+        {(data.caveats || []).map((caveat) => (
           <p key={caveat} className="text-sm font-medium text-slate-500">
             {caveat}
           </p>

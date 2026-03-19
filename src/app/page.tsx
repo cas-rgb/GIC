@@ -1,5 +1,5 @@
-import { redirect } from 'next/navigation';
+import { redirect } from "next/navigation";
 
 export default function BasicDashboard() {
-    redirect('/executive/province');
+  redirect("/executive/state-of-the-province");
 }

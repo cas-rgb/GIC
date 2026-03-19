@@ -8,8 +8,12 @@ export async function GET() {
     return NextResponse.json(summary);
   } catch (error) {
     const message =
-      error instanceof Error ? error.message : "Failed to load social coverage summary";
+      error instanceof Error
+        ? error.message
+        : "Failed to load social coverage summary";
 
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
+
+

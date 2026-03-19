@@ -22,14 +22,20 @@ export default function DashboardToolbar({
           <p className="text-[9px] font-black uppercase tracking-[0.22em] text-slate-400">
             {label}
           </p>
-          <p className="mt-1 text-sm font-display font-bold text-slate-900 md:text-base">{title}</p>
+          <p className="mt-1 text-sm font-display font-bold text-slate-900 md:text-base">
+            {title}
+          </p>
           {description ? (
             <p className="mt-1 max-w-3xl text-[13px] font-medium leading-relaxed text-slate-600">
               {description}
             </p>
           ) : null}
         </div>
-        {controls ? <div className="flex flex-wrap items-end gap-2 xl:justify-end">{controls}</div> : null}
+        {controls ? (
+          <div className="flex flex-wrap items-end gap-2 xl:justify-end">
+            {controls}
+          </div>
+        ) : null}
       </div>
     </div>
   );

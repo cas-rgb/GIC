@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 import {
   Activity,
   BarChart3,
@@ -9,53 +10,81 @@ import {
   Database,
   MapPin,
   Users,
+  Menu,
+  X
 } from "lucide-react";
 
 const navigation = [
   {
     name: "State of the Province",
-    href: "/executive/province",
+    href: "/executive/situation-report",
     icon: BarChart3,
-    description: "Provincial pressure, sentiment, evidence, and intervention priorities",
+    description: "What the province is experiencing overall",
   },
   {
     name: "Leadership Sentiment",
-    href: "/leadership-sentiment",
+    href: "/executive/leadership",
     icon: Users,
-    description: "How leaders and offices are being associated with issues on the ground",
+    description: "How leaders are being perceived",
   },
   {
     name: "State of the Municipality & Wards",
-    href: "/municipality-wards",
+    href: "/executive/municipalities",
     icon: MapPin,
-    description: "Municipality and ward-level pressure, citizen voice, and local action context",
+    description: "What is happening locally on the ground",
   },
   {
     name: "Social Media, News & Other Trends",
-    href: "/news",
+    href: "/executive/social-trends",
     icon: Activity,
-    description: "Trusted media, civic signals, and citizen voice trend monitoring",
+    description: "What narratives and topics are rising now",
   },
   {
     name: "Investor Profiling",
-    href: "/investor-profiling",
+    href: "/executive/investors",
     icon: Briefcase,
-    description: "Project funding fit, investor alignment, and infrastructure opportunity mapping",
+    description: "Which economic opportunities and investor matches exist",
   },
   {
-    name: "Data Coverage",
-    href: "/data-coverage",
+    name: "Investor Identification",
+    href: "/executive/investor-identification",
     icon: Database,
-    description: "Verified source coverage across official, media, civic, research, and social layers",
+    description: "Search, filter, and save targeted investor profiles",
   },
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Close sidebar when navigating on mobile
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   return (
-    <aside className="relative z-50 flex h-screen w-72 flex-col overflow-hidden border-r border-white/5 bg-slate-950 text-white">
-      <div className="pointer-events-none absolute left-0 top-0 h-96 w-full bg-gic-gold/5 blur-[100px]" />
+    <>
+      {/* Mobile Toggle Button */}
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="md:hidden fixed bottom-6 right-6 z-[60] bg-slate-900 border border-slate-700 text-white p-4 rounded-full shadow-2xl print:hidden"
+      >
+        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+      </button>
+
+      {/* Backdrop */}
+      {isOpen && (
+        <div 
+          className="md:hidden fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-sm print:hidden"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside 
+        className={`fixed inset-y-0 left-0 z-50 flex h-screen w-72 flex-col overflow-hidden border-r border-white/5 bg-slate-950 text-white transition-transform duration-300 md:relative md:translate-x-0 print:hidden ${isOpen ? "translate-x-0 shadow-2xl" : "-translate-x-full"}`}
+      >
+        <div className="pointer-events-none absolute left-0 top-0 h-96 w-full bg-gic-gold/5 blur-[100px]" />
 
       <div className="relative z-10 px-8 pb-6 pt-8">
         <Link href="/" className="group block">
@@ -78,7 +107,8 @@ export default function Sidebar() {
           Dashboards
         </p>
         {navigation.map((item) => {
-          const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+          const isActive =
+            pathname === item.href || pathname.startsWith(`${item.href}/`);
 
           return (
             <Link
@@ -106,7 +136,9 @@ export default function Sidebar() {
               </div>
               <p
                 className={`ml-7 text-[9px] font-medium leading-relaxed transition-colors ${
-                  isActive ? "text-slate-400" : "text-slate-600 group-hover:text-slate-400"
+                  isActive
+                    ? "text-slate-400"
+                    : "text-slate-600 group-hover:text-slate-400"
                 }`}
               >
                 {item.description}
@@ -120,5 +152,6 @@ export default function Sidebar() {
         })}
       </nav>
     </aside>
+    </>
   );
 }

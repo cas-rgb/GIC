@@ -13,9 +13,10 @@ interface ProvincePressureTrendSqlRow {
 export async function getProvincePressureTrend(
   province: string,
   days = 30,
-  serviceDomain?: string | null
+  serviceDomain?: string | null,
 ): Promise<ProvincePressureTrendResponse> {
-  const normalizedServiceDomain = normalizeInfrastructureServiceFilter(serviceDomain);
+  const normalizedServiceDomain =
+    normalizeInfrastructureServiceFilter(serviceDomain);
   const result = await query<ProvincePressureTrendSqlRow>(
     `
       select
@@ -31,7 +32,7 @@ export async function getProvincePressureTrend(
       group by day
       order by day asc
     `,
-    [province, days, normalizedServiceDomain]
+    [province, days, normalizedServiceDomain],
   );
 
   return {

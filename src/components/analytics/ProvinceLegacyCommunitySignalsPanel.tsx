@@ -7,6 +7,8 @@ import { ProvinceLegacyCommunitySignalsResponse } from "@/lib/analytics/types";
 
 interface ProvinceLegacyCommunitySignalsPanelProps {
   province?: string;
+  municipality?: string | null;
+  serviceDomain?: string | null;
   days?: number;
   selectedIssue?: string | null;
   onSelectIssue?: (issue: string) => void;
@@ -46,22 +48,28 @@ export default function ProvinceLegacyCommunitySignalsPanel({
       try {
         const response = await fetch(
           `/api/analytics/province-legacy-community-signals?${params.toString()}`,
-          { cache: "no-store" }
+          { cache: "no-store" },
         );
 
         if (!response.ok) {
           throw new Error(
-            await parseError(response, `request failed with status ${response.status}`)
+            await parseError(
+              response,
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
-        const data = (await response.json()) as ProvinceLegacyCommunitySignalsResponse;
+        const data =
+          (await response.json()) as ProvinceLegacyCommunitySignalsResponse;
         setState({ status: "loaded", data });
       } catch (error) {
         setState({
           status: "error",
           message:
-            error instanceof Error ? error.message : "Failed to load legacy community signal pulse",
+            error instanceof Error
+              ? error.message
+              : "Failed to load legacy community signal pulse",
         });
       }
     }
@@ -85,7 +93,9 @@ export default function ProvinceLegacyCommunitySignalsPanel({
       <div className="flex min-h-[220px] items-center justify-center text-center">
         <div>
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">{state.message}</p>
+          <p className="mt-3 text-sm font-medium text-slate-500">
+            {state.message}
+          </p>
         </div>
       </div>
     );
@@ -136,12 +146,13 @@ export default function ProvinceLegacyCommunitySignalsPanel({
           Imported community issue pressure
         </div>
         <div className="space-y-3">
-          {data.issues.length === 0 ? (
+          {(data.issues || []).length === 0 ? (
             <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4 text-sm font-medium text-slate-500">
-              No imported legacy community issues are available for this scope yet.
+              No imported legacy community issues are available for this scope
+              yet.
             </div>
           ) : (
-            data.issues.map((issue) => (
+            (data.issues || []).map((issue) => (
               <button
                 key={issue.issue}
                 type="button"
@@ -153,7 +164,9 @@ export default function ProvinceLegacyCommunitySignalsPanel({
                 }`}
               >
                 <div>
-                  <p className="text-sm font-bold text-slate-900">{issue.issue}</p>
+                  <p className="text-sm font-bold text-slate-900">
+                    {issue.issue}
+                  </p>
                   <p className="mt-1 text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">
                     imported firebase signal cluster
                   </p>
@@ -162,19 +175,25 @@ export default function ProvinceLegacyCommunitySignalsPanel({
                   <p className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">
                     Docs
                   </p>
-                  <p className="mt-2 text-sm font-bold text-slate-900">{issue.documentCount}</p>
+                  <p className="mt-2 text-sm font-bold text-slate-900">
+                    {issue.documentCount}
+                  </p>
                 </div>
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">
                     Provinces
                   </p>
-                  <p className="mt-2 text-sm font-bold text-slate-900">{issue.provinceCount}</p>
+                  <p className="mt-2 text-sm font-bold text-slate-900">
+                    {issue.provinceCount}
+                  </p>
                 </div>
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">
                     Urgency
                   </p>
-                  <p className="mt-2 text-sm font-bold text-slate-900">{Math.round(issue.avgUrgency)}</p>
+                  <p className="mt-2 text-sm font-bold text-slate-900">
+                    {Math.round(issue.avgUrgency)}
+                  </p>
                 </div>
                 <div>
                   <p className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">

@@ -18,7 +18,7 @@ export interface TrendsBriefingResponse extends BriefingOutput {
 
 export async function getTrendsBriefing(
   province: string | null,
-  days = 30
+  days = 30,
 ): Promise<TrendsBriefingResponse> {
   const [summary, trends, sourceMix] = await Promise.all([
     getSocialTrendsExecutiveSummary(province, days),
@@ -53,7 +53,12 @@ export async function getTrendsBriefing(
       mentionCount: issue.mentionCount,
       shareOfVoice:
         trends.summary.mentionCount > 0
-          ? Number(((issue.mentionCount / trends.summary.mentionCount) * 100).toFixed(1))
+          ? Number(
+              (
+                (issue.mentionCount / trends.summary.mentionCount) *
+                100
+              ).toFixed(1),
+            )
           : 0,
       negativeShare: issue.negativeShare,
       velocity: previousByTopic.get(issue.issueFamily) ?? null,
@@ -64,7 +69,11 @@ export async function getTrendsBriefing(
       mentionCount: row.mentionCount,
       shareOfVoice:
         trends.summary.mentionCount > 0
-          ? Number(((row.mentionCount / trends.summary.mentionCount) * 100).toFixed(2))
+          ? Number(
+              ((row.mentionCount / trends.summary.mentionCount) * 100).toFixed(
+                2,
+              ),
+            )
           : 0,
     })),
     sourceMix: sourceMix.rows,
@@ -83,7 +92,12 @@ export async function getTrendsBriefing(
     province,
     days,
     trace: {
-      sources: ["fact_citizen_voice_daily", "citizen_voice_mentions", "documents", "sources"],
+      sources: [
+        "fact_citizen_voice_daily",
+        "citizen_voice_mentions",
+        "documents",
+        "sources",
+      ],
       query: `province=${province ?? "all"};days=${days}`,
     },
   };

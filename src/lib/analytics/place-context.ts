@@ -29,7 +29,12 @@ async function loadContextFile(): Promise<ContextFile> {
     return cache;
   }
 
-  const filePath = path.resolve(process.cwd(), "data", "enrichment", "contextual-reference-profiles.json");
+  const filePath = path.resolve(
+    process.cwd(),
+    "data",
+    "enrichment",
+    "contextual-reference-profiles.json",
+  );
   const raw = await readFile(filePath, "utf8");
   cache = JSON.parse(raw) as ContextFile;
   return cache;
@@ -47,13 +52,13 @@ export async function getPlaceContext(input: {
         row.geographyLevel === "municipality" &&
         municipality !== null &&
         row.province === province &&
-        row.municipality === municipality
+        row.municipality === municipality,
     ) ??
     file.profiles.find(
       (row) =>
         row.geographyLevel === "province" &&
         municipality === null &&
-        row.province === province
+        row.province === province,
     ) ??
     null;
 

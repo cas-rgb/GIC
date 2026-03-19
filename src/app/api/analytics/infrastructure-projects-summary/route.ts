@@ -4,9 +4,11 @@ import { getInfrastructureProjectsSummary } from "@/lib/analytics/infrastructure
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   const province = request.nextUrl.searchParams.get("province");
+  const municipality = request.nextUrl.searchParams.get("municipality");
+  const serviceDomain = request.nextUrl.searchParams.get("serviceDomain");
 
   try {
-    const response = await getInfrastructureProjectsSummary(province);
+    const response = await getInfrastructureProjectsSummary(province, municipality, serviceDomain);
     return NextResponse.json(response);
   } catch (error) {
     return NextResponse.json(
@@ -16,7 +18,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             ? error.message
             : "Failed to fetch infrastructure project summary",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

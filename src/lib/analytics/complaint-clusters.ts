@@ -28,7 +28,7 @@ function toNumber(value: string | number | null | undefined): number {
 
 export async function getComplaintClusters(
   province: string | null,
-  days = 30
+  days = 30,
 ): Promise<ComplaintClustersResponse> {
   const params = [province, days];
 
@@ -62,7 +62,7 @@ export async function getComplaintClusters(
           ) as "widestSpreadIssueFamily"
         from ranked
       `,
-      params
+      params,
     ),
     query<ClusterRow>(
       `
@@ -88,7 +88,7 @@ export async function getComplaintClusters(
         order by "intensityScore" desc, "mentionCount" desc, "issueFamily" asc
         limit 8
       `,
-      params
+      params,
     ),
   ]);
 

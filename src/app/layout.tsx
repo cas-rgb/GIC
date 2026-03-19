@@ -8,23 +8,21 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-display" });
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export default function RootLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-    return (
-        <html lang="en" className={`${outfit.variable} ${inter.variable}`}>
-            <head>
-                <title>GIC | Infrastructure Intelligence Platform</title>
-                <link rel="icon" href="/gic-logo.svg" />
-            </head>
-            <body className="bg-slate-50 font-sans selection:bg-gic-blue/20">
-                <AuthProvider>
-                    <RootWrapper>
-                        {children}
-                    </RootWrapper>
-                </AuthProvider>
-            </body>
-        </html>
-    );
+  return (
+    <html lang="en" className={`${outfit.variable} ${inter.variable}`}>
+      <head>
+        <title>GIC | Infrastructure Intelligence Platform</title>
+        <link rel="icon" href="/gic-logo.svg" />
+      </head>
+      <body className="bg-slate-50 font-sans selection:bg-gic-blue/20">
+        <AuthProvider>
+          <RootWrapper>{children}</RootWrapper>
+        </AuthProvider>
+      </body>
+    </html>
+  );
 }

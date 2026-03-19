@@ -3,7 +3,10 @@
 import { useEffect, useState } from "react";
 import { AlertTriangle, RefreshCw, Scale, ShieldCheck } from "lucide-react";
 
-import { EvidenceBalanceRow, ProvinceEvidenceBalanceResponse } from "@/lib/analytics/types";
+import {
+  EvidenceBalanceRow,
+  ProvinceEvidenceBalanceResponse,
+} from "@/lib/analytics/types";
 
 interface ProvinceEvidenceBalancePanelProps {
   province: string;
@@ -37,19 +40,19 @@ export default function ProvinceEvidenceBalancePanel({
       try {
         const response = await fetch(
           `/api/analytics/province-evidence-balance?province=${encodeURIComponent(
-            province
+            province,
           )}&days=${days}`,
           {
             cache: "no-store",
-          }
+          },
         );
 
         if (!response.ok) {
           throw new Error(
             await parseError(
               response,
-              `request failed with status ${response.status}`
-            )
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -139,7 +142,7 @@ export default function ProvinceEvidenceBalancePanel({
       </div>
 
       <div className="space-y-3">
-        {data.rows.map((row: EvidenceBalanceRow) => (
+        {(data.rows || []).map((row: EvidenceBalanceRow) => (
           <div
             key={row.evidenceClass}
             className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm"
@@ -152,7 +155,8 @@ export default function ProvinceEvidenceBalancePanel({
                     {row.evidenceClass}
                   </p>
                   <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-                    {row.documentCount} documents · {row.sourceCount} source rows
+                    {row.documentCount} documents · {row.sourceCount} source
+                    rows
                   </p>
                 </div>
               </div>
@@ -169,7 +173,9 @@ export default function ProvinceEvidenceBalancePanel({
             <div className="mt-3 h-3 overflow-hidden rounded-full bg-slate-100">
               <div
                 className="h-full rounded-full bg-slate-900"
-                style={{ width: `${Math.max(8, Math.round(row.documentShare))}%` }}
+                style={{
+                  width: `${Math.max(8, Math.round(row.documentShare))}%`,
+                }}
               />
             </div>
 
@@ -180,9 +186,9 @@ export default function ProvinceEvidenceBalancePanel({
         ))}
       </div>
 
-      {data.caveats.length > 0 ? (
+      {(data.caveats || []).length > 0 ? (
         <div className="rounded-2xl border border-dashed border-slate-200 p-4">
-          {data.caveats.map((caveat: string) => (
+          {(data.caveats || []).map((caveat: string) => (
             <p key={caveat} className="text-sm font-medium text-slate-500">
               {caveat}
             </p>

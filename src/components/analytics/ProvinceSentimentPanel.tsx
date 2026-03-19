@@ -3,10 +3,15 @@
 import { useEffect, useState } from "react";
 import { AlertTriangle, MessageSquareQuote, RefreshCw } from "lucide-react";
 
-import { ProvinceSentimentResponse, ProvinceSentimentTopicRow } from "@/lib/analytics/types";
+import {
+  ProvinceSentimentResponse,
+  ProvinceSentimentTopicRow,
+} from "@/lib/analytics/types";
 
 interface ProvinceSentimentPanelProps {
   province: string;
+  municipality?: string | null;
+  serviceDomain?: string | null;
   days?: number;
 }
 
@@ -37,19 +42,19 @@ export default function ProvinceSentimentPanel({
       try {
         const response = await fetch(
           `/api/analytics/province-sentiment?province=${encodeURIComponent(
-            province
+            province,
           )}&days=${days}`,
           {
             cache: "no-store",
-          }
+          },
         );
 
         if (!response.ok) {
           throw new Error(
             await parseError(
               response,
-              `request failed with status ${response.status}`
-            )
+              `request failed with status ${response.status}`,
+            ),
           );
         }
 
@@ -94,7 +99,10 @@ export default function ProvinceSentimentPanel({
   }
 
   const { data } = state;
-  const trendMax = Math.max(...data.trend.map((point) => point.mentionCount), 1);
+  const trendMax = Math.max(
+    ...(data.trend || []).map((point) => point.mentionCount),
+    1,
+  );
 
   return (
     <div className="space-y-6">
@@ -146,20 +154,23 @@ export default function ProvinceSentimentPanel({
 
           <div className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
             <div className="flex h-44 items-end gap-2">
-              {data.trend.length === 0 ? (
+              {(data.trend || []).length === 0 ? (
                 <div className="flex h-full w-full items-center justify-center text-sm font-medium text-slate-500">
                   No sentiment rows available yet.
                 </div>
               ) : (
-                data.trend.map((point) => (
-                  <div key={point.date} className="flex flex-1 flex-col items-center gap-2">
+                (data.trend || []).map((point) => (
+                  <div
+                    key={point.date}
+                    className="flex flex-1 flex-col items-center gap-2"
+                  >
                     <div className="flex h-full w-full items-end">
                       <div
                         className="w-full rounded-t-xl bg-slate-900"
                         style={{
                           height: `${Math.max(
                             10,
-                            Math.round((point.mentionCount / trendMax) * 100)
+                            Math.round((point.mentionCount / trendMax) * 100),
                           )}%`,
                         }}
                       />
@@ -194,9 +205,12 @@ export default function ProvinceSentimentPanel({
                   <div className="flex items-center gap-2">
                     <MessageSquareQuote className="h-4 w-4 text-blue-600" />
                     <div>
-                      <p className="text-sm font-bold text-slate-900">{row.topic}</p>
+                      <p className="text-sm font-bold text-slate-900">
+                        {row.topic}
+                      </p>
                       <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-                        {row.mentionCount} mentions · {Math.round(row.shareOfVoice * 100)}% share
+                        {row.mentionCount} mentions ·{" "}
+                        {Math.round(row.shareOfVoice * 100)}% share
                       </p>
                     </div>
                   </div>
@@ -242,9 +256,9 @@ export default function ProvinceSentimentPanel({
         </div>
       </div>
 
-      {data.caveats.length > 0 ? (
+      {(data.caveats || []).length > 0 ? (
         <div className="rounded-2xl border border-dashed border-slate-200 p-4">
-          {data.caveats.map((caveat: string) => (
+          {(data.caveats || []).map((caveat: string) => (
             <p key={caveat} className="text-sm font-medium text-slate-500">
               {caveat}
             </p>

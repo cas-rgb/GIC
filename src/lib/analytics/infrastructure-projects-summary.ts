@@ -58,7 +58,7 @@ function mapSectorRow(row: ProjectSectorRowDb): InfrastructureProjectSectorRow {
 }
 
 function mapGeographyRow(
-  row: ProjectGeographyRowDb
+  row: ProjectGeographyRowDb,
 ): InfrastructureProjectGeographyRow {
   return {
     ...row,
@@ -68,13 +68,15 @@ function mapGeographyRow(
 }
 
 export async function getInfrastructureProjectsSummary(
-  province?: string | null
+  province?: string | null,
+  municipality?: string | null,
+  serviceDomain?: string | null
 ): Promise<InfrastructureProjectsSummaryResponse> {
   const snapshotResult = await query<SnapshotDateRow>(
     `
       select max(day)::text as "snapshotDate"
       from fact_infrastructure_projects_daily
-    `
+    `,
   );
 
   const snapshotDate = snapshotResult.rows[0]?.snapshotDate ?? null;
@@ -95,11 +97,12 @@ export async function getInfrastructureProjectsSummary(
       },
       sectorBreakdown: [],
       geographyRows: [],
-      caveats: [
-        "No infrastructure project fact rows are available yet.",
-      ],
+      caveats: ["No infrastructure project fact rows are available yet."],
       trace: {
-        tables: ["fact_infrastructure_projects_daily", "infrastructure_projects"],
+        tables: [
+          "fact_infrastructure_projects_daily",
+          "infrastructure_projects",
+        ],
         query: province ? `province=${province}` : "province=all",
       },
     };
@@ -117,8 +120,10 @@ export async function getInfrastructureProjectsSummary(
             and status = 'active'
             and province is not null
             and ($1::text is null or province = $1)
+            and ($2::text is null or municipality = $2)
+            and ($3::text is null or normalized_sector = $3)
         `,
-        [province ?? null]
+        [province ?? null, municipality ?? null, serviceDomain ?? null],
       ),
       query<ProjectSummaryRow>(
         `
@@ -131,8 +136,10 @@ export async function getInfrastructureProjectsSummary(
           from fact_infrastructure_projects_daily
           where day = $1::date
             and ($2::text is null or province = $2)
+            and ($3::text is null or municipality = $3)
+            and ($4::text is null or normalized_sector = $4)
         `,
-        [snapshotDate, province ?? null]
+        [snapshotDate, province ?? null, municipality ?? null, serviceDomain ?? null],
       ),
       query<ProjectSectorRowDb>(
         `
@@ -146,10 +153,12 @@ export async function getInfrastructureProjectsSummary(
           from fact_infrastructure_projects_daily
           where day = $1::date
             and ($2::text is null or province = $2)
+            and ($3::text is null or municipality = $3)
+            and ($4::text is null or normalized_sector = $4)
           group by normalized_sector
           order by sum(project_count) desc, normalized_sector asc
         `,
-        [snapshotDate, province ?? null]
+        [snapshotDate, province ?? null, municipality ?? null, serviceDomain ?? null],
       ),
       query<ProjectGeographyRowDb>(
         `
@@ -168,6 +177,8 @@ export async function getInfrastructureProjectsSummary(
             from fact_infrastructure_projects_daily
             where day = $1::date
               and ($2::text is null or province = $2)
+              and ($3::text is null or municipality = $3)
+              and ($4::text is null or normalized_sector = $4)
             group by 1, normalized_sector
           ),
           ranked as (
@@ -192,7 +203,7 @@ export async function getInfrastructureProjectsSummary(
           order by sum(project_count) desc, geography asc
           limit 12
         `,
-        [snapshotDate, province ?? null]
+        [snapshotDate, province ?? null, municipality ?? null, serviceDomain ?? null],
       ),
     ]);
 

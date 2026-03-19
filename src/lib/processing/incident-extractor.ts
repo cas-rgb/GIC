@@ -50,25 +50,37 @@ function inferServiceDomain(signalType: string, summaryText: string): string {
 export class RuleBasedIncidentExtractor implements IncidentExtractor {
   async extract(
     _document: DocumentRecord,
-    signals: NormalizedSignal[]
+    signals: NormalizedSignal[],
   ): Promise<NormalizedIncident[]> {
     return signals
-      .filter((signal) => signal.sentiment === "negative" && signal.severityScore >= 45)
+      .filter(
+        (signal) =>
+          signal.sentiment === "negative" && signal.severityScore >= 45,
+      )
       .map((signal) => {
         const lowerSummary = signal.summaryText.toLowerCase();
 
         return {
-          serviceDomain: inferServiceDomain(signal.signalType, signal.summaryText),
+          serviceDomain: inferServiceDomain(
+            signal.signalType,
+            signal.summaryText,
+          ),
           incidentType: signal.signalType,
           failureIndicator: signal.severityScore >= 55,
           citizenPressureIndicator:
             /protest|anger|frustration|residents|complaint|shutdown/.test(
-              lowerSummary
+              lowerSummary,
             ),
-          protestIndicator: /protest|march|blockade|shutdown/.test(lowerSummary),
+          protestIndicator: /protest|march|blockade|shutdown/.test(
+            lowerSummary,
+          ),
           responseIndicator:
-            /restored|repair|response|intervention|dispatched/.test(lowerSummary),
-          recurrenceIndicator: /again|recurring|ongoing|repeated/.test(lowerSummary),
+            /restored|repair|response|intervention|dispatched/.test(
+              lowerSummary,
+            ),
+          recurrenceIndicator: /again|recurring|ongoing|repeated/.test(
+            lowerSummary,
+          ),
           severity: scoreToSeverity(signal.severityScore),
           classificationConfidence: signal.confidenceScore,
           openedAt: signal.eventDate,
@@ -77,7 +89,7 @@ export class RuleBasedIncidentExtractor implements IncidentExtractor {
       })
       .filter(
         (incident) =>
-          incident.failureIndicator || incident.citizenPressureIndicator
+          incident.failureIndicator || incident.citizenPressureIndicator,
       );
   }
 }

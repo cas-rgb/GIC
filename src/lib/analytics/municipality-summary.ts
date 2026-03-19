@@ -38,9 +38,10 @@ export async function getMunicipalitySummary(
   province: string,
   municipality: string,
   days = 30,
-  serviceDomain?: string | null
+  serviceDomain?: string | null,
 ): Promise<MunicipalitySummaryResponse> {
-  const normalizedServiceDomain = normalizeInfrastructureServiceFilter(serviceDomain);
+  const normalizedServiceDomain =
+    normalizeInfrastructureServiceFilter(serviceDomain);
   const [pressureResult, sentimentResult, evidenceResult, domainResult] =
     await Promise.all([
       query<SummaryRow>(
@@ -132,7 +133,7 @@ export async function getMunicipalitySummary(
           from pressure_scores ps
           cross join evidence_summary es
         `,
-        [province, municipality, days, normalizedServiceDomain]
+        [province, municipality, days, normalizedServiceDomain],
       ),
       query<SentimentRow>(
         `
@@ -154,7 +155,7 @@ export async function getMunicipalitySummary(
             ) as "topComplaintTopic"
           from sentiment_window
         `,
-        [province, municipality, days]
+        [province, municipality, days],
       ),
       query<EvidenceRow>(
         `
@@ -168,7 +169,7 @@ export async function getMunicipalitySummary(
             and l.municipality = $2
             and coalesce(date(d.published_at), date(d.created_at)) >= current_date - ($3::int - 1)
         `,
-        [province, municipality, days]
+        [province, municipality, days],
       ),
       query<DomainRow>(
         `
@@ -183,7 +184,7 @@ export async function getMunicipalitySummary(
         order by sum(pressure_case_count) desc
         limit 1
       `,
-        [province, municipality, days, normalizedServiceDomain]
+        [province, municipality, days, normalizedServiceDomain],
       ),
     ]);
 

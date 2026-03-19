@@ -4,7 +4,10 @@ import {
   MunicipalityEvidenceResponse,
 } from "@/lib/analytics/types";
 import { query } from "@/lib/db";
-import { expandEvidenceTopics, normalizeIssueFamily } from "@/lib/analytics/issue-taxonomy";
+import {
+  expandEvidenceTopics,
+  normalizeIssueFamily,
+} from "@/lib/analytics/issue-taxonomy";
 
 interface DocumentRow {
   documentId: string;
@@ -35,7 +38,7 @@ export async function getMunicipalityEvidence(
   province: string,
   municipality: string,
   topic?: string | null,
-  ward?: string | null
+  ward?: string | null,
 ): Promise<MunicipalityEvidenceResponse> {
   const normalizedTopic = topic?.trim() ? topic.trim() : null;
   const normalizedWard = ward?.trim() ? ward.trim() : null;
@@ -78,7 +81,7 @@ export async function getMunicipalityEvidence(
         order by coalesce(d.published_at, d.created_at) desc, count(sm.id) desc
         limit 6
       `,
-      [province, municipality, normalizedTopic, evidenceTopics, normalizedWard]
+      [province, municipality, normalizedTopic, evidenceTopics, normalizedWard],
     ),
     query<MentionRow>(
       `
@@ -105,7 +108,7 @@ export async function getMunicipalityEvidence(
         order by coalesce(d.published_at, d.created_at) desc, sm.confidence desc
         limit 8
       `,
-      [province, municipality, normalizedTopic, evidenceTopics, normalizedWard]
+      [province, municipality, normalizedTopic, evidenceTopics, normalizedWard],
     ),
     query<{ documentCount: number; mentionCount: number; sourceCount: number }>(
       `
@@ -140,7 +143,7 @@ export async function getMunicipalityEvidence(
             )
           )
       `,
-      [province, municipality, normalizedTopic, evidenceTopics, normalizedWard]
+      [province, municipality, normalizedTopic, evidenceTopics, normalizedWard],
     ),
   ]);
 
@@ -164,7 +167,7 @@ export async function getMunicipalityEvidence(
         publishedAt: row.publishedAt,
         mentionCount: row.mentionCount,
         excerpt: row.excerpt,
-      })
+      }),
     ),
     mentions: mentionResult.rows.map(
       (row): MunicipalityEvidenceMentionRow => ({
@@ -175,7 +178,7 @@ export async function getMunicipalityEvidence(
         evidenceText: row.evidenceText,
         title: row.title,
         sourceName: row.sourceName,
-      })
+      }),
     ),
     caveats: [
       "Municipality evidence drilldown is limited to governed documents that already map to the selected municipality.",

@@ -19,7 +19,8 @@ export const VERIFIED_LEADER_REFERENCE_SEEDS: LeaderReferenceRecord[] = [
       "Premier Winde",
       "Western Cape Premier",
     ],
-    sourceUrl: "https://www.westerncape.gov.za/department-premier/profile/mr-alan-winde",
+    sourceUrl:
+      "https://www.westerncape.gov.za/department-premier/profile/mr-alan-winde",
     sourceName: "Western Cape Government",
     sourceType: "gov",
     sourceDate: null,
@@ -114,7 +115,8 @@ export const VERIFIED_LEADER_REFERENCE_SEEDS: LeaderReferenceRecord[] = [
       "Cape Town Mayor",
       "Executive Mayor of Cape Town",
     ],
-    sourceUrl: "https://resource.capetown.gov.za/documentcentre/Documents/Forms%2C%20notices%2C%20tariffs%20and%20lists/MEMBERSHIP%20LIST%20-%20MAYORAL%20COMMITTEE.pdf",
+    sourceUrl:
+      "https://resource.capetown.gov.za/documentcentre/Documents/Forms%2C%20notices%2C%20tariffs%20and%20lists/MEMBERSHIP%20LIST%20-%20MAYORAL%20COMMITTEE.pdf",
     sourceName: "City of Cape Town",
     sourceType: "gov",
     sourceDate: "2025-01-24",

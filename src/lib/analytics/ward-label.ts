@@ -1,4 +1,7 @@
-export function formatWardDisplayLabel(ward: string, wardNumber?: number | null): string {
+export function formatWardDisplayLabel(
+  ward: string,
+  wardNumber?: number | null,
+): string {
   const normalizedWard = ward.trim();
   const detectedNumber = wardNumber ?? parseWardNumber(normalizedWard);
 

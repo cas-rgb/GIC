@@ -15,9 +15,10 @@ interface OfficialRow {
 export async function getProvinceAlignmentMatrix(
   province: string,
   days = 30,
-  serviceDomain?: string | null
+  serviceDomain?: string | null,
 ): Promise<ProvinceAlignmentMatrixResponse> {
-  const normalizedServiceDomain = normalizeInfrastructureServiceFilter(serviceDomain);
+  const normalizedServiceDomain =
+    normalizeInfrastructureServiceFilter(serviceDomain);
   const [concernResult, officialResult] = await Promise.all([
     query<ConcernRow>(
       `
@@ -30,7 +31,7 @@ export async function getProvinceAlignmentMatrix(
           and ($3::text is null or service_domain = $3)
         group by service_domain
       `,
-      [province, days, normalizedServiceDomain]
+      [province, days, normalizedServiceDomain],
     ),
     query<OfficialRow>(
       `
@@ -48,37 +49,44 @@ export async function getProvinceAlignmentMatrix(
           and ($3::text is null or si.service_domain = $3)
         group by si.service_domain
       `,
-      [province, days, normalizedServiceDomain]
+      [province, days, normalizedServiceDomain],
     ),
   ]);
 
   const concernMap = new Map(
-    concernResult.rows.map((row) => [row.serviceDomain, row.concernVolume])
+    concernResult.rows.map((row) => [row.serviceDomain, row.concernVolume]),
   );
   const officialMap = new Map(
-    officialResult.rows.map((row) => [row.serviceDomain, row.officialAttentionCount])
+    officialResult.rows.map((row) => [
+      row.serviceDomain,
+      row.officialAttentionCount,
+    ]),
   );
   const domains = Array.from(
-    new Set([...concernMap.keys(), ...officialMap.keys()].filter(Boolean))
+    new Set([...concernMap.keys(), ...officialMap.keys()].filter(Boolean)),
   );
   const totalConcern = Math.max(
     Array.from(concernMap.values()).reduce((sum, value) => sum + value, 0),
-    1
+    1,
   );
   const totalOfficial = Math.max(
     Array.from(officialMap.values()).reduce((sum, value) => sum + value, 0),
-    1
+    1,
   );
 
   const rows = domains
     .map((serviceDomain) => {
       const concernVolume = concernMap.get(serviceDomain) ?? 0;
       const officialAttentionCount = officialMap.get(serviceDomain) ?? 0;
-      const concernShare = Number(((concernVolume / totalConcern) * 100).toFixed(1));
-      const officialAttentionShare = Number(
-        ((officialAttentionCount / totalOfficial) * 100).toFixed(1)
+      const concernShare = Number(
+        ((concernVolume / totalConcern) * 100).toFixed(1),
       );
-      const alignmentGap = Number((officialAttentionShare - concernShare).toFixed(1));
+      const officialAttentionShare = Number(
+        ((officialAttentionCount / totalOfficial) * 100).toFixed(1),
+      );
+      const alignmentGap = Number(
+        (officialAttentionShare - concernShare).toFixed(1),
+      );
 
       return {
         serviceDomain,
@@ -93,16 +101,23 @@ export async function getProvinceAlignmentMatrix(
 
   const strongestAligned = [...rows]
     .filter((row) => row.concernVolume > 0 || row.officialAttentionCount > 0)
-    .sort((left, right) => Math.abs(left.alignmentGap) - Math.abs(right.alignmentGap))[0];
+    .sort(
+      (left, right) =>
+        Math.abs(left.alignmentGap) - Math.abs(right.alignmentGap),
+    )[0];
   const weakestAligned = [...rows]
     .filter((row) => row.concernVolume > 0 || row.officialAttentionCount > 0)
-    .sort((left, right) => Math.abs(right.alignmentGap) - Math.abs(left.alignmentGap))[0];
+    .sort(
+      (left, right) =>
+        Math.abs(right.alignmentGap) - Math.abs(left.alignmentGap),
+    )[0];
   const avgAlignmentGap =
     rows.length > 0
       ? Number(
           (
-            rows.reduce((sum, row) => sum + Math.abs(row.alignmentGap), 0) / rows.length
-          ).toFixed(1)
+            rows.reduce((sum, row) => sum + Math.abs(row.alignmentGap), 0) /
+            rows.length
+          ).toFixed(1),
         )
       : 0;
 
@@ -117,7 +132,8 @@ export async function getProvinceAlignmentMatrix(
       avgAlignmentGap,
     },
     trace: {
-      table: "fact_service_pressure_daily,service_incidents,signals,documents,sources,locations",
+      table:
+        "fact_service_pressure_daily,service_incidents,signals,documents,sources,locations",
       query: `province=${province};days=${days};serviceDomain=${normalizedServiceDomain ?? "all"}`,
     },
   };

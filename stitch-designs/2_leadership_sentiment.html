@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1861aa",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111921",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>Leadership Sentiment Dashboard | GIC</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-slate-200 dark:border-slate-800 px-6 lg:px-10 py-3 bg-white dark:bg-slate-900 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined text-3xl">analytics</span>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">GIC Analytics</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Leaders</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Reports</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-1.5 border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-slate-500 text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 placeholder:text-slate-500" placeholder="Search insights..." type="text"/>
+</div>
+<div class="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary border border-primary/30">
+<span class="material-symbols-outlined text-xl">person</span>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-7xl mx-auto w-full px-6 lg:px-10 py-8">
+<!-- Hero Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 border-b border-slate-200 dark:border-slate-800 pb-8">
+<div class="space-y-2">
+<div class="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm">monitoring</span>
+                    Intelligence Suite
+                </div>
+<h1 class="text-slate-900 dark:text-white text-5xl font-black leading-tight tracking-tighter">Leadership Sentiment</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xl max-w-2xl">Public perception and issue association across key executive figures.</p>
+</div>
+<div class="flex flex-col items-end gap-2">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-xs font-bold border border-amber-200 dark:border-amber-800">
+<span class="material-symbols-outlined text-sm">info</span>
+                    Social listening coverage: Partial
+                </div>
+<p class="text-xs text-slate-400">Last updated: Oct 24, 2023</p>
+</div>
+</div>
+<!-- Leader Comparison Layer -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<!-- CEO Profile -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between mb-6">
+<div class="flex items-center gap-4">
+<div class="h-16 w-16 rounded-full overflow-hidden border-2 border-primary/20">
+<img class="h-full w-full object-cover" data-alt="Portrait of CEO Robert Chen looking professional" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYbkL-hhU0nOjQ_U0ZW2y25_mQdlRBoxGek2jOhrSOK-0NKzM59RFwiY5YHCLNhvBsQQhHRmsbhkNCba0A7GRlf_9T-GNY772ULHbYfCZKuCpagMVv6D_PvxyG4tlHTY28cGXFio7xd-mXEpZ41xvl7Nn96hViaEZ4HbVUa7WODIL4XJfDtSVp4LzdoSvOFbIElnep-BKnhH6l2vZ9wh5qn3qxQvkKmdFXhZ2Ptl2_1YAfxvdpZN6PJ4ahp3H_L2lq88XjY9yQug"/>
+</div>
+<div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-white leading-tight">Robert Chen</h3>
+<p class="text-slate-500 text-sm">Chief Executive Officer</p>
+</div>
+</div>
+<div class="text-right">
+<div class="text-2xl font-black text-emerald-600 dark:text-emerald-400">8.2</div>
+<div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Trust Score</div>
+</div>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs font-bold mb-1 uppercase tracking-wider">
+<span class="text-slate-400">Sentiment Distribution</span>
+<span class="text-emerald-600">68% Positive</span>
+</div>
+<div class="flex h-2 w-full rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+<div class="bg-emerald-500 h-full" style="width: 68%"></div>
+<div class="bg-slate-300 dark:bg-slate-600 h-full" style="width: 22%"></div>
+<div class="bg-rose-500 h-full" style="width: 10%"></div>
+</div>
+</div>
+<div class="pt-4 border-t border-slate-100 dark:border-slate-800">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Key Issue Association</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-primary/10 text-primary text-[11px] font-bold rounded">Economic Growth</span>
+<span class="px-2 py-1 bg-primary/10 text-primary text-[11px] font-bold rounded">Innovation</span>
+<span class="px-2 py-1 bg-primary/10 text-primary text-[11px] font-bold rounded">Global Policy</span>
+</div>
+</div>
+</div>
+</div>
+<!-- COO Profile -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between mb-6">
+<div class="flex items-center gap-4">
+<div class="h-16 w-16 rounded-full overflow-hidden border-2 border-primary/20">
+<img class="h-full w-full object-cover" data-alt="Portrait of COO Sarah Jenkins smiling confidently" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyZnb_6bCuzEN3KxtcHmfxBuSfiWF3hElvbLpIs3neWI_lHVxKH06594DWTk6X9mO2fV8rY1ZWfIlL6J_uE34A2TrLRSEV5BSJlVWzda6oD8tPd-g6YBCo2eftJu3_AbT6I9ohGiP-xa0h_0UQZmsfrH0drZ_6c4Zt8SVWzrym1xufQ63SZeTertjbls89AyDJ-u9N-rI4YB1xXIVXovtFLZy7JdPXRPE20VMCvL0Jabwehe8-UWXX7ddGDHVSeQnZNLIHWPnMMQ"/>
+</div>
+<div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-white leading-tight">Sarah Jenkins</h3>
+<p class="text-slate-500 text-sm">Chief Operating Officer</p>
+</div>
+</div>
+<div class="text-right">
+<div class="text-2xl font-black text-slate-600 dark:text-slate-400">6.1</div>
+<div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Trust Score</div>
+</div>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs font-bold mb-1 uppercase tracking-wider">
+<span class="text-slate-400">Sentiment Distribution</span>
+<span class="text-slate-600">45% Neutral</span>
+</div>
+<div class="flex h-2 w-full rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+<div class="bg-emerald-500 h-full" style="width: 30%"></div>
+<div class="bg-slate-300 dark:bg-slate-600 h-full" style="width: 45%"></div>
+<div class="bg-rose-500 h-full" style="width: 25%"></div>
+</div>
+</div>
+<div class="pt-4 border-t border-slate-100 dark:border-slate-800">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Key Issue Association</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-primary/10 text-primary text-[11px] font-bold rounded">Operations</span>
+<span class="px-2 py-1 bg-rose-100 text-rose-600 dark:bg-rose-900/20 text-[11px] font-bold rounded">Water Crisis</span>
+<span class="px-2 py-1 bg-primary/10 text-primary text-[11px] font-bold rounded">Sustainability</span>
+</div>
+</div>
+</div>
+</div>
+<!-- CTO Profile -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between mb-6">
+<div class="flex items-center gap-4">
+<div class="h-16 w-16 rounded-full overflow-hidden border-2 border-primary/20">
+<img class="h-full w-full object-cover" data-alt="Portrait of CTO David Miller in casual tech attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVkGx1fGEpa5p0_9V0na82Cc9a3oe3TKSATFeFs610N7O69EfWGUwlzxLbOpXfgzrcFilOZid0q_kXheXo4tbowJeu96heLZJHVYGZrvSboa_PiFMaEq1RIoZPwzeVA12m31hetDpc7c2imw52B___tcvZa6KwwGpjq4iAgim1TieyCFusxTQUuVy5GvAh03rC4arLdxoSyMEEpP0W0FUtSN1m8sj6qAvi7liAgfzW4mZZAA6ZdRFK1F-kOQtPSXAiJAJVMcrHew"/>
+</div>
+<div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-white leading-tight">David Miller</h3>
+<p class="text-slate-500 text-sm">Chief Tech Officer</p>
+</div>
+</div>
+<div class="text-right">
+<div class="text-2xl font-black text-amber-600 dark:text-amber-400">7.4</div>
+<div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Trust Score</div>
+</div>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs font-bold mb-1 uppercase tracking-wider">
+<span class="text-slate-400">Sentiment Distribution</span>
+<span class="text-rose-600">32% Negative</span>
+</div>
+<div class="flex h-2 w-full rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+<div class="bg-emerald-500 h-full" style="width: 50%"></div>
+<div class="bg-slate-300 dark:bg-slate-600 h-full" style="width: 18%"></div>
+<div class="bg-rose-500 h-full" style="width: 32%"></div>
+</div>
+</div>
+<div class="pt-4 border-t border-slate-100 dark:border-slate-800">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Key Issue Association</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-primary/10 text-primary text-[11px] font-bold rounded">AI Ethics</span>
+<span class="px-2 py-1 bg-primary/10 text-primary text-[11px] font-bold rounded">R&amp;D Spend</span>
+<span class="px-2 py-1 bg-primary/10 text-primary text-[11px] font-bold rounded">Infrastructure</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trends and Issue Association -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+<!-- Sentiment Trends Chart -->
+<div class="bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between mb-8">
+<h4 class="text-xl font-bold">Historical Sentiment Trends</h4>
+<select class="bg-slate-50 dark:bg-slate-800 border-none text-xs font-bold rounded py-1 px-3 focus:ring-primary">
+<option>Last 90 Days</option>
+<option>Last 30 Days</option>
+</select>
+</div>
+<!-- Abstract Multi-line chart representation using SVG -->
+<div class="w-full h-64 relative">
+<svg class="w-full h-full" viewbox="0 0 100 40">
+<!-- Grid lines -->
+<line class="text-slate-100 dark:text-slate-800" stroke="currentColor" stroke-width="0.1" x1="0" x2="100" y1="10" y2="10"></line>
+<line class="text-slate-100 dark:text-slate-800" stroke="currentColor" stroke-width="0.1" x1="0" x2="100" y1="20" y2="20"></line>
+<line class="text-slate-100 dark:text-slate-800" stroke="currentColor" stroke-width="0.1" x1="0" x2="100" y1="30" y2="30"></line>
+<!-- CEO Line -->
+<path class="stroke-emerald-500" d="M0 25 Q 10 22, 20 28 T 40 20 T 60 15 T 80 18 T 100 12" fill="none" stroke-width="0.8"></path>
+<!-- COO Line -->
+<path class="stroke-slate-400" d="M0 32 Q 10 30, 20 33 T 40 28 T 60 30 T 80 25 T 100 28" fill="none" stroke-width="0.8"></path>
+<!-- CTO Line -->
+<path class="stroke-primary" d="M0 20 Q 10 25, 20 18 T 40 25 T 60 22 T 80 30 T 100 24" fill="none" stroke-width="0.8"></path>
+</svg>
+<div class="flex justify-between mt-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+<span>Aug</span>
+<span>Sep</span>
+<span>Oct</span>
+</div>
+</div>
+<div class="flex items-center gap-6 mt-6">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+<span class="text-xs font-medium">Chen</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-slate-400"></span>
+<span class="text-xs font-medium">Jenkins</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-xs font-medium">Miller</span>
+</div>
+</div>
+</div>
+<!-- Issue Association Cloud -->
+<div class="bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col">
+<h4 class="text-xl font-bold mb-4">Topic Network Association</h4>
+<p class="text-sm text-slate-500 mb-8">Word frequency mapped to leadership mention proximity.</p>
+<div class="flex-1 flex flex-wrap items-center justify-center gap-4 relative">
+<span class="text-4xl font-black text-primary opacity-90">ECONOMIC GROWTH</span>
+<span class="text-2xl font-bold text-slate-400">Infrastructure</span>
+<span class="text-3xl font-extrabold text-rose-500">Water Crisis</span>
+<span class="text-xl font-medium text-primary/60">Talent Retention</span>
+<span class="text-2xl font-bold text-slate-800 dark:text-slate-200">AI ETHICS</span>
+<span class="text-4xl font-black text-emerald-500 opacity-80">SUSTAINABILITY</span>
+<span class="text-xl font-bold text-slate-500">Regulatory Risk</span>
+<span class="text-2xl font-black text-primary">Global Supply</span>
+<span class="text-lg font-medium text-slate-400">R&amp;D Spend</span>
+</div>
+<div class="mt-8 p-3 bg-background-light dark:bg-background-dark rounded-lg flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+<p class="text-xs italic text-slate-600 dark:text-slate-400">High correlation detected between <span class="font-bold text-primary">Chen</span> and <span class="font-bold">Sustainability</span> initiatives this quarter.</p>
+</div>
+</div>
+</div>
+<!-- Evidence Table -->
+<section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+<div class="px-8 py-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<h4 class="text-xl font-bold">Recent Mentions &amp; Confidence Scores</h4>
+<button class="text-primary text-sm font-bold flex items-center gap-1">
+                    Export Raw Data
+                    <span class="material-symbols-outlined text-sm">download</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50">
+<th class="px-8 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Source</th>
+<th class="px-8 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Key Mention</th>
+<th class="px-8 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Leader Linked</th>
+<th class="px-8 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Sentiment</th>
+<th class="px-8 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-right">Confidence</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-500 text-lg">public</span>
+<span class="text-xs font-bold">Financial Times</span>
+</div>
+</td>
+<td class="px-8 py-5">
+<p class="text-sm font-medium line-clamp-1">"Chen's strategy on global expansion reflects renewed confidence..."</p>
+</td>
+<td class="px-8 py-5">
+<span class="text-xs font-bold text-slate-600 dark:text-slate-300">Robert Chen</span>
+</td>
+<td class="px-8 py-5">
+<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 text-[10px] font-black uppercase">Positive</span>
+</td>
+<td class="px-8 py-5 text-right font-mono text-sm font-bold text-primary">0.98</td>
+</tr>
+<tr>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sky-400 text-lg">alternate_email</span>
+<span class="text-xs font-bold">Twitter/X</span>
+</div>
+</td>
+<td class="px-8 py-5">
+<p class="text-sm font-medium line-clamp-1">"Why isn't Sarah Jenkins addressing the local water crisis directly?"</p>
+</td>
+<td class="px-8 py-5">
+<span class="text-xs font-bold text-slate-600 dark:text-slate-300">Sarah Jenkins</span>
+</td>
+<td class="px-8 py-5">
+<span class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400 text-[10px] font-black uppercase">Negative</span>
+</td>
+<td class="px-8 py-5 text-right font-mono text-sm font-bold text-primary">0.84</td>
+</tr>
+<tr>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 text-lg">description</span>
+<span class="text-xs font-bold">Industry Review</span>
+</div>
+</td>
+<td class="px-8 py-5">
+<p class="text-sm font-medium line-clamp-1">"David Miller highlights the need for responsible AI frameworks."</p>
+</td>
+<td class="px-8 py-5">
+<span class="text-xs font-bold text-slate-600 dark:text-slate-300">David Miller</span>
+</td>
+<td class="px-8 py-5">
+<span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-400 text-[10px] font-black uppercase">Neutral</span>
+</td>
+<td class="px-8 py-5 text-right font-mono text-sm font-bold text-primary">0.92</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-8 py-4 bg-slate-50 dark:bg-slate-800/30 flex justify-center">
+<button class="text-xs font-bold text-slate-500 hover:text-primary transition-colors">View All 1,422 Mentions</button>
+</div>
+</section>
+</main>
+<footer class="mt-12 border-t border-slate-200 dark:border-slate-800 py-10 px-6 lg:px-10 bg-white dark:bg-slate-900">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-sm font-medium">© 2023 GIC Intelligence. Editorial Tier.</span>
+</div>
+<div class="flex items-center gap-8">
+<a class="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-primary" href="#">System Status</a>
+<a class="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-primary" href="#">API Docs</a>
+<a class="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-primary" href="#">Support</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

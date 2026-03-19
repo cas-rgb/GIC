@@ -1,40 +1,40 @@
 // src/types/dashboard2.ts
-import { ConfidenceLevel } from './reporting';
-import { DataTrace } from '@/lib/reporting-schema';
+import { ConfidenceLevel } from "./reporting";
+import { DataTrace } from "@/lib/reporting-schema";
 
 export type ServiceDomain =
-  | 'Water Infrastructure'
-  | 'Electricity Supply'
-  | 'Waste Management'
-  | 'Sanitation'
-  | 'Roads and Transport'
-  | 'Public Transport'
-  | 'Healthcare'
-  | 'Housing and Settlements'
-  | 'Local Governance'
-  | 'Community Safety'
-  | 'Provincial Infrastructure'
-  | 'Other';
+  | "Water Infrastructure"
+  | "Electricity Supply"
+  | "Waste Management"
+  | "Sanitation"
+  | "Roads and Transport"
+  | "Public Transport"
+  | "Healthcare"
+  | "Housing and Settlements"
+  | "Local Governance"
+  | "Community Safety"
+  | "Provincial Infrastructure"
+  | "Other";
 
 export type PressureType =
-  | 'Outage'
-  | 'Delay'
-  | 'Breakdown'
-  | 'Backlog'
-  | 'Complaint'
-  | 'Protest'
-  | 'Governance Failure'
-  | 'Repair / Response'
-  | 'Infrastructure Deterioration'
-  | 'Access Failure'
-  | 'Other';
+  | "Outage"
+  | "Delay"
+  | "Breakdown"
+  | "Backlog"
+  | "Complaint"
+  | "Protest"
+  | "Governance Failure"
+  | "Repair / Response"
+  | "Infrastructure Deterioration"
+  | "Access Failure"
+  | "Other";
 
 export type StressStatus =
-  | 'Chronic Pressure'
-  | 'Escalating Risk'
-  | 'Acute Flashpoint'
-  | 'Monitored'
-  | 'Insufficient Data';
+  | "Chronic Pressure"
+  | "Escalating Risk"
+  | "Acute Flashpoint"
+  | "Monitored"
+  | "Insufficient Data";
 
 export interface ServicePressureCase {
   id: string;
@@ -45,9 +45,9 @@ export interface ServicePressureCase {
   serviceDomain: ServiceDomain;
   pressureType: PressureType;
   issueCategory: string | null;
-  sentiment: 'Positive' | 'Neutral' | 'Negative' | 'Mixed';
-  urgency: 'Low' | 'Medium' | 'High';
-  severity: 'Low' | 'Medium' | 'High';
+  sentiment: "Positive" | "Neutral" | "Negative" | "Mixed";
+  urgency: "Low" | "Medium" | "High";
+  severity: "Low" | "Medium" | "High";
   citizenPressureIndicator: boolean;
   serviceFailureIndicator: boolean;
   protestIndicator: boolean;
@@ -75,7 +75,7 @@ export interface ProvinceServicePressureTrendRow {
   serviceDomain: ServiceDomain;
   pressureCaseCount: number;
   rolling7DayAverage: number | null;
-  trendDirection: 'UP' | 'DOWN' | 'STABLE' | 'UNKNOWN';
+  trendDirection: "UP" | "DOWN" | "STABLE" | "UNKNOWN";
   highSeverityShare: number | null;
   confidence: ConfidenceLevel;
   sourceCount: number;
@@ -103,7 +103,7 @@ export interface ProvinceStressEscalationMatrixRow {
   severityWeight: number | null;
   stressStatus: StressStatus;
   confidence: ConfidenceLevel;
-  methodUsed: 'numeric' | 'partial' | 'none';
+  methodUsed: "numeric" | "partial" | "none";
   sourceCount: number;
   trace: DataTrace[];
 }
