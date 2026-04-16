@@ -1,44 +1,28 @@
-"use client";
-import { useState } from "react";
-import { useSearchParams } from "next/navigation";
 import PageHeader from "@/components/ui/PageHeader";
-import LeadershipSentimentPanel from "@/components/analytics/LeadershipSentimentPanel";
-import LeaderDeepDiveDrawer from "@/components/analytics/LeaderDeepDiveDrawer";
-import { LeadershipSentimentLeaderRow } from "@/lib/analytics/types";
+import LeadershipDashboardClient from "./LeadershipDashboardClient";
 
-export default function LeadershipSentimentPage() {
-  const searchParams = useSearchParams();
-  const province = searchParams.get("province") || "Gauteng";
-  const days = searchParams.get("days") ? Number(searchParams.get("days")) : 30;
-  const municipality = searchParams.get("municipality");
-  const ward = searchParams.get("ward");
-  const serviceDomain = searchParams.get("serviceDomain");
-  const [selectedLeader, setSelectedLeader] = useState<LeadershipSentimentLeaderRow | null>(null);
+export const dynamic = "force-dynamic";
+export const maxDuration = 60; 
+
+export default async function LeadershipSentimentPage(props: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const params = await props.searchParams;
+  const province = (params?.province as string) || "Gauteng";
+  const days = params?.days ? Number(params.days) : 30;
+  const municipality = params?.municipality as string | undefined;
 
   return (
-    <div className="space-y-8">
-      <PageHeader
-        title="Leadership Sentiment"
-        subtitle={`How leaders and public offices are being perceived across ${province}.`}
-        headerImage="/projects/INTABAZWE-X2-9906-1024x683.webp"
+    <div className="space-y-6">
+      <PageHeader 
+        title="Leadership Intelligence"
+        subtitle="Search any political figure or municipal official to synthesize a real-time, exhaustive AI strategic dossier on their current institutional exposure."
+        headerImage="/projects/INTABAZWE-X2-9964-1024x683.webp"
       />
-      <div className="space-y-8 mt-6">
-        <LeadershipSentimentPanel
-          province={province}
-          municipality={municipality}
-          serviceDomain={serviceDomain}
-          ward={ward}
-          days={days}
-          onSelectLeader={setSelectedLeader}
-        />
-      </div>
-
-      <LeaderDeepDiveDrawer
-        leader={selectedLeader}
-        isOpen={!!selectedLeader}
-        onClose={() => setSelectedLeader(null)}
+      <LeadershipDashboardClient 
+        province={province} 
+        municipality={municipality}
         days={days}
-        province={province}
       />
     </div>
   );

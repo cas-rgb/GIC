@@ -33,8 +33,8 @@ export default function ResourceNeedBarChart({
       return {
         name: formatWardDisplayLabel(w.ward),
         originalId: w.ward,
-        administrativeFocus: Math.max(10, genericAdminVolume),
-        serviceNeed: Math.max(5, acutePressure),
+        administrativeFocus: genericAdminVolume,
+        serviceNeed: acutePressure,
         totalSort: genericAdminVolume + acutePressure
       };
     })
@@ -66,7 +66,7 @@ export default function ResourceNeedBarChart({
             }}
           >
             <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="#1e293b" />
-            <XAxis type="number" hide />
+            <XAxis type="number" hide domain={[0, (dataMax: number) => Math.max(10, dataMax)]} />
             <YAxis
               dataKey="name"
               type="category"

@@ -20,14 +20,10 @@ interface LeadershipSentimentPanelProps {
   ward?: string | null;
   serviceDomain?: string | null;
   days?: number;
+  initialData: LeadershipSentimentResponse;
   selectedLeaderName?: string | null;
   onSelectLeader?: (leader: LeadershipSentimentLeaderRow) => void;
 }
-
-type LoadState =
-  | { status: "loading" }
-  | { status: "loaded"; data: LeadershipSentimentResponse }
-  | { status: "error"; message: string };
 
 function reputationTone(score: number): {
   label: string;
@@ -67,106 +63,16 @@ export default function LeadershipSentimentPanel({
   ward,
   serviceDomain,
   days = 30,
+  initialData,
   selectedLeaderName = null,
   onSelectLeader,
 }: LeadershipSentimentPanelProps) {
-  const [state, setState] = useState<LoadState>({ status: "loading" });
+  
+  const data = initialData;
 
-  useEffect(() => {
-    async function parseError(response: Response, fallback: string) {
-      try {
-        const body = (await response.json()) as { error?: string };
-        return body.error || fallback;
-      } catch {
-        return fallback;
-      }
-    }
+ 
 
-    async function load(): Promise<void> {
-      setState({ status: "loading" });
-
-      try {
-        const urlParams = new URLSearchParams({ province, days: String(days) });
-        if (municipality && municipality !== "All Municipalities") urlParams.set("municipality", municipality);
-        if (ward) urlParams.set("ward", ward);
-        if (serviceDomain && serviceDomain !== "all") urlParams.set("serviceDomain", serviceDomain);
-
-        const response = await fetch(
-          `/api/analytics/leadership-sentiment?${urlParams.toString()}`,
-          {
-            cache: "no-store",
-          },
-        );
-
-        if (!response.ok) {
-          throw new Error(
-            await parseError(
-              response,
-              `request failed with status ${response.status}`,
-            ),
-          );
-        }
-
-        const data = (await response.json()) as LeadershipSentimentResponse;
-        setState({ status: "loaded", data });
-      } catch (error) {
-        setState({
-          status: "error",
-          message:
-            error instanceof Error
-              ? error.message
-              : "Failed to load leadership sentiment",
-        });
-      }
-    }
-
-    void load();
-  }, [province, municipality, ward, serviceDomain, days]);
-
-  useEffect(() => {
-    if (
-      state.status === "loaded" &&
-      !selectedLeaderName &&
-      (state.data.leaders || []).length > 0 &&
-      onSelectLeader
-    ) {
-      onSelectLeader(state.data.leaders[0]);
-    }
-  }, [onSelectLeader, selectedLeaderName, state]);
-
-  useEffect(() => {
-    if (state.status === "loaded" && selectedLeaderName && onSelectLeader) {
-      const matchedLeader = state.data.leaders.find(
-        (leader) => leader.leaderName === selectedLeaderName,
-      );
-      if (matchedLeader) {
-        onSelectLeader(matchedLeader);
-      }
-    }
-  }, [onSelectLeader, selectedLeaderName, state]);
-
-  if (state.status === "loading") {
-    return (
-      <div className="flex min-h-[320px] items-center justify-center">
-        <ProgressSpinner message="Loading political PR view..." />
-      </div>
-    );
-  }
-
-  if (state.status === "error") {
-    return (
-      <div className="flex min-h-[320px] items-center justify-center text-center">
-        <div>
-          <AlertTriangle className="mx-auto h-8 w-8 text-amber-500" />
-          <p className="mt-3 text-sm font-medium text-slate-500">
-            {state.message}
-          </p>
-        </div>
-      </div>
-    );
-  }
-
-  const { data } = state;
+ 
   const topLeader = data.leaders[0] ?? null;
   const dominantIssue = topLeader?.linkedIssues?.[0] ?? "Mixed service delivery";
   const avgConfidence =
@@ -234,6 +140,13 @@ export default function LeadershipSentimentPanel({
               ? `${topLeader.leaderName} is carrying the highest public exposure in ${province}, with the strongest message pressure tied to ${dominantIssue}.`
               : `Leadership exposure is currently thin in ${province}.`}
           </p>
+          <div className="mt-4 pt-4 border-t border-slate-200">
+            <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1">Score Methodology</p>
+            <p className="text-xs text-slate-500 font-medium leading-relaxed">
+              <strong>Reputation Health:</strong> Algorithmically derived from (-1 to 1) based on ratio of positive vs negative news coverage. <br/>
+              <strong>Risk Alerts:</strong> Triggered when a leader drops below the -0.2 threshold with high mention volume.
+            </p>
+          </div>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="gic-card bg-slate-50">
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">

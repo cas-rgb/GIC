@@ -1,84 +1,78 @@
-import { NextResponse } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { db } from "@/lib/firebase";
-import { collection, query, where, getDocs, setDoc, doc, Timestamp } from "firebase/firestore";
+import { NextResponse, NextRequest } from "next/server";
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
+import { generateObject } from "ai";
+import { z } from "zod";
 
-const genAI = new GoogleGenerativeAI(process.env.VERTEX_AI_API_KEY || process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "");
+const google = createGoogleGenerativeAI({
+  apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY || process.env.VERTEX_AI_API_KEY || process.env.GEMINI_API_KEY
+});
 
-export async function GET(request: Request) {
+export const maxDuration = 60;
+export const dynamic = "force-dynamic";
+
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const province = searchParams.get("province");
+
+  if (!province) {
+    return NextResponse.json({ error: "Province parameter is required" }, { status: 400 });
+  }
+
   try {
-    const { searchParams } = new URL(request.url);
-    const province = searchParams.get("province") || "Gauteng";
-    
-    // 1. Check Firestore Cache
-    const briefingsRef = collection(db, "provinceIntelligenceBriefings");
-    const q = query(briefingsRef, where("province", "==", province));
-    const snapshot = await getDocs(q);
+    const targetRegion = province !== "All Provinces" ? province : "South Africa";
 
-    if (!snapshot.empty) {
-      const docData = snapshot.docs[0].data();
-      const ageHours = (Date.now() - docData.timestamp.toMillis()) / (1000 * 60 * 60);
-      // Force regeneration by temporarily aggressively invalidating the cache if it's over 1 minute old
-      if (ageHours < 0.01) {
-        return NextResponse.json(docData.briefing);
-      }
-    }
-
-    // 2. Generate Real-time Intelligence via Gemini
-    console.log(`[OSINT] Generating fresh province briefing for: ${province}`);
-    
-    // Fallback to flash-preview to guarantee successful inference on local user credentials
-    const model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
-
-    const prompt = `
-      You are the Chief Intelligence Officer for the South African Government.
-      Generate a highly realistic, uncompromising, and absolutely brutal internal intelligence briefing on the current state of governance in the ${province} province.
-
-      Do NOT hallucinate generic issues. Base the blindspots and priorities on actual ongoing historical facts, known infrastructure collapses, political squabbles, and known realities of ${province}. 
-      Name specific syndicates, sectors, or demographic pressures if they apply.
-      
-      Respond STRICTLY with valid JSON in the following schema:
-      {
-        "alignments": "The exact governing coalition, majority structure, and any internal faction friction (e.g. 'ANC/DA GNU Friction', 'IFP/ANC High Alert')",
-        "primaryLeader": "The full name and title of the presiding political leader (e.g. 'Premier Alan Winde', 'Premier Zamani Saul')",
-        "status": "Macro Status of the province in 3 words (e.g. 'Volatile / Contested', 'Stable / Operational')",
-        "blindspots": ["Exact threat 1", "Exact threat 2", "Exact threat 3"],
-        "citizenPriorities": ["Electoral priority 1", "Electoral priority 2", "Electoral priority 3"],
-        "atRiskExecutives": [
-           { "name": "Executive Name", "reason": "Specific reason for political vulnerability" }
-        ],
-        "upcomingFlashpoints": ["Looming threat 1", "Looming threat 2"]
-      }
-    `;
-
-    const result = await model.generateContent({
-      contents: [{ role: "user", parts: [{ text: prompt }] }],
-      generationConfig: {
-        responseMimeType: "application/json",
-        temperature: 0.7
-      }
+    // Grab 7 days of live intel regarding the local provincial infrastructure, politics, and service delivery
+    const searchRes = await fetch("https://api.tavily.com/search", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        api_key: process.env.TAVILY_API_KEY,
+        query: `"${targetRegion}" South Africa premier executive council politics local government infrastructure service delivery crisis issues news`,
+        search_depth: "advanced", 
+        max_results: 15, 
+        days: 7
+      }),
     });
 
-    const responseText = result.response.text();
-    // Aggressively strip markdown JSON codeblocks that gemini occasionally hallucinates
-    const cleanText = responseText.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
-    const object = JSON.parse(cleanText);
+    if (!searchRes.ok) {
+        throw new Error("Tavily OSINT API Failed during extraction.");
+    }
+    
+    const searchData = await searchRes.json();
+    const osintContext = (searchData.results || []).map((a: any) => `Title: ${a.title}\nContent: ${a.content}`).join("\n\n---\n\n");
 
-    // 3. Store in Firestore Cache
-    const newDocRef = doc(briefingsRef);
-    await setDoc(newDocRef, {
-      province,
-      briefing: object,
-      timestamp: Timestamp.now()
+    const { object } = await generateObject({
+      model: google("gemini-2.5-pro"),
+      schema: z.object({
+        alignments: z.string().describe("A deeply analytical 2-sentence breakdown of the current stability and friction points within the ruling party or coalition. Do NOT use markdown asterisks. Use a highly institutional, strategic tone."),
+        primaryLeader: z.string().describe("The name and title of the presiding leader or Premier. E.g. 'Premier Panyaza Lesufi'. No markdown."),
+        blindspots: z.array(z.string()).min(3).max(4).describe("3-4 highly detailed, 2-sentence strategic blindspots the government structure is facing. Describe the exact failure, the location, and the consequence. No markdown."),
+        citizenPriorities: z.array(z.string()).min(3).max(4).describe("3-4 highly detailed, 2-sentence infrastructure or service delivery grievances currently affecting communities. Name specific projects or communities. No markdown."),
+        status: z.string().describe("E.g. 'Critical Monitoring', 'Heightened Scrutiny', 'Baseline Stability', 'Systemic Failure Warning'. No markdown."),
+        atRiskExecutives: z.array(z.object({ 
+            name: z.string().describe("Name and title of the executive or department head. No markdown."), 
+            reason: z.string().describe("A devastatingly detailed 2-sentence intelligence briefing on exactly why their portfolio is failing and what specific project or tender they bungled. No markdown.") 
+        })).min(2).max(3).describe("Specific political figures or officials under fire."),
+        upcomingFlashpoints: z.array(z.string()).min(3).max(4).describe("3-4 highly detailed, 2-sentence intelligence reports on impending protests, strikes, or crises related to current events. No markdown.")
+      }),
+      prompt: `You are a Tier-1 Intelligence Analyst for the South African Government.
+      
+      Read the following live OSINT data retrieved strictly from the last 7 days regarding the executive leadership, infrastructure, and socio-political stability of: ${targetRegion}.
+      
+      CRITICAL INSTRUCTION: Your output must NOT be "generic, boring, or brief." You must provide extremely detailed, deeply analytical, and highly dramatic intelligence-grade paragraphs. Write in the exact tone of a high-stakes government intelligence briefing (e.g., use phrases like 'structural contradictions', 'bifurcated narratives', 'cascading infrastructure failures'). 
+      Do not invent scenarios; focus strictly on genuine events from the search context, but explain them with ruthless strategic depth. Every array item MUST be at least 2 full, complex sentences.
+      
+      DO NOT USE ANY MARKDOWN ASTERISKS (** or *) anywhere in the output strings. Keep the text pure.
+      
+      OSINT DATA:
+      ${osintContext}
+      `
     });
 
     return NextResponse.json(object);
-
+     
   } catch (error) {
-    console.error("[ProvinceBriefingError] Failed to generate AI intelligence:", error);
-    return NextResponse.json(
-      { error: "Failed to synthesize province intelligence." },
-      { status: 500 }
-    );
+    console.error("[ProvinceBriefingError] Failed to generate strategic intelligence:", error);
+    return NextResponse.json({ error: "Failed to generate dynamic intelligence." }, { status: 500 });
   }
 }

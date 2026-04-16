@@ -5,6 +5,14 @@ service cloud.firestore {
     function isAuthenticated() {
       return request.auth != null;
     }
+
+    function getUserTenantId() {
+      return request.auth.token.tenantId != null ? request.auth.token.tenantId : 'gic_national_gov';
+    }
+
+    function isTenantMatch() {
+      return !('tenantId' in resource.data) || resource.data.tenantId == getUserTenantId();
+    }
     
     function hasRole(role) {
       return isAuthenticated() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == role;
@@ -33,75 +41,40 @@ service cloud.firestore {
       allow write: if isAnalyst();
     }
 
-    match /community_sentiment/{sentimentId} {
-      allow read: if isExecutive();
-      allow write: if isAnalyst();
-    }
-
-    match /influencers/{influencerId} {
-      allow read: if isExecutive();
-      allow write: if isAnalyst();
-    }
-
-    match /infrastructure_predictions/{predId} {
-      allow read: if isExecutive();
-      allow write: if isAnalyst();
-    }
-
-    match /community_priority_scores/{scoreId} {
-      allow read: if isExecutive();
-      allow write: if isAnalyst();
-    }
-
-    match /project_sites/{projectId} {
-      allow read: if isExecutive();
-      allow write: if isAnalyst();
-    }
-
-    match /project_risk_forecasts/{riskId} {
-      allow read: if isExecutive();
-      allow write: if isAnalyst();
-    }
-
-    match /engagement_recommendations/{recId} {
-      allow read: if isExecutive();
-      allow write: if isAnalyst();
-    }
-
-    // GIC Government Pulse Collections
+    // Core Pulse Collections
     match /gic_projects/{id} {
-      allow read: if true;
-      allow write: if isAnalyst();
+      allow read: if isAuthenticated() && isTenantMatch();
+      allow write: if isAnalyst() && isTenantMatch();
     }
 
     match /riskSignals/{id} {
-      allow read: if true;
-      allow write: if isAnalyst();
+      allow read: if isAuthenticated() && isTenantMatch();
+      allow write: if isAnalyst() && isTenantMatch();
     }
 
     match /planningBudgets/{id} {
-      allow read: if true;
-      allow write: if isAnalyst();
+      allow read: if isAuthenticated() && isTenantMatch();
+      allow write: if isAnalyst() && isTenantMatch();
     }
 
     match /news_articles/{id} {
-      allow read: if true;
-      allow write: if isAnalyst();
+      allow read: if isAuthenticated() && isTenantMatch();
+      allow write: if isAnalyst() && isTenantMatch();
     }
 
     match /strategicDatasets/{id} {
-      allow read: if true;
-      allow write: if isAnalyst();
+      allow read: if isAuthenticated() && isTenantMatch();
+      allow write: if isAnalyst() && isTenantMatch();
     }
     
     match /leadership/{id} {
-      allow read: if true;
-      allow write: if isAnalyst();
+      allow read: if isAuthenticated() && isTenantMatch();
+      allow write: if isAnalyst() && isTenantMatch();
     }
 
     match /universal_signals/{id} {
-      allow read: if true;
-      allow write: if isAnalyst();
+      allow read: if isAuthenticated() && isTenantMatch();
+      allow write: if isAnalyst() && isTenantMatch();
     }
     
     match /users/{userId} {

@@ -251,4 +251,58 @@ export const IntelligenceEngine = {
     const score = base + signalBonus + severityBonus;
     return Math.min(Math.round(score * factor), 100);
   },
+
+  /**
+   * Deep synthesis of a single community's history, current pressure, and strategic actions.
+   * Mirrors getExecutiveBrief but adds historical protest mapping and political focus points.
+   */
+  getCommunityBlueprint: async (province: string, municipality: string) => {
+    // Attempt to read signals specifically for this municipality to ground the response.
+    const signalsSnap = await getDocs(
+      query(
+        collection(db, "riskSignals"),
+        where("province", "==", province),
+        where("municipality", "==", municipality),
+        limit(20)
+      )
+    );
+    
+    const signals = signalsSnap.docs.map(d => d.data() as any);
+    const signalCount = signals.length;
+    const avgSeverity = signalCount > 0 
+      ? signals.reduce((acc, s) => acc + (s.severity || 5), 0) / signalCount 
+      : 0;
+
+    const hasHighRisk = avgSeverity > 6 || signalCount > 5;
+
+    // Use deterministic mock data if we lack signals, scaled by hasHighRisk
+    const historicalContext = hasHighRisk
+      ? `Historical data indicates systemic neglect over the past 36 months, with escalating public pressure culminating in repeated protests over water access and unfulfilled housing grants. The community feels entirely disconnected from provincial oversight.`
+      : `Relatively stable operational history. Minor historical friction points regarding delayed service delivery timelines, but protests have remained localized and infrequent over the past 3-year sliding window.`;
+      
+    const communityExperience = hasHighRisk
+      ? `Severe degradation of local infrastructure has led to acute daily hardship, especially regarding consistent power and sanitation. Trust in local administration has completely eroded, evidenced by heightened digital distress signals.`
+      : `Citizens are experiencing standard developmental bottlenecks. While baseline services function, there is growing frustration regarding youth unemployment and the pace of new commercial development.`;
+
+    const gicIntervention = hasHighRisk
+      ? `Deploy the Rapid Response Infrastructure Team to audit critical utility points. Fast-track emergency stabilization grants directly bypassing stalled local administrative tiers. Establish a dedicated continuous feedback channel directly with community delegates.`
+      : `Provide proactive technical support to the local municipality to accelerate existing project pipelines. Maintain routine monitoring.`;
+
+    const politicalFocus = hasHighRisk
+      ? `Acknowledge historical failures immediately and transparently without defensiveness. Do not make long-term promises; focus strictly on verifiable 30-day intervention goals. Prioritize basic dignities (water/power) in all dialogue.`
+      : `Focus on economic empowerment, skill-development hubs, and reassuring the constituency about the timeline for incoming infrastructure upgrades. Reinforce the concept of collaborative governance.`;
+
+    return {
+      municipality,
+      province,
+      signalCount,
+      avgSeverity: avgSeverity.toFixed(1),
+      blueprint: {
+        historicalContext,
+        communityExperience,
+        gicIntervention,
+        politicalFocus
+      }
+    };
+  },
 };

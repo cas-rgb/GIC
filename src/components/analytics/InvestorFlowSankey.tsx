@@ -47,7 +47,8 @@ export default function InvestorFlowSankey({
       const weightMultiplier = source === "National Treasury" ? 0.4 : source === "DFIs & Multilaterals" ? 0.3 : 0.15;
       topSectors.forEach((sector, sectorOffset) => {
         const sectorVal = sector.totalKnownExpenditure || (totalSpend / topSectors.length);
-        const linkVal = sectorVal * weightMultiplier * (0.8 + Math.random() * 0.4);
+        const staticModifier = ((sourceIdx + sectorOffset * 3) % 40) / 100; // Deterministic 0 to 0.4
+        const linkVal = sectorVal * weightMultiplier * (0.8 + staticModifier);
         _links.push({
           source: sourceIdx,
           target: sectorStartIndex + sectorOffset,
@@ -61,7 +62,8 @@ export default function InvestorFlowSankey({
       const sectorVal = sector.totalKnownExpenditure || (totalSpend / topSectors.length);
       topGeos.forEach((geo, geoOffset) => {
         const geoChunkRatio = (geo.totalKnownExpenditure || 1000) / totalSpend;
-        const linkVal = sectorVal * geoChunkRatio * (0.8 + Math.random() * 0.4);
+        const staticModifier = ((sectorOffset + geoOffset * 7) % 40) / 100; // Deterministic 0 to 0.4
+        const linkVal = sectorVal * geoChunkRatio * (0.8 + staticModifier);
         _links.push({
           source: sectorStartIndex + sectorOffset,
           target: geoStartIndex + geoOffset,
@@ -75,8 +77,8 @@ export default function InvestorFlowSankey({
 
   if (nodes.length === 0) {
     return (
-      <div className="w-full h-full flex flex-col items-center justify-center bg-slate-50 border border-dashed border-slate-200 min-h-[400px]">
-        <p className="text-sm font-bold text-slate-500">Insufficient flow data to map capital.</p>
+      <div className="w-full h-full flex flex-col items-center justify-center bg-slate-900 border border-slate-800 rounded-lg min-h-[400px]">
+        <p className="text-sm font-bold text-slate-500 uppercase tracking-widest">[ AWAITING CAPITAL FLOW INTELLIGENCE ]</p>
       </div>
     );
   }

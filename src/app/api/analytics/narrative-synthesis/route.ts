@@ -1,10 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { query } from "@/lib/db";
+import { validateRateLimit } from "@/lib/rate-limit";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   try {
+    const ip = request.headers.get("x-forwarded-for") || "anonymous_ip";
+    const rateLimit = validateRateLimit(ip, 30, 60000); // 30 requests per minute
+    if (!rateLimit.success) {
+      return NextResponse.json({ error: rateLimit.message }, { status: 429 });
+    }
+
     const { searchParams } = new URL(request.url);
     const lens = searchParams.get("lens");
     const province = searchParams.get("province") || "Gauteng";

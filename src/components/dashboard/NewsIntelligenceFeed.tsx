@@ -147,7 +147,7 @@ export default function NewsIntelligenceFeed({
                     <div className="flex items-center gap-1">
                       <Globe className="w-3 h-3 text-slate-500" />
                       <span className="text-[10px] font-bold text-slate-400">
-                        {article.sourceName || "OSINT"}
+                        {article.sourceName || "Public Intelligence"}
                       </span>
                     </div>
                     <div className="flex items-center gap-1">

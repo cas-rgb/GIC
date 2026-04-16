@@ -14,40 +14,46 @@ interface MunicipalityRankingSqlRow {
 
 export async function getMunicipalityRanking(
   province: string,
+  days: number = 365,
+  serviceDomain: string = "all"
 ): Promise<MunicipalityRankingResponse> {
+  const params: any[] = [province, days];
+  if (serviceDomain !== "all") params.push(serviceDomain);
+
+  const filterClause = serviceDomain !== "all" ? `and si.service_domain = $3` : "";
+
   const [result, aiResult] = await Promise.all([
     query<MunicipalityRankingSqlRow>(
     `
       with ranked as (
         select
           l.municipality as municipality,
-          count(*)::int as "pressureCaseCount",
-          count(*) filter (where si.severity = 'High')::int as "highSeverityCount",
-          count(*) filter (where si.protest_indicator = true)::int as "protestCount",
-          count(*) filter (where si.response_indicator = true)::int as "responseCount",
+          count(si.id)::int as "pressureCaseCount",
+          count(si.id) filter (where si.severity = 'High')::int as "highSeverityCount",
+          count(si.id) filter (where si.protest_indicator = true)::int as "protestCount",
+          count(si.id) filter (where si.response_indicator = true)::int as "responseCount",
           mode() within group (order by si.service_domain) as "dominantServiceDomain",
           round((
-            count(*) * 1.0 +
-            count(*) filter (where si.severity = 'High') * 1.5 +
-            count(*) filter (where si.protest_indicator = true) * 1.2 -
-            count(*) filter (where si.response_indicator = true) * 0.5
+            count(si.id) * 1.0 +
+            count(si.id) filter (where si.severity = 'High') * 1.5 +
+            count(si.id) filter (where si.protest_indicator = true) * 1.2
           )::numeric, 2) as "riskScore",
           round(avg(si.classification_confidence)::numeric, 3) as "confidence"
-        from service_incidents si
-        join signals s on s.id = si.signal_id
-        left join locations l on l.id = coalesce(si.location_id, s.location_id)
+        from locations l
+        left join service_incidents si on (
+          l.id = coalesce(si.location_id, (select location_id from signals where id = si.signal_id))
+          and si.opened_at >= (now() - interval '1 day' * $2)
+          ${filterClause}
+        )
         where ($1::text = 'All Provinces' or l.province = $1)
-          and si.citizen_pressure_indicator = true
-          and si.failure_indicator = true
           and l.municipality is not null
         group by l.municipality
       )
       select *
       from ranked
-      order by "riskScore" desc, "pressureCaseCount" desc
-      limit 10
+      order by "pressureCaseCount" desc, municipality asc
     `,
-    [province],
+    params,
   ),
   query<AINarrativeSynthesisRow & { municipality: string }>(
     `
@@ -61,9 +67,10 @@ export async function getMunicipalityRanking(
         source_evidence as "sourceEvidence"
       from ai_narrative_synthesis
       where lens = 'municipality' and ($1::text = 'All Provinces' or $1::text is null or province = $1)
+        and created_at >= (now() - interval '1 day' * $2)
       order by created_at desc
     `,
-    [province]
+    [province, days]
   )
   ]);
 

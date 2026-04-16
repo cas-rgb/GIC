@@ -12,13 +12,11 @@ loadEnv();
 
 const { query } = require("../src/lib/db") as typeof import("../src/lib/db");
 
-const HOURS = Number(process.env.ENRICHMENT_HOURS ?? "6");
-const CYCLE_DELAY_MINUTES = Number(process.env.ENRICHMENT_DELAY_MINUTES ?? "20");
 const LOG_DIR = path.resolve(process.cwd(), "logs");
 const DATA_DIR = path.resolve(process.cwd(), "data", "enrichment");
 const RUN_ID = new Date().toISOString().replace(/[:.]/g, "-");
-const LOG_PATH = path.join(LOG_DIR, `overnight-enrichment-${RUN_ID}.log`);
-const REPORT_PATH = path.join(DATA_DIR, `overnight-enrichment-report-${RUN_ID}.json`);
+const LOG_PATH = path.join(LOG_DIR, `daily-pulse-${RUN_ID}.log`);
+const REPORT_PATH = path.join(DATA_DIR, `daily-pulse-report-${RUN_ID}.json`);
 
 interface TableCountRow extends QueryResultRow {
   count: string | number;
@@ -44,25 +42,16 @@ interface OvernightReport {
   runId: string;
   startedAt: string;
   finishedAt: string | null;
-  durationHours: number;
-  cycleDelayMinutes: number;
   cycles: CycleReport[];
 }
 
 const COMMANDS = [
-  "npm.cmd run import:firestore:community-signals:v2",
-  "npm.cmd run ingest:official:v2",
-  "npm.cmd run ingest:rss:v2",
-  "npm.cmd run ingest:news:v2",
-  "npm.cmd run ingest:citizen-voice:v2",
   "npm.cmd run process:v2:queue",
-  "npm.cmd run ingest:municipal-money:v2",
-  "npm.cmd run normalize:projects:v2",
-  "npm.cmd run rebuild:projects:v2",
-  "npm.cmd run rebuild:citizen-voice:v2",
-  "npm.cmd run rebuild:leadership:v2",
-  "npm.cmd run rebuild:municipal-leadership:v2",
-  "node --require ts-node/register --require tsconfig-paths/register scripts/collect-contextual-reference.ts",
+  // "npm.cmd run import:firestore:community-signals:v2", // Disabled: High Firestore Write Cost
+  // "npm.cmd run ingest:rss:v2", // Disabled: OSINT Pipeline
+  // "npm.cmd run ingest:news:v2", // Disabled: OSINT Pipeline
+  // "npm.cmd run ingest:citizen-voice:v2", // Disabled: OSINT Pipeline
+  // "npm.cmd run ingest:social-narratives", // Disabled: OSINT Pipeline
 ];
 
 const COUNT_QUERIES: Record<string, string> = {
@@ -76,10 +65,6 @@ const COUNT_QUERIES: Record<string, string> = {
   infrastructureProjects: "select count(*)::int as count from infrastructure_projects",
   locations: "select count(*)::int as count from locations",
 };
-
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 function appendLog(message: string) {
   fs.appendFileSync(LOG_PATH, `${new Date().toISOString()} ${message}\n`);
@@ -133,64 +118,47 @@ async function main() {
   fs.mkdirSync(LOG_DIR, { recursive: true });
   fs.mkdirSync(DATA_DIR, { recursive: true });
 
-  const startedAt = Date.now();
-  const maxDurationMs = HOURS * 60 * 60 * 1000;
+  appendLog(`Starting Daily Pulse. Executing lightweight high-velocity commands.`);
+
   const report: OvernightReport = {
     runId: RUN_ID,
-    startedAt: new Date(startedAt).toISOString(),
+    startedAt: new Date().toISOString(),
     finishedAt: null,
-    durationHours: HOURS,
-    cycleDelayMinutes: CYCLE_DELAY_MINUTES,
     cycles: [],
   };
 
   let cycleNumber = 1;
-  while (Date.now() - startedAt < maxDurationMs) {
-    const cycleStartedAt = new Date().toISOString();
-    appendLog(`=== cycle ${cycleNumber} start ===`);
-    const countsBefore = await getCounts();
-    const commands: CommandResult[] = [];
+  const cycleStartedAt = new Date().toISOString();
+  appendLog(`=== Execution Run start ===`);
+  const countsBefore = await getCounts();
+  const commands: CommandResult[] = [];
 
-    for (const command of COMMANDS) {
-      if (Date.now() - startedAt >= maxDurationMs) {
-        appendLog(`Skipping remaining commands because max duration was reached.`);
-        break;
-      }
-
-      commands.push(await runCommand(command));
-    }
-
-    const countsAfter = await getCounts();
-    const cycleFinishedAt = new Date().toISOString();
-    report.cycles.push({
-      cycleNumber,
-      startedAt: cycleStartedAt,
-      finishedAt: cycleFinishedAt,
-      countsBefore,
-      countsAfter,
-      commands,
-    });
-
-    fs.writeFileSync(REPORT_PATH, JSON.stringify(report, null, 2));
-    appendLog(`=== cycle ${cycleNumber} end ===`);
-    cycleNumber += 1;
-
-    if (Date.now() - startedAt >= maxDurationMs) {
-      break;
-    }
-
-    await sleep(CYCLE_DELAY_MINUTES * 60 * 1000);
+  for (const command of COMMANDS) {
+    commands.push(await runCommand(command));
   }
+
+  const countsAfter = await getCounts();
+  const cycleFinishedAt = new Date().toISOString();
+  report.cycles.push({
+    cycleNumber,
+    startedAt: cycleStartedAt,
+    finishedAt: cycleFinishedAt,
+    countsBefore,
+    countsAfter,
+    commands,
+  });
+
+  fs.writeFileSync(REPORT_PATH, JSON.stringify(report, null, 2));
+  appendLog(`=== Execution Run end ===`);
 
   report.finishedAt = new Date().toISOString();
   fs.writeFileSync(REPORT_PATH, JSON.stringify(report, null, 2));
-  appendLog(`Overnight enrichment run complete. Report written to ${REPORT_PATH}`);
+  appendLog(`Daily Pulse complete. Report written to ${REPORT_PATH}`);
   console.log(
     JSON.stringify(
       {
         logPath: LOG_PATH,
         reportPath: REPORT_PATH,
-        cycles: report.cycles.length,
       },
       null,
       2

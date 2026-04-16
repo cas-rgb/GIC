@@ -62,14 +62,14 @@ export default function RootWrapper({
 
   return (
     <GICProvider>
-      <div className="flex h-screen overflow-hidden bg-surface-base text-slate-900 font-sans selection:bg-gic-blue/20 gic-ease-elite">
+      <div className="flex h-screen overflow-hidden bg-surface-base text-slate-900 font-sans selection:bg-gic-blue/20 gic-ease-elite print:h-auto print:overflow-visible">
         {/* Global Navigation */}
         <Sidebar />
 
         {/* Main Content Area */}
-        <main className="flex-1 flex flex-col min-w-0 bg-slate-50/50 relative overflow-hidden">
+        <main className="flex-1 flex flex-col min-w-0 bg-slate-50/50 relative overflow-hidden print:overflow-visible">
           {/* Viewport Content */}
-          <div className="flex-1 overflow-y-auto scrollbar-hide">
+          <div className="flex-1 overflow-y-auto print:overflow-visible">
             <RootTransition>{children}</RootTransition>
           </div>
         </main>

@@ -50,30 +50,25 @@ export default function SourceDemographyDonut({
         sourceName.includes("official")
       ) {
         sourceBuckets["Government Feeds"] += 1;
-      } else {
-        /* Fallback random distribution for a realistic look if generic sources are used */ const rand =
-          Math.random();
-        if (rand > 0.6) sourceBuckets["News Media"] += 1;
-        else if (rand > 0.4) sourceBuckets["Social Media"] += 1;
-        else sourceBuckets["Civic Forums"] += 1;
       }
     });
+
     const formatted = Object.entries(sourceBuckets)
       .filter(([_, value]) => value > 0)
       .map(([name, value]) => ({ name, value }))
       .sort((a, b) => b.value - a.value);
-    /* Ensure we have some data even if articles are empty */ if (
-      formatted.length === 0
-    ) {
-      setChartData([
-        { name: "News Media", value: 45 },
-        { name: "Social Media", value: 30 },
-        { name: "Civic Forums", value: 25 },
-      ]);
-    } else {
-      setChartData(formatted);
-    }
+
+    setChartData(formatted);
   }, [articles]);
+
+  if (chartData.length === 0) {
+    return (
+      <div className="w-full h-full min-h-[250px] flex items-center justify-center bg-slate-900 border border-slate-800 rounded-lg">
+        <p className="text-sm font-bold text-slate-500 uppercase tracking-widest">[ AWAITING DEMOGRAPHIC DATA ]</p>
+      </div>
+    );
+  }
+
   const COLORS = ["#2563eb", "#10b981", "#f59e0b", "#6366f1", "#ec4899"];
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {

@@ -1,8 +1,4 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { AlertTriangle, Users2, Target, ShieldAlert, BarChart3 } from "lucide-react";
-import ProgressSpinner from "@/components/ui/ProgressSpinner";
+import { AlertTriangle, Users2, Target, ShieldAlert, BarChart3, AlertCircle } from "lucide-react";
 
 interface BriefingIntel {
   alignments: string;
@@ -12,69 +8,22 @@ interface BriefingIntel {
   status: string;
 }
 
-export default function ProvinceExecutiveBriefing({ province }: { province: string }) {
-  const [intel, setIntel] = useState<BriefingIntel | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  // Extract the exact match
+export default function ProvinceExecutiveBriefing({ province, data }: { province: string, data?: BriefingIntel | null }) {
   const pName = province === "All Provinces" || !province ? "Gauteng" : province;
 
-  useEffect(() => {
-    let isSubscribed = true;
-    setLoading(true);
-
-    fetch(`/api/analytics/province-briefing?province=${encodeURIComponent(pName)}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch Province Briefing");
-        return res.json();
-      })
-      .then((data: BriefingIntel) => {
-        if (isSubscribed) {
-          setIntel(data);
-          setLoading(false);
-        }
-      })
-      .catch((err) => {
-        console.error("Strategic Briefing Error:", err);
-        if (isSubscribed) {
-          // Absolute fallback if Gemini fails
-          setIntel({
-            alignments: `Provincial Executive Governance in ${pName}`,
-            primaryLeader: `Regional Leadership - ${pName}`,
-            blindspots: [
-              `Unverified infrastructure maintenance backlogs specific to ${pName}`,
-              `Vulnerability of ${pName} to extreme cyclical weather events`,
-              `Local procurement delays and tender disputes across ${pName}`
-            ],
-            citizenPriorities: [
-              `Consistent utility delivery and billing within ${pName} municipalities`,
-              `Local economic opportunities and youth employment programs for ${pName}`,
-              `General community policing visibility in high-risk ${pName} domains`
-            ],
-            status: "Baseline Monitoring"
-          });
-          setLoading(false);
-        }
-      });
-
-    return () => {
-      isSubscribed = false;
-    };
-  }, [pName]);
-
-  if (loading || !intel) {
+  if (!data) {
     return (
       <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col items-center justify-center min-h-[300px]">
-        <ProgressSpinner 
-           durationMs={5000} 
-           message={`Compiling Real-Time Report for ${pName}...`} 
-        />
-        <p className="mt-4 text-[10px] uppercase font-black tracking-widest text-slate-500">
-           Aggregating Regional Ground-Truth Metrics
+        <AlertCircle className="w-12 h-12 text-rose-500/50 mb-4" />
+        <p className="text-sm font-bold text-zinc-300">Intelligence Stream Offline</p>
+        <p className="mt-2 text-[10px] uppercase font-black tracking-widest text-slate-500 text-center max-w-sm">
+           The AI tactical synthesis for {pName} failed to aggregate. Verify OSINT pipeline connectivity.
         </p>
       </div>
     );
   }
+
+  const intel = data;
 
   return (
     <div className="space-y-4 grid grid-cols-1 xl:grid-cols-3 gap-6 h-full items-start">

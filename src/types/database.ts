@@ -120,6 +120,8 @@ export interface EvidenceSource extends BaseEntity {
     platform?: string;
     [key: string]: any;
   };
+  rag_score?: number;     // Injected by RAG AI Layer
+  source_name?: string;   // Injected by SQL Joins
 }
 
 // 4. GIC Logical Intelligence

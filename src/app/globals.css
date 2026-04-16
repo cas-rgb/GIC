@@ -27,11 +27,46 @@
 }
 
 @layer base {
+  :root {
+    color-scheme: light; /* Forces browser light mode, fixing OS-level white-on-white text inversions */
+  }
+  
   body {
     @apply bg-surface-base text-slate-900 font-sans antialiased selection:bg-gic-gold/20;
   }
 
-  /* Custom Slim Branded Scrollbar */
+  /* GLOBAL AUTO-CONTRAST FALLBACKS */
+  /* Replaced class lists with bulletproof substring matchers. */
+  [class*="bg-slate-9"], [class*="bg-slate-8"], [class*="bg-gic-dark"], [class*="bg-black"], [class*="bg-blue-9"] {
+    color: white;
+  }
+
+  [class*="bg-white"], [class*="bg-slate-50"], [class*="bg-slate-1"], [class*="bg-surface-base"], [class*="bg-blue-50"] {
+    color: #0f172a;
+  }
+}
+
+/* 
+  ABSOLUTE CONTRAST SANITIZERS (Overrides specific bad utility combinations)
+  These prevent developers from accidentally putting explicit text-white on a white background,
+  or explicit text-slate-900 on a dark background on the SAME element.
+*/
+[class*="bg-white"][class*="text-white"],
+[class*="bg-slate-50"][class*="text-white"],
+[class*="bg-slate-1"][class*="text-white"] {
+  color: #0f172a !important;
+}
+
+[class*="bg-slate-9"][class*="text-slate-9"],
+[class*="bg-slate-9"][class*="text-slate-8"],
+[class*="bg-slate-8"][class*="text-slate-9"],
+[class*="bg-slate-8"][class*="text-slate-8"],
+[class*="bg-gic-dark"][class*="text-slate-9"],
+[class*="bg-gic-dark"][class*="text-slate-8"] {
+  color: white !important;
+}
+
+/* Custom Slim Branded Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -49,8 +84,6 @@
     scrollbar-width: thin;
     scrollbar-color: #cbd5e1 transparent;
   }
-}
-
 @layer utilities {
   /* Typography - Precise Scaling */
   .text-display-xl {
@@ -156,5 +189,45 @@
 
   .animate-marquee-fast {
     animation: marquee 25s linear infinite;
+  }
+}
+
+@media print {
+  @page {
+    margin: 1.5cm;
+    size: A4 portrait;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background-color: white !important;
+  }
+
+  header, nav, aside, footer {
+    display: none !important;
+  }
+
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .gic-sidebar, .gic-sidebar-blur, .desktop-sidebar, .mobile-nav {
+    display: none !important;
+  }
+
+  /* Ensure Cards don't split awkwardly across pages */
+  .gic-card, .gic-card-premium, .bg-slate-950, .bg-slate-900, .recharts-wrapper, .recharts-surface {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+
+  ::-webkit-scrollbar {
+    display: none !important;
   }
 }

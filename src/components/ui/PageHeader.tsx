@@ -3,6 +3,7 @@
 import { Target } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import ExportPdfButton from "@/components/ui/ExportPdfButton";
 
 interface PageHeaderProps {
   title: string;
@@ -18,7 +19,7 @@ export default function PageHeader({
   subtitle,
   breadcrumb,
   actions,
-  headerImage,
+  headerImage = "/projects/Breipaal-17-1024x683.webp",
   guidingQuestion,
 }: PageHeaderProps) {
   const imageMode = Boolean(headerImage);
@@ -160,17 +161,16 @@ export default function PageHeader({
             </p>
           </div>
 
-          {actions ? (
-            <div
-              className={`flex max-w-full flex-wrap items-center gap-2 rounded-xl border p-2 ${
-                imageMode
-                  ? "border-white/15 bg-slate-950/25 backdrop-blur-md"
-                  : "border-slate-200 bg-white shadow-sm"
-              }`}
-            >
-              {actions}
-            </div>
-          ) : null}
+          <div
+            className={`flex max-w-full flex-wrap items-center gap-2 rounded-xl border p-2 ${
+              imageMode
+                ? "border-white/15 bg-slate-950/25 backdrop-blur-md"
+                : "border-slate-200 bg-white shadow-sm"
+            }`}
+          >
+            {actions}
+            <ExportPdfButton imageMode={imageMode} />
+          </div>
         </div>
       </div>
     </div>

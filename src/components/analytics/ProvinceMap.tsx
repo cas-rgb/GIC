@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   AlertTriangle,
   ChevronRight,
-  RefreshCw,
 } from "lucide-react";
 import { APIProvider, Map, AdvancedMarker, Pin } from "@vis.gl/react-google-maps";
 import { MunicipalityRankingResponse } from "@/lib/analytics/types";
@@ -12,12 +12,8 @@ interface ProvinceMapProps {
   province: string;
   days: number;
   onMunicipalitySelect?: (municipalityId: string) => void;
+  initialData?: any;
 }
-
-type LoadState =
-  | { status: "loading" }
-  | { status: "loaded"; data: MunicipalityRankingResponse }
-  | { status: "error"; message: string };
 
 const PROVINCIAL_COORDINATES: Record<string, { lat: number; lng: number }> = {
   // Gauteng
@@ -60,9 +56,9 @@ const PROVINCIAL_COORDINATES: Record<string, { lat: number; lng: number }> = {
 export default function ProvinceMap({
   province,
   days,
-  onMunicipalitySelect,
+  initialData,
 }: ProvinceMapProps) {
-  const [state, setState] = useState<LoadState>({ status: "loading" });
+  const router = useRouter();
   const [hoveredMuni, setHoveredMuni] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -73,48 +69,19 @@ export default function ProvinceMap({
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  useEffect(() => {
-    async function load() {
-      setState({ status: "loading" });
-      try {
-        const response = await fetch(
-          `/api/analytics/municipality-ranking?province=${encodeURIComponent(province)}&days=${days}`,
-          { cache: "no-store" }
-        );
-        if (!response.ok) throw new Error("Failed to fetch map data");
-        const data = await response.json();
-        setState({ status: "loaded", data });
-      } catch (error) {
-        setState({ status: "error", message: String(error) });
-      }
-    }
-    void load();
-  }, [province, days]);
+  const handleMunicipalitySelect = (municipalityId: string) => {
+    router.push(`/executive/municipalities?province=${encodeURIComponent(province)}&municipality=${encodeURIComponent(municipalityId)}&days=${days}`);
+  };
 
   const sortedMunicipalities = useMemo(() => {
-    if (state.status !== "loaded") return [];
-    return state.data.rows;
-  }, [state]);
+    if (!initialData) return [];
+    return initialData.rows || [];
+  }, [initialData]);
 
-  if (state.status === "loading") {
+  if (!initialData) {
     return (
-      <div className="w-full h-full flex flex-col items-center justify-center p-8 bg-slate-100 relative text-slate-400">
-        <RefreshCw className="w-8 h-8 animate-spin mb-4" />
-        <p className="text-sm font-bold uppercase tracking-widest">
-          Loading Map Hotspots
-        </p>
-      </div>
-    );
-  }
-
-  if (state.status === "error") {
-    return (
-      <div className="w-full h-full flex flex-col items-center justify-center p-8 bg-slate-100 relative text-slate-400">
-        <AlertTriangle className="w-8 h-8 text-amber-500 mb-4" />
-        <p className="text-sm font-bold uppercase tracking-widest text-slate-900">
-          Map Data Unavailable
-        </p>
-        <p className="text-xs">{state.message}</p>
+      <div className="w-full h-full flex flex-col items-center justify-center p-8 bg-slate-900 border border-slate-800 rounded-lg min-h-[400px]">
+        <p className="text-sm font-bold text-slate-500 uppercase tracking-widest">[ AWAITING SPATIAL INTELLIGENCE ]</p>
       </div>
     );
   }
@@ -134,7 +101,23 @@ export default function ProvinceMap({
     "All Provinces": { lat: -29.0, lng: 24.0 },
   };
 
-  const mapCenter = PROVINCE_CENTERS[province] || { lat: -29.0, lng: 24.0 };
+  const mapCenter = useMemo(() => {
+    if (sortedMunicipalities.length > 0) {
+      let latSum = 0;
+      let lngSum = 0;
+      let count = 0;
+      sortedMunicipalities.forEach((muni: any) => {
+        const coords = PROVINCIAL_COORDINATES[muni.municipality];
+        if (coords) {
+          latSum += coords.lat;
+          lngSum += coords.lng;
+          count++;
+        }
+      });
+      if (count > 0) return { lat: latSum / count, lng: lngSum / count };
+    }
+    return PROVINCE_CENTERS[province] || { lat: -29.0, lng: 24.0 };
+  }, [sortedMunicipalities, province]);
 
   return (
     <div className="w-full h-full flex flex-col md:flex-row relative">
@@ -155,17 +138,13 @@ export default function ProvinceMap({
               disableDefaultUI={true}
               className="w-full h-full absolute inset-0"
             >
-              {sortedMunicipalities.map((muni) => {
+              {sortedMunicipalities.map((muni: any) => {
                 const risk = Number(muni.riskScore) || 0;
                 let coords = PROVINCIAL_COORDINATES[muni.municipality];
                 if (!coords) {
-                  // Generate deterministic pseudo-random offset via string hash to prevent React render jitter
-                  const hash = muni.municipality.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
-                  const pseudoRandomLat = ((hash % 100) / 100 - 0.5) * 0.5;
-                  const pseudoRandomLng = (((hash * 7) % 100) / 100 - 0.5) * 0.5;
                   coords = {
-                    lat: mapCenter.lat + pseudoRandomLat,
-                    lng: mapCenter.lng + pseudoRandomLng,
+                    lat: mapCenter.lat,
+                    lng: mapCenter.lng,
                   };
                 }
                 
@@ -178,8 +157,8 @@ export default function ProvinceMap({
                     onMouseEnter={() => setHoveredMuni(muni.municipality)}
                     onMouseLeave={() => setHoveredMuni(null)}
                     onClick={() => {
-                      if (onMunicipalitySelect && risk > 0) {
-                        onMunicipalitySelect(muni.municipality);
+                      if (risk > 0) {
+                        handleMunicipalitySelect(muni.municipality);
                       }
                     }}
                   >
@@ -203,12 +182,12 @@ export default function ProvinceMap({
           <span className="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs">{sortedMunicipalities.length} Areas</span>
         </h4>
         <div className="flex flex-col gap-3">
-          {sortedMunicipalities.map((muni) => {
+          {sortedMunicipalities.map((muni: any) => {
             const risk = Number(muni.riskScore) || 0;
             return (
               <button
                 key={`list-${muni.municipality}`}
-                onClick={() => onMunicipalitySelect?.(muni.municipality)}
+                onClick={() => handleMunicipalitySelect(muni.municipality)}
                 onMouseEnter={() => setHoveredMuni(muni.municipality)}
                 onMouseLeave={() => setHoveredMuni(null)}
                 className={`flex items-center justify-between p-3 border hover:border-blue-200 transition-all text-left group

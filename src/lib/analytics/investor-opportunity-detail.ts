@@ -148,10 +148,7 @@ export async function getInvestorOpportunityDetail(
       amount: toNumber(funding.amount) ?? 0,
     })),
     updateRows: updatesResult.rows,
-    caveats: [
-      "Project detail currently reflects the governed Municipal Money project snapshot, not a full longitudinal project monitoring feed.",
-      "Funding rows and updates are derived from the normalized Treasury ingestion path already present in the platform.",
-    ],
+    caveats: [],
     trace: {
       tables: [
         "infrastructure_projects",

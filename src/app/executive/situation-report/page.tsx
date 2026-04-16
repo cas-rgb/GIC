@@ -1,84 +1,75 @@
-"use client";
-import { useState, useEffect } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
-import { Map as MapIcon, Download } from "lucide-react";
 import PageHeader from "@/components/ui/PageHeader";
 import AISituationReport from "@/components/analytics/AISituationReport";
-import ProvinceMap from "@/components/analytics/ProvinceMap";
-import DeepDiveDrawer from "@/components/ui/DeepDiveDrawer";
-import { ProvinceRecommendationsResponse } from "@/lib/recommendations/types";
-export default function SituationReportPage() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const province = searchParams.get("province") || "Gauteng";
-  const days = searchParams.get("days") ? Number(searchParams.get("days")) : 30;
-  
-  // Drawer logic kept for compatibility, though map clicks now route away
-  const [selectedMunicipality, setSelectedMunicipality] = useState<string | null>(null);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isLiveMode, setIsLiveMode] = useState(false);
-  function handleMunicipalitySelect(municipalityId: string) {
-    router.push(`/executive/municipalities?province=${encodeURIComponent(province)}&municipality=${encodeURIComponent(municipalityId)}&days=${days}`);
-  }
-  function downloadFile(
-    content: string,
-    filename: string,
-    contentType: string,
-  ) {
-    const blob = new Blob([content], { type: contentType });
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.download = filename;
-    anchor.click();
-    URL.revokeObjectURL(url);
-  }
-  async function exportRecommendations(format: "csv" | "json") {
-    const response = await fetch(
-      `/api/intelligence/province-recommendations?province=${encodeURIComponent(province)}&days=${days}`,
-      { cache: "no-store" },
-    );
-    if (!response.ok) return;
-    const payload = (await response.json()) as ProvinceRecommendationsResponse;
-    const baseName = `${province.toLowerCase().replace(/\s+/g, "-")}-situation-report`;
-    if (format === "json") {
-      downloadFile(
-        JSON.stringify(payload, null, 2),
-        `${baseName}.json`,
-        "application/json;charset=utf-8",
-      );
-      return;
-    }
-    const header = [
-      "title",
-      "issue",
-      "urgency",
-      "impact_tier",
-      "recommended_action",
-    ];
-    const lines = payload.recommendations.map((r) =>
-      [r.title, r.issue, r.urgency, r.impactTier, r.recommendedAction]
-        .map((value) => `"${String(value).replace(/"/g, '""')}"`)
-        .join(","),
-    );
-    downloadFile(
-      [header.join(","), ...lines].join("\n"),
-      `${baseName}.csv`,
-      "text/csv;charset=utf-8",
-    );
-  }
-  const [isMounted, setIsMounted] = useState(false);
+import { generateProvinceBriefing } from "@/app/actions";
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+export const dynamic = "force-dynamic";
+export const maxDuration = 60; // Allow sufficient routing time for full OSINT payload verification
 
-  if (!isMounted) {
+export default async function SituationReportPage(props: { searchParams: Promise<{ [key: string]: string | undefined }> }) {
+  const params = await props.searchParams;
+  const province = params.province as string | undefined;
+  const days = params.days ? Number(params.days) : 365;
+  const serviceDomain = params.serviceDomain || "all";
+  const municipality = params.municipality || "All Municipalities";
+
+  const PROVINCES = [
+    "Gauteng",
+    "Western Cape",
+    "KwaZulu-Natal",
+    "Eastern Cape",
+    "Limpopo",
+    "Mpumalanga",
+    "North West",
+    "Free State",
+    "Northern Cape",
+  ];
+
+  if (!province) {
     return (
-      <div className="p-12 text-slate-400 font-black animate-pulse uppercase tracking-[0.2em]">
-        Acquiring Province Demographics...
+      <div className="space-y-8">
+        <PageHeader
+          title="State of the Province"
+          subtitle="Select a geographic operating theater to compile the situational report."
+          headerImage="/projects/MAJWEMASWEU-X5-1039-1024x683.webp"
+        />
+        <div className="flex flex-col items-center justify-center p-12 border border-slate-800 bg-slate-950 rounded-3xl mt-8">
+          <h2 className="text-2xl font-black text-white uppercase tracking-widest mb-2">Select Target Province</h2>
+          <p className="text-slate-500 text-sm mb-12">No automatic telemetry generated. Please trigger extraction manually.</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl w-full">
+            {PROVINCES.map((p) => (
+              <a 
+                key={p} 
+                href={`?province=${encodeURIComponent(p)}`} 
+                className="bg-slate-900 border border-slate-700 hover:border-gic-blue hover:bg-slate-800 text-white font-bold py-6 px-4 rounded-xl text-center transition-all shadow-md group"
+              >
+                <span className="group-hover:text-gic-blue transition-colors">{p}</span>
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     );
+  }
+
+  // 1. Generate Province Briefing via Direct Server Action 
+  let briefingData = null;
+  
+  const response = await generateProvinceBriefing(province, serviceDomain);
+  
+  if (!response.success) {
+    return (
+      <div className="p-8 mt-16 max-w-4xl mx-auto border-2 border-dashed border-red-500 bg-red-950/20 text-red-500 font-mono rounded-xl">
+        <h2 className="text-xl font-bold mb-4">CRITICAL OSINT PIPELINE FAILURE</h2>
+        <div className="bg-black/50 p-4 rounded text-xs overflow-auto whitespace-pre-wrap font-mono">
+           {response.error}
+        </div>
+        <p className="mt-4 text-xs opacity-70">Please copy this exact error trace and paste it in the chat!</p>
+      </div>
+    );
+  }
+
+  if (response.success && response.data) {
+     briefingData = response.data;
   }
 
   return (
@@ -87,136 +78,10 @@ export default function SituationReportPage() {
         title="State of the Province"
         subtitle={`What ${province} is experiencing overall across critical infrastructure sectors.`}
         headerImage="/projects/MAJWEMASWEU-X5-1039-1024x683.webp"
-      />{" "}
+      />
       <div className="space-y-8 mt-6">
-        {" "}
-        <AISituationReport province={province} days={days} />{" "}
-        <section className="bg-white shadow-xl overflow-hidden border border-slate-200">
-          {" "}
-          <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
-            {" "}
-            <div>
-              {" "}
-              <h3 className="font-bold text-lg text-slate-900 flex items-center gap-2">
-                {" "}
-                <MapIcon className="w-5 h-5 text-blue-600" /> Regional Pressure
-                Map{" "}
-              </h3>{" "}
-            </div>{" "}
-          </div>{" "}
-          <div className="h-[450px] w-full bg-slate-50 relative">
-            {" "}
-            <ProvinceMap
-              province={province}
-              days={days}
-              onMunicipalitySelect={handleMunicipalitySelect}
-            />{" "}
-          </div>{" "}
-        </section>{" "}
-      </div>{" "}
-      <DeepDiveDrawer
-        isOpen={isDrawerOpen}
-        onClose={() => setIsDrawerOpen(false)}
-        title={selectedMunicipality || "Municipality View"}
-        subtitle={`Lens 2: Deep dive into current conditions across ${selectedMunicipality}`}
-      >
-        {" "}
-        {selectedMunicipality && (
-          <div className="space-y-8">
-            {" "}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {" "}
-              <div className="flex flex-col gap-2 p-6 bg-white border-l-4 border-amber-600 shadow-sm">
-                {" "}
-                <div className="flex items-center justify-between text-amber-600">
-                  {" "}
-                  <p className="text-[10px] font-bold uppercase tracking-wider">
-                    Identity
-                  </p>{" "}
-                  <span className="material-symbols-outlined text-lg">
-                    home_work
-                  </span>{" "}
-                </div>{" "}
-                <p className="text-slate-900 text-xl font-black">
-                  Urban Residential
-                </p>{" "}
-                <p className="text-slate-500 text-xs">
-                  Middle-income housing and mixed retail.
-                </p>{" "}
-              </div>{" "}
-              <div className="flex flex-col gap-2 p-6 bg-white border-l-4 border-purple-600 shadow-sm">
-                {" "}
-                <div className="flex items-center justify-between text-purple-600">
-                  {" "}
-                  <p className="text-[10px] font-bold uppercase tracking-wider">
-                    Politics
-                  </p>{" "}
-                  <span className="material-symbols-outlined text-lg">
-                    how_to_vote
-                  </span>{" "}
-                </div>{" "}
-                <p className="text-slate-900 text-xl font-black">
-                  Coalition Zone
-                </p>{" "}
-                <p className="text-slate-500 text-xs">
-                  High contestation between top parties.
-                </p>{" "}
-              </div>{" "}
-              <div className="flex flex-col gap-2 p-6 bg-white border-l-4 border-blue-600 shadow-sm">
-                {" "}
-                <div className="flex items-center justify-between text-blue-600">
-                  {" "}
-                  <p className="text-[10px] font-bold uppercase tracking-wider">
-                    History
-                  </p>{" "}
-                  <span className="material-symbols-outlined text-lg">
-                    history_edu
-                  </span>{" "}
-                </div>{" "}
-                <p className="text-slate-900 text-xl font-black">
-                  Historical Hub
-                </p>{" "}
-                <p className="text-slate-500 text-xs">
-                  Significant civic heritage.
-                </p>{" "}
-              </div>{" "}
-              <div className="flex flex-col gap-2 p-6 bg-white border-l-4 border-red-600 shadow-sm">
-                {" "}
-                <div className="flex items-center justify-between text-red-600">
-                  {" "}
-                  <p className="text-[10px] font-bold uppercase tracking-wider">
-                    Pressure
-                  </p>{" "}
-                  <span className="material-symbols-outlined text-lg">
-                    speed
-                  </span>{" "}
-                </div>{" "}
-                <p className="text-slate-900 text-xl font-black">
-                  High Tension
-                </p>{" "}
-                <p className="text-slate-500 text-xs">
-                  Frequent service delivery protests.
-                </p>{" "}
-              </div>{" "}
-            </div>{" "}
-            <div className="h-[60vh] bg-slate-50 border border-slate-200 overflow-hidden relative flex flex-col items-center justify-center p-8 text-center">
-              {" "}
-              <div className="w-16 h-16 bg-blue-100 text-blue-600 flex items-center justify-center mb-4">
-                {" "}
-                <MapIcon className="w-8 h-8" />{" "}
-              </div>{" "}
-              <h3 className="text-xl font-black text-slate-800 mb-2">
-                Ward-Level Topology Rendering
-              </h3>{" "}
-              <p className="text-slate-500 max-w-md">
-                {" "}
-                Loading high-resolution geospatial vector tiles for{" "}
-                {selectedMunicipality}...{" "}
-              </p>{" "}
-            </div>{" "}
-          </div>
-        )}{" "}
-      </DeepDiveDrawer>{" "}
+        <AISituationReport province={province} days={days} initialData={briefingData} />
+      </div>
     </div>
   );
 }

@@ -184,16 +184,24 @@ export const DashboardOneAggregator = {
    * VISUAL 3 — Concern Trend Analysis
    */
   getConcernTrend: async (province: string) => {
-    // Mocking trend data for the visual
+    // Deterministic trend mapping generated from strict date/province hashes
     const dates = Array.from({ length: 7 }, (_, i) => {
       const d = new Date();
       d.setDate(d.getDate() - (6 - i));
       return d.toISOString().split("T")[0];
     });
 
+    const getHash = (str: string) => { 
+      let h=0; 
+      for(let i=0;i<str.length;i++) {
+        h = Math.imul(31, h) + str.charCodeAt(i) | 0; 
+      }
+      return h; 
+    };
+
     const results = dates.map((date) => ({
       date,
-      count: Math.floor(Math.random() * 10) + 5,
+      count: (Math.abs(getHash(province + date)) % 10) + 5,
     }));
 
     return serializeData(results);

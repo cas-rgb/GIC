@@ -26,19 +26,18 @@ export default function NarrativeVelocityBubbleChart({
   // Bubbles represent topics (words), X = Days Ago, Y = Sentiment, Z = Mention Volume
   if (words.length === 0) {
     return (
-      <div className="w-full h-full min-h-[300px] flex items-center justify-center bg-slate-800 border border-slate-700">
-        <p className="text-sm font-bold text-slate-500">Awaiting narrative signals...</p>
+      <div className="w-full h-full min-h-[300px] flex items-center justify-center bg-slate-900 border border-slate-800 rounded-lg">
+        <p className="text-sm font-bold text-slate-500 uppercase tracking-widest">[ AWAITING NARRATIVE SIGNALS ]</p>
       </div>
     );
   }
 
   const topTopics = words.slice(0, 10);
   const chartData = topTopics.map((topic, i) => {
-    // Randomly assign a "peak day" (1 to 7) for this topic to show velocity spread
+    // Use index hashing to assign a "peak day" (1 to 7) for this topic to show velocity spread
     const dayIndex = (i * 3) % 7;
     const baseSentiment = sentimentTimeline[dayIndex]?.score || 50;
-    // Add some noise to the sentiment so they don't all sit on the exact same line
-    const bubbleSentiment = Math.max(0, Math.min(100, baseSentiment + (Math.random() * 30 - 15)));
+    const bubbleSentiment = baseSentiment;
     return {
       name: topic.word,
       day: dayIndex + 1, // X Axis (Day 1-7)
@@ -83,7 +82,7 @@ export default function NarrativeVelocityBubbleChart({
             <Tooltip cursor={{ strokeDasharray: '3 3', stroke: '#cbd5e1' }} content={<CustomTooltip />} />
             <ReferenceLine y={40} stroke="#f43f5e" strokeDasharray="3 3" opacity={0.5} />
             <ReferenceLine y={60} stroke="#10b981" strokeDasharray="3 3" opacity={0.5} />
-            <Scatter name="Topics" data={chartData} animationDuration={1500}>
+            <Scatter name="Topics" data={chartData} fill="var(--color-gic-gold)" animationDuration={1500}>
               {chartData.map((entry, index) => {
                 const fill = entry.sentiment < 40 ? '#f43f5e' : entry.sentiment > 60 ? '#10b981' : '#f59e0b';
                 return <Cell key={`cell-${index}`} fill={fill} opacity={0.7} stroke={fill} strokeWidth={2} />;

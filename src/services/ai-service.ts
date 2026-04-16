@@ -11,12 +11,12 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const apiKey = process.env.VERTEX_AI_API_KEY || "";
 const genAI = new GoogleGenerativeAI(apiKey);
 
-// Use Gemini 3.1 Series (2026 Flagship)
+// Use Gemini 1.5 Flash for Cost Optimization
 export const geminiPro = genAI.getGenerativeModel({
-  model: "gemini-3.1-pro-preview",
+  model: "gemini-1.5-flash",
 });
 export const geminiFlash = genAI.getGenerativeModel({
-  model: "gemini-3-flash-preview",
+  model: "gemini-1.5-flash",
 });
 export const geminiEmbed = genAI.getGenerativeModel({
   model: "text-embedding-004",

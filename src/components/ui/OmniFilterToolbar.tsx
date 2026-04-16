@@ -112,6 +112,8 @@ export default function OmniFilterToolbar() {
   const queryWard = searchParams.get("ward");
 
   const [copied, setCopied] = useState(false);
+  const [liveWards, setLiveWards] = useState<string[]>([]);
+  const [loadingWards, setLoadingWards] = useState(false);
 
   // Derive source-of-truth values gracefully, falling back to local storage
   const getLocal = (key: string, def: string) => {
@@ -119,69 +121,25 @@ export default function OmniFilterToolbar() {
     return def;
   };
 
-  const province = queryProvince || getLocal("gicFilter_province", "Gauteng");
+  const province = queryProvince || ""; 
   const days = queryDays ? Number(queryDays) : Number(getLocal("gicFilter_days", "30"));
   const serviceDomain = queryServiceDomain || getLocal("gicFilter_serviceDomain", "all");
 
-  const isMunicipalityRoute =
-    pathname.includes("/executive/municipalities") ||
-    pathname.includes("/executive/leadership");
+  const isMunicipalityRoute = false; // Intentionally disable the cascade UI entirely
 
-  let municipality = queryMunicipality || getLocal("gicFilter_municipality", "Johannesburg");
-  let ward = queryWard || getLocal("gicFilter_ward", "All Wards");
-
-  // Validate that the derived municipality ACTUALLY belongs to the current province, otherwise reset
-  if (
-    province !== "All Provinces" &&
-    PROVINCE_MUNICIPALITIES[province] &&
-    !PROVINCE_MUNICIPALITIES[province].includes(municipality)
-  ) {
-    municipality = "All Municipalities";
-  }
+  // Live wards effect removed as we no longer show ward selection top-level
 
   // Effect handles single unidirectional sync from derived values back to query url & cache
   useEffect(() => {
     const nextParams = new URLSearchParams(searchParams.toString());
     let changed = false;
 
-    if (!queryProvince && province && province !== "All Provinces") {
-      nextParams.set("province", province);
-      changed = true;
-    }
     if (!queryDays && days) {
       nextParams.set("days", String(days));
       changed = true;
     }
-    if (!queryServiceDomain && serviceDomain !== "all") {
+    if (!queryServiceDomain) {
       nextParams.set("serviceDomain", serviceDomain);
-      changed = true;
-    }
-
-    if (isMunicipalityRoute) {
-      if (!queryMunicipality && municipality && municipality !== "All Municipalities") {
-        nextParams.set("municipality", municipality);
-        changed = true;
-      } else if (queryMunicipality && municipality === "All Municipalities") {
-        nextParams.delete("municipality");
-        changed = true;
-      }
-
-      if (municipality !== "All Municipalities") {
-        if (!queryWard && ward && ward !== "All Wards") {
-          nextParams.set("ward", ward);
-          changed = true;
-        } else if (queryWard && ward === "All Wards") {
-          nextParams.delete("ward");
-          changed = true;
-        }
-      } else if (queryWard) {
-        nextParams.delete("ward");
-        changed = true;
-      }
-    } else if (queryMunicipality) {
-      // Purge municipality from URL if not on a valid route
-      nextParams.delete("municipality");
-      nextParams.delete("ward");
       changed = true;
     }
 
@@ -190,10 +148,9 @@ export default function OmniFilterToolbar() {
     }
 
     if (typeof window !== "undefined") {
-      localStorage.setItem("gicFilter_province", province);
+      if (province) localStorage.setItem("gicFilter_province", province);
       localStorage.setItem("gicFilter_days", days.toString());
       localStorage.setItem("gicFilter_serviceDomain", serviceDomain);
-      localStorage.setItem("gicFilter_municipality", municipality);
     }
   }, [
     pathname,
@@ -206,9 +163,6 @@ export default function OmniFilterToolbar() {
     province,
     days,
     serviceDomain,
-    municipality,
-    ward,
-    isMunicipalityRoute,
     router,
   ]);
 
@@ -220,88 +174,14 @@ export default function OmniFilterToolbar() {
             <div className="bg-gic-blue/10 p-2 pointer-events-none">
               <MapPin className="w-5 h-5 text-gic-blue" />
             </div>
-            {/* Context Breadcrumb Wrapper */}
+            {/* UI Dropdown Removed entirely per user request - provinces are now presented as buttons on respective pages */}
             <div className="flex items-center gap-2">
-              <select
-                value={province}
-                onChange={(e) => {
-                  const newProv = e.target.value;
-                  const nextParams = new URLSearchParams(searchParams.toString());
-                  if (newProv !== "All Provinces") nextParams.set("province", newProv);
-                  else nextParams.delete("province");
-                  
-                  // Reset municipality immediately on province change to avoid mismatch
-                  nextParams.delete("municipality"); 
-                  nextParams.delete("ward");
-                  
-                  router.replace(`${pathname}?${nextParams.toString()}`, { scroll: false });
-                }}
-                className={`bg-transparent border-none font-black text-slate-900 focus:ring-0 p-0 cursor-pointer ${isMunicipalityRoute ? "text-sm text-slate-500" : "text-xl"}`}
-              >
-                {PROVINCES.map((p) => (
-                  <option key={p} value={p}>
-                    {p}
-                  </option>
-                ))}
-              </select>
-              {isMunicipalityRoute && (
-                <>
-                  <span className="text-slate-300 font-light">/</span>
-                  <select
-                    value={municipality}
-                    onChange={(e) => {
-                      const val = e.target.value;
-                      const nextParams = new URLSearchParams(searchParams.toString());
-                      if (val !== "All Municipalities") {
-                        nextParams.set("municipality", val);
-                      } else {
-                        nextParams.delete("municipality");
-                      }
-                      router.replace(`${pathname}?${nextParams.toString()}`, { scroll: false });
-                    }}
-                    className="bg-transparent border-none text-xl font-black text-gic-blue focus:ring-0 p-0 cursor-pointer min-w-[200px]"
-                  >
-                    {(PROVINCE_MUNICIPALITIES[province] || []).map((m) => (
-                      <option key={m} value={m}>
-                        {m}
-                      </option>
-                    ))}
-                  </select>
-                </>
-              )}
-              {isMunicipalityRoute && municipality && municipality !== "All Municipalities" && (
-                <>
-                  <span className="text-slate-300 font-light">/</span>
-                  <select
-                    value={ward}
-                    onChange={(e) => {
-                      const val = e.target.value;
-                      const nextParams = new URLSearchParams(searchParams.toString());
-                      if (val !== "All Wards") {
-                        nextParams.set("ward", val);
-                      } else {
-                        nextParams.delete("ward");
-                      }
-                      router.replace(`${pathname}?${nextParams.toString()}`, { scroll: false });
-                    }}
-                    className="bg-transparent border-none text-xl font-black text-slate-500 focus:ring-0 p-0 cursor-pointer min-w-[120px]"
-                  >
-                    <option value="All Wards">All Wards</option>
-                    {Array.from({ length: MUNICIPALITY_WARD_COUNTS[municipality] || 50 }).map((_, i) => {
-                      const rootW = WARD_NOMS[`${municipality}_${i + 1}`];
-                      
-                      return (
-                        <option key={i} value={`Ward ${i + 1}`}>
-                          Ward {i + 1} {rootW ? `- ${rootW}` : ""}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </>
-              )}
+              <span className={`font-black text-slate-900 ${isMunicipalityRoute ? "text-sm text-slate-500" : "text-xl"}`}>
+                 {province && province !== "" ? province : ""}
+              </span>
+              {/* Municipality and Ward cascades explicitly removed to prevent scattered auto-fetching. Targets are now selected contextually in-dashboard. */}
             </div>
           </div>
-
         </div>
       </div>
     </div>

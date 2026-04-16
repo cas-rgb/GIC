@@ -51,34 +51,13 @@ const generateWardPolygon = (lat: number, lng: number, radiusMeters: number, idS
   return path;
 }
 
-export default function MunicipalityMapPanel({ municipality }: { municipality: string }) {
+export default function MunicipalityMapPanel({ municipality, wardsData, isLoading }: { municipality: string, wardsData?: any[], isLoading?: boolean }) {
   const searchParams = useSearchParams();
   const activeWardQuery = searchParams.get("ward") || "All Wards";
 
   const [center, setCenter] = useState({ lat: -26.2041, lng: 28.0473 });
   const [zoom, setZoom] = useState(11);
-  const [wards, setWards] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  
-  useEffect(() => {
-    async function fetchWards() {
-      setLoading(true);
-      try {
-        const res = await fetch(`/api/analytics/ward-intelligence?municipality=${encodeURIComponent(municipality)}`);
-        if (res.ok) {
-          const data = await res.json();
-          if (data.wards && data.wards.length > 0) {
-            setWards(data.wards);
-          }
-        }
-      } catch (e) {
-        console.error("Ward Mapping Error", e);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchWards();
-  }, [municipality]);
+  const wards = wardsData || [];
 
   useEffect(() => {
     if (wards.length === 0) return;

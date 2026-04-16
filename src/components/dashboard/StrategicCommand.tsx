@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Database,
   ShieldCheck,
@@ -45,8 +45,9 @@ import PremierPulse from "../analytics/PremierPulse";
 import StrategicNews from "../analytics/StrategicNews";
 import NarrativeAmplification from "../analytics/NarrativeAmplification";
 import RiskMatrix from "../analytics/RiskMatrix";
-import RegionalHeatmap from "../analytics/RegionalHeatmap";
+import ProvinceIssueHeatmapPanel from "../analytics/ProvinceIssueHeatmapPanel";
 import IntegrityLedger from "../analytics/IntegrityLedger";
+import ErrorBoundary from "@/components/ui/ErrorBoundary";
 
 interface StrategicCommandProps {
   serviceId: string;
@@ -60,7 +61,9 @@ export default function StrategicCommand({
   isLoading,
 }: StrategicCommandProps) {
   const [province, setProvince] = useState("Gauteng");
-  const [municipality, setMunicipality] = useState("City of Joburg");
+  const [municipality, setMunicipality] = useState("City of Johannesburg");
+  const [ward, setWard] = useState("All");
+
   const [logicalData, setLogicalData] = useState<any>(null);
   const [newsArticles, setNewsArticles] = useState<any[]>([]);
   const [narrativeDrivers, setNarrativeDrivers] = useState<NarrativeDriver[]>(
@@ -72,6 +75,9 @@ export default function StrategicCommand({
   const [realPromises, setRealPromises] = useState<any[]>([]);
   const [leadershipData, setLeadershipData] = useState<any>(null);
   const [isSyncing, setIsSyncing] = useState(false);
+  const [timeframe, setTimeframe] = useState<"recent" | "historical">("recent");
+
+  const cacheMap = useRef(new Map<string, any>());
 
   // Service Themes for Extreme Identity
   const SERVICE_IDENTITY: any = {
@@ -149,7 +155,7 @@ export default function StrategicCommand({
   ];
 
   const MUNICIPALITIES: any = {
-    Gauteng: ["All", "City of Joburg", "Ekurhuleni", "Tshwane", "Sedibeng"],
+    Gauteng: ["All", "City of Johannesburg", "Ekurhuleni", "City of Tshwane", "Sedibeng"],
     "Western Cape": [
       "All",
       "City of Cape Town",
@@ -158,12 +164,34 @@ export default function StrategicCommand({
       "Drakenstein",
     ],
     "Eastern Cape": ["All", "Nelson Mandela Bay", "Buffalo City", "OR Tambo"],
-    "KwaZulu-Natal": ["All", "eThekwini", "uMsunduzi", "uMhlathuze"],
-    Limpopo: ["All", "Polokwane", "Thohoyandou", "Mopani"],
-    Mpumalanga: ["All", "City of Mbombela", "Emalahleni", "Steve Tshwete"],
+    "KwaZulu-Natal": ["All", "eThekwini", "Msunduzi", "uMhlathuze"],
+    Limpopo: ["All", "Polokwane", "Thulamela", "Mopani"],
+    Mpumalanga: ["All", "Mbombela", "Emalahleni", "Steve Tshwete"],
     "North West": ["All", "Mahikeng", "Rustenburg", "Tlokwe"],
-    "Free State": ["All", "Bloemfontein", "Welkom", "Maluti-a-Phofung"],
-    "Northern Cape": ["All", "Sol Plaatje", "Dawid Kruiper", "Ga-Segonyana"],
+    "Free State": ["All", "Mangaung", "Matjhabeng", "Maluti-a-Phofung"],
+    "Northern Cape": ["All", "Sol Plaatje", "Dikgatlong", "Ga-Segonyana"],
+  };
+
+  const WARDS: any = {
+    "City of Johannesburg": ["All", "Ward 58", "Ward 12", "Ward 77"],
+    "City of Tshwane": ["All", "Ward 77", "Ward 42"],
+    "City of Cape Town": ["All", "Ward 13", "Ward 8"],
+    "Drakenstein": ["All", "Ward 6"],
+    "eThekwini": ["All", "Ward 34", "Ward 11"],
+    "Msunduzi": ["All", "Ward 28"],
+    "Nelson Mandela Bay": ["All", "Ward 4"],
+    "Buffalo City": ["All", "Ward 31"],
+    "Polokwane": ["All", "Ward 19"],
+    "Thulamela": ["All", "Ward 14"],
+    "Mbombela": ["All", "Ward 22"],
+    "Emalahleni": ["All", "Ward 10"],
+    "Rustenburg": ["All", "Ward 16"],
+    "Mahikeng": ["All", "Ward 9"],
+    "Mangaung": ["All", "Ward 46"],
+    "Matjhabeng": ["All", "Ward 20"],
+    "Sol Plaatje": ["All", "Ward 8"],
+    "Dikgatlong": ["All", "Ward 3"],
+    "All": ["All"],
   };
 
   // Leadership Mapping Helper
@@ -195,16 +223,6 @@ export default function StrategicCommand({
     });
   };
 
-  const generateHeatmapData = (prov: string) => {
-    return MUNICIPALITIES[prov]
-      .filter((m: string) => m !== "All")
-      .map((m: string) => ({
-        name: m,
-        urgency: Math.floor(Math.random() * 60) + 20,
-        impact: Math.floor(Math.random() * 50) + 30,
-      }));
-  };
-
   // Mock Promises
   const generatePromises = (prov: string) => {
     return [
@@ -233,22 +251,44 @@ export default function StrategicCommand({
   };
 
   useEffect(() => {
-    const syncLogic = async () => {
+    let active = true;
+    const runFetch = setTimeout(async () => {
+      const geoLevel = ward !== "All" ? `${municipality}_${ward}` : municipality !== "All" ? municipality : province;
+      const cacheKey = `${serviceId}_${geoLevel}_${timeframe}`;
+
+      if (cacheMap.current.has(cacheKey)) {
+        const cached = cacheMap.current.get(cacheKey);
+        setLogicalData(cached.logicalData);
+        setNewsArticles(cached.newsArticles);
+        setNarrativeDrivers(cached.narrativeDrivers);
+        setPredictiveRisks(cached.predictiveRisks);
+        setRecommendation(cached.recommendation);
+        setRealPromises(cached.realPromises);
+        setLeadershipData(cached.leadershipData);
+        setIsSyncing(false);
+        return;
+      }
+
       setIsSyncing(true);
 
       // 1. Fetch Logical Identity, News, and Leadership
-      const communityId = (municipality !== "All" ? municipality : province)
-        .toLowerCase()
-        .replace(/\s+/g, "_");
+      const communityId = geoLevel.toLowerCase().replace(/\s+/g, "_");
       const provinceId = province.toLowerCase().replace(/\s+/g, "_");
 
       const { db } = await import("@/lib/firebase");
       const { doc, getDoc } = await import("firebase/firestore");
 
-      const [resLogic, resNews, leadershipDoc, promiseDoc] = await Promise.all([
+      const [
+        resLogic,
+        resNews,
+        leadershipDoc,
+        promiseDoc,
+        resGrounded,
+      ] = await Promise.all([
         getLogicalIntelligence(serviceId, province, municipality),
         getStrategicNews(
-          `${municipality !== "All" ? municipality : province} ${serviceId === "apex" ? "infrastructure" : serviceId}`,
+          `${ward !== "All" ? ward : ""} ${municipality !== "All" ? municipality : province} ${serviceId === "apex" ? "infrastructure" : serviceId}`,
+          timeframe
         ),
         getDoc(
           doc(
@@ -258,20 +298,20 @@ export default function StrategicCommand({
           ),
         ),
         getDoc(doc(db, "provincial_promises", provinceId)),
+        getGroundedSignals(communityId, identity.category || "Apex", timeframe),
       ]);
 
-      // 2. Fetch Grounded Evidence (Seeded high-fidelity signals)
-      const resGrounded = await getGroundedSignals(
-        communityId,
-        identity.category || "Apex",
-      );
+      if (!active) return;
 
-      // 3. Update States
-      if (leadershipDoc.exists()) setLeadershipData(leadershipDoc.data());
-      if (promiseDoc.exists())
-        setRealPromises(promiseDoc.data().promises || []);
-      else setRealPromises(generatePromises(province));
+      const newLeadershipData = leadershipDoc.exists() ? leadershipDoc.data() : null;
+      setLeadershipData(newLeadershipData);
 
+      const retrievedPromises = promiseDoc.exists()
+        ? promiseDoc.data().promises || []
+        : generatePromises(province);
+      setRealPromises(retrievedPromises);
+
+      const retrievedLogicalData = resLogic.success ? resLogic.data : null;
       if (resLogic.success) setLogicalData(resLogic.data);
 
       const baseArticles: any[] = resNews.success ? resNews.data || [] : [];
@@ -288,28 +328,59 @@ export default function StrategicCommand({
         ),
       ].join(" ");
 
-      setNewsArticles([...groundedSignals, ...baseArticles]);
+      const combinedNews = [...groundedSignals, ...baseArticles];
+      setNewsArticles(combinedNews);
+
+      let newNarrativeDrivers: any[] = [];
+      let newPredictiveRisks: any[] = [];
+      let newRecommendation: any = null;
 
       if (combinedContent.trim()) {
         const [resNarrative, resRisk] = await Promise.all([
           getNarrativeAnalysis(combinedContent),
-          getPredictiveRisk(resLogic.data?.signals || groundedSignals),
+          getPredictiveRisk(retrievedLogicalData?.signals || groundedSignals),
         ]);
 
-        if (resNarrative.success) setNarrativeDrivers(resNarrative.data || []);
+        if (!active) return;
+
+        if (resNarrative.success) {
+          newNarrativeDrivers = resNarrative.data || [];
+          setNarrativeDrivers(newNarrativeDrivers);
+        }
         if (resRisk.success) {
-          setPredictiveRisks(resRisk.data || []);
+          newPredictiveRisks = resRisk.data || [];
+          setPredictiveRisks(newPredictiveRisks);
           const resRec = await getStrategicRecommendationsAction(
             resRisk.data || [],
             province,
           );
-          if (resRec.success && resRec.data) setRecommendation(resRec.data);
+          if (active && resRec.success && resRec.data) {
+             newRecommendation = resRec.data;
+             setRecommendation(newRecommendation);
+          }
         }
       }
-      setIsSyncing(false);
+
+      cacheMap.current.set(cacheKey, {
+         logicalData: retrievedLogicalData,
+         newsArticles: combinedNews,
+         narrativeDrivers: newNarrativeDrivers,
+         predictiveRisks: newPredictiveRisks,
+         recommendation: newRecommendation,
+         realPromises: retrievedPromises,
+         leadershipData: newLeadershipData
+      });
+
+      if (active) {
+          setIsSyncing(false);
+      }
+    }, 600); // 600ms debounce
+    
+    return () => {
+        active = false;
+        clearTimeout(runFetch);
     };
-    syncLogic();
-  }, [serviceId, province, municipality, identity.category]);
+  }, [serviceId, province, municipality, ward, identity.category, timeframe]);
 
   const insights = strategicInsights || {
     hotspots: [],
@@ -354,6 +425,7 @@ export default function StrategicCommand({
                 onChange={(e) => {
                   setProvince(e.target.value);
                   setMunicipality("All");
+                  setWard("All");
                 }}
                 className="bg-transparent font-bold text-gray-700 text-sm focus:outline-none appearance-none pr-6"
               >
@@ -364,30 +436,63 @@ export default function StrategicCommand({
                 ))}
               </select>
             </div>
-            <div className="flex items-center gap-3 px-4">
+            <div className="flex items-center gap-3 px-4 border-r border-gray-200">
               <Search className="w-4 h-4 text-gray-400" />
               <select
                 value={municipality}
-                onChange={(e) => setMunicipality(e.target.value)}
+                onChange={(e) => { 
+                  setMunicipality(e.target.value);
+                  setWard("All");
+                }}
                 className="bg-transparent font-bold text-gray-700 text-sm focus:outline-none appearance-none pr-6"
               >
-                {MUNICIPALITIES[province].map((m: string) => (
+                {(MUNICIPALITIES[province] || []).map((m: string) => (
                   <option key={m} value={m}>
                     {m}
                   </option>
                 ))}
               </select>
             </div>
+            <div className="flex items-center gap-3 px-4">
+              <span className="text-gray-400 font-bold text-sm">#</span>
+              <select
+                value={ward}
+                onChange={(e) => setWard(e.target.value)}
+                className="bg-transparent font-bold text-gray-700 text-sm focus:outline-none appearance-none pr-6"
+              >
+                {(WARDS[municipality] || ["All"]).map((w: string) => (
+                  <option key={w} value={w}>
+                    {w}
+                  </option>
+                ))}
+              </select>
+            </div>
             <div className="flex items-center gap-3 px-6 py-2 bg-white rounded-lg shadow-sm border border-gray-200">
-              <div className="w-2 h-2 rounded-full bg-blue-500" />
-              <span className="text-[10px] font-black text-gray-500 uppercase">
-                Grounded Intelligence
-              </span>
+              <button
+                onClick={() => setTimeframe("recent")}
+                className={`text-[10px] font-black uppercase px-2 py-1 rounded transition-colors ${timeframe === "recent" ? "bg-gray-900 text-white" : "text-gray-400 hover:text-gray-700"}`}
+              >
+                Recent (30D)
+              </button>
+              <button
+                onClick={() => setTimeframe("historical")}
+                className={`text-[10px] font-black uppercase px-2 py-1 rounded transition-colors ${timeframe === "historical" ? "bg-gray-900 text-white" : "text-gray-400 hover:text-gray-700"}`}
+              >
+                All Context
+              </button>
             </div>
           </div>
         </div>
       </div>
 
+      {isSyncing ? (
+        <div className="max-w-[1600px] mx-auto px-12 pt-32 pb-64 flex flex-col items-center justify-center space-y-6">
+          <div className="w-16 h-16 border-4 border-gray-200 border-t-gic-blue rounded-full animate-spin"></div>
+          <p className="text-sm font-black text-gray-500 uppercase tracking-widest animate-pulse">
+            Auditing Intelligence Streams...
+          </p>
+        </div>
+      ) : (
       <div className="max-w-[1600px] mx-auto px-12 pt-12 space-y-12">
         {/* 2. EXECUTIVE KPI SCORECARDS */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -463,8 +568,13 @@ export default function StrategicCommand({
                 Spatial Risk Distribution
               </div>
             </div>
-            <div className="h-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden p-4">
-              <RegionalHeatmap data={generateHeatmapData(province)} />
+            <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-4">
+              <ErrorBoundary>
+                <ProvinceIssueHeatmapPanel
+                  province={province}
+                  serviceDomain={serviceId === "apex" ? null : serviceId}
+                />
+              </ErrorBoundary>
             </div>
           </div>
 
@@ -524,7 +634,9 @@ export default function StrategicCommand({
               </div>
             </div>
             <div className="h-[700px] bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-              <NarrativeAmplification drivers={narrativeDrivers} />
+              <ErrorBoundary>
+                <NarrativeAmplification drivers={narrativeDrivers} />
+              </ErrorBoundary>
             </div>
           </div>
           <div className="space-y-6">
@@ -537,7 +649,9 @@ export default function StrategicCommand({
               </div>
             </div>
             <div className="h-[700px] bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-              <RiskMatrix risks={predictiveRisks} />
+              <ErrorBoundary>
+                <RiskMatrix risks={predictiveRisks} />
+              </ErrorBoundary>
             </div>
           </div>
         </div>
@@ -554,11 +668,13 @@ export default function StrategicCommand({
               </div>
             </div>
             <div className="h-[600px] bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-              <IntegrityLedger
-                premier={PREMIERS[province]}
-                province={province}
-                promises={realPromises}
-              />
+              <ErrorBoundary>
+                <IntegrityLedger
+                  premier={PREMIERS[province]}
+                  province={province}
+                  promises={realPromises}
+                />
+              </ErrorBoundary>
             </div>
           </div>
 
@@ -643,6 +759,7 @@ export default function StrategicCommand({
           </div>
         </div>
       </div>
+      )}
     </div>
   );
 }

@@ -139,11 +139,7 @@ export default function GroundTruthTracker({
                 </p>{" "}
               </div>{" "}
             </div>{" "}
-            <div className="px-3 py-1 bg-rose-500/20 text-rose-400 text-[10px] font-black uppercase tracking-widest border border-rose-500/30 flex items-center gap-2">
-              {" "}
-              <AlertTriangle className="w-3 h-3" /> Physical Integrity
-              Compromised{" "}
-            </div>{" "}
+
           </div>{" "}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {" "}
@@ -228,25 +224,7 @@ export default function GroundTruthTracker({
       </div>{" "}
 
 
-      {/* 4. DATA CONFIDENCE PANEL */}{" "}
-      <div className="bg-slate-50 border border-slate-200 p-4 flex items-start gap-3">
-        {" "}
-        <Info className="w-5 h-5 text-slate-400 shrink-0 mt-0.5" />{" "}
-        <div>
-          {" "}
-          <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-            Data Confidence & Governance
-          </h4>{" "}
-          <p className="text-xs text-slate-500 leading-relaxed">
-            {" "}
-            The Reality Feed is sourced directly from authenticated field
-            agents, municipal dispatch logs, and verified civic imaging
-            platforms. Qualitative quotes are verified against official incident
-            tickets. No unverified social media scraping is utilized in this
-            Ground Truth determination.{" "}
-          </p>{" "}
-        </div>{" "}
-      </div>{" "}
+
 
       <DeepDiveDrawer
         isOpen={!!selectedWard}

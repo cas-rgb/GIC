@@ -8,7 +8,9 @@ function generateMockProvincePerimeter(centerLat: number, centerLng: number, rad
   const path = [];
   for (let i = 0; i < points; i++) {
     const angle = (i / points) * Math.PI * 2;
-    const r = radiusDeg * (0.85 + Math.random() * 0.3);
+    // Substitute volatile Math.random() with deterministic algebraic jitter
+    const deterministicNoise = ((i * 13) % 30) / 100;
+    const r = radiusDeg * (0.85 + deterministicNoise);
     path.push({
       lat: centerLat + Math.cos(angle) * r,
       lng: centerLng + Math.sin(angle) * r,

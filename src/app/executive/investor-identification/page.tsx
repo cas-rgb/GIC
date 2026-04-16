@@ -1,6 +1,8 @@
 import PageHeader from "@/components/ui/PageHeader";
 import InvestorIdentificationClient from "@/components/analytics/InvestorIdentificationClient";
 
+export const dynamic = "force-dynamic";
+
 export default function InvestorIdentificationPage() {
   return (
     <div className="space-y-8">

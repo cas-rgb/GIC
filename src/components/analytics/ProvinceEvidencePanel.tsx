@@ -159,13 +159,16 @@ export default function ProvinceEvidencePanel({
               No governed province documents match this filter yet.
             </div>
           ) : (
-            (data.documents || []).map((document) => (
-              <a
+            (data.documents || []).map((document) => {
+              const hasUrl = Boolean(document.url && document.url.trim() !== "");
+              const CardWrapper = hasUrl ? 'a' : 'div';
+              const linkProps = hasUrl ? { href: document.url, target: "_blank", rel: "noreferrer" } : {};
+              
+              return (
+              <CardWrapper
                 key={document.documentId}
-                href={document.url}
-                target="_blank"
-                rel="noreferrer"
-                className="block rounded-2xl border border-slate-100 bg-white p-4 shadow-sm transition-colors hover:bg-slate-50"
+                {...linkProps}
+                className={`block rounded-2xl border border-slate-100 bg-white p-4 shadow-sm transition-colors ${hasUrl ? "hover:bg-slate-50 cursor-pointer" : "opacity-80 cursor-default"}`}
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-2">
@@ -190,8 +193,8 @@ export default function ProvinceEvidencePanel({
                 <p className="mt-3 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                   {document.mentionCount} sentiment mentions linked
                 </p>
-              </a>
-            ))
+              </CardWrapper>
+            )})
           )}
         </div>
 

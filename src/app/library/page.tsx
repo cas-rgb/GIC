@@ -30,6 +30,8 @@ export default function EvidenceLibrary() {
   const [reliabilityFilter, setReliabilityFilter] = useState("all");
   const [sourceFilter, setSourceFilter] = useState("all");
   const [clusterFilter, setClusterFilter] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
     async function loadLiveEvidence() {
@@ -57,8 +59,30 @@ export default function EvidenceLibrary() {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-hover:text-gic-blue transition-colors" />
               <input
                 type="text"
-                placeholder="Search hashes or sources..."
-                className="bg-white border border-slate-200 rounded-2xl py-3 pl-12 pr-6 text-xs font-bold focus:outline-none focus:border-gic-blue transition-all w-64"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={async (e) => {
+                  if (e.key === "Enter" && searchQuery.trim()) {
+                    setIsSearching(true);
+                    try {
+                      const res = await fetch("/api/intelligence/vault-search", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ searchQuery }),
+                      });
+                      const data = await res.json();
+                      if (data.documents) {
+                        setEvidence(data.documents);
+                      }
+                    } catch (err) {
+                      console.error("Vector Search Failed:", err);
+                    }
+                    setIsSearching(false);
+                  }
+                }}
+                disabled={isSearching}
+                placeholder={isSearching ? "Vector Mapping..." : "Search hashes or sources..."}
+                className="bg-white border border-slate-200 rounded-2xl py-3 pl-12 pr-6 text-xs font-bold focus:outline-none focus:border-gic-blue transition-all w-64 disabled:opacity-50"
               />
             </div>
             <button className="gic-btn gic-btn-primary flex items-center gap-3">
@@ -174,12 +198,12 @@ export default function EvidenceLibrary() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-50">
-                  {isLoading ? (
+                  {isLoading || isSearching ? (
                     <tr>
                       <td colSpan={6} className="py-20 text-center">
                         <div className="w-8 h-8 border-4 border-gic-blue border-t-transparent rounded-full animate-spin mx-auto mb-4" />
                         <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest">
-                          Verifying Institutional Sources...
+                          {isSearching ? "Executing Deep Vector Retrieval..." : "Verifying Institutional Sources..."}
                         </p>
                       </td>
                     </tr>
@@ -226,14 +250,14 @@ export default function EvidenceLibrary() {
                         </td>
                         <td className="py-6">
                           <p className="text-[11px] font-bold text-slate-700">
-                            {item.metadata.sourceName}
+                            {item.metadata?.sourceName || item.source_name || "GIC Verified Archive"}
                           </p>
                           <p className="text-[9px] font-black text-gic-blue uppercase tracking-widest mt-1">
-                            {item.metadata.platform || "OSINT"}
+                            {item.metadata?.platform || (item.rag_score ? `AI RELEVANCE: ${(item.rag_score * 100).toFixed(1)}%` : "OSINT")}
                           </p>
                         </td>
                         <td className="py-6 font-mono text-[10px] text-slate-400">
-                          {item.hash?.substring(0, 16) || "SHA256:AUTHENTIC"}...
+                          {item.id?.substring(0, 16) || item.hash?.substring(0, 16) || "SHA256:AUTHENTIC"}...
                         </td>
                         <td className="py-6 text-right pr-4">
                           <a

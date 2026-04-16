@@ -1,29 +1,43 @@
-import { db } from "./src/lib/firebase";
-import { collection, getDocs, query, where, limit } from "firebase/firestore";
-import * as dotenv from "dotenv";
+require('dotenv').config({ path: '.env.local' });
+require('ts-node').register({ transpileOnly: true });
 
-dotenv.config({ path: ".env.local" });
+const { query, pool } = require('./src/lib/db/index');
 
-async function auditData() {
-    console.log("--- GIC DATA AUDIT ---");
-    const collections = ['datasetEntries', 'leaders', 'tenders', 'opportunities', 'riskSignals', 'planningBudgets'];
-    
-    for (const colName of collections) {
-        try {
-            const colRef = collection(db, colName);
-            const snapshot = await getDocs(query(colRef, limit(100)));
-            console.log(`Collection: ${colName} | Count (Sample): ${snapshot.size}`);
-            
-            if (snapshot.size > 0) {
-                const first = snapshot.docs[0].data();
-                console.log(` - Sample Municipality: ${first.municipality || 'N/A'}`);
-                if (first.ward) console.log(` - Sample Ward: ${first.ward}`);
-            }
-        } catch (error) {
-            console.error(`Error auditing ${colName}:`, error.message);
-        }
-    }
-    console.log("--- AUDIT COMPLETE ---");
+async function checkData() {
+  try {
+     console.log("=========================================");
+     console.log("       GIC PLATFORM DATA AUDIT           ");
+     console.log("=========================================\n");
+
+     const tables = ['documents', 'leader_mentions', 'municipal_leader_mentions', 'social_narratives', 'locations', 'fact_infrastructure_projects_daily'];
+     
+     for (const table of tables) {
+         try {
+           const res = await query(`SELECT COUNT(*) as count FROM ${table}`);
+           console.log(`[${table.padEnd(35, ' ')}] : ${res.rows[0].count} rows`);
+         } catch(e) {
+           console.log(`[${table.padEnd(35, ' ')}] : ERROR (Does not exist or inaccessible)`);
+         }
+     }
+
+     console.log("\n--- Breakdown by Province (leader_mentions) ---");
+     try {
+       const prov = await query(`SELECT province, count(*) as count FROM leader_mentions GROUP BY province`);
+       prov.rows.forEach(r => console.log(`  ${r.province}: ${r.count}`));
+     } catch(e) {}
+
+     console.log("\n--- Breakdown by Province (social_narratives) ---");
+     try {
+       const narr = await query(`SELECT province, count(*) as count FROM social_narratives GROUP BY province`);
+       narr.rows.forEach(r => console.log(`  ${r.province}: ${r.count}`));
+     } catch(e) {}
+     
+     console.log("\n=========================================");
+  } catch(e) {
+     console.error(e);
+  } finally {
+     pool.end();
+  }
 }
 
-auditData();
+checkData();

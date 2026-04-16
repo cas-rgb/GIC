@@ -206,7 +206,7 @@ export default function SocialTrendsExecutivePanel({
               <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
                 <div className="col-span-1 md:col-span-5 space-y-4">
                   <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400 flex items-center gap-2">
-                    <Activity className="w-4 h-4" /> Live Web Signal Interception (Tavily)
+                    <Activity className="w-4 h-4" /> Live Web Signal Interception
                   </span>
                   {newsFallback.length > 0 ? (
                     <div className="grid gap-3 grid-cols-1 md:grid-cols-3">

@@ -26,7 +26,10 @@ type LoadState =
   | { status: "loaded"; data: InfrastructureProjectsSummaryResponse }
   | { status: "error"; message: string };
 
-function formatCurrency(value: number): string {
+function formatCurrency(value: number | null | undefined): string {
+  if (value === null || value === undefined || isNaN(value)) {
+    return "[ VALUATION PENDING ]";
+  }
   return new Intl.NumberFormat("en-ZA", {
     style: "currency",
     currency: "ZAR",

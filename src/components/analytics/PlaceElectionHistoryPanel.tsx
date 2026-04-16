@@ -61,11 +61,7 @@ export default function PlaceElectionHistoryPanel(props: {
   }
 
   if ((state.data.rows || []).length === 0) {
-    return (
-      <p className="text-sm font-bold tracking-widest uppercase text-slate-500">
-        No election history has been loaded for this geography yet.
-      </p>
-    );
+    return null;
   }
 
   return (

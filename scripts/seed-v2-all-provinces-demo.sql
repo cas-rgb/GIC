@@ -7,6 +7,11 @@ truncate table signals cascade;
 truncate table documents cascade;
 truncate table locations cascade;
 
+insert into sources (
+  id, name, source_type, base_url, reliability_score, created_at
+) values
+  ('00000000-0000-0000-0000-000000000001', 'Demo Source', 'news', 'https://example.org', 0.85, current_timestamp);
+
 insert into locations (
   id, country, province, district, municipality, ward, lat, lng, location_key
 ) values

@@ -6,19 +6,39 @@ import {
   MapPin,
   Activity,
 } from "lucide-react";
-import { useGIC } from "@/context/GICContext";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function TopBar() {
-  const { selectedProvince, selectedMunicipality } = useGIC();
+  const searchParams = useSearchParams();
+  const [pulseCount, setPulseCount] = useState<number>(0);
+
+  useEffect(() => {
+    fetch('/api/analytics/notification-pulse')
+      .then(r => r.json())
+      .then(d => setPulseCount(d.count))
+      .catch(() => {});
+  }, []);
+  
+  // Gracefully fallback to local storage if URL params are temporarily blank during transit
+  const getLocal = (key: string, def: string) => {
+    if (typeof window !== "undefined") return localStorage.getItem(key) || def;
+    return def;
+  };
+
+  const selectedProvince = searchParams.get("province") || getLocal("gicFilter_province", "Gauteng");
+  const selectedMunicipality = searchParams.get("municipality") && searchParams.get("municipality") !== "All Municipalities" 
+    ? searchParams.get("municipality") 
+    : null;
 
   const TICKER_ITEMS = [
     { text: "SYSTEM STATUS: SECURE", color: "text-emerald-500" },
-    { text: "OSINT INTERCEPT: 12 NEW SIGNALS ISOLATED IN JOHANNESBURG", color: "text-rose-500" },
+    { text: "INTELLIGENCE INTERCEPT: 12 NEW SIGNALS ISOLATED IN JOHANNESBURG", color: "text-rose-500" },
     { text: "WATER INFRASTRUCTURE PRESSURE ELEVATED", color: "text-amber-500" },
     { text: "GIC INTELLIGENCE GRID ONLINE", color: "text-blue-500" },
-    { text: "TAVILY NEURAL SCRAPE ACTIVE", color: "text-slate-400" },
+    { text: "DEEP DATA EXTRACTION PIPELINE ACTIVE", color: "text-slate-400" },
     { text: "SENTIMENT INDEX: DECLINING (BEARISH)", color: "text-rose-500" },
-    { text: "GEMINI 3 FLASH GENERATIVE LAYERING ACTIVE", color: "text-purple-400" },
+    { text: "PREDICTIVE MODELING ENGINE ONLINE", color: "text-purple-400" },
     { text: "REGIONAL VULNERABILITY SCORE: 68/100", color: "text-amber-500" },
   ];
 
@@ -93,7 +113,11 @@ export default function TopBar() {
       <div className="flex items-center gap-4 ml-8">
         <button className="p-2.5 rounded-xl hover:bg-slate-50 transition-colors relative">
           <Bell className="w-5 h-5 text-slate-600" />
-          <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white" />
+          {pulseCount > 0 && (
+            <span className="absolute top-1 right-1 px-1.5 py-0.5 min-w-[16px] flex items-center justify-center bg-red-500 rounded-full border-2 border-white text-[8px] font-black text-white leading-none">
+               {pulseCount > 99 ? '99+' : pulseCount}
+            </span>
+          )}
         </button>
         <div className="w-[1px] h-6 bg-slate-200 mx-2" />
         <button className="flex items-center gap-3 px-4 py-2 rounded-xl bg-slate-50 border border-slate-100 hover:border-slate-200 transition-all text-slate-600">

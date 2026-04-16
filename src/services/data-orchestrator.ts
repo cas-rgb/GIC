@@ -220,11 +220,27 @@ export class GlobalDataOrchestrator {
     municipality: string,
   ): Promise<DatasetEntry[]> {
     console.log(`  > Wave: Wikipedia Socioeconomic Baseline...`);
-    const query = `site:en.wikipedia.org ${municipality} Local Municipality ${province} ${country} demographics geography history economy`;
+
+    // Static Data Isolation Check
+    try {
+      const q = query(
+        collection(db, "strategicDatasets"),
+        where("datasetId", "==", `WikiBaseline_${municipality}`)
+      );
+      const snap = await getDocs(q);
+      if (!snap.empty) {
+        console.log(`    [WIKI SKIPPED] Static baseline already exists for ${municipality}.`);
+        return [];
+      }
+    } catch (e) {
+      console.warn("    [WIKI CACHE CHECK FAILED]", e);
+    }
+
+    const queryStr = `site:en.wikipedia.org ${municipality} Local Municipality ${province} ${country} demographics geography history economy`;
 
     try {
-      const search = await tavilyClient.search(query, {
-        searchDepth: "advanced",
+      const search = await tavilyClient.search(queryStr, {
+        searchDepth: "basic",
         // @ts-ignore - Some versions of the SDK might have different property naming or type expectations
         includeRawContent: "text",
         maxResults: 1,

@@ -1,202 +1,85 @@
 import { NextResponse, NextRequest } from "next/server";
-import { db } from "@/lib/firebase";
-import { collection, query, where, getDocs, doc, setDoc } from "firebase/firestore";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
 
-const WARD_NOMS: Record<string, string> = {
-  "City of Johannesburg_1": "Orange Farm",
-  "City of Johannesburg_2": "Ivory Park",
-  "City of Johannesburg_87": "Melville & Auckland Park",
-  "City of Johannesburg_88": "Emmarentia & Northcliff",
-  "City of Johannesburg_130": "Soweto & Orlando",
-  "eThekwini_1": "KwaXimba & Rural",
-  "eThekwini_10": "Kloof & Hillcrest",
-  "eThekwini_27": "Morningside & Berea",
-  "eThekwini_33": "Umbilo & Glenwood",
-  "eThekwini_101": "Cato Manor",
-  "City of Cape Town_1": "Goodwood",
-  "City of Cape Town_54": "Sea Point & Camps Bay",
-  "City of Cape Town_76": "Mitchells Plain",
-  "City of Cape Town_115": "Green Point & CBD",
-  "City of Tshwane_1": "Pretoria North",
-  "City of Tshwane_42": "Waterkloof",
-  "City of Tshwane_69": "Centurion"
-};
+const google = createGoogleGenerativeAI({
+  apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY || process.env.VERTEX_AI_API_KEY || process.env.GEMINI_API_KEY
+});
+import { generateObject } from "ai";
+import { z } from "zod";
+
+export const maxDuration = 60; // Allow 1 minute for Just-In-Time OSINT Scraping on free/pro tier
+export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const municipality = searchParams.get("municipality");
 
-  if (!municipality) {
-    return NextResponse.json({ error: "Municipality parameter is required" }, { status: 400 });
+  if (!municipality || municipality === "All Municipalities") {
+    // Return empty wards array if no specific municipality is selected
+    return NextResponse.json({ wards: [] });
   }
 
   try {
-    const wardsRef = collection(db, "wardIntelligence");
-    const q = query(wardsRef, where("municipality", "==", municipality));
-    const snapshot = await getDocs(q);
-
-    if (snapshot.empty) {
-      // PROCEDURAL FALLBACK -> AUTO-SEEDING PIPELINE
-      let baseLat = -29.0;
-      let baseLng = 24.0;
-      const paramStr = municipality.toLowerCase();
-      // Master SA GPS Mappings
-      if (paramStr.includes("gauteng") || paramStr.includes("johannesburg") || paramStr.includes("tshwane") || paramStr.includes("ekurhuleni")) { baseLat = -26.1; baseLng = 28.1; }
-      else if (paramStr.includes("western cape") || paramStr.includes("cape town") || paramStr.includes("stellenbosch")) { baseLat = -33.9; baseLng = 18.4; }
-      else if (paramStr.includes("kwazulu-natal") || paramStr.includes("ethekwini") || paramStr.includes("umhlathuze")) { baseLat = -29.5; baseLng = 31.0; }
-      else if (paramStr.includes("eastern cape") || paramStr.includes("mandela") || paramStr.includes("buffalo")) { baseLat = -32.5; baseLng = 27.0; }
-      else if (paramStr.includes("limpopo") || paramStr.includes("polokwane") || paramStr.includes("thulamela")) { baseLat = -23.9; baseLng = 29.4; }
-      else if (paramStr.includes("mpumalanga") || paramStr.includes("mbombela") || paramStr.includes("emalahleni")) { baseLat = -25.5; baseLng = 30.5; }
-      else if (paramStr.includes("north west") || paramStr.includes("rustenburg") || paramStr.includes("mahikeng")) { baseLat = -26.0; baseLng = 26.5; }
-      else if (paramStr.includes("free state") || paramStr.includes("mangaung") || paramStr.includes("matjhabeng")) { baseLat = -29.1; baseLng = 26.2; }
-      else if (paramStr.includes("northern cape") || paramStr.includes("plaatje") || paramStr.includes("kruiper")) { baseLat = -28.7; baseLng = 22.0; }
-
-      try {
-        const genAI = new GoogleGenerativeAI(process.env.VERTEX_AI_API_KEY || "");
-        const model = genAI.getGenerativeModel({ 
-            model: "gemini-3-flash-preview", 
-            generationConfig: { responseMimeType: "application/json" } 
-        });
-
-        const prompt = `You are an elite geographic OSINT AI acting as an intelligence seeder for a South African municipal platform. 
-The user engaged an unseeded region: ${municipality}.
-You must synthesize a massive JSON array of exactly 15 rigorous demographic ward profiles (Wards 1 through 15) so they can be permanently saved to the database.
-
-CRITICAL: Never return "Standard municipal aggregation zone" or "Baseline Local". You must hyper-realistically vary the cultural heritage, primary languages, political allegiances (ANC, DA, EFF, IFP, etc.), crime threat profiles (e.g. Copper theft, Construction Mafia, Gang violence), and unemployment severity across each ward reflecting the stark socio-economic divides of ${municipality}.
-
-The output MUST be a strict JSON array of 15 objects following this explicit schema:
-[
-  {
-    "wardId": "${municipality.replace(/ /g, "_")}_Ward_X",
-    "municipality": "${municipality}",
-    "wardNumber": X,
-    "mapParameters": {
-      "centerLat": ${baseLat} +/- small random variation,
-      "centerLng": ${baseLng} +/- small random variation,
-      "radiusMeters": 3500,
-      "boundaryType": "Urban Grid"
-    },
-    "demographics": {
-      "populationDensity": "High / Medium / Low",
-      "primaryLanguage": "isiZulu / English / etc",
-      "secondaryLanguage": "...",
-      "medianAge": 28
-    },
-    "culture": {
-      "heritageProfile": "Deep local demographic breakdown...",
-      "communityStructures": "e.g. Traditional governance, aggressive civic forums, religious blocks"
-    },
-    "voting": {
-      "dominantParty": "...",
-      "voterTurnoutPercent": 55.4,
-      "politicalVolatility": "Stable / Contested / Volatile"
-    },
-    "weather": {
-      "climateBaseline": "Subtropical / Semi-arid / etc",
-      "primaryClimateRisk": "Flash Flooding / Substation Heat Damage / etc"
-    },
-    "crime": {
-      "safetyIndex": 45,
-      "primarySyndicateOrThreat": "..."
-    },
-    "socioEconomicStats": {
-      "unemploymentPercent": 34.2,
-      "medianIncomeBracket": "Low Income / Lower-Middle / etc",
-      "primaryEconomicDriver": "Logistics / Informal Trading / Tourism / Services"
-    }
-  }
-]
-`;
-        console.log(`[Ward Intelligence] Firing live Gemini 3 Flash Auto-Seeding for ${municipality} (15 Wards)`);
-        const result = await model.generateContent(prompt);
-        const dataText = result.response.text();
-        const syntheticWards = JSON.parse(dataText);
-
-        // Await full persistence matrix to Firestore
-        const batchPromises = syntheticWards.map((w: any) => {
-            const docId = `${municipality.replace(/ /g, "_")}_Ward_${w.wardNumber}`;
-            w.wardId = docId;
-            return setDoc(doc(db, "wardIntelligence", docId), { ...w, lastUpdated: new Date().toISOString() });
-        });
-        await Promise.all(batchPromises);
-        console.log(`[Ward Intelligence] Successfully seeded ${syntheticWards.length} AI-generated wards to Firestore.`);
-
-        // Append explicit display names for immediate frontend render
-        const mappedWards = syntheticWards.map((data: any) => {
-            const key = `${data.municipality}_${data.wardNumber}`;
-            data.wardName = WARD_NOMS[key] || `Ward ${data.wardNumber}`;
-            return data;
-        });
-
-        return NextResponse.json({ success: true, wards: mappedWards });
-
-      } catch (geminiError) {
-         console.warn("[Ward Intelligence] Gemini Auto-Seeding failed. Escalating to static topological fallback array.", geminiError);
-         
-         const syntheticWards = Array.from({ length: 15 }).map((_, i) => {
-            const wNum = i + 1;
-            const sLat = baseLat + (Math.sin(wNum) * 0.15);
-            const sLng = baseLng + (Math.cos(wNum) * 0.15);
-            
-            return {
-                wardId: `${municipality}_Ward_${wNum}`,
-                municipality,
-                wardNumber: wNum,
-                wardName: `Ward ${wNum} Sector Zone`,
-                mapParameters: {
-                  centerLat: sLat,
-                  centerLng: sLng,
-                  radiusMeters: 4000 + (wNum * 100),
-                  boundaryType: "Administrative Approximation"
-                },
-                demographics: {
-                  populationDensity: "Medium",
-                  primaryLanguage: "Baseline Local",
-                  medianAge: 32
-                },
-                culture: {
-                  heritageProfile: "Standard municipal aggregation zone",
-                  communityStructures: "Baseline civic footprint"
-                },
-                voting: {
-                  dominantParty: "Contested",
-                  voterTurnoutPercent: 55.0,
-                  politicalVolatility: "Stable"
-                },
-                weather: {
-                  climateBaseline: "Regional standard",
-                  primaryClimateRisk: "Severe Thunderstorms and Grid Vulnerability"
-                },
-                crime: {
-                  safetyIndex: 50,
-                  primarySyndicateOrThreat: "Petty theft and Vandalism"
-                },
-                socioEconomicStats: {
-                  unemploymentPercent: 32.0,
-                  medianIncomeBracket: "Lower-Middle",
-                  primaryEconomicDriver: "Logistics, Retail & Industrial"
-                }
-            };
-          });
-          return NextResponse.json({ success: true, wards: syntheticWards });
-      }
-    }
-
-    const wards = snapshot.docs.map(doc => {
-      const data = doc.data();
-      const key = `${data.municipality}_${data.wardNumber}`;
-      data.wardName = WARD_NOMS[key] || `Ward ${data.wardNumber}`;
-      return data;
+    // 1. Ask the LLM to synthesize the real wards and ethnographic data for the municipality
+    const { object } = await generateObject({
+      model: google("gemini-2.5-pro"),
+      schema: z.object({
+        wards: z.array(z.object({
+          wardNumber: z.string().describe("e.g. '12', '45' or a specific area identifier"),
+          wardName: z.string().describe("The actual real-world name of this town, suburb, or township within the municipality (e.g. 'Mbekweni', 'Soweto', 'Atteridgeville')"),
+          mapParameters: z.object({
+            centerLat: z.number().describe("Approximate latitude, e.g. -33.7 for Paarl"),
+            centerLng: z.number().describe("Approximate longitude, e.g. 18.9 for Paarl")
+          }),
+          demographics: z.object({
+            primaryLanguage: z.string(),
+            populationDensity: z.string().describe("e.g. 'High Urban Density', 'Peri-Urban', 'Rural'")
+          }),
+          culture: z.object({
+            heritageProfile: z.string().describe("1 sentence describing historical or cultural significance"),
+            communityStructures: z.string().describe("e.g. 'Strong civic structures', 'Volatile youth leagues'")
+          }),
+          voting: z.object({
+            dominantParty: z.string().describe("e.g. 'ANC', 'DA', 'EFF', 'PA'"),
+            politicalVolatility: z.string().describe("e.g. 'Stable', 'Highly Contested', 'Shifting'"),
+            voterTurnoutPercent: z.number().min(0).max(100)
+          }),
+          socioEconomicStats: z.object({
+            primaryEconomicDriver: z.string().describe("e.g. 'Agriculture', 'Informal Trading', 'Manufacturing'"),
+            medianIncomeBracket: z.string().describe("e.g. 'Low Income', 'Lower-Middle', 'Affluent'"),
+            unemploymentPercent: z.number().min(0).max(100)
+          }),
+          crime: z.object({
+            safetyIndex: z.number().min(0).max(100).describe("0 = Extremely Dangerous, 100 = Extremely Safe"),
+            primarySyndicateOrThreat: z.string().describe("e.g. 'Extortion syndicates', 'Copper theft', 'Gang violence'")
+          }),
+          incidentCount: z.number().describe("Estimated open service delivery or political incidents"),
+          primaryIssue: z.string().describe("The biggest current infrastructure or social crisis (e.g. 'Water Shedding', 'Potholes', 'Housing')"),
+          severity: z.enum(["critical", "high", "moderate", "low"])
+        })).min(4).max(6).describe("Generate 4 to 6 of the most prominent, real-world wards/townships in this specific municipality")
+      }),
+      prompt: `You are a South African Tier-1 Intelligence Ethnographer and Spatial Analyst.
+      We need live, highly accurate ward-level granular intelligence for the following South African Municipality: ${municipality}.
+      
+      Using your deep pre-trained knowledge of South African geography, politics, and socio-economics, identify 4 to 6 of the most critical or well-known actual suburbs, towns, or townships within this municipality.
+      You MUST provide real names, real political dynamics (dominant parties per the last elections), realistic crime vectors, and the most pressing structural issues (service delivery crises) facing those specific areas.
+      
+      DO NOT HALLUCINATE MUNICIPALITIES. If I say "Drakenstein", you focus on Paarl, Wellington, Mbekweni, Gouda, Saron, etc. 
+      If I say "Tshwane", focus on Mamelodi, Soshanguve, Centurion, Pretoria East, etc.
+      
+      Output strictly in accordance with the provided JSON schema. No Markdown. No filler.`
     });
 
-    // Provide ascending chronological sort
-    wards.sort((a, b) => (a.wardNumber || 0) - (b.wardNumber || 0));
-    
-    return NextResponse.json({ success: true, wards });
+    // Map municipality across all generating wards to ensure consistency
+    const formattedWards = object.wards.map(w => ({
+      ...w,
+      municipality: municipality
+    }));
 
-  } catch (error) {
-    console.error("Ward Intelligence GET error:", error);
-    return NextResponse.json({ error: "Failed to fetch deep ward intelligence" }, { status: 500 });
+    return NextResponse.json({ wards: formattedWards });
+
+  } catch (error: any) {
+    console.error("Ward Intelligence LLM Generation Error:", error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

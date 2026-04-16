@@ -55,7 +55,7 @@ export default function StrategicNews({ articles }: { articles: any[] }) {
                 </span>
                 <span className="text-[8px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-1">
                   <Clock className="w-2.5 h-2.5" />
-                  {new Date(article.publishedAt).toLocaleDateString()}
+                  {article.publishedAt ? new Date(article.publishedAt).toLocaleDateString() : "Time Unknown"}
                 </span>
               </div>
               <a

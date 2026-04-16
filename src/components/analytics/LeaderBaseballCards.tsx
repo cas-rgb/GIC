@@ -21,7 +21,8 @@ export default function LeaderBaseballCards({
       {leaders.map((leader) => {
         const isSelected = selectedLeaderName === leader.leaderName;
         const score = Math.round(leader.sentimentScore * 100);
-        const isPositive = score >= 0;
+        const isNeutral = score === 0;
+        const isPositive = score > 0;
         const topIssue = leader.linkedIssues[0] || "General Governance";
         return (
           <div
@@ -43,15 +44,19 @@ export default function LeaderBaseballCards({
               </div>{" "}
               <div className={`flex flex-col items-end`}>
                 {" "}
-                <span
-                  className={`text-2xl font-black ${isPositive ? "text-emerald-500" : "text-rose-500"}`}
-                >
-                  {" "}
-                  {score > 0 ? "+" : ""}
-                  {score}{" "}
-                </span>{" "}
+                {isNeutral ? (
+                  <span className="text-xl font-black text-slate-400">Neutral</span>
+                ) : (
+                  <span
+                    className={`text-2xl font-black ${isPositive ? "text-emerald-500" : "text-rose-500"}`}
+                  >
+                    {" "}
+                    {score > 0 ? "+" : ""}
+                    {score}{" "}
+                  </span>
+                )}{" "}
                 <span className="text-[9px] font-bold uppercase tracking-widest text-slate-400">
-                  Net Trust
+                  {isNeutral ? "No Data" : "Net Trust"}
                 </span>{" "}
               </div>{" "}
             </div>{" "}
@@ -74,7 +79,9 @@ export default function LeaderBaseballCards({
               </span>{" "}
               <p className="text-[11px] text-slate-600 font-medium leading-relaxed italic">
                 {" "}
-                {leader.prAdvice || (isPositive
+                {leader.prAdvice || (isNeutral
+                  ? "Awaiting public narrative synthesis. No significant conversational volume."
+                  : isPositive
                   ? `Positive trust trajectory anchored by effective delivery within ${topIssue.toLowerCase()}.`
                   : `Severe reputational friction currently tied directly to ${topIssue.toLowerCase()} controversies.`)}{" "}
               </p>{" "}
@@ -83,10 +90,12 @@ export default function LeaderBaseballCards({
             <div className="mt-auto pt-3 border-t border-slate-100 flex items-center justify-between">
               {" "}
               <div
-                className={`gic-badge ${isPositive ? "gic-badge-success" : "gic-badge-critical"}`}
+                className={`gic-badge ${isNeutral ? "gic-badge-neutral" : isPositive ? "gic-badge-success" : "gic-badge-critical"}`}
               >
                 {" "}
-                {isPositive ? (
+                {isNeutral ? (
+                  <AlertCircle className="w-3 h-3 text-slate-400" />
+                ) : isPositive ? (
                   <ShieldCheck className="w-3 h-3" />
                 ) : (
                   <AlertCircle className="w-3 h-3" />
@@ -95,10 +104,12 @@ export default function LeaderBaseballCards({
               </div>{" "}
               <div className="flex items-center gap-1 text-slate-400">
                 {" "}
-                {isPositive ? (
-                  <TrendingUp className="w-3 h-3" />
+                {isNeutral ? (
+                  <div className="w-3 h-1 bg-slate-300 rounded-full" />
+                ) : isPositive ? (
+                  <TrendingUp className="w-3 h-3 text-emerald-500" />
                 ) : (
-                  <TrendingDown className="w-3 h-3" />
+                  <TrendingDown className="w-3 h-3 text-rose-500" />
                 )}{" "}
               </div>{" "}
             </div>{" "}

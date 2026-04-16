@@ -1,0 +1,96 @@
+{
+  "runId": "2026-03-31T22-10-47-376Z",
+  "startedAt": "2026-03-31T22:10:47.379Z",
+  "finishedAt": "2026-04-01T01:16:21.598Z",
+  "cycles": [
+    {
+      "cycleNumber": 1,
+      "startedAt": "2026-03-31T22:10:47.379Z",
+      "finishedAt": "2026-04-01T01:16:21.595Z",
+      "countsBefore": {
+        "documents": 22,
+        "signals": 18,
+        "serviceIncidents": 18,
+        "sentimentMentions": 0,
+        "citizenVoiceMentions": 0,
+        "leaderMentions": 0,
+        "municipalLeaderMentions": 0,
+        "infrastructureProjects": 54,
+        "locations": 38
+      },
+      "countsAfter": {
+        "documents": 32,
+        "signals": 18,
+        "serviceIncidents": 18,
+        "sentimentMentions": 0,
+        "citizenVoiceMentions": 0,
+        "leaderMentions": 0,
+        "municipalLeaderMentions": 0,
+        "infrastructureProjects": 6128,
+        "locations": 597
+      },
+      "commands": [
+        {
+          "command": "npm.cmd run ingest:official:v2",
+          "startedAt": "2026-03-31T22:10:48.686Z",
+          "finishedAt": "2026-03-31T22:10:55.047Z",
+          "exitCode": 1
+        },
+        {
+          "command": "npm.cmd run ingest:budget-osint",
+          "startedAt": "2026-03-31T22:10:55.048Z",
+          "finishedAt": "2026-03-31T22:16:01.852Z",
+          "exitCode": 0
+        },
+        {
+          "command": "npm.cmd run process:v2:queue",
+          "startedAt": "2026-03-31T22:16:01.853Z",
+          "finishedAt": "2026-03-31T22:16:07.482Z",
+          "exitCode": 0
+        },
+        {
+          "command": "npm.cmd run ingest:municipal-money:v2",
+          "startedAt": "2026-03-31T22:16:07.483Z",
+          "finishedAt": "2026-04-01T01:08:43.196Z",
+          "exitCode": 0
+        },
+        {
+          "command": "npm.cmd run normalize:projects:v2",
+          "startedAt": "2026-04-01T01:08:43.197Z",
+          "finishedAt": "2026-04-01T01:08:56.770Z",
+          "exitCode": 0
+        },
+        {
+          "command": "npm.cmd run rebuild:projects:v2",
+          "startedAt": "2026-04-01T01:08:56.771Z",
+          "finishedAt": "2026-04-01T01:09:07.638Z",
+          "exitCode": 0
+        },
+        {
+          "command": "npm.cmd run rebuild:citizen-voice:v2",
+          "startedAt": "2026-04-01T01:09:07.639Z",
+          "finishedAt": "2026-04-01T01:09:19.223Z",
+          "exitCode": 0
+        },
+        {
+          "command": "npm.cmd run rebuild:leadership:v2",
+          "startedAt": "2026-04-01T01:09:19.224Z",
+          "finishedAt": "2026-04-01T01:09:29.956Z",
+          "exitCode": 0
+        },
+        {
+          "command": "npm.cmd run rebuild:municipal-leadership:v2",
+          "startedAt": "2026-04-01T01:09:29.957Z",
+          "finishedAt": "2026-04-01T01:09:42.857Z",
+          "exitCode": 0
+        },
+        {
+          "command": "node --require ts-node/register --require tsconfig-paths/register scripts/collect-contextual-reference.ts",
+          "startedAt": "2026-04-01T01:09:42.858Z",
+          "finishedAt": "2026-04-01T01:16:20.179Z",
+          "exitCode": 0
+        }
+      ]
+    }
+  ]
+}

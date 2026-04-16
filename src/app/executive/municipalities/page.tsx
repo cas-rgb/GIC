@@ -1,5 +1,4 @@
-"use client";
-import { useSearchParams } from "next/navigation";
+
 import PageHeader from "@/components/ui/PageHeader";
 import MunicipalityMapPanel from "@/components/analytics/MunicipalityMapPanel";
 import PlaceProfilePanel from "@/components/analytics/PlaceProfilePanel";
@@ -8,16 +7,33 @@ import WardIntelligencePanel from "@/components/analytics/WardIntelligencePanel"
 import MunicipalityInfluencerPanel from "@/components/analytics/MunicipalityInfluencerPanel";
 import GroundTruthTracker from "@/components/analytics/GroundTruthTracker";
 
-export default function MunicipalitiesPage() {
-  const searchParams = useSearchParams();
-  const province = searchParams.get("province") || "Gauteng";
-  const municipality = searchParams.get("municipality") || "All Municipalities";
-  const ward = searchParams.get("ward") || "All Wards";
-  const serviceDomain = searchParams.get("serviceDomain") || "all";
+export const dynamic = "force-dynamic";
+
+export default async function MunicipalitiesPage(props: { searchParams: Promise<{ [key: string]: string | undefined }> }) {
+  const params = await props.searchParams;
+  const province = params.province || "Gauteng";
+  const municipality = params.municipality || "All Municipalities";
+  const ward = params.ward || "All Wards";
+  const serviceDomain = params.serviceDomain || "all";
 
   // Build a specific location string for dynamic text
   const locTitle = ward !== "All Wards" ? `${ward}, ${municipality}` 
                    : (municipality !== "All Municipalities" ? municipality : province);
+
+  const targetMuni = municipality !== "All Municipalities" ? municipality : province;
+  let wards: any[] = [];
+  try {
+     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+     const res = await fetch(`${baseUrl}/api/analytics/ward-intelligence?municipality=${encodeURIComponent(targetMuni)}`, { cache: "no-store" });
+     if (res.ok) {
+       const json = await res.json();
+       wards = json.wards || [];
+     }
+  } catch (e) {
+     console.error("Failed to fetch wards server-side:", e);
+  }
+
+  const loadingWards = false;
 
   return (
     <div className="space-y-8">
@@ -28,11 +44,11 @@ export default function MunicipalitiesPage() {
       />
       
       {/* 0. INTERACTIVE PERIMETER MAP */}
-      <MunicipalityMapPanel municipality={municipality !== "All Municipalities" ? municipality : province} />
+      <MunicipalityMapPanel municipality={municipality !== "All Municipalities" ? municipality : province} wardsData={wards} isLoading={loadingWards} />
       
       {municipality !== "All Municipalities" && (
         <div className="mt-8">
-           <WardIntelligencePanel municipality={municipality} />
+           <WardIntelligencePanel municipality={municipality} wardsData={wards} isLoading={loadingWards} />
         </div>
       )}
       
@@ -42,17 +58,18 @@ export default function MunicipalitiesPage() {
           <h4 className="font-black text-xl text-white uppercase tracking-widest mb-4">
               Demographic & Cultural Profile
           </h4>
-          <p className="text-slate-400 text-xs mb-6 uppercase tracking-wider font-bold">
-              Live Wikipedia & StatSA Baseline Data
-          </p>
           <PlaceProfilePanel province={province} municipality={municipality !== "All Municipalities" ? municipality : null} ward={ward !== "All Wards" ? ward : null} />
         </div>
 
         {/* 2. OSINT INFLUENCER MATRIX */}
-        <div className="pt-4 border-t border-slate-800">
+        <div className="bg-slate-900 border border-slate-700 shadow-2xl p-6 relative overflow-hidden">
+          <h4 className="font-black text-xl text-white uppercase tracking-widest mb-4">
+              Community Sentiment & Public Coverage
+          </h4>
           <MunicipalityInfluencerPanel 
               province={province} 
               municipality={municipality !== "All Municipalities" ? municipality : null} 
+              serviceDomain={serviceDomain}
           />
         </div>
 
@@ -74,7 +91,7 @@ export default function MunicipalitiesPage() {
         </div>
 
         {/* 4. GROUND TRUTH INFRASTRUCTURE ISSUES */}
-        <div className="pt-4 border-t border-slate-800">
+        <div className="bg-slate-900 border border-slate-700 shadow-2xl p-6 relative overflow-hidden">
           <h4 className="font-black text-xl text-white uppercase tracking-widest mb-4">
               Service Delivery Ground Truth
           </h4>

@@ -13,7 +13,7 @@ import {
 interface AuthContextType {
   isAuthenticated: boolean;
   isMounted: boolean;
-  user: { name: string; email: string; role: "admin" | "executive" | "viewer" } | null;
+  user: { name: string; email: string; role: "admin" | "executive" | "viewer"; tenantId: string } | null;
   login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<void>;
 }
@@ -23,7 +23,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isMounted, setIsMounted] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [user, setUser] = useState<{ name: string; email: string; role: "admin" | "executive" | "viewer" } | null>(null);
+  const [user, setUser] = useState<{ name: string; email: string; role: "admin" | "executive" | "viewer"; tenantId: string } | null>(null);
 
   useEffect(() => {
     setIsMounted(true);
@@ -34,6 +34,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         // Fetch custom claims for role-based access, fallback to simple email checking for robust demo
         const idTokenResult = await firebaseUser.getIdTokenResult();
         const customRole = idTokenResult.claims.role as string;
+        const tenantId = (idTokenResult.claims.tenantId as string) || "gic_national_gov";
         
         let assignedRole: "admin" | "executive" | "viewer" = "executive";
         if (customRole && ["admin", "executive", "viewer"].includes(customRole)) {
@@ -48,11 +49,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser({ 
           name: firebaseUser.displayName || firebaseUser.email.split("@")[0], 
           email: firebaseUser.email.toLowerCase(),
-          role: assignedRole
+          role: assignedRole,
+          tenantId
         });
+        document.cookie = `gic_auth_session=${assignedRole}; path=/; max-age=86400; SameSite=Strict`;
+        document.cookie = `gic_tenant_id=${tenantId}; path=/; max-age=86400; SameSite=Strict`;
       } else {
         setIsAuthenticated(false);
         setUser(null);
+        document.cookie = `gic_auth_session=; path=/; max-age=0`;
+        document.cookie = `gic_tenant_id=; path=/; max-age=0`;
       }
     });
 

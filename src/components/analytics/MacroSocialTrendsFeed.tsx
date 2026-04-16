@@ -6,31 +6,11 @@ import PlatformVelocityPanel from "./PlatformVelocityPanel";
 import TrendingArticlesPanel from "./TrendingArticlesPanel";
 import { Loader2 } from "lucide-react";
 import GICCard from "@/components/ui/GICCard";
-import { Activity, PlaySquare, Newspaper } from "lucide-react";
+import { Activity, PlaySquare, Newspaper, Cpu } from "lucide-react";
 
-export default function MacroSocialTrendsFeed({ province }: { province: string }) {
-  const [data, setData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+export default function MacroSocialTrendsFeed({ province, data }: { province: string, data: any }) {
 
-  useEffect(() => {
-    async function fetchInsights() {
-      setLoading(true);
-      try {
-        const res = await fetch(`/api/analytics/deep-social?province=${encodeURIComponent(province || "All Provinces")}`);
-        if (res.ok) {
-          const json = await res.json();
-          setData(json);
-        }
-      } catch (e) {
-        console.error("Deep Social Fetch Error", e);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchInsights();
-  }, [province]);
-
-  if (loading) {
+  if (!data) {
     return (
       <div className="flex flex-col items-center justify-center p-12 bg-zinc-900 border border-zinc-800 rounded-2xl animate-pulse min-h-[400px]">
         <Loader2 className="w-8 h-8 text-blue-500 animate-spin mb-4" />
@@ -45,6 +25,24 @@ export default function MacroSocialTrendsFeed({ province }: { province: string }
 
   return (
     <div className="space-y-5">
+      {/* AI Synthesized Briefing */}
+      {data.executiveSummary && (
+        <GICCard 
+          premium 
+          title="Strategic AI Briefing" 
+          subtitle={`Live synthesis of ${province || "National"} digital ecosystems`}
+          icon={<Cpu className="w-5 h-5 text-gic-gold" />}
+        >
+          <div className="p-5 bg-blue-950/20 border border-blue-500/20 rounded-2xl">
+            {data.executiveSummary.split("\n\n").map((paragraph: string, idx: number) => (
+              <p key={idx} className="text-sm font-medium leading-relaxed text-slate-300 mb-4 last:mb-0">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </GICCard>
+      )}
+
       <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
         <GICCard
           premium

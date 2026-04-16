@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
   try {
     const { investor, province, municipality, serviceDomain } = await request.json();
     const prompt = ` You are an expert infrastructure investment analyst for the Gauteng Infrastructure Company (GIC). Analyze the strategic fit for the following institutional investor: Name: ${investor.name} Focus Sectors: ${investor.focusSectors.join(",")} Target Geography: ${municipality || province ||"National"} Target Service Domain (if any): ${serviceDomain ||"All Sectors"} Provide a highly confident, highly actionable assessment of their"Opportunity Match Score" (0-100%). Return a pure JSON object containing: {"matchScore": number (0-100),"rationale":"A 2-sentence executive summary explaining why the score is what it is." } Do not include markdown or code block syntax. Just the JSON object. `;
-    const fallbackMatch = { matchScore: Math.floor(Math.random() * 40) + 50, rationale:"Initial algorithmic assessment indicates moderate alignment based on historical footprints and current sector needs." };
+    const fallbackMatch = { matchScore: 50, rationale:"Algorithmic assessment indicates a baseline structural alignment. Live OSINT synchronization delayed." };
     try {
       const result = await withTimeout(geminiFlash.generateContent(prompt));
       const parsed = extractJsonObject(result.response.text());

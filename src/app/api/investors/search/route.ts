@@ -31,6 +31,11 @@ const mockInvestors = [
         email: "info@emerald-ventures.com",
         address: "Seefeldstrasse 215, 8008 Zurich, Switzerland"
       },
+      reachOutStrategy: [
+        "Propose localized pilot opportunities for their water tech portfolio within targeted municipal grids.",
+        "Highlight GIC's pipeline of sustainable packaging transition requirements for major SOEs.",
+        "Request exploratory dialogue on co-funding early-stage African mobility innovation."
+      ],
       investmentFocus: {
         sweetSpot: "€5 million to €20 million"
       },
@@ -68,6 +73,11 @@ const mockInvestors = [
         email: "webmaster@dbsa.org",
         address: "1258 Lever Rd, Headway Hill, Midrand, 1685"
       },
+      reachOutStrategy: [
+        "Align pitch directly with their Project Preparation Facility for derisking GIC's early-stage civil proposals.",
+        "Emphasize the socio-economic alignment of GIC's water and mass transport pipeline.",
+        "Position GIC as the definitive implementation partner for unblocking stalled municipal mega-projects."
+      ],
       investmentFocus: {
         sweetSpot: "R250m to R5B+"
       },
@@ -104,6 +114,11 @@ const mockInvestors = [
         email: "info@aiimafrica.com",
         address: "The Citadel, 15 Cavendish Street, Claremont, Cape Town"
       },
+      reachOutStrategy: [
+        "Introduce shovel-ready toll-road expansions requiring massive private equity interventions.",
+        "Present GIC's high-yield digital infrastructure pipeline targeting underserved metros.",
+        "Demonstrate robust projected ROI metrics directly to their Co-Managing Directors."
+      ],
       investmentFocus: {
         sweetSpot: "$20m to $150m"
       },
@@ -140,6 +155,11 @@ const mockInvestors = [
         email: "info@pic.gov.za",
         address: "Menlyn Maine Central Square, Corner Aramist Avenue, Pretoria"
       },
+      reachOutStrategy: [
+        "Submit large-scale aggregated sovereign-level debt frameworks to their Unlisted Investments wing.",
+        "Highlight explicit job creation and B-BBEE metrics in every social infrastructure proposal.",
+        "Approach the PIC only once projects have surpassed the R500m threshold and have clear ESG compliance."
+      ],
       investmentFocus: {
         sweetSpot: "R500m to R10B+"
       },
@@ -176,6 +196,11 @@ const mockInvestors = [
         email: "contact@harith.co.za",
         address: "34A Fredman Drive, Sandton, Johannesburg, 2196"
       },
+      reachOutStrategy: [
+        "Leverage high-level strategic alignment with PAIDF mandate for cross-border logistics hubs.",
+        "Propose co-investment in massive, multi-decade transport and energy concessions.",
+        "Focus on delivering strictly commercial returns blended with political derisking."
+      ],
       investmentFocus: {
         sweetSpot: "$30m to $200m"
       },
@@ -202,7 +227,7 @@ const mockInvestors = [
       updated: "2/28/2026",
       teamSize: "200+",
       ticketSize: "R100m to R1B",
-      narrativeSummary: "Stanlib is a premier South African asset manager with a robust dedicated infrastructure franchise. Their Infrastructure and Private Equity wings are major players in the REIPPPP, funneling deep institutional capital directly into critical renewable energy IPPs. They exist to stabilize the national grid while driving the South African green transition, heavily favoring projects that merge high ESG compliance with immediate municipal relief.",
+      narrativeSummary: "Stanlib is a premier South African asset manager with a robust dedicated infrastructure franchise. Their Infrastructure and Private Equity wings are major players in the REIPPPP, funneling deep institutional liquidity directly into critical renewable energy IPPs. They exist to stabilize the national grid while driving the South African green transition, heavily favoring projects that merge high ESG compliance with immediate municipal relief.",
       investmentPhilosophy: "Harnessing deep institutional liquidity to fund the physical transition of the South African economy, optimizing for defensive, inflation-linked yields.",
       investmentStages: ["Project Finance", "Growth PE", "Late Stage Infrastructure"],
       industryFocus: ["Utility-scale Solar", "Wind Generation", "Peaking Power", "Municipal Grids"],
@@ -212,6 +237,11 @@ const mockInvestors = [
         email: "infrastructure@stanlib.com",
         address: "17 Melrose Boulevard, Melrose Arch, Johannesburg"
       },
+      reachOutStrategy: [
+        "Pitch fully vetted, license-approved IPP solar and wind projects seeking senior debt.",
+        "Present localized municipal grid interventions targeting severe, immediate power shortages.",
+        "Ensure all GIC pitch decks highlight absolute defensive, inflation-linked yield characteristics."
+      ],
       investmentFocus: {
         sweetSpot: "R100m to R1B"
       },
@@ -247,6 +277,11 @@ const mockInvestors = [
         email: "infraworks@sanlaminvestments.com",
         address: "2 Strand Road, Bellville, Cape Town, 7530"
       },
+      reachOutStrategy: [
+        "Target their ESG auditing team with GIC's pipeline of climate resiliency and retrofitting projects.",
+        "Frame capital requests around 'climate impact' metrics rather than purely commercial hurdles.",
+        "Propose joint ventures on high-visibility waste-to-energy municipal projects."
+      ],
       investmentFocus: {
         sweetSpot: "$10m to $50m"
       },
@@ -282,6 +317,11 @@ const mockInvestors = [
         email: "info@vantagecapital.co.za",
         address: "Third Floor, 10 The High Street, Melrose Arch, Johannesburg"
       },
+      reachOutStrategy: [
+        "Introduce Vantage to established property operators needing non-dilutive expansion capital.",
+        "Leverage their mezzanine agility for fast-moving commercial property opportunities lacking tier-1 equity.",
+        "Target the Managing Partners directly with structured, cash-flow producing civic hubs."
+      ],
       investmentFocus: {
         sweetSpot: "R150m to R450m"
       },
@@ -318,6 +358,11 @@ const mockInvestors = [
         email: "alternatives@oldmutual.com",
         address: "Mutualpark, Jan Smuts Drive, Pinelands, Cape Town"
       },
+      reachOutStrategy: [
+        "Present highly-scaleable affordable housing and student accommodation land parcels.",
+        "Emphasize the spatial spatial transformation and massive social yield achieved by GIC projects.",
+        "Align all commercial node pitches with their mandate to anchor emerging municipalities economically."
+      ],
       investmentFocus: {
         sweetSpot: "R200m to R2B+"
       },
@@ -389,13 +434,14 @@ export async function GET(request: Request) {
           "industryFocus": ["Water", "Energy", "Transport"],
           "portfolioExamples": ["Company A", "Company B"],
           "contact": { "phone": "+44 20...", "email": "info@...", "address": "Detailed HQ address" },
+          "reachOutStrategy": ["Actionable strategy point 1", "Actionable strategy point 2", "Actionable strategy point 3"],
           "keyPersonnel": [
             { "initial": "A", "name": "John Doe", "role": "Managing Partner" }
           ]
         }
       }]
       
-      Only output valid JSON format. Do not use block quote markers outside of the array. Synthesize the 'deepProfile' realistically and accurately using the context. If data is sparse, deduce the most likely realistic corporate framework.
+      Only output valid JSON format. Do not use block quote markers outside of the array. Synthesize the 'deepProfile' realistically and accurately using the context. If data is sparse, deduce the most likely realistic corporate framework. Provide a realistic 3-point 'reachOutStrategy' customized for the GIC infrastructure mandate to appeal to this investor.
     `;
 
     const aiResponse = await geminiPro.generateContent(prompt);

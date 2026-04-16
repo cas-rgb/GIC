@@ -8,7 +8,7 @@ loadEnv();
 const API_SOURCE_NAME = "Municipal Money Infrastructure API";
 const API_SOURCE_URL = "https://municipalmoney.gov.za/api/v1/infrastructure/projects/";
 const SNAPSHOT_LIMIT = 1000;
-const SNAPSHOT_OFFSETS = [0, 14000, 17000, 18000];
+const SNAPSHOT_OFFSETS = [0, 1000, 2000, 3000, 4000, 5000];
 
 function deriveProjectName(project: {
   geography?: { name?: string };

@@ -1,32 +1,74 @@
 import { NextResponse } from "next/server";
 import { searchCommunityData } from "@/services/tavily-service";
 import { geminiPro, extractJsonArray } from "@/services/ai-service";
+import { validateRateLimit } from "@/lib/rate-limit";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
+  const ip = request.headers.get("x-forwarded-for") || "anonymous_ip";
+  const rateLimit = validateRateLimit(ip, 12, 60000); // 12 requests per minute due to high Tavily costs
+  if (!rateLimit.success) {
+    return NextResponse.json({ error: rateLimit.message }, { status: 429 });
+  }
+
   const { searchParams } = new URL(request.url);
   const province = searchParams.get("province") || "Gauteng";
   const municipality = searchParams.get("municipality") || "All Municipalities";
   const ward = searchParams.get("ward") || "All Wards";
+  const serviceDomain = searchParams.get("serviceDomain") || "all";
 
   const locationTarget = municipality !== "All Municipalities" ? `${municipality}, ${province}` : province;
   const specificLoc = ward && ward !== "All Wards" ? `${ward}, ${locationTarget}` : locationTarget;
+  const domainContext = serviceDomain !== "all" ? ` Focus exclusively on influencers, corruption vectors, and activists operating within the ${serviceDomain} sector.` : "";
 
   try {
-    const searchQuery = `Find current political leaders, powerful business forum figures, outspoken community activists, civil society, municipal managers, and union influencers active in ${specificLoc}, South Africa. Identify who holds power and why explicitly. Find their current agendas or grievances.`;
+    const searchQuery = `Find current political leaders, powerful business forum figures, outspoken community activists, civil society, municipal managers, and union influencers active in ${specificLoc}, South Africa.${domainContext} Identify who holds power and why explicitly. Find their current agendas or grievances.`;
     
     const tavilyResults = await searchCommunityData(searchQuery);
     
-    if (!tavilyResults || !tavilyResults.results) {
-      throw new Error("Tavily API returned null context.");
+    if (!tavilyResults || !tavilyResults.results || tavilyResults.results.length === 0) {
+      // LEVEL 2/3 FALLBACK: Roll up to Municipality/Province and use Tier 1 Predictive Inference
+      const rollupTarget = ward && ward !== "All Wards" ? municipality : province;
+      
+      console.warn(`No OSINT for ${specificLoc}. Rolling up to baseline inference for ${rollupTarget}`);
+      
+      const fallbackPrompt = `
+        You are an elite political analyst for South Africa.
+        Live social data for "${specificLoc}" is currently barren.
+        Instead, perform a structural baseline assessment for the parent region: ${rollupTarget}.
+        Determine 3 highly statistical baseline influencers based on historical Tier 1 context (e.g. The Regional Mayor, The leading opposition chairperson, or a prominent Ratepayers Association).${domainContext}
+        
+        Return ONLY a JSON array matching this exact interface:
+        [{
+          "name": "Exact Name of Title/Person",
+          "platform": "Political Party or Civic Group",
+          "focus": "Baseline Structural Role",
+          "impact": "75",
+          "why": "A 2-sentence explanation of why they hold structural baseline power here."
+        }]
+      `;
+      
+      const fallbackResponse = await geminiPro.generateContent(fallbackPrompt);
+      const fallbackText = fallbackResponse.response.text();
+      const fallbackInfluencers = extractJsonArray(fallbackText);
+
+      return NextResponse.json({ 
+        influencers: fallbackInfluencers || [{
+          name: "Regional Civic Coalitions (Static Inference)",
+          platform: "Civic Society",
+          focus: "Resident Associations",
+          impact: 75,
+          why: `Due to a persistent lack of live data for ${specificLoc}, baseline models assume local ratepayers and regional party chairs hold primary leverage.`
+        }]
+      });
     }
     
     const searchContext = tavilyResults.results.map((r: any) => `${r.title}\n${r.content}`).join("\n\n");
 
     const prompt = `
       You are an elite political and social intelligence analyst for the South African government.
-      Analyze the following live web search results regarding key influencers and power brokers in ${specificLoc}.
+      Analyze the following live web search results regarding key influencers and power brokers in ${specificLoc}.${domainContext}
       
       SEARCH CONTEXT:
       ${searchContext}
@@ -51,16 +93,7 @@ export async function GET(request: Request) {
     const influencers = extractJsonArray(parsedText);
 
     if (!influencers || influencers.length === 0) {
-      // Fallback mock if completely blocked
-      return NextResponse.json({
-        influencers: [{
-          name: "Local Civic Coalitions (Data Unavailable)",
-          platform: "Civic Society",
-          focus: "Resident Associations",
-          impact: 75,
-          why: "Due to a lack of immediate live OSINT data, assume local rate-payer associations and ward councillors hold primary baseline leverage regarding service delivery."
-        }]
-      });
+      throw new Error("Invalid AI Synthesis resulting in empty array.");
     }
 
     return NextResponse.json({ influencers });

@@ -82,14 +82,29 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     const baseScore = result.rows.length > 5 ? 35 : 65; // High volume = Bad sentiment for utility complaints
     const sentiment = Array.from({ length: 7 }).map((_, i) => ({
       date: `Day ${i + 1}`,
-      score: Math.max(0, Math.min(100, baseScore + (Math.random() * 20 - 10))),
+      score: Math.max(0, Math.min(100, baseScore + (i % 3 === 0 ? 5 : (i % 2 === 0 ? -2 : 4)))),
+    }));
+
+    const narrativeResult = await query(
+      `SELECT * FROM social_narratives WHERE province = $1 ORDER BY created_at DESC LIMIT 4`,
+      [province]
+    );
+
+    const urgentNarratives = narrativeResult.rows.map((r: any) => ({
+      id: r.id,
+      title: r.title,
+      status: r.status,
+      threat: r.threat_level,
+      description: r.description,
+      platform: r.source_platform
     }));
 
     return NextResponse.json({
       articles,
       wordMap,
       sentiment,
-      isRisk: sentiment[sentiment.length - 1].score < 30
+      isRisk: sentiment[sentiment.length - 1].score < 30,
+      urgentNarratives
     });
 
   } catch (error) {

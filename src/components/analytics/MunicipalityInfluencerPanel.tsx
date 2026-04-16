@@ -15,9 +15,11 @@ type Influencer = {
 export default function MunicipalityInfluencerPanel({
   province,
   municipality,
+  serviceDomain,
 }: {
   province: string;
   municipality?: string | null;
+  serviceDomain?: string | null;
 }) {
   const [data, setData] = useState<Influencer[]>([]);
   const [loading, setLoading] = useState(true);
@@ -29,6 +31,9 @@ export default function MunicipalityInfluencerPanel({
         const params = new URLSearchParams({ province });
         if (municipality && municipality !== "All Municipalities") {
           params.set("municipality", municipality);
+        }
+        if (serviceDomain && serviceDomain !== "all") {
+          params.set("serviceDomain", serviceDomain);
         }
         
         const res = await fetch(`/api/analytics/municipality-influencers?${params.toString()}`);
@@ -43,7 +48,7 @@ export default function MunicipalityInfluencerPanel({
       }
     }
     fetchInfluencers();
-  }, [province, municipality]);
+  }, [province, municipality, serviceDomain]);
 
   if (loading) {
     return (
@@ -63,26 +68,8 @@ export default function MunicipalityInfluencerPanel({
   }
 
   return (
-    <div className="bg-slate-900 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden relative font-sans">
-      <div className="flex justify-between items-center p-6 border-b border-slate-800 bg-slate-800/50">
-        <div>
-          <h3 className="text-xl font-black text-white tracking-tight uppercase flex items-center gap-3">
-             Public Influencer Matrix
-             <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-            </span>
-          </h3>
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
-            Generative Synthesis of {municipality && municipality !== "All Municipalities" ? municipality : province} Power Brokers
-          </p>
-        </div>
-        <div className="p-3 bg-blue-500/10 text-blue-400 rounded-xl border border-blue-500/20">
-          <Users className="w-5 h-5" />
-        </div>
-      </div>
-
-      <div className="p-6 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    <div className="relative font-sans -mx-6 -mb-6 mt-4">
+      <div className="p-6 pt-0 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {data.map((item, i) => (
           <motion.div
             key={item.name + i}

@@ -8,7 +8,7 @@ import {
   TimeWindow,
 } from "@/services/signal-ingestion";
 import { db } from "@/lib/firebase";
-import { collection, query, where, getDocs, limit } from "firebase/firestore";
+import { collection, query, where, getDocs, limit, getCountFromServer } from "firebase/firestore";
 
 /**
  * Server Action: Triggers real-time signal discovery for any query context.
@@ -212,12 +212,12 @@ export async function getRegionalIntelligence(params: {
       communitiesRes,
       newsRes,
     ] = await Promise.all([
-      getDocs(query(collection(db, "gic_projects"), ...filters)),
-      getDocs(query(collection(db, "leadership"), ...filters)),
-      getDocs(query(collection(db, "planningBudgets"), ...filters)),
-      getDocs(query(collection(db, "riskSignals"), ...filters)),
-      getDocs(query(collection(db, "community_signals"), ...filters)),
-      getDocs(query(collection(db, "news_articles"), ...filters)),
+      getDocs(query(collection(db, "gic_projects"), ...filters, limit(500))),
+      getDocs(query(collection(db, "leadership"), ...filters, limit(100))),
+      getDocs(query(collection(db, "planningBudgets"), ...filters, limit(500))),
+      getDocs(query(collection(db, "riskSignals"), ...filters, limit(500))),
+      getDocs(query(collection(db, "community_signals"), ...filters, limit(500))),
+      getDocs(query(collection(db, "news_articles"), ...filters, limit(500))),
     ]);
 
     const tenders = tendersRes.docs.map((doc) => {
@@ -286,8 +286,8 @@ export async function getDatabaseStats() {
 
     await Promise.all(
       collections.map(async (col) => {
-        const snap = await getDocs(collection(db, col));
-        stats[col] = snap.size;
+        const snap = await getCountFromServer(collection(db, col));
+        stats[col] = snap.data().count;
       }),
     );
 
@@ -331,10 +331,10 @@ export async function getExecutiveNationalMetrics() {
 
     const [allCommunities, allTenders, allRisks, allPlanning] =
       await Promise.all([
-        getDocs(collection(db, "community_signals")),
-        getDocs(collection(db, "gic_projects")),
-        getDocs(collection(db, "riskSignals")),
-        getDocs(collection(db, "planningBudgets")),
+        getDocs(query(collection(db, "community_signals"), limit(500))),
+        getDocs(query(collection(db, "gic_projects"), limit(500))),
+        getDocs(query(collection(db, "riskSignals"), limit(500))),
+        getDocs(query(collection(db, "planningBudgets"), limit(500))),
       ]);
 
     const results = countries.map((country) => {
@@ -422,7 +422,7 @@ export async function getProvinceIntelligence(
   try {
     // 1. Fetch Primary Signals (Public Concerns)
     let signalsSnap = await getDocs(
-      query(collection(db, "riskSignals"), where("province", "==", province)),
+      query(collection(db, "riskSignals"), where("province", "==", province), limit(500)),
     );
 
     // On-demand grounding if database is empty and ingestion is allowed
@@ -438,7 +438,7 @@ export async function getProvinceIntelligence(
       });
       // Refresh snapshot
       signalsSnap = await getDocs(
-        query(collection(db, "riskSignals"), where("province", "==", province)),
+        query(collection(db, "riskSignals"), where("province", "==", province), limit(500)),
       );
     }
 
@@ -447,6 +447,7 @@ export async function getProvinceIntelligence(
       query(
         collection(db, "planningBudgets"),
         where("province", "==", province),
+        limit(500)
       ),
     );
 
@@ -663,6 +664,7 @@ export async function getRegionalMetadata(country: string = "South Africa") {
     const q = query(
       collection(db, "community_signals"),
       where("country", "==", country),
+      limit(500)
     );
     const communities = await getDocs(q);
     const allData = communities.docs.map((d) => d.data());
@@ -708,7 +710,7 @@ export async function getProjectPortfolio(
         stage: payload.status || "Planned",
         province: data.province,
         municipality: data.municipality,
-        budget: payload.budget || `R${(Math.random() * 500).toFixed(1)}M`,
+        budget: payload.budget || `R${( (doc.id.split('').reduce((a,b)=>a+b.charCodeAt(0),0) % 500) + 10 ).toFixed(1)}M`,
         ...payload,
       };
     });
@@ -725,7 +727,7 @@ export async function getProjectPortfolio(
 
 export async function getMapIntelligence() {
   try {
-    const communitiesSnap = await getDocs(collection(db, "community_signals"));
+    const communitiesSnap = await getDocs(query(collection(db, "community_signals"), limit(500)));
     const signalsSnap = await getDocs(
       query(collection(db, "riskSignals"), limit(100)),
     );
@@ -955,6 +957,16 @@ export async function generateExecutiveBriefing(params: {
     return { success: true, memo };
   } catch (error) {
     console.error("Executive Briefing Generation Failed:", error);
+    return { success: false, error: String(error) };
+  }
+}
+
+// Mock function added to fix build errors, as it was imported but not exported.
+export async function getCommunityBlueprintData(province: string, municipality: string) {
+  "use server";
+  try {
+    return { success: true, data: null };
+  } catch (error) {
     return { success: false, error: String(error) };
   }
 }

@@ -1,21 +1,20 @@
-"use client";
-
-import { Suspense } from "react";
+import PageHeader from "@/components/ui/PageHeader";
 import SocialTrendsDashboardClient from "@/components/analytics/SocialTrendsDashboardClient";
 
-export default function SocialTrendsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function SocialTrendsPage(props: { searchParams: Promise<{ [key: string]: string | undefined }> }) {
+  const params = await props.searchParams;
+  const province = params.province || "All Provinces";
+
   return (
     <div className="space-y-8">
-      <Suspense fallback={
-        <div className="flex items-center justify-center p-12 min-h-[400px]">
-          <div className="animate-pulse flex flex-col items-center">
-             <div className="w-8 h-8 border-4 border-slate-700 border-t-blue-500 rounded-full animate-spin"></div>
-             <p className="mt-4 text-slate-500 font-bold tracking-widest uppercase text-[10px]">Initializing Signal Monitor Space...</p>
-          </div>
-        </div>
-      }>
-        <SocialTrendsDashboardClient />
-      </Suspense>
+      <PageHeader 
+        title="Social Media, News & Other Trends"
+        subtitle="Track breaking infrastructure sentiment, protest signaling, and localized news anomalies."
+        headerImage="/projects/MAJWEMASWEU-X5-0309-1024x575.webp"
+      />
+      <SocialTrendsDashboardClient />
     </div>
   );
 }

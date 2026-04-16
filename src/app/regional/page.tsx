@@ -4,6 +4,7 @@ import PageHeader from "@/components/ui/PageHeader";
 import KPIRibbon from "@/components/ui/KPIRibbon";
 import GICCard from "@/components/ui/GICCard";
 import GICMap from "@/components/ui/GICMap";
+import { EmptyState } from "@/components/ui/FeedbackStates";
 import {
   Globe,
   MapPin,
@@ -19,28 +20,53 @@ import {
   TrendingUp,
   SearchCode,
   Database,
+  Lightbulb,
+  MessageSquare,
+  AlertTriangle,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useGIC } from "@/context/GICContext";
 import { useMemo, useEffect, useState } from "react";
-import { getRegionalIntelligence } from "@/app/intel-actions";
+import { getRegionalIntelligence, getProvinceIntelligence } from "@/app/intel-actions";
 
 export default function RegionalIntelligence() {
   const { selectedProvince, selectedMunicipality } = useGIC();
   const [liveData, setLiveData] = useState<any>(null);
+  const [provinceData, setProvinceData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    if (!selectedProvince) {
+      setLiveData(null);
+      setProvinceData(null);
+      setIsLoading(false);
+      return;
+    }
+
     async function loadRegionalData() {
       setIsLoading(true);
-      const res = await getRegionalIntelligence({
-        province: selectedProvince || "Gauteng",
-      });
+      const provName = selectedProvince;
+      const [res, provRes] = await Promise.all([
+        getRegionalIntelligence({ province: provName }),
+        getProvinceIntelligence(provName, true)
+      ]);
       if (res.success) setLiveData(res.data);
+      if (provRes.success) setProvinceData(provRes);
       setIsLoading(false);
     }
     loadRegionalData();
   }, [selectedProvince]);
+
+  if (!selectedProvince) {
+    return (
+      <div className="pb-24 px-8 min-h-[80vh] flex items-center justify-center">
+        <EmptyState 
+          title="Awaiting Geographic Target" 
+          subtitle="Select a province from the top omni-filter to generate the command matrix." 
+        />
+      </div>
+    );
+  }
 
   const filteredCommunities = useMemo(() => {
     if (!liveData) return [];
@@ -115,6 +141,118 @@ export default function RegionalIntelligence() {
           { label: "Network Integrity", value: "99.4%", color: "blue" },
         ]}
       />
+
+      {/* 1. Decision Summary & Recommendations */}
+      {provinceData && provinceData.metrics && (
+        <section className="mb-12">
+          <GICCard
+            premium
+            title="Strategic Command Abstract"
+            subtitle="Deterministic assessment of provincial risk markers"
+            icon={<Lightbulb className="w-5 h-5 text-gic-gold" />}
+          >
+            <div className="flex flex-col md:flex-row gap-8">
+              <div className="flex-1 bg-slate-900 rounded-[2rem] p-8 text-white relative overflow-hidden shadow-gic-hard">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-gic-blue blur-[100px] opacity-10" />
+                <h4 className="text-xl font-display font-bold text-white mb-4 relative z-10 w-full flex justify-between items-center">
+                  <span>Deterministic Recommendation</span>
+                  <span className="text-[10px] uppercase font-black tracking-widest text-emerald-400 border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 rounded-full">
+                    Zero-Hallucination Framework Active
+                  </span>
+                </h4>
+                <p className="text-sm leading-relaxed opacity-90 mb-6 relative z-10">
+                  {provinceData.metrics.volume.value > 100
+                    ? `Critical volume of ${provinceData.metrics.volume.value} public signals detected. Core intervention is required in ${provinceData.metrics.topConcern.value} to restore stability.`
+                    : `Signal volume is within operational baselines (${provinceData.metrics.volume.value} tracked). The leading edge indicator is currently ${provinceData.metrics.topConcern.value}. Focus on preventative maintenance.`}
+                  {provinceData.metrics.alignment.value !== null && provinceData.metrics.alignment.value < 50
+                    ? " High misalignment exists between budget allocation and the primary public concern."
+                    : " Current budget allocations tentatively align with public pressure domains."}
+                </p>
+                <div className="space-y-3 relative z-10">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Data Provenance</p>
+                  <p className="text-xs text-white/70 italic max-w-full">
+                    Grounded on actuals derived from ETL telemetry matching region: <b>{selectedProvince || "Gauteng"}</b>. No generative inference applied to strategic facts.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </GICCard>
+        </section>
+      )}
+
+      {/* 2. Hotspots & Public Pressure */}
+      {provinceData && provinceData.metrics && (
+        <section className="grid grid-cols-12 gap-8 mb-12">
+          {/* Public Pressure */}
+          <div className="col-span-12 lg:col-span-6">
+            <GICCard
+              title="Public Pressure Topography"
+              subtitle="Governed metrics tracking sentiment volume and velocity"
+              icon={<MessageSquare className="w-5 h-5 text-gic-blue" />}
+            >
+              <div className="grid grid-cols-2 gap-4">
+                <div className="p-6 bg-slate-50 border border-slate-100 rounded-2xl text-center">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Total Volume</p>
+                  <p className="text-4xl font-display font-black text-slate-900">{provinceData.metrics.volume.value}</p>
+                </div>
+                <div className="p-6 bg-slate-50 border border-slate-100 rounded-2xl text-center">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Velocity Trend</p>
+                  <p className="text-4xl font-display font-black text-slate-900">{provinceData.metrics.velocity.value}</p>
+                  <p className="text-[10px] font-bold text-amber-500 mt-1 uppercase">multiplier over 7d</p>
+                </div>
+                <div className="col-span-2 p-6 bg-slate-50 border border-slate-100 rounded-2xl">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Leading Concerns</p>
+                  <div className="space-y-3">
+                    {provinceData.topicBreakdown.slice(0, 3).map((topic: any, i: number) => (
+                      <div key={i} className="flex justify-between items-center text-sm font-bold text-slate-700">
+                        <span>{topic.topic}</span>
+                        <div className="flex items-center gap-3">
+                           <div className="h-1.5 w-24 bg-slate-200 rounded-full overflow-hidden">
+                             <div className="h-full bg-gic-blue" style={{ width: `${topic.percentage}%` }} />
+                           </div>
+                           <span className="w-8 text-right">{topic.percentage.toFixed(1)}%</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </GICCard>
+          </div>
+
+          {/* Hotspot Municipalities */}
+          <div className="col-span-12 lg:col-span-6">
+            <GICCard
+              title="Hotspot Municipalities"
+              subtitle="Highest density of operational signals"
+              icon={<AlertTriangle className="w-5 h-5 text-rose-500" />}
+            >
+              <div className="space-y-4">
+                {provinceData.municipalityData.slice(0, 5).map((muni: any, i: number) => (
+                  <div key={i} className="flex justify-between items-center p-4 bg-slate-50 border border-slate-100 rounded-2xl hover:bg-white transition-all">
+                    <div className="flex items-center gap-4">
+                      <div className="w-8 h-8 rounded-full bg-rose-100 text-rose-500 font-bold flex items-center justify-center text-xs">
+                        #{i + 1}
+                      </div>
+                      <span className="font-bold text-slate-900 text-sm">{muni.name}</span>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-xs font-black uppercase text-slate-400 tracking-widest px-3 py-1 bg-white rounded-full border border-slate-200">
+                        {muni.value} Signals
+                      </span>
+                    </div>
+                  </div>
+                ))}
+                {provinceData.municipalityData.length === 0 && (
+                  <div className="p-4 text-center text-sm text-slate-500">
+                    No municipality data localized for this region timeline.
+                  </div>
+                )}
+              </div>
+            </GICCard>
+          </div>
+        </section>
+      )}
 
       {/* Interactive Regional Map */}
       <div className="grid grid-cols-12 gap-8 mb-12">

@@ -3,8 +3,8 @@ import { CommunitySignal, EvidenceSource } from "@/types/database";
 import { Category } from "@/types";
 import { DataFetcher } from "@/lib/data-fetcher";
 import { IntelligenceEngine } from "@/lib/intelligence-engine";
-import { db } from "@/lib/firebase";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { query } from "@/lib/db/index";
+import crypto from "crypto";
 
 export interface NormalizedSignal {
   url: string;
@@ -206,31 +206,64 @@ export class SignalIngestionService {
       }
     }
 
-    // Batch save to Firestore
-    try {
-      const signalsRef = collection(db, "riskSignals");
-      const evidenceRef = collection(db, "evidenceSources");
-
-      // For now, let's just return them and handle saving in the server action
-      // to keep the service purely logic-based if needed,
-      // but the requirement says "pull this data into the database".
-
-      for (const sig of signals) {
-        await setDoc(doc(signalsRef, sig.id), sig);
+    // Prune URL Duplicates (OSINT Strict Deduplication Requirement)
+    const allUrls = signals.map(s => s.sourceUrl).filter(Boolean);
+    let uniqueSignals = signals;
+    
+    if (allUrls.length > 0) {
+      try {
+        const existingDocs = await query(
+          `SELECT url FROM documents WHERE url = ANY($1::text[])`, 
+          [allUrls]
+        );
+        const existingUrlSet = new Set(existingDocs.rows.map(r => r.url));
+        if (existingUrlSet.size > 0) {
+           console.log(`[OSINT Deduplication] Found ${existingUrlSet.size} redundant URL(s). Pruning ingestion payload.`);
+           uniqueSignals = signals.filter(s => !existingUrlSet.has(s.sourceUrl));
+        }
+      } catch (err) {
+        console.error("OSINT Deduplication Query Failed:", err);
       }
-      for (const ev of evidenceItems) {
-        await setDoc(doc(evidenceRef, ev.id), ev);
+    }
+
+    if (uniqueSignals.length === 0) {
+      console.log("[OSINT Ingestion] All signals were duplicates. Skipping database insert.");
+      return { success: true, signalCount: 0, evidenceCount: 0, signals: [], evidence: [] };
+    }
+
+    try {
+      const sourceRes = await query(`SELECT id FROM sources LIMIT 1`);
+      const sourceId = sourceRes.rows[0]?.id || '00000000-0000-0000-0000-000000000001';
+
+      for (const sig of uniqueSignals) {
+         const docId = crypto.randomUUID();
+         const targetType = sig.sourceUrl?.includes("youtube") || sig.sourceUrl?.includes("youtu.be") ? "youtube_video" : "article";
+         
+         await query(
+           `INSERT INTO documents (
+              id, source_id, url, title, content_text, doc_type, status, created_at, published_at, fetched_at
+            ) VALUES ($1, $2, $3, $4, $5, $6, 'active', current_timestamp, current_timestamp, current_timestamp)
+            ON CONFLICT DO NOTHING`,
+           [docId, sourceId, sig.sourceUrl, sig.text, sig.text, targetType]
+         );
+
+         await query(
+           `INSERT INTO signals (
+              id, document_id, sector, signal_type, sentiment, severity_score, urgency_score, confidence_score, event_date, summary_text, source_url, status, created_at
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, current_timestamp, $9, $10, 'active', current_timestamp)`,
+           [sig.id, docId, sig.category, 'media_alert', sig.sentiment || 'neutral', (sig.urgency || 0.5) * 100, Math.min(100, (sig.urgency || 0.5) * 120), sig.reliabilityScore || 0.8, sig.text, sig.sourceUrl]
+         );
       }
 
       return {
         success: true,
-        signalCount: signals.length,
-        evidenceCount: evidenceItems.length,
-        signals,
-        evidence: evidenceItems,
+        signalCount: uniqueSignals.length,
+        evidenceCount: uniqueSignals.length,
+        signals: uniqueSignals,
+        evidence: evidenceItems.filter(e => uniqueSignals.some(u => u.id === e.signalId)),
       };
     } catch (error) {
-      console.error("Firestore persistence failed:", error);
+      console.error("PostgreSQL persistence failed:", error);
       throw error;
     }
   }

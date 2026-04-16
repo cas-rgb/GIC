@@ -59,11 +59,7 @@ export default function PlaceProfilePanel(props: {
   }
 
   if (!state.data.demographics) {
-    return (
-      <p className="text-sm text-slate-500">
-        No structured demographic profile has been loaded for this place yet.
-      </p>
-    );
+    return null;
   }
 
   const { demographics, latestYear } = state.data;

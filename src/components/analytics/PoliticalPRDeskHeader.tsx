@@ -1,60 +1,26 @@
-"use client";
-import { useEffect, useState } from "react";
-import { Activity, ShieldAlert, TrendingDown, MessageSquareQuote, Target, Siren, Users2, AlertTriangle, Building2, Flame } from "lucide-react";
-
-import ProgressSpinner from "@/components/ui/ProgressSpinner";
+import { Activity, ShieldAlert, TrendingDown, MessageSquareQuote, Target, Siren, Users2, AlertTriangle, Building2, Flame, AlertCircle } from "lucide-react";
 
 interface LeadershipRadarData {
   atRiskExecutives: { name: string; reason: string }[];
   upcomingFlashpoints: string[];
 }
 
-export default function PoliticalPRDeskHeader({ province }: { province: string }) {
-  const [data, setData] = useState<LeadershipRadarData | null>(null);
-  const [loading, setLoading] = useState(true);
-
+export default function PoliticalPRDeskHeader({ province, data }: { province: string, data?: LeadershipRadarData | null }) {
   const pName = province === "All Provinces" || !province ? "Gauteng" : province;
 
-  useEffect(() => {
-    let isSubscribed = true;
-    setLoading(true);
-
-    fetch(`/api/analytics/province-briefing?province=${encodeURIComponent(pName)}`)
-      .then((res) => res.json())
-      .then((json) => {
-        if (isSubscribed && json.atRiskExecutives) {
-          setData(json);
-        }
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Leadership Radar Error:", err);
-        setLoading(false);
-      });
-
-    return () => { isSubscribed = false; };
-  }, [pName]);
-
-  if (loading) {
+  if (!data) {
     return (
-      <div className="bg-slate-900 p-8 border border-slate-700 shadow-2xl relative overflow-hidden min-h-[300px] flex flex-col items-center justify-center">
-         <ProgressSpinner durationMs={12000} message={`Running Geopolitical Threat Scan for ${pName}...`} />
-         <p className="mt-4 text-[10px] uppercase font-black tracking-widest text-slate-500">Live Telemetry Active</p>
+      <div className="bg-slate-900 p-8 border border-slate-700 shadow-2xl relative overflow-hidden min-h-[300px] flex flex-col items-center justify-center group">
+         <AlertCircle className="w-12 h-12 text-slate-700 mb-4" />
+         <p className="text-sm font-bold text-slate-300">Radar Offline</p>
+         <p className="mt-2 text-[10px] uppercase font-black tracking-widest text-slate-600 text-center max-w-sm">
+            Live telemetry for {pName} is currently unavailable. No geopolitical threats successfully scanned.
+         </p>
       </div>
     );
   }
 
-  const displayData = data || {
-    atRiskExecutives: [
-      { name: `Executive Council Member (${pName})`, reason: `Elevated scrutiny regarding regional procurement irregularities and tender disputes specific to ${pName} operations.` },
-      { name: `Director of Infrastructure - ${pName}`, reason: "Failing to meet quarterly critical deployment targets for localized capital projects." }
-    ],
-    upcomingFlashpoints: [
-      `Impending localized service delivery protests along major ${pName} transport corridors.`,
-      `Contested political factioning affecting infrastructure policy stability across ${pName} districts.`,
-      `Critical vulnerability of essential grid networks across ${pName} to unscheduled weather events.`
-    ]
-  };
+  const displayData = data;
 
   return (
     <div className="bg-slate-900 p-8 border border-slate-700 shadow-2xl relative overflow-hidden group">

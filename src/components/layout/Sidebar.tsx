@@ -11,7 +11,12 @@ import {
   MapPin,
   Users,
   Menu,
-  X
+  X,
+  ShieldCheck,
+  Target,
+  FileText,
+  Maximize2,
+  Cpu
 } from "lucide-react";
 
 const navigation = [
@@ -28,8 +33,8 @@ const navigation = [
     description: "How leaders are being perceived",
   },
   {
-    name: "State of the Municipality & Wards",
-    href: "/executive/municipalities",
+    name: "Municipalities and Wards",
+    href: "/executive/municipalities-wards",
     icon: MapPin,
     description: "What is happening locally on the ground",
   },
@@ -50,6 +55,36 @@ const navigation = [
     href: "/executive/investor-identification",
     icon: Database,
     description: "Search, filter, and save targeted investor profiles",
+  },
+  {
+    name: "Automated Deal Room",
+    href: "/executive/matchmaker",
+    icon: Target,
+    description: "AI-aligned investors and active funding targets",
+  },
+  {
+    name: "Pitch & Readiness Generator",
+    href: "/executive/pitch-generator",
+    icon: FileText,
+    description: "Generate 3-page PDF investment cases instantly",
+  },
+  {
+    name: "Opportunity Matrix",
+    href: "/executive/opportunity-matrix",
+    icon: Maximize2,
+    description: "Plot geometric risk versus commercial ROI",
+  },
+  {
+    name: "Predictive Simulator",
+    href: "/executive/impact-simulator",
+    icon: Cpu,
+    description: "Model downstream civic trajectories and impact",
+  },
+  {
+    name: "Platform Methodology",
+    href: "/executive/methodology",
+    icon: ShieldCheck,
+    description: "AI architecture, verifiable tracing & RAG frameworks",
   },
 ];
 
@@ -102,7 +137,7 @@ export default function Sidebar() {
         </p>
       </div>
 
-      <nav className="relative z-10 flex-1 space-y-3 overflow-y-auto p-6 scrollbar-hide">
+      <nav className="relative z-10 flex-1 space-y-3 overflow-y-auto p-6">
         <p className="mb-4 ml-4 text-[9px] font-black uppercase tracking-[0.3em] text-white/20">
           Dashboards
         </p>

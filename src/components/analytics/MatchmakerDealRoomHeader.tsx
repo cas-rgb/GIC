@@ -301,24 +301,7 @@ export default function MatchmakerDealRoomHeader({
           <InvestorFlowSankey sectorBreakdown={sectorBreakdown} geographyRows={geographyRows} />
         </div>
       </div>
-      {/* 5. DATA CONFIDENCE PANEL */}{" "}
-      <div className="bg-slate-50 border border-slate-200 p-4 flex items-start gap-3">
-        {" "}
-        <Info className="w-5 h-5 text-slate-400 shrink-0 mt-0.5" />{" "}
-        <div>
-          {" "}
-          <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-            Data Confidence & Governance
-          </h4>{" "}
-          <p className="text-xs text-slate-500 leading-relaxed">
-            {" "}
-            Institutional investor profiles are matched dynamically against
-            publicly stated fund mandates and recent transaction records. Pitch
-            viability is assessed entirely against documented municipal project
-            pipelines. No speculative matching is performed. Flow weighting reflects live Treasury database extraction mapped via deterministic heuristic.{" "}
-          </p>{" "}
-        </div>{" "}
-      </div>{" "}
+
     </div>
   );
 }

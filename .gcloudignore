@@ -1,0 +1,15 @@
+.gcloudignore
+.git/
+.gitignore
+node_modules/
+.next/
+.firebase/
+.codex/
+npm-debug.log
+README.md
+powerbi/
+superset/
+stitch-designs/
+/data/
+logs/
+bridges/

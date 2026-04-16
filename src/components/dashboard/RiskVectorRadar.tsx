@@ -177,7 +177,7 @@ export default function RiskVectorRadar({ data }: RiskVectorRadarProps) {
       <div className="pt-6 border-t border-white/5">
         <p className="text-[10px] text-white/30 italic leading-relaxed">
           * Risk vectors are calculated using cross-sector correlation analysis
-          of current field records and OSINT sentiment triggers.
+          of current field records and live public sentiment triggers.
         </p>
       </div>
     </div>

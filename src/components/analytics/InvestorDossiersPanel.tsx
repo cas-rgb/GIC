@@ -91,6 +91,17 @@ export default function InvestorDossiersPanel({
   };
 
   const getRadarData = (inv: any) => {
+    // Deterministic algorithm replaces volatile Math.random() slop
+    const extractStaticTraction = (inputStr: string, base: number, range: number) => {
+      let hash = 0;
+      const str = inputStr || "baseline";
+      for (let i = 0; i < str.length; i++) {
+          hash = ((hash << 5) - hash) + str.charCodeAt(i);
+          hash |= 0; 
+      }
+      return base + (Math.abs(hash) % range);
+    };
+
     const sectors = [
       "Water",
       "Energy",
@@ -102,8 +113,8 @@ export default function InvestorDossiersPanel({
     return sectors.map((s) => ({
       subject: s,
       A: inv.focusSectors.some((fs: string) => fs.includes(s) || s.includes(fs))
-        ? 90 + Math.random() * 10
-        : 30 + Math.random() * 20,
+        ? extractStaticTraction(inv.name + s, 85, 15)
+        : extractStaticTraction(inv.name + s, 20, 30),
       fullMark: 100,
     }));
   };
@@ -118,7 +129,12 @@ export default function InvestorDossiersPanel({
         </div>
         
         <div className="divide-y divide-slate-100">
-          {investors.map((inv) => (
+          {investors.length === 0 ? (
+            <div className="p-8 text-center text-slate-500 font-medium text-sm bg-white">
+              No matching capital allocators found. Try broadening the search.
+            </div>
+          ) : (
+            investors.map((inv) => (
             <div key={inv.id} className="flex flex-col print:block">
               {/* Row Header */}
               <div
@@ -126,8 +142,19 @@ export default function InvestorDossiersPanel({
                 className={`grid grid-cols-[1.5fr_1fr_0.8fr] gap-3 px-4 py-4 items-center cursor-pointer transition-colors ${selectedInvestorId === inv.id ? 'bg-blue-50/50 outline outline-1 outline-blue-200' : 'bg-white hover:bg-slate-50'} print:hidden`}
               >
                 <div className="flex items-center gap-3">
-                  <div className={`p-2 transition-colors ${selectedInvestorId === inv.id ? 'bg-blue-600 text-white' : 'bg-blue-50 text-blue-600'}`}>
-                    <Building2 className="w-4 h-4" />
+                  <div className={`p-2 transition-colors flex items-center justify-center overflow-hidden ${selectedInvestorId === inv.id ? 'bg-blue-600 text-white' : 'bg-blue-50 text-blue-600'}`}>
+                    <img 
+                      src={`https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://${(inv?.name || 'default').toLowerCase().replace(/[^a-z0-9]/g, '')}.com&size=64`}
+                      className="w-4 h-4 object-contain"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                        if (e.currentTarget.nextElementSibling) {
+                          (e.currentTarget.nextElementSibling as HTMLElement).style.display = 'block';
+                        }
+                      }}
+                      alt=""
+                    />
+                    <Building2 className="w-4 h-4 hidden" />
                   </div>
                   <div>
                     <p className="text-sm font-bold text-slate-900">
@@ -327,7 +354,7 @@ export default function InvestorDossiersPanel({
                 )}
               </AnimatePresence>
             </div>
-          ))}
+          )))}
         </div>
       </div>
       <ExportToPDFFooter confidenceRating="VERIFIED" />

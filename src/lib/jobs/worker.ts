@@ -1,12 +1,14 @@
 import { query } from "@/lib/db";
 import { rebuildDailyFacts } from "@/lib/analytics/rebuild-daily-facts";
 import { createDocumentProcessor } from "@/lib/processing/run-document";
+import { processMineDeepSocialJob } from "@/lib/jobs/mine-deep-social-handler";
 
 type JobType =
   | "ingest_document"
   | "process_document"
   | "embed_document"
-  | "rebuild_daily_facts";
+  | "rebuild_daily_facts"
+  | "mine_deep_social";
 
 interface JobRow {
   id: string;
@@ -92,6 +94,9 @@ async function handleJob(job: JobRow): Promise<void> {
     }
     case "rebuild_daily_facts":
       await rebuildDailyFacts(job.payload);
+      return;
+    case "mine_deep_social":
+      await processMineDeepSocialJob(job.payload as any);
       return;
     case "embed_document":
       return;

@@ -4,31 +4,11 @@ import { useEffect, useState } from "react";
 import { Users2, ThermometerSun, ShieldAlert, BarChart3, Landmark, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function WardIntelligencePanel({ municipality }: { municipality: string }) {
-  const [wards, setWards] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+export default function WardIntelligencePanel({ municipality, wardsData, isLoading }: { municipality: string, wardsData?: any[], isLoading?: boolean }) {
   const [activeWardIndex, setActiveWardIndex] = useState(0);
+  const wards = wardsData || [];
 
-  useEffect(() => {
-    async function fetchWards() {
-      setLoading(true);
-      try {
-        const res = await fetch(`/api/analytics/ward-intelligence?municipality=${encodeURIComponent(municipality)}`);
-        if (res.ok) {
-          const data = await res.json();
-          setWards(data.wards || []);
-          setActiveWardIndex(0);
-        }
-      } catch (e) {
-        console.error("Ward Mapping Error", e);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchWards();
-  }, [municipality]);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="w-full flex-col h-[400px] flex items-center justify-center bg-zinc-900 border border-zinc-800 rounded-3xl animate-pulse">
         <Loader2 className="w-8 h-8 text-blue-500 animate-spin mb-4" />
@@ -40,7 +20,7 @@ export default function WardIntelligencePanel({ municipality }: { municipality: 
   if (wards.length === 0) {
       return (
         <div className="w-full h-[200px] flex flex-col items-center justify-center bg-zinc-900 border border-zinc-800 rounded-3xl text-zinc-500">
-          <p className="text-sm font-bold uppercase tracking-widest">No Deep Intelligence Seeded</p>
+          <p className="text-sm font-bold uppercase tracking-widest">[ AWAITING LOCAL INTELLIGENCE ]</p>
         </div>
       );
   }

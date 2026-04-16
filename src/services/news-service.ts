@@ -5,6 +5,7 @@ const BASE_URL = "https://newsapi.org/v2";
 
 export async function fetchStrategicNews(
   query: string,
+  timeframe: "recent" | "historical" = "recent",
   pageSize: number = 5,
 ): Promise<NewsArticle[]> {
   try {
@@ -14,7 +15,14 @@ export async function fetchStrategicNews(
     }
     // We focus on South African regional news based on the query (Municipality/Service)
     const encodedQuery = encodeURIComponent(`${query} South Africa`);
-    const url = `${BASE_URL}/everything?q=${encodedQuery}&apiKey=${API_KEY}&pageSize=${pageSize}&sortBy=relevancy&language=en`;
+    let url = `${BASE_URL}/everything?q=${encodedQuery}&apiKey=${API_KEY}&pageSize=${pageSize}&sortBy=relevancy&language=en`;
+
+    if (timeframe === "recent") {
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+      const dateString = thirtyDaysAgo.toISOString().split("T")[0];
+      url += `&from=${dateString}`;
+    }
 
     const response = await fetch(url);
     const data = await response.json();

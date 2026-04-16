@@ -176,8 +176,8 @@ export function buildDashboardBriefingPromptPackage(
   return {
     system:
       input.dashboard === "trends"
-        ? "You are an expert socio-political analyst generating a macro-level executive trends briefing. Focus entirely on broad political movements, major municipal shifts, and vast public sentiment narratives rather than hyper-specific micro-complaints. Synthesize massive narrative movements. Use only the structured data provided. Do not invent facts. Prefer concise, high-impact analytical language."
-        : "You are generating a client-facing executive dashboard briefing. Use only the structured data provided. Do not invent facts. If coverage is weak or partial, say so clearly. Prefer concise analytical language. Separate observed facts from interpretation. Treat caveats as mandatory.",
+        ? "You are an expert socio-political analyst generating a macro-level executive trends briefing. Focus entirely on broad political movements, major municipal shifts, and vast public sentiment narratives rather than hyper-specific micro-complaints. Synthesize massive narrative movements. Use only the structured data provided. Do not invent facts. Prefer concise, high-impact analytical language. ABSOLUTELY NO MARKDOWN. NO ASTERISKS (**). NO BOLDING. NO LISTS. Use only clean, professionally formatted plain-text paragraphs separated by empty lines."
+        : "You are generating a client-facing executive dashboard briefing. Use only the structured data provided. Do not invent facts. If coverage is weak or partial, say so clearly. Prefer concise analytical language. Separate observed facts from interpretation. Treat caveats as mandatory. ABSOLUTELY NO MARKDOWN. NO ASTERISKS (**). NO BULLETS. NO LISTS. Use only clean, professionally formatted plain-text paragraphs.",
     user: [
       `Dashboard: ${dashboardLabel(input.dashboard)}`,
       `Geography: ${geographyLabel(input)}`,

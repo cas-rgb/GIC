@@ -27,6 +27,7 @@ export default function LiveSocialFeedPanel({
   const [news, setNews] = useState<any[]>([]);
   const [sentiment, setSentiment] = useState<any[]>([]);
   const [words, setWords] = useState<any[]>([]);
+  const [urgentNarratives, setUrgentNarratives] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeKeyword, setActiveKeyword] = useState<string | null>(null);
   const [showRiskAlert, setShowRiskAlert] = useState<boolean>(false);
@@ -51,6 +52,7 @@ export default function LiveSocialFeedPanel({
           const data = await res.json();
           setNews(data.articles || []);
           setSentiment(data.sentiment || []);
+          setUrgentNarratives(data.urgentNarratives || []);
           
           if (data.isRisk) {
             setShowRiskAlert(true);
@@ -138,7 +140,7 @@ export default function LiveSocialFeedPanel({
           </motion.div>
         )}
       </AnimatePresence>
-      <UrgentNarrativeTrackerHeader province={province || "Gauteng"} />
+      <UrgentNarrativeTrackerHeader province={province || "Gauteng"} narratives={urgentNarratives} />
       {activeKeyword && (
         <div className="flex items-center justify-between bg-slate-800 p-4 border border-slate-700 mb-6 mt-4">
           <span className="text-sm font-medium text-slate-400">
